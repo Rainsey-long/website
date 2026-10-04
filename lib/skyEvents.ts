@@ -9,6 +9,7 @@ import { signIndexFromLongitude, SIGNS } from "./western";
 import { moonLongitude, planetLongitude } from "./sky";
 import { khmerDigits, type Lang } from "./i18n";
 import { planetName, signName as signNameL } from "./names";
+import { GLOBAL_LIMIT_KEY, createRateLimiter, type RateLimiter } from "./rateLimit";
 
 const QUARTER_NAMES = ["New moon", "First quarter", "Full moon", "Last quarter"];
 
@@ -22,6 +23,37 @@ function cached<T>(key: string, fn: () => T): T {
     memo.set(key, fn());
   }
   return memo.get(key) as T;
+}
+
+/*
+ * Whole-year results (retrogrades, eclipses) cost 0.1-0.5 s each to compute,
+ * so they get their own memo that week-by-week phase lookups cannot push
+ * out: 201 supported years x 2 kinds fit under the cap. On globalThis so every
+ * route shares one copy (error-handling.md).
+ */
+const YEAR_CAP = 450;
+const g = globalThis as unknown as { __skyYearMemo?: Map<string, unknown>; __skyYearBudget?: RateLimiter };
+const yearMemo = (g.__skyYearMemo ??= new Map<string, unknown>());
+function cachedYear<T>(key: string, fn: () => T): T {
+  if (!yearMemo.has(key)) {
+    if (yearMemo.size >= YEAR_CAP) yearMemo.delete(yearMemo.keys().next().value!);
+    yearMemo.set(key, fn());
+  }
+  return yearMemo.get(key) as T;
+}
+
+export const isSkyYearCached = (y: number) => yearMemo.has(`rx:${y}`) && yearMemo.has(`ecl:${y}`);
+
+/**
+ * Whether a page may compute these years now. Cached years are always free;
+ * a request that needs a new one is charged against one site-wide ceiling
+ * (security review 2026-10-04), so rotating through 1900-2100 cannot keep
+ * the single process busy. The caller shows a calm "try again" when false.
+ */
+const yearBudget = (g.__skyYearBudget ??= createRateLimiter(10 * 60_000, 600));
+export function skyYearsAvailable(years: number[]): boolean {
+  if (years.every(isSkyYearCached)) return true;
+  return !yearBudget(GLOBAL_LIMIT_KEY);
 }
 
 /** Exact new/full/quarter moments between two instants. */
@@ -113,7 +145,7 @@ function crossing(body: A.Body, target: number, from: number, to: number): numbe
 
 /** All retrograde periods that START in a calendar year (UTC). */
 export function retrogradesForYear(year: number): Retrograde[] {
-  return cached(`rx:${year}`, () => {
+  return cachedYear(`rx:${year}`, () => {
     const out: Retrograde[] = [];
     const day = 86400_000;
     const start = Date.UTC(year, 0, 1), end = Date.UTC(year + 1, 0, 1);
@@ -151,7 +183,7 @@ export interface Eclipse { at: string; body: "sun" | "moon"; kind: string; signI
 
 /** Lunar and solar eclipses whose peak falls in a calendar year (UTC). */
 export function eclipsesForYear(year: number): Eclipse[] {
-  return cached(`ecl:${year}`, () => {
+  return cachedYear(`ecl:${year}`, () => {
     const out: Eclipse[] = [];
     const start = new Date(Date.UTC(year, 0, 1)), end = Date.UTC(year + 1, 0, 1);
     for (let e = A.SearchLunarEclipse(start); e.peak.date.getTime() < end; e = A.NextLunarEclipse(e.peak)) {

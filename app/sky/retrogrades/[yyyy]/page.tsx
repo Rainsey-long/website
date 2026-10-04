@@ -3,7 +3,7 @@ import Link from "@/components/client/LocaleLink";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Glyph from "@/components/Glyph";
-import { degreeInL, eclipseName, eclipsesForYear, planetNameIn, retrogradesForYear, signNameIn } from "@/lib/skyEvents";
+import { degreeInL, eclipseName, eclipsesForYear, planetNameIn, retrogradesForYear, signNameIn, skyYearsAvailable } from "@/lib/skyEvents";
 import { getLang } from "@/lib/langServer";
 import { defineMessages, num } from "@/lib/i18n";
 import { dateTimeIn, shortDateIn, zoneLabel } from "@/lib/format";
@@ -28,6 +28,7 @@ const T = defineMessages({
     eclipses: "Eclipses", peak: "(peak)",
     bodyIn: (sun: boolean, sign: string) => `${sun ? "Sun" : "Moon"} in ${sign}`,
     foot: "Whether an eclipse is visible depends on where you are. Calculated with astronomy-engine.",
+    busy: "Many people are looking at the sky right now. Try this year again in a few minutes.",
   },
   km: {
     title: (y: number) => `ព្រះពុធដើរថយក្រោយ ${khmerYear(y)} និងភពដើរថយក្រោយ និងគ្រាសទាំងអស់`,
@@ -42,6 +43,7 @@ const T = defineMessages({
     eclipses: "សូរ្យគ្រាស និងចន្ទគ្រាស", peak: "(ពេលពេញលេញបំផុត)",
     bodyIn: (sun: boolean, sign: string) => `${sun ? "ព្រះអាទិត្យ" : "ព្រះចន្ទ"}ក្នុងរាសី${sign}`,
     foot: "អ្នកអាចមើលឃើញគ្រាសឬអត់ អាស្រ័យលើទីកន្លែងដែលអ្នកនៅ។ គណនាដោយ astronomy-engine។",
+    busy: "ឥឡូវនេះមានមនុស្សច្រើនកំពុងមើលមេឃ។ សូមព្យាយាមឆ្នាំនេះម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
   },
 });
 function khmerYear(y: number) { return num(y, "km"); }
@@ -61,6 +63,9 @@ export default async function Retrogrades({ params }: Params) {
   const t = T[lang];
   const sign = (i: number) => signNameIn(i, lang);
   const deg = (lon: number) => degreeInL(lon, lang);
+  if (!skyYearsAvailable([year])) {
+    return <div className="mx-auto max-w-reading safe-x py-7"><h1 className="text-h1">{T[lang].h1(year)}</h1><p className="mt-3">{T[lang].busy}</p></div>;
+  }
   const rx = retrogradesForYear(year);
   const ecl = eclipsesForYear(year);
   return (

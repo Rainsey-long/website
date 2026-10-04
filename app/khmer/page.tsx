@@ -31,7 +31,7 @@ const T = defineMessages({
     what: "What we calculate, and what we leave to people",
     what1: "We calculate what tradition fixes by rule: the lunar date, holy days, festivals, the animal year, your birth weekday and its colour, and the New Year moment and angel.",
     what2: "We don't pick wedding or house-moving days. Families ask an achar for that, and no single published rule exists. We also leave out omens about illness, accidents or war, and anything that asks you to pay for a ritual.",
-    cal: "Open the Khmer calendar",
+    cal: "Open the Khmer calendar", converter: "Convert a date", colours: "Colour of the day",
     sea: "The zodiac across Southeast Asia",
   },
   km: {
@@ -50,7 +50,7 @@ const T = defineMessages({
     what: "អ្វីដែលយើងគណនា និងអ្វីដែលយើងទុកឲ្យមនុស្សសម្រេច",
     what1: "យើងគណនាតែអ្វីដែលប្រពៃណីកំណត់ដោយច្បាប់ច្បាស់លាស់៖ ថ្ងៃខែតាមចន្ទគតិ ថ្ងៃសីល ពិធីបុណ្យ ឆ្នាំសត្វ ថ្ងៃកំណើត និងពណ៌របស់វា ព្រមទាំងពេលចូលឆ្នាំថ្មី និងទេវតា។",
     what2: "យើងមិនរើសថ្ងៃរៀបការ ឬថ្ងៃឡើងផ្ទះទេ។ គ្រួសារនានាសួរលោកអាចារ្យសម្រាប់រឿងនោះ ហើយមិនមានច្បាប់តែមួយដែលបានបោះពុម្ពនោះទេ។ យើងក៏មិនដាក់ទំនាយអំពីជំងឺ គ្រោះថ្នាក់ ឬសង្គ្រាម ឬអ្វីដែលឲ្យអ្នកបង់ប្រាក់សម្រាប់ពិធីណាមួយដែរ។",
-    cal: "បើកប្រតិទិនខ្មែរ",
+    cal: "បើកប្រតិទិនខ្មែរ", converter: "បម្លែងកាលបរិច្ឆេទ", colours: "ពណ៌ប្រចាំថ្ងៃ",
     sea: "ឆ្នាំសត្វនៅទូទាំងអាស៊ីអាគ្នេយ៍",
   },
 });
@@ -111,7 +111,7 @@ export default async function KhmerHub() {
             <p>{t.what1}</p>
             <p>{t.what2}</p>
           </div>
-          <p className="mt-4"><Link className="link" href="/lucky-days">{t.cal}</Link> · <Link className="link" href="/southeast-asian-zodiac">{t.sea}</Link></p>
+          <p className="mt-4"><Link className="link" href="/lucky-days">{t.cal}</Link> · <Link className="link" href="/tools/date-converter">{t.converter}</Link> · <Link className="link" href="/khmer/colours">{t.colours}</Link> · <Link className="link" href="/southeast-asian-zodiac">{t.sea}</Link></p>
         </section>
       </div>
     </>

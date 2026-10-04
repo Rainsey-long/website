@@ -8,8 +8,8 @@ import { getLang } from "@/lib/langServer";
 import { defineMessages, khmerDigits } from "@/lib/i18n";
 
 const T = defineMessages({
-  en: { heading: "Today in the Khmer calendar", holy: "Holy day", month: "This month in the Khmer calendar" },
-  km: { heading: "ថ្ងៃនេះក្នុងប្រតិទិនខ្មែរ", holy: "ថ្ងៃសីល", month: "ខែនេះក្នុងប្រតិទិនខ្មែរ" },
+  en: { heading: "Today in the Khmer calendar", holy: "Holy day", month: "This month in the Khmer calendar", colour: (c: string) => `Colour of the day: ${c}`, colours: "The week's colours" },
+  km: { heading: "ថ្ងៃនេះក្នុងប្រតិទិនខ្មែរ", holy: "ថ្ងៃសីល", month: "ខែនេះក្នុងប្រតិទិនខ្មែរ", colour: (c: string) => `ពណ៌ប្រចាំថ្ងៃ៖ ${c}`, colours: "ពណ៌ប្រចាំសប្ដាហ៍" },
 });
 
 export default async function KhmerDayCard({ day, heading, headingId = "khmer-today" }: { day: KhmerDay; heading?: string; headingId?: string }) {
@@ -33,7 +33,11 @@ export default async function KhmerDayCard({ day, heading, headingId = "khmer-to
           {day.festival && (km ? <li className="font-semibold">{day.festival.km}</li> : <li className="font-semibold">{day.festival.en} <span lang="km" className="font-normal">{day.festival.km}</span></li>)}
         </ul>
       )}
-      <p className="mt-4 text-small"><Link className="link" href={`/lucky-days/${day.date.slice(0, 4)}/${day.date.slice(5, 7)}`}>{t.month}</Link></p>
+      <p className="mt-3 flex items-center gap-2">
+        <span className="swatch" style={{ background: `var(--${day.weekday.swatch})` }} aria-hidden="true" />
+        {t.colour(km ? day.weekday.colourKm : day.weekday.colourEn)}{!km && <span lang="km" className="text-muted"> {day.weekday.colourKm}</span>}
+      </p>
+      <p className="mt-4 text-small"><Link className="link" href={`/lucky-days/${day.date.slice(0, 4)}/${day.date.slice(5, 7)}`}>{t.month}</Link> · <Link className="link" href="/khmer/colours">{t.colours}</Link></p>
     </section>
   );
 }

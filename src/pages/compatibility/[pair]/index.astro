@@ -24,7 +24,7 @@ const relationName = WESTERN_RELATION_NAME[s.relation];
 const title = `${a.name} and ${b.name} compatibility`;
 const description = `${a.name} and ${b.name}: ${relationName.toLowerCase()}, ${s.score}% match. How these signs connect in love, friendship and work.`;
 const url = new URL(`/compatibility/${pairSlug(a.slug, b.slug)}/`, SITE_URL).href;
-const others = SIGNS.filter((x) => x.element === a.element && x.slug !== b.slug).slice(0, 2);
+const others = SIGNS.filter((x) => x.element === a.element && x.slug !== b.slug && x.slug !== a.slug).slice(0, 2);
 ---
 <BaseLayout title={title} description={description} ogType="article"
   breadcrumbs={[{ name: "Compatibility", href: "/compatibility/" }, { name: `${a.name} and ${b.name}`, href: `/compatibility/${pairSlug(a.slug, b.slug)}/` }]}

@@ -37,10 +37,12 @@ const lunarShort = (d: AlmanacDay) => (d.lunarDay === 1 ? `${d.leapMonth ? "L" :
                 data-good={JSON.stringify(d.good)} data-avoid={JSON.stringify(d.avoid)}
                 data-clash={d.clash.name} data-clash-slug={d.clash.slug} data-quality={qualityWord[d.quality]}>
                 <span class="num serif">{Number(d.date.slice(8))}</span>
-                <span class="lunar text-small text-muted">{lunarShort(d)}</span>
-                <span class="mark" aria-hidden="true">
-                  {d.quality === "good" && <Seal size="sm" />}
-                  {d.quality === "challenging" && <span class="dot"></span>}
+                <span class="foot">
+                  <span class="lunar text-small text-muted">{lunarShort(d)}</span>
+                  <span class="mark" aria-hidden="true">
+                    {d.quality === "good" && <Seal size="sm" />}
+                    {d.quality === "challenging" && <span class="dot"></span>}
+                  </span>
                 </span>
               </button>
             </td>
@@ -69,7 +71,6 @@ const lunarShort = (d: AlmanacDay) => (d.lunarDay === 1 ? `${d.leapMonth ? "L" :
 
 <style>
   .day {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -88,10 +89,10 @@ const lunarShort = (d: AlmanacDay) => (d.lunarDay === 1 ? `${d.leapMonth ? "L" :
   .day[aria-selected="true"] { background: var(--paper-raised); border-color: var(--ink); }
   .day.is-today { border-color: var(--cinnabar); }
   .num { font-size: var(--fs-h3); line-height: 1.1; }
-  .mark { position: absolute; right: 4px; top: 4px; display: flex; }
+  .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px; width: 100%; margin-top: auto; }
+  .mark { display: flex; }
   .dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; background: var(--clay); }
   .today-key { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--cinnabar); border-radius: 4px; }
-  @media (max-width: 479px) { .lunar { font-size: var(--fs-small); } }
 </style>
 
 <script>

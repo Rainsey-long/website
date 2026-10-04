@@ -23,7 +23,7 @@ const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
       <div>
         <dt class="text-small text-muted">Colour</dt>
         <dd class="mt-1 flex items-center gap-2 font-semibold">
-          <span class={`swatch bg-el-${color.element}`} aria-hidden="true"></span>{color.name}
+          <span class="swatch" style={`background: var(--el-${color.element})`} aria-hidden="true"></span>{color.name}
         </dd>
       </div>
     )}

@@ -160,14 +160,26 @@ export function dailyReading(sign: WesternSign, date: string, skyIn?: SkyDay): D
   const stay = dayInStay(date, sky.moon.signIndex);
   const random = rng(hash(sign.slug + date));
 
+  // One moon-phase note per reading, on one topic, so the same sentence
+  // does not close every section. Retrograde and element notes go where they fit.
+  const phaseTopic = TOPICS[Math.floor(random() * TOPICS.length)];
+
   const topics: TopicReading[] = TOPICS.map((topic) => {
     const bases = BLOCKS[topic].filter((b) => b.kind === "base" && b.conditions.house?.includes(house));
     const [a, b] = ROTATION[topic];
     const base = bases[(hash(`${sign.slug}|${topic}`) + a * lap + b * stay) % bases.length];
     const mods = modifiersFor(topic, sky);
-    // Retrograde notes take priority over phase notes; one modifier per topic.
+    // At most one modifier per topic: a retrograde note when one applies,
+    // the Moon's element for mood, the phase note only on the chosen topic.
     const retroMods = mods.filter((m) => m.conditions.retrograde);
-    const mod = retroMods.length && random() < 0.6 ? pick(retroMods, random) : mods.length ? pick(mods, random) : null;
+    const elementMods = mods.filter((m) => m.conditions.moonElement);
+    const phaseMods = topic === phaseTopic ? mods.filter((m) => m.conditions.moonPhase) : [];
+    const roll = random();
+    const mod =
+      retroMods.length && roll < 0.5 ? pick(retroMods, random)
+      : phaseMods.length ? pick(phaseMods, random)
+      : elementMods.length && roll < 0.8 ? pick(elementMods, random)
+      : null;
 
     let energy = HOUSE_ENERGY[topic][house - 1];
     if (sky.moon.phaseGroup === "waxing" && random() < 0.5) energy += 1;

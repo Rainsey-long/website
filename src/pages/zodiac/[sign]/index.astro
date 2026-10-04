@@ -31,7 +31,7 @@ const Content = profile?.Content;
       <h1 class="flex items-center gap-3 text-display"><Glyph name={sign.slug} set="western" class="size-glyph-lg shrink-0" />{sign.name}</h1>
       <p class="mt-2 text-small text-muted tabular">{sign.range}</p>
       <dl class="mt-5 grid grid-cols-2 gap-4 border-y border-rule py-4 text-small sm:grid-cols-4">
-        <div><dt class="text-muted">Element</dt><dd class="mt-1 flex items-center gap-2 font-semibold"><span class={`swatch bg-el-${sign.element}`} aria-hidden="true"></span>{ELEMENT_LABEL[sign.element]}</dd></div>
+        <div><dt class="text-muted">Element</dt><dd class="mt-1 flex items-center gap-2 font-semibold"><span class="swatch" style={`background: var(--el-${sign.element})`} aria-hidden="true"></span>{ELEMENT_LABEL[sign.element]}</dd></div>
         <div><dt class="text-muted">Quality</dt><dd class="mt-1 font-semibold">{MODALITY_LABEL[sign.modality]}</dd></div>
         <div><dt class="text-muted">Ruler</dt><dd class="mt-1 font-semibold">{sign.ruler.replace(/^the /, "The ")}</dd></div>
         {fm?.luckyDay && <div><dt class="text-muted">Lucky day</dt><dd class="mt-1 font-semibold">{fm.luckyDay}</dd></div>}

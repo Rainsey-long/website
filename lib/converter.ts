@@ -67,21 +67,46 @@ export interface KhmerQuery {
 }
 
 /**
+ * One Gregorian year's Khmer dates, encoded month*100 + phase*50 + day per
+ * day of the year. Building it costs ~27 ms (365 momentkh calls), so tables
+ * are kept on globalThis (one copy for every route, error-handling.md) and
+ * bounded: at most KHMER_YEAR_CAP years, oldest dropped first.
+ */
+const KHMER_YEAR_CAP = 32;
+const g = globalThis as unknown as { __khmerYears?: Map<number, Uint16Array> };
+const khmerYears = (g.__khmerYears ??= new Map());
+
+export const isKhmerYearCached = (year: number) => khmerYears.has(year);
+
+function khmerYearTable(year: number): Uint16Array {
+  const hit = khmerYears.get(year);
+  if (hit) return hit;
+  const days = (Date.UTC(year + 1, 0, 1) - Date.UTC(year, 0, 1)) / 86_400_000;
+  const table = new Uint16Array(days);
+  for (let i = 0; i < days; i++) {
+    const t = new Date(Date.UTC(year, 0, 1 + i));
+    const k = kh.fromGregorian(t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate(), 12, 0, 0).khmer;
+    table[i] = k.monthIndex * 100 + k.moonPhase * 50 + k.day;
+  }
+  if (khmerYears.size >= KHMER_YEAR_CAP) khmerYears.delete(khmerYears.keys().next().value!);
+  khmerYears.set(year, table);
+  return table;
+}
+
+/**
  * Every Gregorian date in `year` whose Khmer lunar date matches. Usually one,
  * none when the month does not occur that year (the doubled Asadh, or a 15th
  * waning day in a 14-day half), and occasionally two when the month falls in
  * both January and December.
  */
 export function findKhmerDates(q: KhmerQuery): string[] {
+  const want = q.month * 100 + (q.phase === "waxing" ? 0 : 50) + q.day;
   const out: string[] = [];
-  const phase = q.phase === "waxing" ? 0 : 1;
-  const days = (Date.UTC(q.year + 1, 0, 1) - Date.UTC(q.year, 0, 1)) / 86_400_000;
-  for (let i = 0; i < days; i++) {
+  khmerYearTable(q.year).forEach((v, i) => {
+    if (v !== want) return;
     const t = new Date(Date.UTC(q.year, 0, 1 + i));
-    const y = t.getUTCFullYear(), m = t.getUTCMonth() + 1, d = t.getUTCDate();
-    const k = kh.fromGregorian(y, m, d, 12, 0, 0).khmer;
-    if (k.monthIndex === q.month && k.moonPhase === phase && k.day === q.day) out.push(ymd(y, m, d));
-  }
+    out.push(ymd(t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate()));
+  });
   return out;
 }
 

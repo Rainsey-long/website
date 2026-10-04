@@ -7,9 +7,10 @@
 | Table | Owner | Holds |
 |---|---|---|
 | `users` | admin | admin accounts: username, scrypt hash, session_epoch |
-| `text_blocks` | code + owner | reading text. Structure (id, topic, conditions) comes from `content/blocks/*.json`; `text` is owner-editable; `review` is `draft` or `approved` (drafts are served) |
+| `text_blocks` | code + owner | reading text. Structure (id, topic, conditions) comes from `content/blocks/*.json`; `text` and `text_km` are owner-editable (each follows its `source_*` only while untouched); `review` is `draft` or `approved` (drafts are served) |
 | `songkran_overrides` | owner | official Moha Songkran moment and the year's saying, per year |
-| `feedback` | visitors | anonymous helpful/not-helpful, page, block ids, optional comment |
+| `feedback` | visitors | anonymous helpful/not-helpful, page, block ids, optional comment; `read_at` set by the owner |
+| `content_overrides` | owner | owner edits to profiles and 2027 forecasts, per (path, language); replaces the repository file on the site until reset. Never written by the seed |
 | `app_settings` | owner | small key/value settings (unused so far) |
 | `schema_migrations` | runner | the file-migration ledger (`lib/migrationRunner.ts`) |
 

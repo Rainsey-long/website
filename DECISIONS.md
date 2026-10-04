@@ -64,5 +64,6 @@ Next candidates: personal transit readings (24, large content cost: ~600 text bl
 | Ads, affiliates, report CTA | Components built, flags off (plan §11) |
 | Languages | English and Khmer (owner request, 2026-10-04), built ahead of the plan's Phase 7. Khmer under `/km` (CamboMath's rewrite pattern), English at the root, no browser-language redirect, choice remembered in a `lang` cookie. Mechanism: `lib/i18n.ts`; conventions: `docs/I18N.md` |
 | Khmer translations | Drafted in the repository and listed in `docs/KHMER-REVIEW.md` until a native reader approves them; reading blocks are owner-editable in both languages in `/admin` |
+| Admin | Owner-editable: reading text (both languages), profiles and 2027 forecasts (database overrides on top of the repository files, so deploys never wipe edits and "Reset" restores the file), Khmer New Year, feedback, admin accounts, backups. Not editable there (code changes): compatibility, birth-chart and good-hours wording, Khmer birth-day portraits, almanac terms |
 | Not translated | The admin dashboard (owner-only), `.ics` feed files (calendar apps show one language), share-card images (the image renderer has no Khmer font loaded); legal pages in Khmer say the English version prevails |
 | Khmer numerals | Khmer digits in Khmer text, as Khmer print does (CamboMath does the same) |

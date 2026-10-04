@@ -120,6 +120,18 @@ function migrate(d: Database.Database): void {
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
 
+    -- Owner edits to long-form Markdown (profiles, 2027 forecasts), per
+    -- language. The repository file is the default; a row here replaces it on
+    -- the site until the owner resets it. Never written by the seed.
+    CREATE TABLE IF NOT EXISTS content_overrides (
+      path TEXT NOT NULL,
+      lang TEXT NOT NULL CHECK (lang IN ('en', 'km')),
+      source TEXT NOT NULL,
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_by TEXT,
+      PRIMARY KEY (path, lang)
+    );
+
     CREATE TABLE IF NOT EXISTS app_settings (
       key TEXT PRIMARY KEY,
       value TEXT NOT NULL
@@ -133,6 +145,8 @@ function migrate(d: Database.Database): void {
   // follows source_text_km only while the owner has not edited text_km.
   addColumnIfMissing(d, "text_blocks", "text_km", "text_km TEXT NOT NULL DEFAULT ''");
   addColumnIfMissing(d, "text_blocks", "source_text_km", "source_text_km TEXT NOT NULL DEFAULT ''");
+  // Admin triage: when the owner marked a feedback row as read (NULL = unread).
+  addColumnIfMissing(d, "feedback", "read_at", "read_at TEXT");
   runFileMigrations(d);
 }
 
@@ -164,4 +178,13 @@ export type FeedbackRow = {
   block_ids: string;
   comment: string;
   created_at: string;
+  read_at: string | null;
+};
+
+export type ContentOverrideRow = {
+  path: string;
+  lang: "en" | "km";
+  source: string;
+  updated_at: string;
+  updated_by: string | null;
 };

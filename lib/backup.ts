@@ -18,7 +18,7 @@ import { diskBlock, mb } from "./volumeHeadroom";
 
 export const BACKUP_DIR = path.join(DATA_DIR, "backups");
 const PREFIX = "almanac-";
-const TABLES = ["users", "text_blocks", "songkran_overrides", "feedback"] as const;
+const TABLES = ["users", "text_blocks", "songkran_overrides", "feedback", "content_overrides"] as const;
 
 export class BackupSkippedError extends Error {}
 
@@ -68,5 +68,18 @@ function prune(): number {
   for (const f of old) fs.rmSync(path.join(BACKUP_DIR, f), { force: true });
   return old.length;
 }
+
+/** Verified backups on the volume, newest first (admin "Backups" tab). */
+export function listBackups(): Array<{ file: string; bytes: number; at: string }> {
+  if (!fs.existsSync(BACKUP_DIR)) return [];
+  return fs.readdirSync(BACKUP_DIR)
+    .filter((f) => f.startsWith(PREFIX) && f.endsWith(".db.gz"))
+    .sort()
+    .reverse()
+    .map((file) => ({ file, bytes: fs.statSync(path.join(BACKUP_DIR, file)).size, at: fs.statSync(path.join(BACKUP_DIR, file)).mtime.toISOString() }));
+}
+
+/** "812 KB" / "3.1 MB" for the admin pages. */
+export const fileSize = (bytes: number) => (bytes >= 1048576 ? `${(bytes / 1048576).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1024))} KB`);
 
 export { mb };

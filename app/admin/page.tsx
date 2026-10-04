@@ -1,118 +1,64 @@
 /**
- * Admin dashboard: the owner reviews reading text, enters the official Khmer
- * New Year moment, and reads feedback. Every read is behind getSession().
+ * Admin overview: what needs the owner's attention, at a glance, with a link
+ * to the section that fixes each thing. Every read is behind getSession().
  */
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { BlockEditor, SignOut, SongkranForm } from "@/components/client/AdminForms";
 import { getSession } from "@/lib/auth";
-import { getDb, type FeedbackRow, type TextBlockRow } from "@/lib/db";
+import { getDb } from "@/lib/db";
 import { seedIfEmpty } from "@/lib/seed";
+import { CONTENT_PATHS, repoSource } from "@/lib/content";
+import { fileSize as size, listBackups } from "@/lib/backup";
 import { songkran } from "@/lib/khmer";
 import { songkranOverride } from "@/lib/songkranStore";
 import { diskStatus } from "@/lib/volumeHeadroom";
 
 export const dynamic = "force-dynamic";
-type Search = { searchParams: Promise<{ tab?: string; topic?: string; show?: string }> };
 
-export default async function Admin({ searchParams }: Search) {
-  const session = await getSession();
-  if (!session) redirect("/admin/login");
+export default async function AdminOverview() {
+  if (!(await getSession())) redirect("/admin/login");
   seedIfEmpty();
-  const { tab = "blocks", topic = "love", show = "draft" } = await searchParams;
   const db = getDb();
-  const totals = db.prepare("SELECT review, COUNT(*) AS n FROM text_blocks GROUP BY review").all() as Array<{ review: string; n: number }>;
-  const n = (r: string) => totals.find((t) => t.review === r)?.n ?? 0;
+  const one = (sql: string) => (db.prepare(sql).get() as { n: number }).n;
+  const drafts = one("SELECT COUNT(*) AS n FROM text_blocks WHERE review = 'draft'");
+  const blocks = one("SELECT COUNT(*) AS n FROM text_blocks");
+  const noKm = one("SELECT COUNT(*) AS n FROM text_blocks WHERE text_km = ''");
+  const unread = one("SELECT COUNT(*) AS n FROM feedback WHERE read_at IS NULL");
+  const week = db.prepare("SELECT SUM(verdict = 'helpful') AS good, COUNT(*) AS n FROM feedback WHERE created_at >= datetime('now', '-7 days')").get() as { good: number | null; n: number };
+  const overrides = one("SELECT COUNT(*) AS n FROM content_overrides");
+  const kmMissing = CONTENT_PATHS.filter((p) => !repoSource(p, "km") && !db.prepare("SELECT 1 FROM content_overrides WHERE path = ? AND lang = 'km'").get(p)).length;
+  const now = new Date();
+  const nyYear = now.getUTCFullYear() + (now.getUTCMonth() >= 4 ? 1 : 0);
+  const ny = songkran(nyYear);
+  const official = songkranOverride(nyYear)?.official_at;
   const disk = diskStatus();
-  const tabs = [["blocks", "Reading text"], ["songkran", "Khmer New Year"], ["feedback", "Feedback"]] as const;
+  const backups = listBackups();
+  const lastBackup = backups[0];
+
+  const cards: Array<{ title: string; value: string; note: string; href: string; attention: boolean }> = [
+    { title: "Reading text", value: `${blocks - drafts} of ${blocks} approved`, note: drafts ? `${drafts} drafts to review` : "All approved", href: "/admin/readings?show=draft", attention: drafts > 0 },
+    { title: "Khmer reading text", value: `${blocks - noKm} of ${blocks} translated`, note: noKm ? `${noKm} show English on Khmer pages` : "Every block has Khmer", href: "/admin/readings?show=nokm", attention: noKm > 0 },
+    { title: "Profiles and forecasts", value: `${CONTENT_PATHS.length} pages, ${overrides} edited here`, note: kmMissing ? `${kmMissing} have no Khmer version yet` : "All have a Khmer version", href: "/admin/content", attention: kmMissing > 0 },
+    { title: "Feedback", value: `${unread} unread`, note: week.n ? `${week.good ?? 0} of ${week.n} helpful in the last 7 days` : "None in the last 7 days", href: "/admin/feedback", attention: unread > 0 },
+    { title: `Khmer New Year ${nyYear}`, value: official ? `Official: ${official}` : `Calculated: ${ny.date} ${ny.time}`, note: official ? "Official moment entered" : "Enter the Ministry's minute when announced", href: "/admin/songkran", attention: !official },
+    { title: "Backups", value: lastBackup ? `Last: ${lastBackup.at.slice(0, 16).replace("T", " ")} UTC` : "No backup yet", note: `${backups.length} kept${disk.usedPct !== null ? ` · volume ${disk.usedPct}% used` : ""}`, href: "/admin/backups", attention: !lastBackup || disk.level !== "ok" },
+  ];
 
   return (
     <>
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-h1">Admin</h1>
-        <div className="flex items-center gap-3"><span className="text-small text-muted">Signed in as {session.username}</span><SignOut /></div>
-      </div>
-      <p className="mt-2 text-small text-muted tabular">
-        Reading blocks: {n("approved")} approved, {n("draft")} awaiting review.
-        {disk.usedPct !== null && ` Volume ${disk.usedPct}% used (${disk.level}).`}
-      </p>
-      <nav aria-label="Admin" className="mt-5 flex gap-5 border-b border-rule">
-        {tabs.map(([k, label]) => <Link key={k} href={`/admin?tab=${k}`} className={`link nav-link pb-3 ${tab === k ? "font-semibold" : ""}`} aria-current={tab === k ? "page" : undefined}>{label}</Link>)}
-      </nav>
-
-      {tab === "blocks" && (() => {
-        const rows = db.prepare(`SELECT * FROM text_blocks WHERE topic = ? ${show === "all" ? "" : "AND review = ?"} ORDER BY kind, id`).all(...(show === "all" ? [topic] : [topic, show])) as TextBlockRow[];
-        return (
-          <section className="mt-6">
-            <div className="flex flex-wrap gap-x-5 gap-y-2 text-small">
-              {["love", "career", "money", "mood"].map((t) => <Link key={t} className={`link ${t === topic ? "font-semibold" : ""}`} href={`/admin?tab=blocks&topic=${t}&show=${show}`}>{t[0].toUpperCase() + t.slice(1)}</Link>)}
-              <span className="text-muted">·</span>
-              {[["draft", "Awaiting review"], ["approved", "Approved"], ["all", "All"]].map(([k, l]) => <Link key={k} className={`link ${k === show ? "font-semibold" : ""}`} href={`/admin?tab=blocks&topic=${topic}&show=${k}`}>{l}</Link>)}
-            </div>
-            <p className="mt-3 text-small text-muted">Edit the words, not the meaning: each block is chosen by the Moon&apos;s house and phase. Rules: warm, short sentences, no exclamation marks, no health, money actions, guarantees or doom.</p>
-            {rows.length === 0 && <p className="mt-5">Nothing here. Every {topic} block in this view is done.</p>}
-            <ul className="mt-4">
-              {rows.map((r) => (
-                <li key={r.id} className="border-b border-rule py-4">
-                  <p className="text-small text-muted tabular">{r.id} · {r.kind} · {r.conditions} · {r.review}{r.updated_by ? ` · edited by ${r.updated_by}` : ""}</p>
-                  <BlockEditor id={r.id} text={r.text} textKm={r.text_km} review={r.review} />
-                  {r.text !== r.source_text && <p className="mt-2 text-small text-muted">Original: {r.source_text}</p>}
-                </li>
-              ))}
-            </ul>
-          </section>
-        );
-      })()}
-
-      {tab === "songkran" && (() => {
-        const year = new Date().getUTCFullYear() + (new Date().getUTCMonth() >= 4 ? 1 : 0);
-        return (
-          <section className="mt-6 grid gap-8 lg:grid-cols-2">
-            {[year, year + 1].map((y) => {
-              const o = songkranOverride(y);
-              const c = songkran(y);
-              return (
-                <div key={y}>
-                  <h2 className="text-h2">Khmer New Year {y}</h2>
-                  <SongkranForm year={y} officialAt={o?.official_at ?? ""} tumneay={o?.tumneay ?? ""} source={o?.source ?? ""} calculated={`${c.date} ${c.time}`} />
-                </div>
-              );
-            })}
-          </section>
-        );
-      })()}
-
-      {tab === "feedback" && (() => {
-        const rows = db.prepare("SELECT * FROM feedback ORDER BY id DESC LIMIT 100").all() as FeedbackRow[];
-        const worst = db.prepare(`
-          WITH RECURSIVE split(id, rest, verdict) AS (
-            SELECT '', block_ids || ',', verdict FROM feedback
-            UNION ALL SELECT substr(rest, 0, instr(rest, ',')), substr(rest, instr(rest, ',') + 1), verdict FROM split WHERE rest <> ''
-          )
-          SELECT id, SUM(verdict = 'not_helpful') AS bad, COUNT(*) AS total FROM split WHERE id <> '' GROUP BY id HAVING total >= 3 ORDER BY bad * 1.0 / total DESC, total DESC LIMIT 15
-        `).all() as Array<{ id: string; bad: number; total: number }>;
-        return (
-          <section className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1fr)_var(--size-rail)]">
-            <div>
-              <h2 className="text-h2">Latest feedback</h2>
-              {rows.length === 0 && <p className="mt-3">No feedback yet.</p>}
-              <ul className="mt-3">
-                {rows.map((f) => (
-                  <li key={f.id} className="border-b border-rule py-3 text-small">
-                    <span className={f.verdict === "helpful" ? "text-jade font-semibold" : "text-clay font-semibold"}>{f.verdict === "helpful" ? "Helpful" : "Not helpful"}</span> · <Link className="link" href={f.path}>{f.path}</Link> · <span className="tabular text-muted">{f.created_at} UTC</span>
-                    {f.comment && <p className="mt-1">{f.comment}</p>}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <aside>
-              <h2 className="text-h3">Blocks people found least helpful</h2>
-              <p className="mt-1 text-small text-muted">At least 3 votes. Edit these first.</p>
-              <ul className="mt-3 text-small tabular">{worst.map((w) => <li key={w.id} className="border-b border-rule py-2">{w.id}: {w.bad} of {w.total}</li>)}</ul>
-            </aside>
-          </section>
-        );
-      })()}
+      <h1 className="text-h1">Overview</h1>
+      <p className="mt-2 text-muted">What needs attention. Each item links to the place to fix it.</p>
+      <ul className="mt-6 grid gap-x-7 sm:grid-cols-2 lg:grid-cols-3">
+        {cards.map((c) => (
+          <li key={c.title} className="border-t border-rule py-4">
+            <h2 className="text-small text-muted">{c.title}</h2>
+            <p className="mt-1 serif text-h3">{c.value}</p>
+            <p className={`mt-1 text-small ${c.attention ? "font-semibold" : "text-muted"}`}>{c.note}</p>
+            <p className="mt-2 text-small"><Link className="link" href={c.href}>Open</Link></p>
+          </li>
+        ))}
+      </ul>
+      {lastBackup && <p className="mt-4 text-small text-muted tabular">Latest backup {lastBackup.file}, {size(lastBackup.bytes)}.</p>}
     </>
   );
 }

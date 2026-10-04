@@ -4,7 +4,7 @@
 
 | Layer | Mechanism | Grants |
 |---|---|---|
-| **Admin** | username + scrypt password (`lib/auth.ts`), HMAC-signed `al_session` cookie (`__Host-` in production, httpOnly, SameSite=Strict, 8 h) | `/admin`: review reading text, Songkran override, read feedback |
+| **Admin** | username + scrypt password (`lib/auth.ts`), HMAC-signed `al_session` cookie (`__Host-` in production, httpOnly, SameSite=Strict, 8 h) | `/admin`: reading text (both languages), profiles and forecasts, Songkran override, feedback triage and CSV, admin accounts, backups |
 | **Visitor** | nothing. No accounts, ever (owner rule) | everything public |
 
 **`getSession()` re-reads the users row on every call** and refuses a token whose `session_epoch` no longer matches, so sign-out (which bumps the epoch) revokes every copy of the token. It denies on a database error. Token readers refuse a non-base64url body before the MAC check. The password floor is `ADMIN_PASSWORD_MIN` (12), checked wherever a password is set.
@@ -25,8 +25,11 @@
 6. **Parameterised SQL only.** The admin dashboard's few dynamic SQL fragments are fixed strings chosen by code, never request text.
 7. **Generic errors out, details to the log.**
 8. **Cron routes** (`/api/cron/backup`): `Bearer` secret ≥ 32 chars compared with `timingSafeEqual` after a length check, before any work; 503 when unset; 409 while running. A new cron route gets its own secret.
-9. **HTML rendering:** only repository Markdown (`lib/content.ts`) is rendered as HTML. Owner-edited block text and feedback are rendered as React text.
+9. **HTML rendering:** Markdown (`lib/content.ts`) is the only thing rendered as HTML, and since the owner can edit it in the admin, the renderer is locked down: raw HTML is shown as text, images are dropped, and links must be http(s), mailto or site-relative (tested in `tests/admin.test.ts`). Block text, feedback and every other owner or visitor string are rendered as React text.
 10. **`proxy.ts` makes no network call**, ever. Header and path work only.
+11. **Admin accounts:** an admin cannot remove themselves and the last admin cannot be removed; a removed admin is signed out at once (the session re-reads the row). Changing a password needs the current one, is rate-limited per account, and bumps the session epoch (signed out everywhere).
+12. **Feedback CSV export** prefixes cells that start with `= + - @`, tab or CR (visitor comments): spreadsheet formula injection.
+13. **Backups never leave the server through the web**: the admin can list them and take one, but there is no download route; a database copy leaves only through Railway volume access.
 
 ## Headers (`next.config.ts`)
 

@@ -23,7 +23,7 @@ export async function POST(req: Request) {
   const body = await readJsonCapped<{ path?: unknown; verdict?: unknown; blockIds?: unknown; comment?: unknown }>(req, 4096);
   if (!body.ok) return body.res;
   const { path, verdict, blockIds, comment } = body.value;
-  if (typeof path !== "string" || path.length > 200 || !/^\/horoscope\/[a-z]+\/\d{4}-\d{2}-\d{2}$/.test(path)) return json({ error: "Bad request" }, 400);
+  if (typeof path !== "string" || path.length > 200 || !/^(\/km)?\/horoscope\/[a-z]+\/\d{4}-\d{2}-\d{2}$/.test(path)) return json({ error: "Bad request" }, 400);
   if (verdict !== "helpful" && verdict !== "not_helpful") return json({ error: "Bad request" }, 400);
   const ids = Array.isArray(blockIds) ? blockIds.filter((x): x is string => typeof x === "string" && BLOCK_IDS.has(x)).slice(0, 12) : [];
   const text = typeof comment === "string" ? comment.replace(/[\u0000-\u0008\u000B-\u001F\u007F]/g, "").trim().slice(0, 500) : "";

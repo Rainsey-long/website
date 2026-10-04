@@ -1,48 +1,102 @@
 /**
  * Server-only loader for long-form Markdown (profiles, yearly forecasts).
- * Content is authored in this repository and reviewed in code review; it is
- * never user- or admin-supplied, which is why rendering it as HTML is safe
- * (.claude/security.md). Missing files return null so a page still renders.
  *
- * Khmer: a translation lives at the same path under content/km/ (e.g.
- * content/km/profiles/western/aries.md), same front-matter keys, values in
- * Khmer. When a Khmer file is missing the English one is served and
- * `translated` is false, so the page can say the text is in English for now.
+ * Sources, in order: an owner edit saved in the admin (content_overrides, per
+ * language), then the repository file. Khmer lives at content/km/<same path>;
+ * when no Khmer version exists the English one is served and `translated` is
+ * false, so the page can say the text is in English for now.
+ *
+ * Because owner-edited Markdown now reaches public pages, the renderer is
+ * locked down: raw HTML in the Markdown is shown as text, never parsed, and
+ * links may only point at http(s), mailto or site-relative URLs. Missing
+ * files return null so a page still renders.
  */
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import { marked } from "marked";
+import { Marked } from "marked";
+import { getDb } from "./db";
+import { SIGNS } from "./western";
+import { ANIMALS } from "./chinese";
 import type { Lang } from "./i18n";
 
 export interface Faq { q: string; a: string }
 export interface WesternProfileFm { name: string; slug: string; summary: string; traits: string[]; luckyDay?: string; luckyColours?: string[]; luckyNumbers?: number[]; faq?: Faq[] }
 export interface AnimalProfileFm { name: string; slug: string; summary: string; traits: string[]; bestMatches?: string[]; challengingMatches?: string[]; faq?: Faq[] }
 export interface YearlyFm { animal: string; title: string; summary: string; relation: string; outlook: number; months: Array<{ label: string; text: string }> }
+export type Loaded<T> = { fm: T; html: string; translated: boolean };
 
 const ROOT = path.join(process.cwd(), "content");
-const cache = new Map<string, { fm: unknown; html: string } | null>();
 
-function load<T>(rel: string): { fm: T; html: string } | null {
-  if (cache.has(rel)) return cache.get(rel) as { fm: T; html: string } | null;
-  const file = path.join(ROOT, rel);
-  let out: { fm: T; html: string } | null = null;
-  if (fs.existsSync(file)) {
-    const { data, content } = matter(fs.readFileSync(file, "utf8"));
-    out = { fm: data as T, html: marked.parse(content, { async: false }) as string };
+const escapeHtml = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const SAFE_HREF = /^(https?:\/\/|mailto:|\/(?!\/)|#)/i;
+const md = new Marked({
+  renderer: {
+    html({ text }) { return escapeHtml(text); },
+    link({ href, title, tokens }) {
+      const label = this.parser.parseInline(tokens);
+      if (!SAFE_HREF.test(href)) return label;
+      return `<a href="${escapeHtml(href)}"${title ? ` title="${escapeHtml(title)}"` : ""}>${label}</a>`;
+    },
+    image({ text }) { return escapeHtml(text); },
+  },
+});
+
+/** Every editable Markdown path, relative to content/ (also the admin's whitelist). */
+export const CONTENT_PATHS: string[] = [
+  ...SIGNS.map((s) => `profiles/western/${s.slug}.md`),
+  ...ANIMALS.map((a) => `profiles/chinese/${a.slug}.md`),
+  ...ANIMALS.map((a) => `yearly/2027/${a.slug}.md`),
+];
+const KNOWN = new Set(CONTENT_PATHS);
+export const isContentPath = (p: string) => KNOWN.has(p);
+
+/** The repository text for a path and language, or null. */
+export function repoSource(rel: string, lang: Lang): string | null {
+  if (!KNOWN.has(rel)) return null;
+  const file = path.join(ROOT, lang === "km" ? "km" : "", rel);
+  return fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
+}
+
+/** The owner's saved edit, or null. A database error falls back to the repository text. */
+function overrideSource(rel: string, lang: Lang): string | null {
+  try {
+    const row = getDb().prepare("SELECT source FROM content_overrides WHERE path = ? AND lang = ?").get(rel, lang) as { source: string } | undefined;
+    return row?.source ?? null;
+  } catch (err) {
+    console.error("[content] override read failed, using repository text", err);
+    return null;
   }
-  cache.set(rel, out);
+}
+
+export function parseSource<T>(source: string): { fm: T; html: string } {
+  const { data, content } = matter(source);
+  return { fm: data as T, html: md.parse(content, { async: false }) as string };
+}
+
+// Parsed results, on globalThis so the admin API and the pages share one memo
+// (Next bundles routes separately); cleared whenever the admin saves.
+const store = globalThis as unknown as { __alContent?: Map<string, { fm: unknown; html: string } | null> };
+const cache = (store.__alContent ??= new Map());
+export function invalidateContent(): void {
+  cache.clear();
+}
+
+function load<T>(rel: string, lang: Lang): { fm: T; html: string } | null {
+  const key = `${lang}:${rel}`;
+  if (cache.has(key)) return cache.get(key) as { fm: T; html: string } | null;
+  const source = overrideSource(rel, lang) ?? repoSource(rel, lang);
+  const out = source ? parseSource<T>(source) : null;
+  cache.set(key, out);
   return out;
 }
 
-export type Loaded<T> = { fm: T; html: string; translated: boolean };
-
 function localised<T>(rel: string, lang: Lang): Loaded<T> | null {
   if (lang === "km") {
-    const km = load<T>(`km/${rel}`);
+    const km = load<T>(rel, "km");
     if (km) return { ...km, translated: true };
   }
-  const en = load<T>(rel);
+  const en = load<T>(rel, "en");
   return en ? { ...en, translated: lang === "en" } : null;
 }
 

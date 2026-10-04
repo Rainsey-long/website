@@ -9,7 +9,8 @@ import { BackupSkippedError, runBackup } from "@/lib/backup";
 import { json } from "@/lib/http";
 
 export const dynamic = "force-dynamic";
-let running = false;
+// Shared with the admin "Back up now" route (globalThis: Next bundles routes separately).
+const flag = globalThis as unknown as { __alBackupRunning?: boolean };
 
 function authorised(req: Request): boolean | null {
   const secret = process.env.BACKUP_SECRET;
@@ -23,8 +24,8 @@ export async function GET(req: Request) {
   const ok = authorised(req);
   if (ok === null) return json({ error: "Backups are not configured" }, 503);
   if (!ok) return json({ error: "Unauthorized" }, 401);
-  if (running) return json({ error: "A backup is already running" }, 409);
-  running = true;
+  if (flag.__alBackupRunning) return json({ error: "A backup is already running" }, 409);
+  flag.__alBackupRunning = true;
   try {
     const r = await runBackup();
     console.log(`[backup] ${r.file} ${r.bytes} bytes, pruned ${r.pruned}`);
@@ -34,6 +35,6 @@ export async function GET(req: Request) {
     console.error("[backup] failed", err);
     return json({ error: "Backup failed" }, 500);
   } finally {
-    running = false;
+    flag.__alBackupRunning = false;
   }
 }

@@ -19,6 +19,9 @@
 | `/tools/zodiac-calculator` | Client-side: sun/moon/rising, Chinese, Khmer (animal at the Songkran minute, birth weekday, lunar birth date) | browser only |
 | `/tools/compatibility-checker` | Picks a pair page | — |
 | `/southeast-asian-zodiac[/khmer|/vietnamese]`, `/about`, `/contact`, `/privacy`, `/terms`, `/disclaimer`, `/styleguide` (noindex) | | |
-| `/admin/login`, `/admin` | Owner: reading text review, Songkran override, feedback | DB |
-| `/api/health`, `/api/feedback`, `/api/admin/login`, `/api/admin/blocks/[id]`, `/api/admin/songkran/[year]`, `/api/cron/backup` | see `.claude/security.md` | DB |
+| `/admin/login` · `/admin` | Sign-in · overview of what needs attention | DB |
+| `/admin/readings` | Reading text in both languages: review, edit, approve; filters (draft, missing Khmer) and search | DB |
+| `/admin/content`, `/admin/content/edit?path=&lang=` | Profiles and 2027 forecasts: owner edits per language, stored in `content_overrides`, reset to the repository file | DB + `content/` |
+| `/admin/songkran` · `/admin/feedback` · `/admin/accounts` · `/admin/backups` | Official Khmer New Year moment · feedback triage, delete, CSV · add/remove admins, change password · list backups, back up now | DB / volume |
+| `/api/health`, `/api/feedback`, `/api/admin/login`, `/api/admin/blocks/[id]`, `/api/admin/songkran/[year]`, `/api/admin/content`, `/api/admin/feedback` (+ `/export` CSV), `/api/admin/users`, `/api/admin/password`, `/api/admin/backups`, `/api/cron/backup` | see `.claude/security.md` | DB |
 | `/og/[slug]`, `/sitemap.xml`, `/robots.txt` | share cards, sitemap, robots | |

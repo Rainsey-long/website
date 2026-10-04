@@ -3,6 +3,7 @@
  * from the Sun's real ecliptic longitude (build plan §5.1, §5.3).
  */
 import * as Astronomy from "astronomy-engine";
+import { khmerDigits, type Lang } from "./i18n";
 
 export type Element = "fire" | "earth" | "air" | "water";
 export type Modality = "cardinal" | "fixed" | "mutable";
@@ -87,6 +88,26 @@ export const ELEMENT_LABEL: Record<Element, string> = {
   air: "Air",
   water: "Water",
 };
+export const ELEMENT_LABEL_KM: Record<Element, string> = { fire: "ភ្លើង", earth: "ដី", air: "ខ្យល់", water: "ទឹក" };
+export const MODALITY_LABEL_KM: Record<Modality, string> = { cardinal: "ចាប់ផ្ដើម", fixed: "ថេរ", mutable: "ប្រែប្រួល" };
+export const elementLabel = (e: Element, lang: Lang = "en") => (lang === "km" ? ELEMENT_LABEL_KM : ELEMENT_LABEL)[e];
+export const modalityLabel = (m: Modality, lang: Lang = "en") => (lang === "km" ? MODALITY_LABEL_KM : MODALITY_LABEL)[m];
+
+/** Ruling planets in Khmer, by sign index (drafts for native review). */
+const RULER_KM = [
+  "ព្រះអង្គារ", "ព្រះសុក្រ", "ព្រះពុធ", "ព្រះចន្ទ", "ព្រះអាទិត្យ", "ព្រះពុធ",
+  "ព្រះសុក្រ", "ព្រះអង្គារ និងភ្លុយតូ", "ព្រះព្រហស្បតិ៍", "ព្រះសៅរ៍", "ព្រះសៅរ៍ និងអ៊ុយរ៉ានុស", "ព្រះព្រហស្បតិ៍ និងណិបទូន",
+];
+export const signRuler = (s: WesternSign, lang: Lang = "en") => (lang === "km" ? RULER_KM[s.index] : s.ruler);
+
+const MON_KM: Record<string, string> = {
+  Jan: "មករា", Feb: "កុម្ភៈ", Mar: "មីនា", Apr: "មេសា", May: "ឧសភា", Jun: "មិថុនា",
+  Jul: "កក្កដា", Aug: "សីហា", Sep: "កញ្ញា", Oct: "តុលា", Nov: "វិច្ឆិកា", Dec: "ធ្នូ",
+};
+/** "21 Mar – 19 Apr" / "២១ មីនា – ១៩ មេសា". */
+export const signRange = (s: WesternSign, lang: Lang = "en") =>
+  lang === "km" ? khmerDigits(s.range.replace(/[A-Z][a-z]{2}/g, (m) => MON_KM[m] ?? m)) : s.range;
+
 export const MODALITY_LABEL: Record<Modality, string> = {
   cardinal: "Cardinal",
   fixed: "Fixed",

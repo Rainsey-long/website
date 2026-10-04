@@ -7,6 +7,8 @@
 import * as A from "astronomy-engine";
 import { signIndexFromLongitude, SIGNS } from "./western";
 import { moonLongitude, planetLongitude } from "./sky";
+import { khmerDigits, type Lang } from "./i18n";
+import { planetName, signName as signNameL } from "./names";
 
 const QUARTER_NAMES = ["New moon", "First quarter", "Full moon", "Last quarter"];
 
@@ -164,3 +166,22 @@ export function eclipsesForYear(year: number): Eclipse[] {
 
 export const signName = (i: number) => SIGNS[i].name;
 export const degreeIn = (lon: number) => `${Math.floor(((lon % 360) + 360) % 30)}°`;
+
+/* ---------- Names in the page language (labels only; no calculation) ---------- */
+
+const QUARTER_NAMES_KM = ["ព្រះចន្ទងងឹត", "ព្រះចន្ទកន្លះដើមខែ", "ព្រះចន្ទពេញវង់", "ព្រះចន្ទកន្លះចុងខែ"];
+/** "Full moon" / "ព្រះចន្ទពេញវង់". */
+export const phaseName = (p: Pick<PhaseEvent, "quarter" | "name">, lang: Lang) => (lang === "km" ? QUARTER_NAMES_KM[p.quarter] : p.name);
+/** Sign name by index in the page language. */
+export const signNameIn = (i: number, lang: Lang) => (lang === "km" ? signNameL(SIGNS[i].slug, "km") : SIGNS[i].name);
+/** Planet name in the page language. */
+export const planetNameIn = (planet: Planet, lang: Lang) => (lang === "km" ? planetName(planet, "km") : PLANET_NAME[planet]);
+/** "12°" / "១២°". */
+export const degreeInL = (lon: number, lang: Lang) => (lang === "km" ? khmerDigits(degreeIn(lon)) : degreeIn(lon));
+
+const ECLIPSE_KIND_KM: Record<string, string> = { total: "ពេញលេញ", partial: "ដោយផ្នែក", annular: "រាងចិញ្ចៀន", penumbral: "ស្រមោលស្រាល", hybrid: "ចម្រុះ" };
+/** "Total solar eclipse" / "សូរ្យគ្រាសពេញលេញ". */
+export function eclipseName(e: Pick<Eclipse, "kind" | "body">, lang: Lang): string {
+  if (lang === "km") return `${e.body === "sun" ? "សូរ្យគ្រាស" : "ចន្ទគ្រាស"}${ECLIPSE_KIND_KM[e.kind] ?? ""}`;
+  return `${e.kind[0].toUpperCase() + e.kind.slice(1)} ${e.body === "sun" ? "solar" : "lunar"} eclipse`;
+}

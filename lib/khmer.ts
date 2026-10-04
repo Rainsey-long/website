@@ -53,24 +53,27 @@ export interface Weekday {
   colourEn: string;
   swatch: string; // token name in app/styles/tokens.css
   quality: string;
-  angel: { km: string; roman: string; flower: string; jewel: string; food: string; hands: string; mount: string };
+  /** The day's quality in Khmer (draft, docs/KHMER-REVIEW.md). */
+  qualityKm: string;
+  /** English attributes plus their Khmer twins (`flowerKm` …), from the research table (§ angels). */
+  angel: { km: string; roman: string; flower: string; jewel: string; food: string; hands: string; mount: string; flowerKm: string; jewelKm: string; foodKm: string; handsKm: string; mountKm: string };
 }
 
 export const WEEKDAYS: Weekday[] = [
-  { index: 0, km: "អាទិត្យ", en: "Sunday", planetKm: "ព្រះអាទិត្យ", planetEn: "the Sun", colourKm: "ក្រហម", colourEn: "Red", swatch: "kh-sun", quality: "courage",
-    angel: { km: "ទុង្សាទេវី", roman: "Tungsa Tevy", flower: "pomegranate flower", jewel: "ruby", food: "figs", hands: "a conch and a discus", mount: "a garuda" } },
-  { index: 1, km: "ចន្ទ", en: "Monday", planetKm: "ព្រះចន្ទ", planetEn: "the Moon", colourKm: "លឿងទុំ", colourEn: "Ripe yellow", swatch: "kh-mon", quality: "cheerfulness",
-    angel: { km: "គោរាគៈទេវី", roman: "Koreak Tevy", flower: "angkeabos flower", jewel: "pearl", food: "sesame oil", hands: "a walking staff and a sword", mount: "a tiger" } },
-  { index: 2, km: "អង្គារ", en: "Tuesday", planetKm: "ព្រះអង្គារ", planetEn: "Mars", colourKm: "ស្វាយ", colourEn: "Purple", swatch: "kh-tue", quality: "self-confidence",
-    angel: { km: "រាក្យៈសាទេវី", roman: "Reaksa Tevy", flower: "lotus", jewel: "coral", food: "blood", hands: "a bow and a trident", mount: "a horse" } },
-  { index: 3, km: "ពុធ", en: "Wednesday", planetKm: "ព្រះពុធ", planetEn: "Mercury", colourKm: "ស៊ីលៀប", colourEn: "Olive green", swatch: "kh-wed", quality: "optimism",
-    angel: { km: "មណ្ឌាទេវី", roman: "Mondea Tevy", flower: "champa", jewel: "cat's-eye", food: "ghee and milk", hands: "a staff and a needle", mount: "a donkey" } },
-  { index: 4, km: "ព្រហស្បតិ៍", en: "Thursday", planetKm: "ព្រះព្រហស្បតិ៍", planetEn: "Jupiter", colourKm: "បៃតង", colourEn: "Green", swatch: "kh-thu", quality: "good judgement",
-    angel: { km: "កិរិណីទេវី", roman: "Kirinei Tevy", flower: "mandara flower", jewel: "emerald", food: "beans and sesame", hands: "a vajra and an elephant hook", mount: "an elephant" } },
-  { index: 5, km: "សុក្រ", en: "Friday", planetKm: "ព្រះសុក្រ", planetEn: "Venus", colourKm: "ខៀវ", colourEn: "Blue", swatch: "kh-fri", quality: "perseverance",
-    angel: { km: "កិមិរាទេវី", roman: "Kimira Tevy", flower: "romchang flower", jewel: "topaz", food: "bananas", hands: "a lute and a sword", mount: "a water buffalo" } },
-  { index: 6, km: "សៅរ៍", en: "Saturday", planetKm: "ព្រះសៅរ៍", planetEn: "Saturn", colourKm: "ព្រីងទុំ", colourEn: "Dark plum", swatch: "kh-sat", quality: "friendliness",
-    angel: { km: "មហោទរាទេវី", roman: "Mohorea Tevy", flower: "trakiet flower", jewel: "sapphire", food: "venison", hands: "a trident and a discus", mount: "a peacock" } },
+  { index: 0, km: "អាទិត្យ", en: "Sunday", planetKm: "ព្រះអាទិត្យ", planetEn: "the Sun", colourKm: "ក្រហម", colourEn: "Red", swatch: "kh-sun", quality: "courage", qualityKm: "ភាពក្លាហាន",
+    angel: { km: "ទុង្សាទេវី", roman: "Tungsa Tevy", flower: "pomegranate flower", jewel: "ruby", food: "figs", hands: "a conch and a discus", mount: "a garuda", flowerKm: "ផ្កាទទឹម", jewelKm: "ត្បូងទទឹម (បទុមរាគ)", foodKm: "ផ្លែល្វា", handsKm: "ស័ង្ខ និងកងចក្រ", mountKm: "គ្រុឌ" } },
+  { index: 1, km: "ចន្ទ", en: "Monday", planetKm: "ព្រះចន្ទ", planetEn: "the Moon", colourKm: "លឿងទុំ", colourEn: "Ripe yellow", swatch: "kh-mon", quality: "cheerfulness", qualityKm: "ភាពរីករាយ",
+    angel: { km: "គោរាគៈទេវី", roman: "Koreak Tevy", flower: "angkeabos flower", jewel: "pearl", food: "sesame oil", hands: "a walking staff and a sword", mount: "a tiger", flowerKm: "ផ្កាអង្គាបុស្ប", jewelKm: "កែវមុក្តា", foodKm: "ប្រេងល្ង", handsKm: "ឈើច្រត់ និងព្រះខ័ន", mountKm: "ខ្លាធំ" } },
+  { index: 2, km: "អង្គារ", en: "Tuesday", planetKm: "ព្រះអង្គារ", planetEn: "Mars", colourKm: "ស្វាយ", colourEn: "Purple", swatch: "kh-tue", quality: "self-confidence", qualityKm: "ទំនុកចិត្តលើខ្លួនឯង",
+    angel: { km: "រាក្យៈសាទេវី", roman: "Reaksa Tevy", flower: "lotus", jewel: "coral", food: "blood", hands: "a bow and a trident", mount: "a horse", flowerKm: "ផ្កាឈូក", jewelKm: "កែវមោរ៉ា", foodKm: "លោហិត", handsKm: "ធ្នូ និងត្រីសូល៍", mountKm: "សេះ" } },
+  { index: 3, km: "ពុធ", en: "Wednesday", planetKm: "ព្រះពុធ", planetEn: "Mercury", colourKm: "ស៊ីលៀប", colourEn: "Olive green", swatch: "kh-wed", quality: "optimism", qualityKm: "ក្ដីសង្ឃឹម និងសុទិដ្ឋិនិយម",
+    angel: { km: "មណ្ឌាទេវី", roman: "Mondea Tevy", flower: "champa", jewel: "cat's-eye", food: "ghee and milk", hands: "a staff and a needle", mount: "a donkey", flowerKm: "ផ្កាចម្ប៉ា", jewelKm: "កែវពិទូរ្យ", foodKm: "ទឹកដោះ និងសប្បិ", handsKm: "ឈើច្រត់ និងម្ជុល", mountKm: "លា" } },
+  { index: 4, km: "ព្រហស្បតិ៍", en: "Thursday", planetKm: "ព្រះព្រហស្បតិ៍", planetEn: "Jupiter", colourKm: "បៃតង", colourEn: "Green", swatch: "kh-thu", quality: "good judgement", qualityKm: "ការពិចារណាល្អ",
+    angel: { km: "កិរិណីទេវី", roman: "Kirinei Tevy", flower: "mandara flower", jewel: "emerald", food: "beans and sesame", hands: "a vajra and an elephant hook", mount: "an elephant", flowerKm: "ផ្កាមន្ទារ", jewelKm: "កែវមរកត", foodKm: "សណ្ដែក និងល្ង", handsKm: "វជ្រ និងកង្វេរ", mountKm: "ដំរី" } },
+  { index: 5, km: "សុក្រ", en: "Friday", planetKm: "ព្រះសុក្រ", planetEn: "Venus", colourKm: "ខៀវ", colourEn: "Blue", swatch: "kh-fri", quality: "perseverance", qualityKm: "ការព្យាយាម",
+    angel: { km: "កិមិរាទេវី", roman: "Kimira Tevy", flower: "romchang flower", jewel: "topaz", food: "bananas", hands: "a lute and a sword", mount: "a water buffalo", flowerKm: "ផ្ការំចង់", jewelKm: "កែវផុស្សរាគ", foodKm: "ចេក", handsKm: "ពិណ និងព្រះខ័ន", mountKm: "ក្របី" } },
+  { index: 6, km: "សៅរ៍", en: "Saturday", planetKm: "ព្រះសៅរ៍", planetEn: "Saturn", colourKm: "ព្រីងទុំ", colourEn: "Dark plum", swatch: "kh-sat", quality: "friendliness", qualityKm: "ភាពរួសរាយរាក់ទាក់",
+    angel: { km: "មហោទរាទេវី", roman: "Mohorea Tevy", flower: "trakiet flower", jewel: "sapphire", food: "venison", hands: "a trident and a discus", mount: "a peacock", flowerKm: "ផ្កាត្រកៀត", jewelKm: "កែវនិលរ័តន៍", foodKm: "សាច់ក្ដាន់", handsKm: "ត្រីសូល៍ និងកងចក្រ", mountKm: "ក្ងោក" } },
 ];
 
 export interface KhmerDay {
@@ -92,6 +95,8 @@ export interface KhmerDay {
   labelKm: string;
   /** e.g. "8th waning day of Phatrabot" */
   labelEn: string;
+  /** e.g. "៨រោច ខែភទ្របទ" — the Khmer twin of labelEn. */
+  labelKmShort: string;
 }
 
 export interface Festival { id: string; km: string; en: string }
@@ -149,6 +154,7 @@ export function khmerDay(dateKey: string): KhmerDay {
     festival: songkran ?? festivalFor(k.monthIndex, k.moonPhase, k.day),
     labelKm: `ថ្ងៃ${weekday.km} ${toKhmerNum(k.day)}${waxing ? "កើត" : "រោច"} ខែ${month.km} ឆ្នាំ${animal.km} ${SAKS[k.sak]} ព.ស. ${toKhmerNum(k.beYear)}`,
     labelEn: `${ord(k.day)} ${waxing ? "waxing" : "waning"} day of ${month.en}`,
+    labelKmShort: `${toKhmerNum(k.day)}${waxing ? "កើត" : "រោច"} ខែ${month.km}`,
   };
 }
 

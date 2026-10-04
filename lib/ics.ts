@@ -50,12 +50,13 @@ export function toIcs(name: string, events: IcsEvent[]): string {
   return lines.map(fold).join("\r\n") + "\r\n";
 }
 
+/** `titleKm`/`aboutKm` are for the /km/feeds page only; the .ics files stay English. */
 export const FEEDS = {
-  "moon-phases": { title: "Moon phases", about: "New moons, first quarters, full moons and last quarters, with the Moon's sign." },
-  retrogrades: { title: "Retrogrades", about: "Each planet's retrograde period from Mercury to Saturn, as an all-day span." },
-  eclipses: { title: "Eclipses", about: "Solar and lunar eclipses at their peak moment." },
-  "khmer-holy-days": { title: "Khmer Buddhist holy days", about: "Every ថ្ងៃសីល: the 8th and 15th of the waxing and waning Moon." },
-  "khmer-festivals": { title: "Khmer festivals", about: "Khmer New Year, Visak Bochea, Pchum Ben, the Water Festival and other lunar festivals." },
+  "moon-phases": { title: "Moon phases", about: "New moons, first quarters, full moons and last quarters, with the Moon's sign.", titleKm: "ដំណាក់កាលព្រះចន្ទ", aboutKm: "ព្រះចន្ទងងឹត ព្រះចន្ទកន្លះដើមខែ ព្រះចន្ទពេញវង់ និងព្រះចន្ទកន្លះចុងខែ ព្រមទាំងរាសីដែលព្រះចន្ទស្ថិតនៅ។" },
+  retrogrades: { title: "Retrogrades", about: "Each planet's retrograde period from Mercury to Saturn, as an all-day span.", titleKm: "ភពដើរថយក្រោយ", aboutKm: "រយៈពេលដែលភពនីមួយៗដើរថយក្រោយ ចាប់ពីព្រះពុធដល់ព្រះសៅរ៍ ជាព្រឹត្តិការណ៍ពេញមួយថ្ងៃ។" },
+  eclipses: { title: "Eclipses", about: "Solar and lunar eclipses at their peak moment.", titleKm: "សូរ្យគ្រាស និងចន្ទគ្រាស", aboutKm: "សូរ្យគ្រាស និងចន្ទគ្រាស នៅពេលដែលវាពេញលេញបំផុត។" },
+  "khmer-holy-days": { title: "Khmer Buddhist holy days", about: "Every ថ្ងៃសីល: the 8th and 15th of the waxing and waning Moon.", titleKm: "ថ្ងៃសីលព្រះពុទ្ធសាសនា", aboutKm: "រាល់ថ្ងៃសីល៖ ថ្ងៃ ៨ និង ១៥ កើត និងរោច។" },
+  "khmer-festivals": { title: "Khmer festivals", about: "Khmer New Year, Visak Bochea, Pchum Ben, the Water Festival and other lunar festivals.", titleKm: "ពិធីបុណ្យខ្មែរ", aboutKm: "ចូលឆ្នាំខ្មែរ វិសាខបូជា ភ្ជុំបិណ្ឌ បុណ្យអុំទូក និងពិធីបុណ្យតាមចន្ទគតិផ្សេងទៀត។" },
 } as const;
 export type FeedName = keyof typeof FEEDS;
 

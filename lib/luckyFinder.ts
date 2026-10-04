@@ -16,19 +16,21 @@ import { addDays } from "./dates";
 export interface Occasion {
   slug: string;
   label: string;
+  /** Khmer label (draft). */
+  labelKm: string;
   /** Almanac terms any one of which marks the day favourable. */
   terms: string[];
 }
 
 export const OCCASIONS: Occasion[] = [
-  { slug: "moving", label: "Moving house", terms: ["移徙", "入宅"] },
-  { slug: "wedding", label: "A wedding", terms: ["嫁娶"] },
-  { slug: "engagement", label: "An engagement", terms: ["纳采", "订盟"] },
-  { slug: "opening", label: "Opening a business", terms: ["开市", "挂匾"] },
-  { slug: "contract", label: "Signing a contract", terms: ["立券", "交易"] },
-  { slug: "travel", label: "Travel", terms: ["出行"] },
-  { slug: "renovation", label: "Building or renovation", terms: ["修造", "动土"] },
-  { slug: "school", label: "Starting school or a course", terms: ["入学", "习艺"] },
+  { slug: "moving", label: "Moving house", labelKm: "ផ្លាស់ផ្ទះ", terms: ["移徙", "入宅"] },
+  { slug: "wedding", label: "A wedding", labelKm: "រៀបការ", terms: ["嫁娶"] },
+  { slug: "engagement", label: "An engagement", labelKm: "ភ្ជាប់ពាក្យ", terms: ["纳采", "订盟"] },
+  { slug: "opening", label: "Opening a business", labelKm: "បើកមុខរបរ", terms: ["开市", "挂匾"] },
+  { slug: "contract", label: "Signing a contract", labelKm: "ចុះហត្ថលេខាកិច្ចសន្យា", terms: ["立券", "交易"] },
+  { slug: "travel", label: "Travel", labelKm: "ធ្វើដំណើរ", terms: ["出行"] },
+  { slug: "renovation", label: "Building or renovation", labelKm: "សាងសង់ ឬជួសជុល", terms: ["修造", "动土"] },
+  { slug: "school", label: "Starting school or a course", labelKm: "ចូលរៀន ឬចាប់ផ្ដើមវគ្គសិក្សា", terms: ["入学", "习艺"] },
 ];
 
 export const MAX_FINDER_DAYS = 186;
@@ -37,6 +39,7 @@ export interface FinderResult {
   day: AlmanacDay;
   /** The occasion terms the almanac listed, translated. */
   matched: string[];
+  matchedKm: string[];
 }
 
 export function findLuckyDays(opts: { occasion: Occasion; from: string; days: number; avoidAnimals: string[] }): FinderResult[] {
@@ -46,7 +49,7 @@ export function findLuckyDays(opts: { occasion: Occasion; from: string; days: nu
     const day = almanacDay(addDays(opts.from, i));
     const hits = opts.occasion.terms.filter((t) => day.goodRaw.includes(t) && !day.avoidRaw.includes(t));
     if (!hits.length || day.quality === "challenging" || opts.avoidAnimals.includes(day.clash.slug)) continue;
-    out.push({ day, matched: translateTerms(hits) });
+    out.push({ day, matched: translateTerms(hits), matchedKm: translateTerms(hits, "km") });
   }
   return out;
 }

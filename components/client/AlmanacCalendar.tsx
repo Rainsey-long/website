@@ -10,12 +10,19 @@ import Link from "@/components/client/LocaleLink";
 import { useRef, useState, useSyncExternalStore } from "react";
 import Seal from "../Seal";
 import { localToday } from "@/lib/client";
+import { useLang } from "./LangProvider";
+import { defineMessages, num } from "@/lib/i18n";
+import { animalName } from "@/lib/names";
 
+/**
+ * `full`, `chinese.lunarLabel`, `chinese.good` and `chinese.avoid` arrive
+ * already in the page language (the server page picks them).
+ */
 export interface CalDay {
   date: string;
   full: string;
   chinese?: { lunarShort: string; lunarLabel: string; pillar: string; quality: "good" | "neutral" | "challenging"; good: string[]; avoid: string[]; clash: { slug: string; name: string } };
-  khmer?: { short: string; phase: string; labelKm: string; labelEn: string; sila: boolean; festival: { km: string; en: string } | null };
+  khmer?: { short: string; phase: string; labelKm: string; labelEn: string; labelKmShort?: string; sila: boolean; festival: { km: string; en: string } | null };
 }
 
 function subscribeHash(cb: () => void) {
@@ -23,9 +30,38 @@ function subscribeHash(cb: () => void) {
   return () => window.removeEventListener("hashchange", cb);
 }
 
-const QUALITY = { good: "Good day", neutral: "Ordinary day", challenging: "Challenging day" } as const;
+const T = defineMessages({
+  en: {
+    quality: { good: "Good day", neutral: "Ordinary day", challenging: "Challenging day" },
+    dow: [["Mon", "Monday"], ["Tue", "Tuesday"], ["Wed", "Wednesday"], ["Thu", "Thursday"], ["Fri", "Friday"], ["Sat", "Saturday"], ["Sun", "Sunday"]].map(([a, b]) => `${a}|${b}`).join(","),
+    nothing: "Nothing in particular",
+    holy: "Buddhist holy day",
+    today: "Today",
+    chineseLine: (lunar: string, pillar: string, q: string) => `Chinese almanac: lunar ${lunar}. Day of ${pillar}. ${q}.`,
+    goodFor: "Good for",
+    avoid: "Avoid",
+    clashA: "Clashes with the ",
+    clashB: ". People born in that year may prefer a quieter day.",
+  },
+  km: {
+    quality: { good: "ថ្ងៃល្អ", neutral: "ថ្ងៃធម្មតា", challenging: "ថ្ងៃគួរប្រុងប្រយ័ត្ន" },
+    dow: [["ច", "ថ្ងៃច័ន្ទ"], ["អ", "ថ្ងៃអង្គារ"], ["ពុ", "ថ្ងៃពុធ"], ["ព្រ", "ថ្ងៃព្រហស្បតិ៍"], ["សុ", "ថ្ងៃសុក្រ"], ["ស", "ថ្ងៃសៅរ៍"], ["អា", "ថ្ងៃអាទិត្យ"]].map(([a, b]) => `${a}|${b}`).join(","),
+    nothing: "គ្មានអ្វីពិសេស",
+    holy: "ថ្ងៃសីល",
+    today: "ថ្ងៃនេះ",
+    chineseLine: (lunar: string, pillar: string, q: string) => `ប្រតិទិនចិន៖ ចន្ទគតិ ${lunar}។ ថ្ងៃ ${pillar}។ ${q}។`,
+    goodFor: "ល្អសម្រាប់",
+    avoid: "គួរជៀសវាង",
+    clashA: "ឆុងនឹងឆ្នាំ",
+    clashB: "។ អ្នកកើតឆ្នាំនោះ ប្រហែលជាចូលចិត្តថ្ងៃដែលស្ងប់ស្ងាត់ជាង។",
+  },
+});
 
 export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; days: CalDay[] }) {
+  const lang = useLang();
+  const t = T[lang];
+  const km = lang === "km";
+  const QUALITY = t.quality;
   const today = useSyncExternalStore(() => () => {}, localToday, () => "");
   const hash = useSyncExternalStore(subscribeHash, () => location.hash.slice(1), () => "");
   const [sel, setSel] = useState<string | null>(null);
@@ -43,8 +79,8 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
   const cells: Array<CalDay | null> = [...Array(firstDow).fill(null), ...days];
   while (cells.length % 7) cells.push(null);
   const weeks = Array.from({ length: cells.length / 7 }, (_, i) => cells.slice(i * 7, i * 7 + 7));
-  const DOW: Array<[string, string]> = [["Mon", "Monday"], ["Tue", "Tuesday"], ["Wed", "Wednesday"], ["Thu", "Thursday"], ["Fri", "Friday"], ["Sat", "Saturday"], ["Sun", "Sunday"]];
-  const list = (x: string[]) => (x.length ? x.join(", ") : "Nothing in particular");
+  const DOW = t.dow.split(",").map((x) => x.split("|") as [string, string]);
+  const list = (x: string[]) => (x.length ? x.join(km ? " · " : ", ") : t.nothing);
 
   return (
     <div>
@@ -58,7 +94,7 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
                   <button type="button" ref={(el) => { refs.current[d.date] = el; }}
                     className={`cal-day${d.date === today ? " is-today" : ""}${d.date === current ? " is-selected" : ""}`} aria-current={d.date === today ? "date" : undefined}
                     tabIndex={d.date === current ? 0 : -1}
-                    aria-label={[d.full, d.khmer?.labelEn, d.khmer?.sila ? "Buddhist holy day" : "", d.khmer?.festival?.en, d.chinese ? QUALITY[d.chinese.quality] : ""].filter(Boolean).join(". ")}
+                    aria-label={[d.full, km ? d.khmer?.labelKmShort : d.khmer?.labelEn, d.khmer?.sila ? t.holy : "", km ? d.khmer?.festival?.km : d.khmer?.festival?.en, d.chinese ? QUALITY[d.chinese.quality] : ""].filter(Boolean).join(km ? "។ " : ". ")}
                     onClick={() => choose(d.date)}
                     onKeyDown={(e) => {
                       const i = days.findIndex((x) => x.date === d.date);
@@ -67,9 +103,9 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
                       e.preventDefault();
                       choose(days[Math.max(0, Math.min(days.length - 1, i + step))].date, true);
                     }}>
-                    <span className="cal-num">{Number(d.date.slice(8))}</span>
+                    <span className="cal-num">{num(Number(d.date.slice(8)), lang)}</span>
                     <span className="cal-foot">
-                      <span className="text-small text-muted" lang={d.khmer ? "km" : undefined}>{d.khmer ? <>{d.khmer.short}<span className="max-sm:sr-only">{d.khmer.phase}</span></> : d.chinese?.lunarShort}</span>
+                      <span className="text-small text-muted" lang={d.khmer ? "km" : undefined}>{d.khmer ? <>{d.khmer.short}<span className="max-sm:sr-only">{d.khmer.phase}</span></> : d.chinese ? num(d.chinese.lunarShort, lang) : null}</span>
                       <span className="flex items-center gap-1" aria-hidden="true">
                         {d.khmer?.sila && <span className="cal-sila" />}
                         {d.chinese?.quality === "good" && <Seal size="sm" />}
@@ -85,9 +121,9 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
       </table>
 
       <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-small text-muted">
-        {days[0].chinese && <><span className="inline-flex items-center gap-2"><Seal size="sm" /> Good day</span><span className="inline-flex items-center gap-2"><span className="cal-dot" /> Challenging day</span></>}
-        {days[0].khmer && <span className="inline-flex items-center gap-2"><span className="cal-sila" /> Buddhist holy day</span>}
-        <span className="inline-flex items-center gap-2"><span className="today-key" /> Today</span>
+        {days[0].chinese && <><span className="inline-flex items-center gap-2"><Seal size="sm" /> {QUALITY.good}</span><span className="inline-flex items-center gap-2"><span className="cal-dot" /> {QUALITY.challenging}</span></>}
+        {days[0].khmer && <span className="inline-flex items-center gap-2"><span className="cal-sila" /> {t.holy}</span>}
+        <span className="inline-flex items-center gap-2"><span className="today-key" /> {t.today}</span>
       </p>
 
       <section className="mt-6 border-y-2 border-ink py-5" aria-live="polite" aria-labelledby="detail-h">
@@ -95,18 +131,22 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
         {day.khmer && (
           <div className="mt-3">
             <p lang="km" className="serif">{day.khmer.labelKm}</p>
-            <p className="text-small text-muted">The {day.khmer.labelEn}.{day.khmer.sila ? <> A Buddhist holy day (<span lang="km">ថ្ងៃសីល</span>).</> : ""}</p>
-            {day.khmer.festival && <p className="mt-2 font-semibold">{day.khmer.festival.en} <span lang="km" className="font-normal">{day.khmer.festival.km}</span></p>}
+            {km
+              ? (day.khmer.sila && <p className="text-small text-muted">{t.holy}។</p>)
+              : <p className="text-small text-muted">The {day.khmer.labelEn}.{day.khmer.sila ? <> A Buddhist holy day (<span lang="km">ថ្ងៃសីល</span>).</> : ""}</p>}
+            {day.khmer.festival && (km
+              ? <p className="mt-2 font-semibold">{day.khmer.festival.km}</p>
+              : <p className="mt-2 font-semibold">{day.khmer.festival.en} <span lang="km" className="font-normal">{day.khmer.festival.km}</span></p>)}
           </div>
         )}
         {day.chinese && (
           <div className="mt-4">
-            <p className="text-small text-muted">Chinese almanac: lunar {day.chinese.lunarLabel}. Day of {day.chinese.pillar}. {QUALITY[day.chinese.quality]}.</p>
+            <p className="text-small text-muted">{t.chineseLine(day.chinese.lunarLabel, day.chinese.pillar, QUALITY[day.chinese.quality])}</p>
             <dl className="mt-3 grid gap-5 sm:grid-cols-2">
-              <div><dt className="font-semibold">Good for</dt><dd className="mt-1">{list(day.chinese.good)}</dd></div>
-              <div><dt className="font-semibold">Avoid</dt><dd className="mt-1">{list(day.chinese.avoid)}</dd></div>
+              <div><dt className="font-semibold">{t.goodFor}</dt><dd className="mt-1">{list(day.chinese.good)}</dd></div>
+              <div><dt className="font-semibold">{t.avoid}</dt><dd className="mt-1">{list(day.chinese.avoid)}</dd></div>
             </dl>
-            <p className="mt-4">Clashes with the <Link className="link" href={`/chinese-zodiac/${day.chinese.clash.slug}`}>{day.chinese.clash.name}</Link>. People born in that year may prefer a quieter day.</p>
+            <p className="mt-4">{t.clashA}<Link className="link" href={`/chinese-zodiac/${day.chinese.clash.slug}`}>{km ? animalName(day.chinese.clash.slug, lang) : day.chinese.clash.name}</Link>{t.clashB}</p>
           </div>
         )}
       </section>

@@ -30,12 +30,12 @@ function lichun(year: number): Date {
 }
 
 /** BaZi year pillar, which turns at Lichun rather than Lunar New Year. */
-export function baziYear(instant: Date): { year: number; pillar: string; label: string } {
+export function baziYear(instant: Date): { year: number; pillar: string; label: string; element: string; animal: string } {
   const y = instant.getUTCFullYear();
   const year = instant < lichun(y) ? y - 1 : y;
   const z = zodiacYear(year);
   const branch = BRANCH_NAMES[z.animal.index];
-  return { year, pillar: `${z.stem} ${branch}`, label: `${ELEMENT_NAME[z.element]} ${z.animal.name}` };
+  return { year, pillar: `${z.stem} ${branch}`, label: `${ELEMENT_NAME[z.element]} ${z.animal.name}`, element: z.element, animal: z.animal.slug };
 }
 
 export interface CalculatorInput {

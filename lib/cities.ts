@@ -1,6 +1,7 @@
 /** The bundled city list (lib/data/cities.json) with stable URL slugs. */
 import data from "./data/cities.json";
 import type { City } from "./zone";
+import type { Lang } from "./i18n";
 
 export interface CityEntry extends City {
   slug: string;
@@ -19,3 +20,15 @@ export function cityBySlug(slug: string | undefined): CityEntry | undefined {
 export function cityForZone(tz: string): CityEntry {
   return CITIES.find((c) => c.tz === tz) ?? CITIES[0];
 }
+
+// Khmer names for the Cambodian cities (other cities keep their international
+// names on Khmer pages, as Khmer media usually does).
+const KM_CITY: Record<string, string> = {
+  "Phnom Penh": "ភ្នំពេញ", "Siem Reap": "សៀមរាប", Battambang: "បាត់ដំបង", Sihanoukville: "ព្រះសីហនុ", Kampot: "កំពត",
+};
+/** "Phnom Penh, Cambodia" / "ភ្នំពេញ កម្ពុជា". */
+export function cityLabel(c: City, lang: Lang): string {
+  if (lang === "km" && c.country === "Cambodia") return `${KM_CITY[c.name] ?? c.name} កម្ពុជា`;
+  return `${c.name}, ${c.country}`;
+}
+export const cityName = (c: City, lang: Lang) => (lang === "km" ? KM_CITY[c.name] ?? c.name : c.name);

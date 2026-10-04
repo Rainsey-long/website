@@ -15,7 +15,7 @@
  */
 import * as Astronomy from "astronomy-engine";
 import { Solar } from "lunar-javascript";
-import { SPIRITS, HANZI_TO_ANIMAL } from "./almanac";
+import { SPIRITS, SPIRITS_KM, HANZI_TO_ANIMAL } from "./almanac";
 import { ANIMALS, type Animal } from "./chinese";
 import { localToUtc } from "./zone";
 
@@ -32,6 +32,8 @@ export interface ChineseHour {
   /** The animal of the hour itself. */
   animal: Animal;
   spirit: string;
+  /** The spirit's Khmer name (draft). */
+  spiritKm: string;
   good: boolean;
   /** People born in this animal's year traditionally take this hour gently. */
   clash: Animal;
@@ -56,6 +58,7 @@ export function chineseHours(dateKey: string): ChineseHour[] {
       branchHanzi: zhi,
       animal: animal(ZHI_ANIMAL[ZHI.indexOf(zhi)]),
       spirit: SPIRITS[t.getTianShen()] ?? t.getTianShen(),
+      spiritKm: SPIRITS_KM[t.getTianShen()] ?? t.getTianShen(),
       good: t.getTianShenLuck() === "吉",
       clash: animal(t.getChongShengXiao()),
     };
@@ -69,14 +72,14 @@ const CHALDEAN: Planet[] = ["saturn", "jupiter", "mars", "sun", "venus", "mercur
 /** Day rulers, Sunday first (the weekday names come from these planets). */
 const DAY_RULER: Planet[] = ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"];
 
-export const PLANET_HOUR: Record<Planet, { name: string; theme: string }> = {
-  sun: { name: "Sun", theme: "being seen: presenting, leading, asking for what you want" },
-  moon: { name: "Moon", theme: "home and feelings: rest, family, looking after yourself" },
-  mars: { name: "Mars", theme: "effort: exercise, hard tasks, getting started" },
-  mercury: { name: "Mercury", theme: "words: messages, calls, study, short errands" },
-  jupiter: { name: "Jupiter", theme: "growth: plans, generosity, asking a favour" },
-  venus: { name: "Venus", theme: "connection: friends, beauty, making peace" },
-  saturn: { name: "Saturn", theme: "structure: tidying up, finishing, careful work" },
+export const PLANET_HOUR: Record<Planet, { name: string; theme: string; nameKm: string; themeKm: string }> = {
+  sun: { name: "Sun", theme: "being seen: presenting, leading, asking for what you want", nameKm: "ព្រះអាទិត្យ", themeKm: "ការបង្ហាញខ្លួន៖ ធ្វើបទបង្ហាញ ដឹកនាំ សុំអ្វីដែលអ្នកចង់បាន" },
+  moon: { name: "Moon", theme: "home and feelings: rest, family, looking after yourself", nameKm: "ព្រះចន្ទ", themeKm: "ផ្ទះ និងអារម្មណ៍៖ សម្រាក គ្រួសារ ថែរក្សាខ្លួនឯង" },
+  mars: { name: "Mars", theme: "effort: exercise, hard tasks, getting started", nameKm: "ព្រះអង្គារ", themeKm: "ការខិតខំ៖ ហាត់ប្រាណ កិច្ចការពិបាក ការចាប់ផ្ដើម" },
+  mercury: { name: "Mercury", theme: "words: messages, calls, study, short errands", nameKm: "ព្រះពុធ", themeKm: "ពាក្យសម្ដី៖ សារ ការហៅទូរសព្ទ ការសិក្សា កិច្ចការខ្លីៗ" },
+  jupiter: { name: "Jupiter", theme: "growth: plans, generosity, asking a favour", nameKm: "ព្រះព្រហស្បតិ៍", themeKm: "ការរីកចម្រើន៖ ផែនការ ចិត្តទូលាយ ការសុំជំនួយ" },
+  venus: { name: "Venus", theme: "connection: friends, beauty, making peace", nameKm: "ព្រះសុក្រ", themeKm: "ទំនាក់ទំនង៖ មិត្តភក្តិ ភាពស្រស់ស្អាត ការផ្សះផ្សា" },
+  saturn: { name: "Saturn", theme: "structure: tidying up, finishing, careful work", nameKm: "ព្រះសៅរ៍", themeKm: "រចនាសម្ព័ន្ធ៖ រៀបចំ បញ្ចប់ការងារ ការងារដែលត្រូវប្រុងប្រយ័ត្ន" },
 };
 
 export interface PlanetaryHour {

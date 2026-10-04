@@ -1,10 +1,36 @@
 import TextPage from "@/components/TextPage";
 import { SITE_NAME } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
+import { getLang } from "@/lib/langServer";
 
-export const metadata = pageMetadata({ title: "About", description: `About ${SITE_NAME}: daily horoscopes, the Chinese zodiac, Khmer traditions and lucky days, written from real sky data.`, path: "/about" });
+const META = {
+  en: { title: "About", description: `About ${SITE_NAME}: daily horoscopes, the Chinese zodiac, Khmer traditions and lucky days, written from real sky data.` },
+  km: { title: "អំពីយើង", description: `អំពី ${SITE_NAME}៖ ហោរាសាស្ត្រប្រចាំថ្ងៃ ឆ្នាំសត្វចិន ប្រពៃណីខ្មែរ និងថ្ងៃល្អ ដែលសរសេរចេញពីទិន្នន័យមេឃពិតៗ។` },
+};
 
-export default function About() {
+export async function generateMetadata() {
+  const lang = await getLang();
+  return pageMetadata({ lang, ...META[lang], path: "/about" });
+}
+
+export default async function About() {
+  const lang = await getLang();
+  if (lang === "km") {
+    return (
+      <TextPage title={META.km.title} path="/about">
+        <p><span lang="en">{SITE_NAME}</span> ជាប្រតិទិនហោរាសាស្ត្រប្រចាំថ្ងៃដ៏ស្ងប់ស្ងាត់ សម្រាប់អ្នកអានសម័យថ្មី។ វាប្រមូលហោរាសាស្ត្រលោកខាងលិច ឆ្នាំសត្វចិន ប្រពៃណីខ្មែរ និងប្រតិទិនប្រពៃណី មកដាក់នៅកន្លែងតែមួយ។ អ្នកជាអ្នកជ្រើសរើសថាចង់មើលប្រពៃណីណាខ្លះ។</p>
+        <h2>របៀបដែលការទស្សន៍ទាយត្រូវបានរៀបចំ</h2>
+        <p>ការទស្សន៍ទាយប្រចាំថ្ងៃនីមួយៗចាប់ផ្ដើមពីមេឃពិតៗ។ យើងគណនាទីតាំងព្រះចន្ទ និងភពនានាជារៀងរាល់ថ្ងៃ ដោយប្រើកម្មវិធីតារាសាស្ត្របើកចំហ រួចផ្គូផ្គងវាជាមួយបណ្ណាល័យអត្ថបទដែលសរសេរដោយដៃ។ គ្មានអ្វីត្រូវបានបង្កើតដោយ AI ហើយគ្មានអ្វីត្រូវបានប្រឌិតឡើងសម្រាប់តែលម្អនោះទេ។ ការទស្សន៍ទាយនីមួយៗបង្ហាញមេឃដែលវាផ្អែកលើ។</p>
+        <p>ទំព័រប្រតិទិនចិនប្រើកំណត់ត្រារបស់ប្រតិទិនប្រពៃណីផ្ទាល់ អំពីថ្ងៃល្អ និងថ្ងៃដែលគួរប្រុងប្រយ័ត្ន។ ប្រតិទិនខ្មែរប្រើវិធីគណនាចន្ទគតិប្រពៃណី ដែលប្រតិទិនខ្មែរបោះពុម្ពប្រើ។</p>
+        <h2>អ្វីដែលយើងមិនធ្វើ</h2>
+        <p>គ្មានការជាវដែលត្រូវលុបចោល គ្មានការជូនដំណឹងដែលធ្វើឲ្យភ័យខ្លាច គ្មានការជជែកជាមួយគ្រូទាយដែលត្រូវបង់ប្រាក់ ហើយគ្មានការទស្សន៍ទាយអំពីជំងឺ គ្រោះថ្នាក់ ឬសំណាងអាក្រក់ទេ។</p>
+        <h2>សម្រាប់អ្នកណា</h2>
+        <p>សម្រាប់អ្នកណាដែលចូលចិត្តចំណាយពេលបន្តិចដើម្បីពិចារណា ជាមួយកាហ្វេពេលព្រឹក។ យើងនៅប្រទេសកម្ពុជា ហេតុនេះហើយបានជាមានប្រតិទិនខ្មែរ និងទេវតាឆ្នាំថ្មីនៅទីនេះ។</p>
+        <h2>កំណត់សម្គាល់អំពីអ្វីដែលទំព័រនេះជា</h2>
+        <p>ហោរាសាស្ត្រ និងប្រតិទិនប្រពៃណី ជាប្រពៃណីសម្រាប់រីករាយ និងគិតពិចារណា។ វាមិនមែនជាដំបូន្មានវេជ្ជសាស្ត្រ ច្បាប់ ឬហិរញ្ញវត្ថុទេ ហើយវាមិនអាចប្រាប់អ្នកថាអ្វីនឹងកើតឡើងនោះទេ។</p>
+      </TextPage>
+    );
+  }
   return (
     <TextPage title="About" path="/about">
       <p>{SITE_NAME} is a calm, daily almanac for the modern reader. It brings together Western astrology, the Chinese zodiac, Khmer traditions and the traditional almanac in one place. You choose which traditions you see.</p>

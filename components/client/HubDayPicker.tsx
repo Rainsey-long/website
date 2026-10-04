@@ -6,13 +6,15 @@
  */
 import { useSyncExternalStore, type ReactNode } from "react";
 import { localToday } from "@/lib/client";
+import { useLang } from "./LangProvider";
 
 export default function HubDayPicker({ days, serverToday, labels, children }: { days: string[]; serverToday: string; labels: Record<string, string>; children: ReactNode[] }) {
   const local = useSyncExternalStore(() => () => {}, localToday, () => serverToday);
   const active = days.includes(local) ? local : serverToday;
+  const lang = useLang();
   return (
     <>
-      <p className="mt-2 text-small text-muted">Horoscope for {labels[active]}</p>
+      <p className="mt-2 text-small text-muted">{lang === "km" ? `ហោរាសាស្ត្រសម្រាប់${labels[active]}` : `Horoscope for ${labels[active]}`}</p>
       {children.map((c, i) => <div key={days[i]} hidden={days[i] !== active}>{c}</div>)}
     </>
   );

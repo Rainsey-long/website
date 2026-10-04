@@ -1,10 +1,13 @@
 /** Faq — native disclosure (keyboard accessible). FAQPage JSON-LD is emitted by the page. */
 import type { Faq as FaqItem } from "@/lib/content";
-export default function Faq({ items }: { items: FaqItem[] }) {
+import { getLang } from "@/lib/langServer";
+
+export default async function Faq({ items }: { items: FaqItem[] }) {
   if (!items.length) return null;
+  const lang = await getLang();
   return (
     <section aria-labelledby="faq-h" className="faq mt-7 border-t border-rule pt-5">
-      <h2 id="faq-h" className="text-h2">Questions</h2>
+      <h2 id="faq-h" className="text-h2">{lang === "km" ? "សំណួរ" : "Questions"}</h2>
       <div className="mt-3">
         {items.map((f) => (
           <details key={f.q} className="border-b border-rule">

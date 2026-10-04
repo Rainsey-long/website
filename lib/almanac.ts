@@ -12,8 +12,9 @@
 import { Solar } from "lunar-javascript";
 import termData from "../content/data/almanac-terms.json";
 import { ANIMALS, type Animal } from "./chinese";
+import { khmerDigits } from "./i18n";
 
-type TermTable = Record<string, { en: string; hide?: boolean }>;
+type TermTable = Record<string, { en: string; km?: string; hide?: boolean }>;
 const TERMS = termData.terms as TermTable;
 
 const HANZI_ANIMAL: Record<string, string> = {
@@ -44,9 +45,13 @@ export interface AlmanacDay {
   clash: Animal;
   quality: DayQuality;
   /** The day officer (建除十二值星), Chinese and English. */
-  officer: { hanzi: string; en: string };
+  officer: { hanzi: string; en: string; km: string };
   /** The day spirit (十二天神) and whether the almanac counts it auspicious. */
-  spirit: { hanzi: string; en: string; auspicious: boolean };
+  spirit: { hanzi: string; en: string; km: string; auspicious: boolean };
+  /** Khmer twins of the labels above (drafts for native review). */
+  goodKm: string[];
+  avoidKm: string[];
+  lunarLabelKm: string;
   /** Untranslated 宜 / 忌 terms, for matching occasions (lib/luckyFinder.ts). */
   goodRaw: string[];
   avoidRaw: string[];
@@ -65,14 +70,27 @@ export const SPIRITS: Record<string, string> = {
   天牢: "Heavenly Prison", 玄武: "Black Tortoise", 司命: "Life Keeper", 勾陈: "Hook Array",
 };
 
+/** Khmer names for the day officers (drafts for native review). */
+export const OFFICERS_KM: Record<string, string> = {
+  建: "បង្កើត", 除: "បោសសម្អាត", 满: "ពេញ", 平: "ស្មើ", 定: "នឹងនរ", 执: "ចាប់ផ្ដើម",
+  破: "បែក", 危: "គ្រោះ", 成: "សម្រេច", 收: "ទទួល", 开: "បើក", 闭: "បិទ",
+};
+
+/** Khmer names for the twelve spirits (drafts for native review). */
+export const SPIRITS_KM: Record<string, string> = {
+  青龙: "នាគខៀវ", 明堂: "សាលភ្លឺ", 天刑: "ទណ្ឌកម្មស្ថានសួគ៌", 朱雀: "បក្សីក្រហម",
+  金匮: "ហិបមាស", 天德: "គុណធម៌ស្ថានសួគ៌", 白虎: "ខ្លាស", 玉堂: "សាលត្បូងថ្ម",
+  天牢: "គុកស្ថានសួគ៌", 玄武: "អណ្ដើកខ្មៅ", 司命: "អ្នកថែជីវិត", 勾陈: "ជួរទំពក់",
+};
+
 export const HANZI_TO_ANIMAL = HANZI_ANIMAL;
 
-export function translateTerms(terms: string[]): string[] {
+export function translateTerms(terms: string[], lang: "en" | "km" = "en"): string[] {
   const out: string[] = [];
   for (const t of terms) {
     const entry = TERMS[t];
     if (!entry) throw new Error(`Missing almanac term translation: ${t}`);
-    if (!entry.hide) out.push(entry.en);
+    if (!entry.hide) out.push(lang === "km" ? (entry.km ?? entry.en) : entry.en);
   }
   return out;
 }
@@ -108,10 +126,13 @@ export function almanacDay(key: string): AlmanacDay {
     dayPillarHanzi: gan + zhi,
     good: translateTerms(yi),
     avoid: translateTerms(ji),
+    goodKm: translateTerms(yi, "km"),
+    avoidKm: translateTerms(ji, "km"),
+    lunarLabelKm: `ខែទី${khmerDigits(lunarMonth)}${rawMonth < 0 ? " (ខែអធិក)" : ""} ថ្ងៃទី${khmerDigits(lunarDay)}`,
     clash: ANIMALS.find((a) => a.slug === HANZI_ANIMAL[lunar.getDayChongShengXiao()])!,
     quality,
-    officer: { hanzi: officer, en: OFFICERS[officer] ?? officer },
-    spirit: { hanzi: lunar.getDayTianShen(), en: SPIRITS[lunar.getDayTianShen()] ?? lunar.getDayTianShen(), auspicious: luck === "吉" },
+    officer: { hanzi: officer, en: OFFICERS[officer] ?? officer, km: OFFICERS_KM[officer] ?? officer },
+    spirit: { hanzi: lunar.getDayTianShen(), en: SPIRITS[lunar.getDayTianShen()] ?? lunar.getDayTianShen(), km: SPIRITS_KM[lunar.getDayTianShen()] ?? lunar.getDayTianShen(), auspicious: luck === "吉" },
     goodRaw: yi,
     avoidRaw: ji,
   };

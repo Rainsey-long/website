@@ -32,7 +32,7 @@ export default async function SkyPage() {
       <Breadcrumbs items={[{ name: "Sky", href: "/sky" }]} />
       <div className="mx-auto max-w-page safe-x py-6">
         <h1 className="text-h1">The sky today</h1>
-        <p className="reading mt-3 text-muted">Positions for 12:00 UTC on {date}, tropical zodiac. Times below are in {zoneLabel(tz)} time.</p>
+        <p className="reading mt-3 text-muted">Positions for 12:00 UTC on {new Intl.DateTimeFormat("en-GB", { timeZone: "UTC", day: "numeric", month: "long", year: "numeric" }).format(new Date(`${date}T12:00:00Z`))}, tropical zodiac. Times below are in {zoneLabel(tz)} time.</p>
         <div className="mt-6 grid gap-7 lg:grid-cols-2">
           <DayDial sky={sky} size="large" id="sky-dial" />
           <div>

@@ -54,6 +54,22 @@ export default async function Home() {
     href: `/chinese-compatibility/${pairSlug(a, b)}`, label: `${animalBySlug(a)!.name} and ${animalBySlug(b)!.name}`, score: chineseScore(animalBySlug(a)!, animalBySlug(b)!).score,
   }));
 
+  // Answer first (DESIGN_SYSTEM §1.2, §7.1): with Western readings on, the sign
+  // picker sits directly under the dial and the Khmer day follows it.
+  const khmerToday = show("khmer") ? (
+    <div className={show("western") ? "border-t border-rule py-7" : "py-7"}>
+      {!show("western") && <p className="serif text-h2">Today, <time dateTime={date}>{longDate(date)}</time></p>}
+      <div className="mt-5 grid gap-6 lg:grid-cols-2">
+        <KhmerDayCard day={kday} />
+        <section aria-labelledby="ny-h" className="border-y-2 border-ink py-5">
+          <h2 id="ny-h" className="text-h3">Khmer New Year {ny.year}</h2>
+          <p className="mt-3">Moha Songkran falls on {fullDate(ny.date)}, around {ny.time} Cambodian time. The New Year angel is <span lang="km">{ny.angel.km}</span> ({ny.angel.roman}), arriving {ny.posture.en}.</p>
+          <p className="mt-4 text-small"><Link className="link" href="/khmer/new-year">Read about the New Year angel</Link></p>
+        </section>
+      </div>
+    </div>
+  ) : null;
+
   return (
     <>
       <h1 className="sr-only">{SITE_NAME}: daily horoscopes, Chinese zodiac, Khmer traditions and lucky days</h1>
@@ -69,26 +85,15 @@ export default async function Home() {
       )}
 
       <div className="mx-auto max-w-page safe-x">
-        {show("khmer") && (
-          <div className="py-7">
-            {!show("western") && <p className="serif text-h2">Today, <time dateTime={date}>{longDate(date)}</time></p>}
-            <div className="mt-5 grid gap-6 lg:grid-cols-2">
-              <KhmerDayCard day={kday} />
-              <section aria-labelledby="ny-h" className="border-y-2 border-ink py-5">
-                <h2 id="ny-h" className="text-h3">Khmer New Year {ny.year}</h2>
-                <p className="mt-3">Moha Songkran falls on {fullDate(ny.date)}, around {ny.time} Cambodian time. The New Year angel is <span lang="km">{ny.angel.km}</span> ({ny.angel.roman}), arriving {ny.posture.en}.</p>
-                <p className="mt-4 text-small"><Link className="link" href="/khmer/new-year">Read about the New Year angel</Link></p>
-              </section>
-            </div>
-          </div>
-        )}
-
+        {!show("western") && khmerToday}
         {show("western") && (
           <div className="border-t border-rule py-7">
             <ChipGrid items={signChips()} set="western" heading="Pick your sign" headingId="pick-sign" remember />
             <p className="mt-4"><Link className="link" href="/tools/zodiac-calculator">Find my sign</Link></p>
           </div>
         )}
+
+        {show("western") && khmerToday}
 
         {show("khmer") && <div className="border-t border-rule py-7"><WeekdayChips /></div>}
 

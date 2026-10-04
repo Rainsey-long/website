@@ -52,7 +52,7 @@ export default async function Month({ params }: Params) {
     }
     if (wantKhmer) {
       const k = khmerDay(date);
-      d.khmer = { short: `${toKhmerNum(k.day)}${k.phaseKm}`, labelKm: k.labelKm, labelEn: k.labelEn, sila: k.sila, festival: k.festival ? { km: k.festival.km, en: k.festival.en } : null };
+      d.khmer = { short: toKhmerNum(k.day), phase: k.phaseKm, labelKm: k.labelKm, labelEn: k.labelEn, sila: k.sila, festival: k.festival ? { km: k.festival.km, en: k.festival.en } : null };
     }
     return d;
   });
@@ -89,7 +89,7 @@ export default async function Month({ params }: Params) {
             <h2 className="text-h3">How these calendars work</h2>
             <div className="reading mt-3 text-body">
               {wantChinese && <p>The Chinese almanac, the tong shu, marks each day with a day spirit and a day officer. Favourable spirits get the seal; days where both lean unfavourable get a small dot. The clash animal is the zodiac animal opposite the day&apos;s branch.</p>}
-              {wantKhmer && <p>The Khmer calendar, Chhankitek, follows the Moon. Each month has waxing (កើត) and waning (រោច) days. The 8th and 15th of each half are Buddhist holy days, ថ្ងៃសីល, when many people visit the pagoda.</p>}
+              {wantKhmer && <p>The Khmer calendar, Chhankitek, follows the Moon. Each month has waxing (<span lang="km">កើត</span>) and waning (<span lang="km">រោច</span>) days. The 8th and 15th of each half are Buddhist holy days, <span lang="km">ថ្ងៃសីល</span>, when many people visit the pagoda.</p>}
               <p className="text-small text-muted">Traditions to enjoy and reflect on, not rules. Medical and catch-all almanac entries are left out. Choose which traditions you see in the header.</p>
             </div>
           </aside>

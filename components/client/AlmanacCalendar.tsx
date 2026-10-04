@@ -15,7 +15,7 @@ export interface CalDay {
   date: string;
   full: string;
   chinese?: { lunarShort: string; lunarLabel: string; pillar: string; quality: "good" | "neutral" | "challenging"; good: string[]; avoid: string[]; clash: { slug: string; name: string } };
-  khmer?: { short: string; labelKm: string; labelEn: string; sila: boolean; festival: { km: string; en: string } | null };
+  khmer?: { short: string; phase: string; labelKm: string; labelEn: string; sila: boolean; festival: { km: string; en: string } | null };
 }
 
 function subscribeHash(cb: () => void) {
@@ -54,7 +54,7 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
           {weeks.map((w, wi) => (
             <tr key={wi}>
               {w.map((d, di) => d ? (
-                <td key={d.date} className="border-t border-rule p-0" role="gridcell" aria-selected={d.date === current}>
+                <td key={d.date} className="border-t border-rule p-0 align-top" role="gridcell" aria-selected={d.date === current}>
                   <button type="button" ref={(el) => { refs.current[d.date] = el; }}
                     className={`cal-day${d.date === today ? " is-today" : ""}${d.date === current ? " is-selected" : ""}`} aria-current={d.date === today ? "date" : undefined}
                     tabIndex={d.date === current ? 0 : -1}
@@ -69,7 +69,7 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
                     }}>
                     <span className="cal-num">{Number(d.date.slice(8))}</span>
                     <span className="cal-foot">
-                      <span className="text-small text-muted" lang={d.khmer ? "km" : undefined}>{d.khmer ? d.khmer.short : d.chinese?.lunarShort}</span>
+                      <span className="text-small text-muted" lang={d.khmer ? "km" : undefined}>{d.khmer ? <>{d.khmer.short}<span className="max-sm:sr-only">{d.khmer.phase}</span></> : d.chinese?.lunarShort}</span>
                       <span className="flex items-center gap-1" aria-hidden="true">
                         {d.khmer?.sila && <span className="cal-sila" />}
                         {d.chinese?.quality === "good" && <Seal size="sm" />}
@@ -95,7 +95,7 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
         {day.khmer && (
           <div className="mt-3">
             <p lang="km" className="serif">{day.khmer.labelKm}</p>
-            <p className="text-small text-muted">The {day.khmer.labelEn}.{day.khmer.sila ? " A Buddhist holy day (ថ្ងៃសីល)." : ""}</p>
+            <p className="text-small text-muted">The {day.khmer.labelEn}.{day.khmer.sila ? <> A Buddhist holy day (<span lang="km">ថ្ងៃសីល</span>).</> : ""}</p>
             {day.khmer.festival && <p className="mt-2 font-semibold">{day.khmer.festival.en} <span lang="km" className="font-normal">{day.khmer.festival.km}</span></p>}
           </div>
         )}

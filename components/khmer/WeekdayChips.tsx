@@ -7,7 +7,7 @@ export default function WeekdayChips({ heading = "Born on which day?", headingId
     <section aria-labelledby={headingId}>
       <h2 id={headingId} className="text-h2">{heading}</h2>
       <p className="reading mt-3 text-muted">In Khmer tradition the day of the week you were born on has its own planet, colour and New Year angel.</p>
-      <ul className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4 md:grid-cols-7">
+      <ul className="mt-5 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-7">
         {WEEKDAYS.map((w) => (
           <li key={w.index}>
             <Link href={`/khmer/born-on/${w.en.toLowerCase()}`} className="chip">

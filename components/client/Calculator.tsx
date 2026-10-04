@@ -57,7 +57,7 @@ export default function Calculator({ cities, traditions }: { cities: City[]; tra
           <label className="label" htmlFor={`${id}-time`}>Birth time <span className="font-normal text-muted">(optional)</span></label>
           <input className="field tabular" type="time" id={`${id}-time`} value={time} disabled={unknown} onChange={(e) => setTime(e.target.value)} />
           <label className="mt-3 inline-flex min-h-tap items-center gap-3">
-            <input type="checkbox" className="size-5" checked={unknown} onChange={(e) => { setUnknown(e.target.checked); if (e.target.checked) setTime(""); }} />
+            <input type="checkbox" className="size-5 shrink-0" checked={unknown} onChange={(e) => { setUnknown(e.target.checked); if (e.target.checked) setTime(""); }} />
             <span>I don&apos;t know my birth time</span>
           </label>
         </div>
@@ -70,7 +70,7 @@ export default function Calculator({ cities, traditions }: { cities: City[]; tra
         </div>
         {show("khmer") && (
           <label className="inline-flex min-h-tap items-center gap-3">
-            <input type="checkbox" className="size-5" checked={sunrise} onChange={(e) => setSunrise(e.target.checked)} />
+            <input type="checkbox" className="size-5 shrink-0" checked={sunrise} onChange={(e) => setSunrise(e.target.checked)} />
             <span>Count the Khmer birth day from sunrise <span className="text-muted">(a birth before 6 am belongs to the day before)</span></span>
           </label>
         )}
@@ -140,7 +140,7 @@ export default function Calculator({ cities, traditions }: { cities: City[]; tra
 
 function Cell({ label, value, note }: { label: string; value: React.ReactNode; note?: React.ReactNode }) {
   return (
-    <div className="border-t-2 border-ink pt-3">
+    <div className="border-t border-rule pt-3">
       <dt className="text-small text-muted">{label}</dt>
       <dd className="mt-1 serif text-h2">{value}</dd>
       {note ? <dd className="text-small text-muted">{note}</dd> : null}

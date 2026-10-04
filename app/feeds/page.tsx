@@ -18,7 +18,7 @@ export default function Feeds() {
             return (
               <li key={name} className="border-b border-rule py-4">
                 <h2 className="text-h3">{f.title}</h2>
-                <p className="mt-1 text-muted">{f.about}</p>
+                <p className="mt-1 text-muted">{f.about.split(/([\u1780-\u17FF]+)/).map((part, i) => (i % 2 ? <span key={i} lang="km">{part}</span> : part))}</p>
                 <p className="mt-3 flex flex-wrap gap-3">
                   <a className="btn-secondary" href={webcal}>Subscribe</a>
                   <a className="btn-secondary" href={`https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}`} target="_blank" rel="noopener noreferrer">Add to Google Calendar</a>

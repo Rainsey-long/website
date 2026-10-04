@@ -368,3 +368,5 @@ Month heading with previous/next → AlmanacCalendar → selected day detail →
 | 2026-10-04 | `MoonGlyph` (small phase moon), `SkyPanel` ("the sky behind this reading" disclosure) | Moon calendar and reading transparency features |
 | 2026-10-04 | Nav adds "Khmer" and "Sky"; footer regrouped (Readings, Calendars, Tools, About) | New sections |
 | 2026-10-04 | Added HoursList (§6.15), BirthChartWheel (§6.16), Finder form (§6.17), and planet glyphs in `lib/glyphs.ts` | Good hours, birth chart and lucky-date finder from the scored feature research |
+| 2026-10-04 | Language switch in the header (and footer): a text link to the other language ("ខ្មែរ" / "English"), §6.10. Supersedes the row above that omitted it | Owner: the site supports English and Khmer |
+| 2026-10-04 | Khmer pages use Khmer numerals and written-out Khmer dates; `<html lang="km">` applies the Khmer line height site-wide | DESIGN_SYSTEM §8.5, §8.8 |

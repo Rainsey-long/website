@@ -62,4 +62,7 @@ Next candidates: personal transit readings (24, large content cost: ~600 text bl
 | City data | 124 hand-picked cities with IANA zones, no external dataset |
 | AI crawlers | Blocked like CamboMath (`FEATURES.BLOCK_AI_CRAWLERS`); answer-engine bots are an owner decision |
 | Ads, affiliates, report CTA | Components built, flags off (plan §11) |
-| Language switch | Phase 7; Khmer script appears inline where traditions need it |
+| Languages | English and Khmer (owner request, 2026-10-04), built ahead of the plan's Phase 7. Khmer under `/km` (CamboMath's rewrite pattern), English at the root, no browser-language redirect, choice remembered in a `lang` cookie. Mechanism: `lib/i18n.ts`; conventions: `docs/I18N.md` |
+| Khmer translations | Drafted in the repository and listed in `docs/KHMER-REVIEW.md` until a native reader approves them; reading blocks are owner-editable in both languages in `/admin` |
+| Not translated | The admin dashboard (owner-only), `.ics` feed files (calendar apps show one language), share-card images (the image renderer has no Khmer font loaded); legal pages in Khmer say the English version prevails |
+| Khmer numerals | Khmer digits in Khmer text, as Khmer print does (CamboMath does the same) |

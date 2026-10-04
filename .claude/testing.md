@@ -19,6 +19,7 @@ npm run build        # validates text blocks, next build
 | a new component, page or visual change | dispatch the `ui-ux-designer` agent (mandatory, `role.md`) |
 | auth, input handling, a trust boundary | dispatch the `security-auditor` agent (mandatory) |
 | `Dockerfile`, `railway.json`, `instrumentation.ts` | cannot be verified from `next dev`; say so, and run `docs/RAILWAY.md` §7 after deploying |
+| any visible text | both languages: check `/x` and `/km/x`; the Khmer page has no stray English UI text and survives the longer Khmer at 360px |
 | any `.claude/*.md` or `CLAUDE.md` | every `@` import still resolves |
 
 Before a deploy: `npm run release:check -- --build` must print GO.

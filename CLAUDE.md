@@ -56,3 +56,4 @@ Built on the same stack and production shape as the owner's other site, CamboMat
 | `.claude/reference/agent-budget.md` · `agent-runs.md` | Before dispatching a subagent · what agents have cost (`npm run agents:report`) |
 | `.claude/reference/routes.md` | What each route does |
 | `.claude/reference/memory.md` | Session memory (claude-mem) |
+| `docs/I18N.md` | **Any visible text**: how English/Khmer works, the helpers, and how to write Khmer |

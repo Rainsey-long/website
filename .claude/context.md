@@ -42,7 +42,8 @@ npm run release:check  # all gates, GO / NO-GO (add -- --build before a deploy)
 - Every page exports metadata via `lib/seo.ts` `pageMetadata()` and renders `Breadcrumbs` (which emits BreadcrumbList JSON-LD).
 - The tradition preference is read on the server (`lib/traditionsServer.ts`); a page must render sensibly for any non-empty combination.
 - Server-shared state (DB connection, caches, seed flag) lives on `globalThis`: Next bundles routes separately, and a module-level variable is a different copy per route (measured: an admin edit never reached the pages until this was fixed).
-- Khmer script: wrap in `lang="km"`; numerals via `toKhmerNum()` where the context is Khmer.
+- **Bilingual (English/Khmer)**: no hard-coded visible English. Strings via `defineMessages`, language via `getLang()`/`useLang()`, links via `LocaleLink`, metadata via `pageMetadata({ lang })`. Full rules: `docs/I18N.md`.
+- Khmer script inside English text: wrap in `lang="km"`; numerals via `num()`/`khmerDigits()` on Khmer pages.
 
 ## Where to look next
 

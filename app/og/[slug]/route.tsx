@@ -55,6 +55,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
   }
   // Khmer lines become pre-shaped images; English stays live text in the card's fonts.
   const ink = (text: string, size: number, face: "serif" | "sans", color: string) =>
+    // eslint-disable-next-line @next/next/no-img-element -- an image inside a share card, rendered by next/og, not a page
     km ? shapedLine(text, { size, face, color }).then((l) => <img src={l.src} width={l.width} height={l.height} alt="" />) : Promise.resolve(<>{text}</>);
   const titleEl = await ink(title, 96, "serif", T.ink);
   const subtitleEl = await ink(subtitle, 32, "sans", T.muted);

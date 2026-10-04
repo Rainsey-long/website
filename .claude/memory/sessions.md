@@ -2,6 +2,13 @@
 
 One entry per working session, at most ~10 lines: what changed, the commit range, what is left open. This is the cross-session memory for "what happened last time"; the why of each change is in its commit message.
 
+## 2026-10-04 (evening) — top three features from the brainstorm
+
+- Date converter `/tools/date-converter` (Khmer and Chinese lunar, both reverse lookups) with a client-only age tool (`lib/age.ts`: a birth date never reaches the server); Khmer year tables cached per year with a ceiling on cache misses (security review).
+- Colour of the day `/khmer/colours` plus a line on the Khmer day card; printable A4 month `/lucky-days/YYYY/MM/print`.
+- UI review found `.theme-light` resetting the type tokens (fixed in tokens.css: type and size tokens live on `:root` only).
+- Open: Khmer strings for these pages (docs/KHMER-REVIEW.md), next features #46 weekly horoscopes and #47 Telegram card.
+
 ## 2026-10-04 (later) — docs sync, memory, token budget, brainstorm round 2
 
 - Committed memory in `.claude/memory/` (MEMORY.md auto-loaded, this log on demand) and a SessionStart hook (cloud only: installs deps, sets the git hooks path, prints status).

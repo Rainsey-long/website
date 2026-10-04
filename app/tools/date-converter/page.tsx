@@ -10,7 +10,7 @@ import Link from "@/components/client/LocaleLink";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Seal from "@/components/Seal";
 import AgeTool from "@/components/client/AgeTool";
-import { convert, findChineseDate, findKhmerDates, isChineseQuery, isKhmerQuery, parseDateKey, type ChineseQuery, type KhmerQuery } from "@/lib/converter";
+import { convert, findChineseDate, findKhmerDates, isChineseQuery, isKhmerQuery, isKhmerYearCached, parseDateKey, type ChineseQuery, type KhmerQuery } from "@/lib/converter";
 import { LUNAR_MONTHS, khmerDay } from "@/lib/khmer";
 import { fullDate } from "@/lib/dates";
 import { today } from "@/lib/today";
@@ -20,6 +20,15 @@ import { getLang } from "@/lib/langServer";
 import { defineMessages, khmerDigits, localePath, num } from "@/lib/i18n";
 import { animalName, elementName } from "@/lib/names";
 import { almanacDay } from "@/lib/almanac";
+import { GLOBAL_LIMIT_KEY, createRateLimiter } from "@/lib/rateLimit";
+
+/**
+ * A Khmer lookup for a year not yet cached builds a 365-day table (~27 ms of
+ * synchronous work, security review 2026-10-04). Those builds share one
+ * site-wide ceiling; cached years are free and never charged.
+ */
+const g = globalThis as unknown as { __khmerLookupLimiter?: ReturnType<typeof createRateLimiter> };
+const khmerBuilds = (g.__khmerLookupLimiter ??= createRateLimiter(10 * 60_000, 600));
 
 export const dynamic = "force-dynamic";
 
@@ -43,6 +52,9 @@ const T = defineMessages({
     year: "Gregorian year", lmonth: "Lunar month", phase: "Waxing or waning", waxing: "Waxing (កើត)", waning: "Waning (រោច)", day: "Day",
     leapNote: "(leap years only)",
     find: "Find the date",
+    busy: "Many people are looking up dates right now. Try again in a few minutes.",
+    birthHint: "Converting your own birth date? Use the age tool below: it works on your device and sends nothing.",
+    ageLink: "Go to the age tool",
     khmerNone: (y: number) => `That lunar date does not fall in ${y}. The two Asadh months occur only in leap years, and some months have 14 waning days, not 15.`,
     khmerMany: "It falls twice this year: the lunar month starts in January and again in December.",
     findChinese: "Find a Chinese lunar date",
@@ -75,6 +87,9 @@ const T = defineMessages({
     year: "ឆ្នាំសុរិយគតិ", lmonth: "ខែចន្ទគតិ", phase: "កើត ឬរោច", waxing: "កើត", waning: "រោច", day: "ថ្ងៃ",
     leapNote: "(តែឆ្នាំអធិកមាសប៉ុណ្ណោះ)",
     find: "រកកាលបរិច្ឆេទ",
+    busy: "ឥឡូវនេះមានមនុស្សច្រើនកំពុងរកកាលបរិច្ឆេទ។ សូមព្យាយាមម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
+    birthHint: "ចង់បម្លែងថ្ងៃកំណើតរបស់អ្នក? សូមប្រើឧបករណ៍អាយុខាងក្រោម៖ វាដំណើរការនៅលើឧបករណ៍របស់អ្នក ហើយមិនផ្ញើអ្វីទាំងអស់។",
+    ageLink: "ទៅកាន់ឧបករណ៍អាយុ",
     khmerNone: (y: number) => `ថ្ងៃចន្ទគតិនោះមិនមាននៅក្នុងឆ្នាំ ${khmerDigits(y)} ទេ។ ខែអាសាឍទាំងពីរមានតែក្នុងឆ្នាំអធិកមាស ហើយខែខ្លះមានថ្ងៃរោចត្រឹម ១៤ មិនមែន ១៥ ទេ។`,
     khmerMany: "ឆ្នាំនេះវាធ្លាក់ពីរដង៖ ខែចន្ទគតិនោះចាប់ផ្ដើមក្នុងខែមករា និងម្ដងទៀតក្នុងខែធ្នូ។",
     findChinese: "រកថ្ងៃចន្ទគតិចិន",
@@ -114,7 +129,8 @@ export default async function DateConverter({ searchParams }: Search) {
 
   const kq: Partial<KhmerQuery> = { year: int(sp.ky), month: int(sp.kmo), phase: sp.kph as KhmerQuery["phase"], day: int(sp.kd) };
   const khmerQuery = isKhmerQuery(kq) ? kq : null;
-  const khmerHits = khmerQuery ? findKhmerDates(khmerQuery) : null;
+  const khmerBusy = !!khmerQuery && !isKhmerYearCached(khmerQuery.year) && khmerBuilds(GLOBAL_LIMIT_KEY);
+  const khmerHits = khmerQuery && !khmerBusy ? findKhmerDates(khmerQuery) : null;
 
   const cq: Partial<ChineseQuery> = { year: int(sp.cy), month: int(sp.cm), day: int(sp.cd), leap: sp.cl === "1" };
   const chineseQuery = isChineseQuery(cq) ? cq : null;
@@ -143,6 +159,7 @@ export default async function DateConverter({ searchParams }: Search) {
           </div>
           <button type="submit" className="btn-primary">{t.convert}</button>
           {dateError && <p id="cv-d-err" className="w-full text-small font-semibold text-cinnabar">{t.dateErr}</p>}
+          <p className="w-full text-small text-muted">{t.birthHint} <a className="link" href="#age-tool">{t.ageLink}</a></p>
         </form>
 
         <section className="mt-7" aria-labelledby="result-h">
@@ -166,7 +183,7 @@ export default async function DateConverter({ searchParams }: Search) {
             <Row label={t.chineseYear}>
               <Link className="link" href={`/chinese-zodiac/${c.zodiac.animal.slug}`}>{t.chineseYearValue(elementName(c.zodiac.element, lang), animalName(c.zodiac.animal.slug, lang), c.zodiac.year)}</Link>
             </Row>
-            <Row label={t.pillar}>{a.dayPillar} <span lang="zh" className="text-muted">{a.dayPillarHanzi}</span></Row>
+            <Row label={t.pillar}>{km ? <span lang="zh">{a.dayPillarHanzi}</span> : <>{a.dayPillar} <span lang="zh" className="text-muted">{a.dayPillarHanzi}</span></>}</Row>
             <Row label={t.almanac}>
               <span className="inline-flex items-center gap-2">{a.quality === "good" && <Seal size="sm" />}{a.quality === "challenging" && <span className="cal-dot" aria-hidden="true" />}{quality}</span>
               <span className="block text-small text-muted">{t.clash(animalName(a.clash.slug, lang))}</span>
@@ -202,6 +219,7 @@ export default async function DateConverter({ searchParams }: Search) {
             </div>
             <div><button type="submit" className="btn-secondary">{t.find}</button></div>
           </form>
+          {khmerBusy && <p className="mt-5" aria-live="polite">{t.busy}</p>}
           {khmerQuery && khmerHits && (
             <div className="mt-5" aria-live="polite">
               {khmerHits.length === 0 ? <p>{t.khmerNone(khmerQuery.year)}</p> : (
@@ -248,7 +266,7 @@ export default async function DateConverter({ searchParams }: Search) {
           )}
         </section>
 
-        <div className="mt-8"><AgeTool /></div>
+        <div className="mt-8" id="age-tool"><AgeTool /></div>
 
         <section className="mt-8 border-t border-rule pt-7" aria-labelledby="how-h">
           <h2 id="how-h" className="text-h3">{t.how}</h2>

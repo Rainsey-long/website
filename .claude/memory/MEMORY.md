@@ -4,6 +4,8 @@ Cloud sessions start in a fresh container: nothing outside git survives. This fi
 
 ## Lessons that cost time
 
+- **A palette class (`.theme-light`) must only set colours.** Type and size tokens on `:root` only, or the class resets the type scale and the Khmer line heights.
+- **Printing in dark mode:** set `color-scheme: light` on html in `@media print`, or the canvas prints dark around a light sheet.
 - **Shared server state goes on `globalThis`.** Next bundles each route separately; a module-level cache or DB handle is a different copy per route (an admin edit never reached the pages).
 - **gray-matter evals `---js` front matter.** Always pass `GM_YAML_ONLY` (lib/content.ts); passing only a yaml engine is not enough (it merges over the built-ins).
 - **next/og (satori) cannot shape Khmer.** Use `shapedLine()` (lib/khmerShape.ts, HarfBuzz). Plain Khmer text in an image shows coeng marks and misplaced vowels.

@@ -104,7 +104,7 @@ export default async function Colours() {
                 <li key={d} className="flex min-h-tap items-center gap-4 border-t border-rule py-3">
                   <span className="swatch" style={{ width: "var(--size-glyph)", height: "var(--size-glyph)", background: `var(--${x.swatch})` }} aria-hidden="true" />
                   <span className="grow"><time dateTime={d}>{fullDate(d, lang)}</time></span>
-                  <span className="font-semibold">{name(x)}</span>
+                  <span className="shrink-0 text-right font-semibold">{name(x)}</span>
                 </li>
               );
             })}
@@ -115,7 +115,7 @@ export default async function Colours() {
           <h2 id="var-h" className="text-h3">{t.variants}</h2>
           <div className="reading mt-3">
             <p>{t.variantsBody}</p>
-            <ul className="list-disc pl-6">
+            <ul className="my-3 list-disc pl-6">
               {Object.entries(NEWER).map(([i, c]) => {
                 const x = WEEKDAYS[Number(i)];
                 return <li key={i}>{t.variantRow(km ? x.km : x.en, km ? c.km : c.en)}{km ? ` (ពណ៌ដូនតា៖ ${x.colourKm})` : ` (ancestral: ${x.colourEn.toLowerCase()})`}</li>;

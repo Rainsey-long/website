@@ -6,7 +6,7 @@
  * form and not part of the GET converter beside it.
  */
 import Link from "@/components/client/LocaleLink";
-import { useId, useState, type FormEvent, type ReactNode } from "react";
+import { useId, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { ageFacts, type AgeResult } from "@/lib/age";
 import { localToday } from "@/lib/client";
 import { fullDate } from "@/lib/dates";
@@ -50,6 +50,7 @@ export default function AgeTool() {
   const t = T[lang];
   const km = lang === "km";
   const id = useId();
+  const input = useRef<HTMLInputElement>(null);
   const [date, setDate] = useState("");
   const [error, setError] = useState(false);
   const [r, setR] = useState<{ birth: string; facts: AgeResult } | null>(null);
@@ -60,6 +61,8 @@ export default function AgeTool() {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date < "1900-01-01" || date > today) {
       setError(true);
       setR(null);
+      // Move focus to the field so the error (aria-describedby) is announced.
+      input.current?.focus();
       return;
     }
     setError(false);
@@ -74,7 +77,7 @@ export default function AgeTool() {
       <form className="mt-5 flex flex-col gap-5" noValidate onSubmit={submit}>
         <div>
           <label className="label" htmlFor={`${id}-d`}>{t.birth}</label>
-          <input className="field tabular" type="date" id={`${id}-d`} min="1900-01-01" value={date} onChange={(e) => setDate(e.target.value)} aria-invalid={error} aria-describedby={error ? `${id}-err` : undefined} />
+          <input ref={input} className="field tabular" type="date" id={`${id}-d`} min="1900-01-01" value={date} onChange={(e) => setDate(e.target.value)} aria-invalid={error} aria-describedby={error ? `${id}-err` : undefined} />
           {error && <p id={`${id}-err`} className="mt-2 text-small font-semibold text-cinnabar">{t.dateErr}</p>}
         </div>
         <div><button type="submit" className="btn-secondary">{t.submit}</button></div>

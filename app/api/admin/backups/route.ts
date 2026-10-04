@@ -25,7 +25,7 @@ const T = defineMessages({
     running: "ការបម្រុងទុកមួយកំពុងដំណើរការរួចហើយ។",
     // The detail (volume level) stays as lib/backup.ts writes it, in English.
     // The detail from lib/backup.ts is English; the Khmer message says the same thing in full.
-    skipped: (_why: string) => "ថាសផ្ទុកជិតពេញ ដូច្នេះមិនបានបម្រុងទុកទេ ហើយគ្មានអ្វីត្រូវបានលុបឡើយ។",
+    skipped: () => "ថាសផ្ទុកជិតពេញ ដូច្នេះមិនបានបម្រុងទុកទេ ហើយគ្មានអ្វីត្រូវបានលុបឡើយ។",
     failed: "ការបម្រុងទុកមិនបានសម្រេច។ សូមមើលកំណត់ហេតុម៉ាស៊ីនមេ។",
   },
 });

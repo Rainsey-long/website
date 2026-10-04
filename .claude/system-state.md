@@ -9,7 +9,7 @@
 - Content: 196 reading blocks (all `draft`), 12 Western + 12 Chinese profiles, 12 Fire Goat 2027 forecasts, 156 compatibility pairs (templated), 7 Khmer birth-weekday portraits. All original, all awaiting owner review.
 - Khmer traditions: lunar calendar, holy days, festivals, Moha Songkran + angel (2020–2026 match km.wikipedia's table), birth weekday, tradition switch.
 - Sky: moon calendar, ingresses, retrogrades with shadows, eclipses (2026 matches published tables), .ics feeds.
-- Tools: birth chart, good hours, lucky-date finder. Admin: overview, readings, profiles/forecasts, Khmer New Year, feedback, admins, backups.
+- Tools: birth chart, good hours, lucky-date finder, date converter + in-browser age tool, colour of the day (`/khmer/colours`), printable month (`/lucky-days/YYYY/MM/print`). Admin: overview, readings, profiles/forecasts, Khmer New Year, feedback, admins, backups.
 - Memory: committed in `.claude/memory/` (MEMORY.md auto-loaded, sessions.md on demand); the SessionStart hook installs deps and prints status in cloud sessions.
 
 ## Baselines
@@ -18,7 +18,7 @@
 |---|---|
 | `npx tsc --noEmit` | clean |
 | `npm run lint` | **0** problems |
-| `npm test` | 62 passing |
+| `npm test` | 75 passing |
 | `npm run check:contrast` | all pairs AA |
 | `npm run check:tokens` | 0 violations |
 | `npm run db:preflight` | CLEAN |
@@ -31,4 +31,4 @@
 - English and Khmer (2026-10-04): every page has a `/km` twin (`docs/I18N.md`). All Khmer text is a draft awaiting a native reader (`docs/KHMER-REVIEW.md`). Everything is bilingual, including the admin (`/km/admin`), the .ics feeds (`?lang=km`) and share images (`/og/<slug>?lang=km`, HarfBuzz-shaped).
 - Reading block library is 196 of the ~360 the plan targets.
 - Built 2026-10-04 (second pass): birth chart (`/tools/birth-chart`), good hours (`/good-hours`), lucky-date finder (`/lucky-days/finder`). Their wording (`lib/natalCopy.ts`, `PLANET_HOUR` in `lib/goodHours.ts`) is draft.
-- Next features, ranked: `docs/research/FEATURES.md` §7 (date converter + Khmer age tool, colour to wear, printable calendar, weekly horoscopes, Telegram card).
+- Next features, ranked: `docs/research/FEATURES.md` §7. Built 2026-10-04: the top three. Next: weekly horoscopes (#46), Telegram daily card (#47).

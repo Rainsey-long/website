@@ -36,7 +36,9 @@ const toMin = (hm: string) => Number(hm.slice(0, 2)) * 60 + Number(hm.slice(3, 5
 
 export default async function GoodHours({ searchParams }: Search) {
   const sp = await searchParams;
-  const city = cityBySlug(sp.city) ?? cityForZone(await visitorZone());
+  const asked = cityBySlug(sp.city);
+  const city = asked ?? cityForZone(await visitorZone());
+  const unknownCity = !!sp.city && !asked;
   const now = nowIso();
   const todayHere = dateInZone(city.tz, new Date(now));
   const date = validDate(sp.date) ? sp.date! : todayHere;
@@ -78,6 +80,8 @@ export default async function GoodHours({ searchParams }: Search) {
           <Link className="link inline-flex min-h-tap items-center gap-1" href={q(next)} rel="next">Next day<Glyph name="chevron-right" set="ui" className="size-4" /></Link>
         </nav>
 
+        {unknownCity && <p className="mt-4 border border-rule p-4 text-small">That city is not on our list, so this shows {city.name}. Choose the nearest large city above.</p>}
+
         {neither && <p className="mt-4 border border-rule p-4 text-small">Good hours come from the Chinese and Western traditions, so both are shown here.</p>}
 
         <div className={`mt-6 grid gap-7 ${showChinese && showWestern ? "lg:grid-cols-2" : ""}`}>
@@ -91,13 +95,13 @@ export default async function GoodHours({ searchParams }: Search) {
                 {chinese.map((h) => {
                   const current = isToday && toMin(nowHm) >= toMin(h.start) && toMin(nowHm) < toMin(h.end);
                   return (
-                    <li key={h.start} className={`flex min-h-tap items-center gap-3 border-b border-rule px-2 py-2 ${current ? "rounded-sm outline outline-1 outline-cinnabar" : ""}`} aria-current={current ? "time" : undefined}>
-                      <span className="tabular w-24 shrink-0">{h.start}–{h.end}</span>
-                      <span className="flex-1">
+                    <li key={h.start} className={`flex min-h-tap flex-wrap items-center gap-x-3 gap-y-1 border-b border-rule px-2 py-2 ${current ? "rounded-sm outline outline-1 outline-cinnabar" : ""}`} aria-current={current ? "time" : undefined}>
+                      <span className="tabular shrink-0">{h.start}–{h.end}</span>
+                      <span className="min-w-0 flex-1">
                         {h.animal.name} hour <span lang="zh">{h.branchHanzi}</span>
                         <span className="block text-small text-muted">{h.spirit}. Clashes with the {h.clash.name}.</span>
                       </span>
-                      <span className="flex shrink-0 items-center gap-2 text-small">
+                      <span className="flex w-full shrink-0 items-center justify-end gap-2 text-small sm:w-auto">
                         {current && <span className="font-semibold">Now</span>}
                         {h.good ? <><Seal size="sm" />Good hour</> : <span className="text-muted">Quiet hour</span>}
                       </span>
@@ -122,7 +126,7 @@ export default async function GoodHours({ searchParams }: Search) {
                   const p = PLANET_HOUR[h.planet];
                   return (
                     <li key={h.start} className={`flex min-h-tap items-center gap-3 border-b border-rule px-2 py-2 ${current ? "rounded-sm outline outline-1 outline-cinnabar" : ""}`} aria-current={current ? "time" : undefined}>
-                      <span className="tabular w-24 shrink-0">{timeIn(h.start, city.tz)}–{timeIn(h.end, city.tz)}</span>
+                      <span className="tabular shrink-0">{timeIn(h.start, city.tz)}–{timeIn(h.end, city.tz)}</span>
                       <Glyph name={h.planet} set="planet" className="size-5 shrink-0" />
                       <span className="flex-1">
                         {p.name} hour{h.night ? <span className="text-muted"> · night</span> : null}

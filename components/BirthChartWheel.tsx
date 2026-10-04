@@ -3,7 +3,10 @@
  * hand. Pure render from lib/natal.ts; no directive, so it can sit inside the
  * client calculator. With a birth time the ascendant is drawn on the left (the
  * usual chart orientation); without one, 0° Aries is on the left.
- * Decorative for screen readers: the placements list carries the same data.
+ * Hidden from screen readers (aria-hidden): the placements list below it carries
+ * the same data, so describing the wheel too would read everything twice.
+ * The ascendant axis runs past the rings on the left only; the descendant end
+ * stops at the sign ring so the left reads as the rising point.
  */
 import { SIGNS } from "@/lib/western";
 import { PLANET_GLYPHS, WESTERN_GLYPHS } from "@/lib/glyphs";
@@ -15,7 +18,7 @@ const PLANET_R = [112, 92, 72] as const;
 const D = Math.PI / 180;
 const f = (n: number) => Math.round(n * 100) / 100;
 
-export default function BirthChartWheel({ chart, describedBy }: { chart: NatalChart; describedBy: string }) {
+export default function BirthChartWheel({ chart }: { chart: NatalChart }) {
   const offset = chart.ascendant ?? 0;
   // Longitudes run counter-clockwise from the left, rotated so `offset` sits on the left.
   const pt = (lon: number, r: number) => ({ x: C - r * Math.cos((lon - offset) * D), y: C + r * Math.sin((lon - offset) * D) });
@@ -37,7 +40,7 @@ export default function BirthChartWheel({ chart, describedBy }: { chart: NatalCh
   });
   const byBody = new Map(chart.placements.map((p) => [p.body, p]));
   return (
-    <svg viewBox="0 0 400 400" className="size-dial" role="img" aria-label="Birth chart wheel" aria-describedby={describedBy}>
+    <svg viewBox="0 0 400 400" className="size-dial" aria-hidden="true" focusable="false">
       <circle cx={C} cy={C} r={R_OUT} className="ring" />
       <circle cx={C} cy={C} r={R_SIGN_OUT} className="ring-fine" />
       <circle cx={C} cy={C} r={R_SIGN_IN} className="ring" />
@@ -56,7 +59,7 @@ export default function BirthChartWheel({ chart, describedBy }: { chart: NatalCh
       {chart.ascendant !== null && (
         <g className="axis">
           <line x1={f(pt(chart.ascendant, R_OUT + 10).x)} y1={f(pt(chart.ascendant, R_OUT + 10).y)} x2={f(pt(chart.ascendant, R_TICK_IN).x)} y2={f(pt(chart.ascendant, R_TICK_IN).y)} />
-          <line x1={f(pt(chart.ascendant + 180, R_OUT + 10).x)} y1={f(pt(chart.ascendant + 180, R_OUT + 10).y)} x2={f(pt(chart.ascendant + 180, R_TICK_IN).x)} y2={f(pt(chart.ascendant + 180, R_TICK_IN).y)} />
+          <line x1={f(pt(chart.ascendant + 180, R_SIGN_IN).x)} y1={f(pt(chart.ascendant + 180, R_SIGN_IN).y)} x2={f(pt(chart.ascendant + 180, R_TICK_IN).x)} y2={f(pt(chart.ascendant + 180, R_TICK_IN).y)} />
         </g>
       )}
       {chart.aspects.filter((a) => a.kind !== "conjunction").map((a) => {

@@ -6,7 +6,7 @@
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Seal from "@/components/Seal";
-import { findLuckyDays, OCCASIONS } from "@/lib/luckyFinder";
+import { findLuckyDays, OCCASIONS, type FinderResult } from "@/lib/luckyFinder";
 import { ANIMALS } from "@/lib/chinese";
 import { fullDate, monthName } from "@/lib/dates";
 import { today } from "@/lib/today";
@@ -91,26 +91,37 @@ export default async function Finder({ searchParams }: Search) {
 
         {results && occasion && (
           <section className="mt-8" aria-labelledby="res-h" aria-live="polite">
-            <h2 id="res-h" className="text-h2">{occasion.label}: {results.length === 1 ? "1 day" : `${results.length} days`}</h2>
+            <h2 id="res-h" className="text-h2">{occasion.label}: {results.length === 0 ? "no days found" : results.length === 1 ? "1 day" : `${results.length} days`}</h2>
             <p className="mt-2 text-small text-muted">
               {rangeLabel}{animals.length ? `, leaving out days that clash with the ${animals.map(animalName).join(" or ")}` : ""}.
             </p>
             {results.length === 0 ? (
               <p className="mt-4">The almanac lists no suitable days in this range.{longer ? <> <Link className="link" href={params(longer)}>Search {longer} months instead</Link>.</> : " Try a later starting month."}</p>
             ) : (
-              <ul className="mt-4">
-                {results.map(({ day, matched }) => (
-                  <li key={day.date} className="border-b border-rule py-4">
-                    <div className="flex items-baseline justify-between gap-3">
-                      <Link className="link font-semibold" href={`/lucky-days/${day.date.slice(0, 4)}/${day.date.slice(5, 7)}`}>{fullDate(day.date)}</Link>
-                      {day.quality === "good" && <span className="flex shrink-0 items-center gap-2 text-small"><Seal size="sm" />Good day</span>}
-                    </div>
-                    <p className="mt-1 text-small text-muted">
-                      Listed for: {matched.join(", ")}. Day {day.dayPillar}, officer {day.officer.en} (<span lang="zh">{day.officer.hanzi}</span>), {day.spirit.en} day. Clashes with the {day.clash.name}.
-                    </p>
-                  </li>
+              <>
+                <p className="mt-3 flex items-center gap-2 text-small text-muted"><Seal size="sm" />Every day below suits the occasion. The seal marks days the calendar also counts as good overall.</p>
+                {byMonth(results).map(([month, rows], i) => (
+                  <details key={month} className="mt-4 border-t border-rule" open={i === 0}>
+                    <summary className="flex min-h-tap cursor-pointer items-center justify-between py-3 font-semibold">
+                      <span>{monthName(Number(month.slice(5)))} {month.slice(0, 4)}</span>
+                      <span className="text-small font-normal text-muted">{rows.length === 1 ? "1 day" : `${rows.length} days`}</span>
+                    </summary>
+                    <ul>
+                      {rows.map(({ day, matched }) => (
+                        <li key={day.date} className="border-t border-rule py-4">
+                          <div className="flex items-baseline justify-between gap-3">
+                            <Link className="link font-semibold" href={`/lucky-days/${day.date.slice(0, 4)}/${day.date.slice(5, 7)}`}>{fullDate(day.date)}</Link>
+                            {day.quality === "good" && <span className="flex shrink-0 items-center gap-2 text-small"><Seal size="sm" />Good day</span>}
+                          </div>
+                          <p className="mt-1 text-small text-muted">
+                            Listed for: {matched.join(", ")}. Day {day.dayPillar}, officer {day.officer.en} (<span lang="zh">{day.officer.hanzi}</span>), {day.spirit.en} day. Clashes with the {day.clash.name}.
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
                 ))}
-              </ul>
+              </>
             )}
           </section>
         )}
@@ -125,4 +136,14 @@ export default async function Finder({ searchParams }: Search) {
       </div>
     </>
   );
+}
+
+/** Results grouped by month, in date order (§6.17: long lists stay calm). */
+function byMonth(results: FinderResult[]): Array<[string, FinderResult[]]> {
+  const groups = new Map<string, FinderResult[]>();
+  for (const r of results) {
+    const key = r.day.date.slice(0, 7);
+    groups.set(key, [...(groups.get(key) ?? []), r]);
+  }
+  return [...groups];
 }

@@ -85,7 +85,7 @@ export default function BirthChart({ cities }: { cities: City[] }) {
         <section ref={results} tabIndex={-1} className="mt-8 scroll-mt-5" aria-labelledby={`${id}-res`}>
           <h2 id={`${id}-res`} className="text-h2">Your birth chart</h2>
           <figure className="daydial tone-paper mt-5 flex flex-col items-center">
-            <BirthChartWheel chart={chart} describedBy={`${id}-list`} />
+            <BirthChartWheel chart={chart} />
             <figcaption className="mt-3 max-w-reading text-center text-small text-muted">
               {chart.ascendant !== null ? "Your rising sign is on the left, on the horizontal line." : "Without a birth time the wheel starts at 0° Aries on the left and shows no houses."}
             </figcaption>
@@ -99,8 +99,10 @@ export default function BirthChart({ cities }: { cities: City[] }) {
 
           <h3 className="mt-7 text-h3">Planets</h3>
           <ul id={`${id}-list`} className="mt-2">
-            {chart.placements.map((p) => {
+            {chart.placements.map((p, i) => {
               const copy = SIGN_COPY[p.signIndex];
+              // Several planets often share a sign; give the sign's gift and growth once, then point back.
+              const first = chart.placements.slice(0, i).find((q) => q.signIndex === p.signIndex && q.house === p.house);
               return (
                 <li key={p.body} className="border-b border-rule py-4">
                   <p className="flex items-center gap-3 font-semibold">
@@ -110,8 +112,14 @@ export default function BirthChart({ cities }: { cities: City[] }) {
                       {p.retrograde && <span className="font-normal text-muted">, retrograde</span>}
                     </span>
                   </p>
-                  <p className="mt-2">{BODY_COPY[p.body].topic}: {copy.style}.</p>
-                  <p className="mt-1 text-small text-muted">Gift: {copy.gift}. Growth: {copy.growth}.{p.house !== null ? ` Shows up in ${HOUSE_TOPIC[p.house - 1]}.` : ""}{p.uncertain ? " It changed sign that day, so a birth time would confirm it." : ""}</p>
+                  {first ? (
+                    <p className="mt-2">{BODY_COPY[p.body].topic}. Same sign{p.house !== null ? " and house" : ""} as your {BODY_COPY[first.body].name}, so the same style, gift and growth apply.{p.uncertain ? " It changed sign that day, so a birth time would confirm it." : ""}</p>
+                  ) : (
+                    <>
+                      <p className="mt-2">{BODY_COPY[p.body].topic}: {copy.style}.</p>
+                      <p className="mt-1 text-small text-muted">Gift: {copy.gift}. Growth: {copy.growth}.{p.house !== null ? ` Shows up in ${HOUSE_TOPIC[p.house - 1]}.` : ""}{p.uncertain ? " It changed sign that day, so a birth time would confirm it." : ""}</p>
+                    </>
+                  )}
                 </li>
               );
             })}
@@ -121,12 +129,19 @@ export default function BirthChart({ cities }: { cities: City[] }) {
             <>
               <h3 className="mt-7 text-h3">Aspects</h3>
               <p className="mt-2 text-small text-muted">Angles between planets, closest first.</p>
+              <dl className="mt-3 grid gap-x-4 gap-y-1 text-small sm:grid-cols-[auto_1fr]">
+                {(Object.keys(ASPECT_COPY) as Array<keyof typeof ASPECT_COPY>).filter((k) => chart.aspects.slice(0, 12).some((a) => a.kind === k)).map((k) => (
+                  <div key={k} className="contents">
+                    <dt className="font-semibold capitalize">{ASPECT_COPY[k].name}</dt>
+                    <dd className="mb-2 text-muted sm:mb-0">{ASPECT_COPY[k].meaning}.</dd>
+                  </div>
+                ))}
+              </dl>
               <ul className="mt-2">
                 {chart.aspects.slice(0, 12).map((a) => (
                   <li key={`${a.a}-${a.b}`} className="border-b border-rule py-3">
                     <span className="font-semibold">{BODY_COPY[a.a].name} {ASPECT_COPY[a.kind].name} {BODY_COPY[a.b].name}</span>
                     <span className="tabular text-small text-muted"> · {a.orb}° from exact</span>
-                    <span className="block text-small text-muted">{ASPECT_COPY[a.kind].meaning}.</span>
                   </li>
                 ))}
               </ul>

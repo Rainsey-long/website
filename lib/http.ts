@@ -10,18 +10,18 @@ import type { Lang } from "./i18n";
 
 export async function readJsonCapped<T>(req: Request, maxBytes: number): Promise<{ ok: true; value: T } | { ok: false; res: NextResponse }> {
   const text = await req.text();
-  if (Buffer.byteLength(text) > maxBytes) return { ok: false, res: NextResponse.json({ error: "Too large" }, { status: 413 }) };
+  if (Buffer.byteLength(text) > maxBytes) return { ok: false, res: NextResponse.json({ error: requestLang(req) === "km" ? "សំណើធំពេក។" : "Too large" }, { status: 413 }) };
   let value: unknown;
   try {
     value = JSON.parse(text);
   } catch {
-    return { ok: false, res: NextResponse.json({ error: "Bad request" }, { status: 400 }) };
+    return { ok: false, res: NextResponse.json({ error: requestLang(req) === "km" ? "សំណើមិនត្រឹមត្រូវ។" : "Bad request" }, { status: 400 }) };
   }
   // Every caller destructures an object. `null` (valid JSON) used to throw on
   // destructuring and surface as an unhandled 500, reachable anonymously via
   // /api/feedback; arrays and primitives are refused here for the same reason.
   if (value === null || typeof value !== "object" || Array.isArray(value)) {
-    return { ok: false, res: NextResponse.json({ error: "Bad request" }, { status: 400 }) };
+    return { ok: false, res: NextResponse.json({ error: requestLang(req) === "km" ? "សំណើមិនត្រឹមត្រូវ។" : "Bad request" }, { status: 400 }) };
   }
   return { ok: true, value: value as T };
 }

@@ -5,7 +5,22 @@
  */
 import { getDb } from "@/lib/db";
 import { getSession } from "@/lib/auth";
-import { json, readJsonCapped, sameOrigin } from "@/lib/http";
+import { json, readJsonCapped, requestLang, sameOrigin } from "@/lib/http";
+import { defineMessages } from "@/lib/i18n";
+
+/** Wording only; the caller's language comes from `?lang=` (lib/http.ts requestLang). */
+const T = defineMessages({
+  en: {
+    unauthorized: "Unauthorized",
+    forbidden: "Forbidden",
+    badRequest: "Bad request",
+  },
+  km: {
+    unauthorized: "សូមចូលជាអ្នកគ្រប់គ្រងសិន។",
+    forbidden: "មិនអនុញ្ញាតទេ។",
+    badRequest: "សំណើមិនត្រឹមត្រូវ។",
+  },
+});
 
 function ids(v: unknown): number[] | null {
   if (!Array.isArray(v) || v.length === 0 || v.length > 200) return null;
@@ -14,20 +29,21 @@ function ids(v: unknown): number[] | null {
 }
 
 async function guard(req: Request) {
+  const t = T[requestLang(req)];
   const s = await getSession();
-  if (!s) return { res: json({ error: "Unauthorized" }, 401) } as const;
-  if (!sameOrigin(req)) return { res: json({ error: "Forbidden" }, 403) } as const;
+  if (!s) return { res: json({ error: t.unauthorized }, 401) } as const;
+  if (!sameOrigin(req)) return { res: json({ error: t.forbidden }, 403) } as const;
   const body = await readJsonCapped<{ ids?: unknown; read?: unknown }>(req, 8192);
   if (!body.ok) return { res: body.res } as const;
   const list = ids(body.value.ids);
-  if (!list) return { res: json({ error: "Bad request" }, 400) } as const;
+  if (!list) return { res: json({ error: t.badRequest }, 400) } as const;
   return { list, read: body.value.read } as const;
 }
 
 export async function PATCH(req: Request) {
   const g = await guard(req);
   if ("res" in g) return g.res;
-  if (typeof g.read !== "boolean") return json({ error: "Bad request" }, 400);
+  if (typeof g.read !== "boolean") return json({ error: T[requestLang(req)].badRequest }, 400);
   const stmt = getDb().prepare(`UPDATE feedback SET read_at = ${g.read ? "datetime('now')" : "NULL"} WHERE id = ?`);
   getDb().transaction(() => g.list.forEach((id) => stmt.run(id)))();
   return json({ ok: true });

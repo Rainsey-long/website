@@ -14,6 +14,14 @@ describe("admin Markdown rendering", () => {
     expect(html).toContain('<a href="/zodiac/aries">ok</a>');
     expect(html).toContain('<a href="https://example.org">web</a>');
     expect(html).toContain("bad");
+    expect(parseSource("---\nname: x\n---\n\n[off](/\\evil.example)").html).not.toContain("href");
+  });
+  it("never evaluates JavaScript front matter (gray-matter's ---js engine)", () => {
+    const g = globalThis as unknown as { __pwned?: boolean };
+    const evil = "---js\n(function(){ globalThis.__pwned = true; return { name: 'x' } })()\n---\n\n" + "body ".repeat(20);
+    expect(() => parseSource(evil)).toThrow();
+    expect(validateContent("profiles/western/aries.md", "en", evil)).toMatch(/YAML/);
+    expect(g.__pwned).toBeUndefined();
   });
 });
 

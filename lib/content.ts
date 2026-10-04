@@ -15,6 +15,19 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { Marked } from "marked";
+
+// gray-matter runs the executable "javascript"/"coffee" front-matter engines on
+// a `---js` (etc.) delimiter, which is arbitrary code execution from
+// owner-edited Markdown. Force YAML only: every code-running engine throws, so
+// a non-YAML front-matter block is rejected, never evaluated. (Object.assign in
+// gray-matter's defaults MERGES these over the built-ins, so they must be named
+// explicitly — passing only `{yaml}` leaves the javascript engine live.)
+const rejectEngine = () => {
+  throw new Error("Only YAML front matter is allowed.");
+};
+export const GM_YAML_ONLY = {
+  engines: { javascript: rejectEngine, js: rejectEngine, coffee: rejectEngine, coffeescript: rejectEngine, cson: rejectEngine },
+} as const;
 import { getDb } from "./db";
 import { SIGNS } from "./western";
 import { ANIMALS } from "./chinese";
@@ -29,7 +42,8 @@ export type Loaded<T> = { fm: T; html: string; translated: boolean };
 const ROOT = path.join(process.cwd(), "content");
 
 const escapeHtml = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-const SAFE_HREF = /^(https?:\/\/|mailto:|\/(?!\/)|#)/i;
+// "/\\x" is excluded too: browsers read a leading /\ as //, i.e. another site.
+const SAFE_HREF = /^(https?:\/\/|mailto:|\/(?![/\\])|#)/i;
 const md = new Marked({
   renderer: {
     html({ text }) { return escapeHtml(text); },
@@ -70,7 +84,7 @@ function overrideSource(rel: string, lang: Lang): string | null {
 }
 
 export function parseSource<T>(source: string): { fm: T; html: string } {
-  const { data, content } = matter(source);
+  const { data, content } = matter(source, GM_YAML_ONLY);
   return { fm: data as T, html: md.parse(content, { async: false }) as string };
 }
 

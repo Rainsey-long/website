@@ -5,7 +5,7 @@
  * reads (slug, animal, relation, outlook) unchanged from the English file.
  */
 import matter from "gray-matter";
-import { repoSource } from "./content";
+import { GM_YAML_ONLY, repoSource } from "./content";
 import type { Lang } from "./i18n";
 
 export const MAX_SOURCE_BYTES = 120_000;
@@ -20,7 +20,7 @@ export function validateContent(rel: string, lang: Lang, source: string): string
   let data: Record<string, unknown>;
   let body: string;
   try {
-    const parsed = matter(source);
+    const parsed = matter(source, GM_YAML_ONLY);
     data = parsed.data as Record<string, unknown>;
     body = parsed.content;
   } catch {
@@ -28,7 +28,7 @@ export function validateContent(rel: string, lang: Lang, source: string): string
   }
   if (body.trim().length < 50) return "The text below the front matter is missing or too short.";
   const english = repoSource(rel, "en");
-  const base = english ? (matter(english).data as Record<string, unknown>) : {};
+  const base = english ? (matter(english, GM_YAML_ONLY).data as Record<string, unknown>) : {};
 
   if (rel.startsWith("profiles/")) {
     if (!isStr(data.name) || !isStr(data.summary)) return "name and summary are required.";

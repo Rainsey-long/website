@@ -6,6 +6,7 @@
  */
 import { NextResponse } from "next/server";
 import { SITE_URL } from "./site";
+import type { Lang } from "./i18n";
 
 export async function readJsonCapped<T>(req: Request, maxBytes: number): Promise<{ ok: true; value: T } | { ok: false; res: NextResponse }> {
   const text = await req.text();
@@ -39,3 +40,12 @@ export function sameOrigin(req: Request): boolean {
 }
 
 export const json = (body: unknown, status = 200) => NextResponse.json(body, { status, headers: { "Cache-Control": "no-store" } });
+
+/**
+ * The caller's language for messages an API route sends back to a person
+ * (admin forms). API URLs carry no /km prefix, so a Khmer page asks with
+ * `?lang=km`; anything else is English. Never used for anything but wording.
+ */
+export function requestLang(req: Request): Lang {
+  return new URL(req.url).searchParams.get("lang") === "km" ? "km" : "en";
+}

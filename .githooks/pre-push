@@ -1,0 +1,47 @@
+#!/bin/sh
+# Pre-push guard (installed by `npm run hooks:install`, which sets core.hooksPath).
+#
+# WHY: on 2026-09-20 the shared working folder was silently switched to
+# `release/1.0.0` (the branch Railway deploys to PRODUCTION) and two ordinary
+# "push the working branch" commands (`git push origin HEAD`) shipped straight to
+# production. Nothing looked wrong: the pushes succeeded and the deploys were
+# healthy. This hook makes a production push a deliberate act.
+#
+#  1. A push to any `release/*` branch is REFUSED unless ALLOW_PROD_DEPLOY=1 is
+#     set for that command:   ALLOW_PROD_DEPLOY=1 git push origin HEAD:release/1.0.0
+#  2. A non-fast-forward (force) push to `main` or `release/*` is REFUSED unless
+#     ALLOW_FORCE_PUSH=1.
+#
+# Bypass for a genuine emergency: `git push --no-verify` (visible in shell history).
+# git feeds one line per ref on stdin: <local ref> <local sha> <remote ref> <remote sha>
+zero="0000000000000000000000000000000000000000"
+status=0
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case "$remote_ref" in
+    refs/heads/release/*)
+      if [ "$ALLOW_PROD_DEPLOY" != "1" ]; then
+        echo "" >&2
+        echo "  BLOCKED: pushing to $remote_ref deploys to PRODUCTION." >&2
+        echo "  If the owner asked for a deploy, re-run with:" >&2
+        echo "      ALLOW_PROD_DEPLOY=1 git push origin <ref>:${remote_ref#refs/heads/}" >&2
+        echo "  Otherwise push your working branch by NAME, never HEAD:" >&2
+        echo "      git push origin HEAD:<working-branch>     (current branch: $(git branch --show-current))" >&2
+        echo "" >&2
+        status=1
+      fi
+      ;;
+  esac
+  case "$remote_ref" in
+    refs/heads/main|refs/heads/release/*)
+      if [ "$remote_sha" != "$zero" ] && [ "$local_sha" != "$zero" ]; then
+        if ! git merge-base --is-ancestor "$remote_sha" "$local_sha" 2>/dev/null; then
+          if [ "$ALLOW_FORCE_PUSH" != "1" ]; then
+            echo "  BLOCKED: this is not a fast-forward of $remote_ref (history rewrite). Set ALLOW_FORCE_PUSH=1 only on the owner's explicit say-so." >&2
+            status=1
+          fi
+        fi
+      fi
+      ;;
+  esac
+done
+exit $status

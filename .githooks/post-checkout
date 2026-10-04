@@ -1,0 +1,15 @@
+#!/bin/sh
+# Prints a banner when a branch checkout lands on a production-deploying branch.
+# $3 == 1 means a branch checkout (not a file checkout).
+if [ "$3" = "1" ]; then
+  branch=$(git branch --show-current)
+  case "$branch" in
+    release/*)
+      echo "" >&2
+      echo "  *** You are now on '$branch' — pushing this branch DEPLOYS TO PRODUCTION. ***" >&2
+      echo "  *** Push your working branch by name: git push origin HEAD:<working-branch> ***" >&2
+      echo "" >&2
+      ;;
+  esac
+fi
+exit 0

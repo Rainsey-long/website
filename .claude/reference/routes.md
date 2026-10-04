@@ -1,0 +1,21 @@
+# Routes
+
+| Route | What | Data |
+|---|---|---|
+| `/` | Home, sections per chosen tradition: your reading (remembered sign), DayDial night band, Khmer today + New Year, sign picker, birth-weekday chips, Chinese animals + almanac strip, 2027, pairs | engines + DB block text |
+| `/horoscope`, `/horoscope/[sign]`, `/horoscope/[sign]/[date]` | Daily readings; hub shows yesterday/today/tomorrow by the visitor's local date; dated pages for 1900–2100 (only ±60 days indexed) | reading engine, DB text |
+| `/zodiac`, `/zodiac/[sign]` | Western profiles | Markdown |
+| `/chinese-zodiac`, `/chinese-zodiac/[animal]`, `/[animal]/2027`, `/chinese-zodiac/2027` | Animal profiles (+ today's clash note), Fire Goat forecasts | Markdown, almanac |
+| `/compatibility`, `/compatibility/[a]-and-[b]`, `/chinese-compatibility/...` | 78 + 78 canonical pairs; reversed order 308s | rule tables |
+| `/khmer` | Khmer hub: today's lunar date, New Year countdown, birth weekdays, the 12 animals, what is and isn't computed | Khmer engine, DB override |
+| `/khmer/new-year` | Moha Songkran moment, festival days, the angel and posture, all seven angels, the owner's official time/saying | Khmer engine, DB override |
+| `/khmer/born-on/[weekday]` | Birth-weekday portrait, colour, planet, angel | static |
+| `/lucky-days/[yyyy]/[mm]` | Calendar: Chinese almanac marks and/or Khmer lunar days, holy days, festivals (by tradition choice) | almanac + Khmer engines |
+| `/sky`, `/sky/moon/[yyyy]/[mm]`, `/sky/retrogrades/[yyyy]` | Positions, phases, ingresses, stations + shadows, eclipses, in the visitor's zone | sky events |
+| `/feeds`, `/feeds/[name].ics` | Subscribable calendars: moon phases, retrogrades, eclipses, Khmer holy days, Khmer festivals | sky + Khmer engines |
+| `/tools/zodiac-calculator` | Client-side: sun/moon/rising, Chinese, Khmer (animal at the Songkran minute, birth weekday, lunar birth date) | browser only |
+| `/tools/compatibility-checker` | Picks a pair page | — |
+| `/southeast-asian-zodiac[/khmer|/vietnamese]`, `/about`, `/contact`, `/privacy`, `/terms`, `/disclaimer`, `/styleguide` (noindex) | | |
+| `/admin/login`, `/admin` | Owner: reading text review, Songkran override, feedback | DB |
+| `/api/health`, `/api/feedback`, `/api/admin/login`, `/api/admin/blocks/[id]`, `/api/admin/songkran/[year]`, `/api/cron/backup` | see `.claude/security.md` | DB |
+| `/og/[slug]`, `/sitemap.xml`, `/robots.txt` | share cards, sitemap, robots | |

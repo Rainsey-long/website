@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "defaultMode": "auto",
+    "allow": [
+      "Bash(npx tsc --noEmit)",
+      "Bash(npm run lint)",
+      "Bash(npm test)",
+      "Bash(npm run check)",
+      "Bash(npm run validate:blocks)",
+      "Bash(npm run db:preflight)",
+      "Bash(npm run release:check)",
+      "Bash(npm run agents:report)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Agent",
+        "hooks": [
+          { "type": "command", "command": "node .claude/hooks/agent-tier-check.cjs" },
+          { "type": "command", "command": "node .claude/hooks/agent-run-ledger.cjs" }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Agent",
+        "hooks": [{ "type": "command", "command": "node .claude/hooks/agent-run-ledger.cjs" }]
+      }
+    ]
+  }
+}

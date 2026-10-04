@@ -1,26 +1,24 @@
-# Zodiac almanac site
+# Almanac — daily horoscopes, Chinese zodiac, Khmer traditions
 
-Daily horoscopes, Chinese zodiac, the 2027 Fire Goat forecast, compatibility and lucky days. A static Astro site with every calculation done at build time or in the browser.
+A calm, minimalist horoscope and almanac site. Western astrology, the Chinese zodiac and almanac, and the Khmer traditional calendar, side by side, with the visitor choosing which traditions they see. Readings come from the real sky and hand-written text; nothing is generated at runtime.
 
-Read **BUILD_PLAN.md** and **DESIGN_SYSTEM.md** before changing anything. DESIGN_SYSTEM.md is binding for UI work.
+Same stack and production shape as CamboMath: **Next.js 16 + better-sqlite3 on Railway (one container, one volume, one replica), domain on Cloudflare.**
 
 ```bash
 npm install
-npm run dev          # http://localhost:4321
-npm test             # calculation engine tests (Vitest)
-npm run check        # contrast + design-token guard + tests
-npm run build        # validates text blocks, builds ~1,000 pages to dist/
+cp .env.example .env.local     # set AUTH_SECRET and ADMIN_PASSWORD
+npm run dev                    # http://localhost:3000, admin at /admin/login
+npm test                       # engine tests
+npm run release:check          # all gates, GO / NO-GO
 ```
+
+Start with **CLAUDE.md** (and its imports) and **DESIGN_SYSTEM.md** (binding for UI). Deploying: **docs/RAILWAY.md**. Waiting on the owner: **docs/OWNER-ACTIONS.md**.
 
 | Where | What |
 |---|---|
-| `src/config/site.ts` | Brand, domain, feature flags (ads, affiliates, report, email, push) |
-| `src/lib/` | Engine: `western`, `chinese`, `sky`, `almanac`, `sea-variants`, `compatibility`, `reading-engine`, `calculator`, `seed` |
-| `src/styles/tokens.css` | The only place raw design values live |
-| `src/icons/glyphs.ts` | Original zodiac glyphs and redrawn UI icons |
-| `src/components/` | Components documented in DESIGN_SYSTEM.md §6 |
-| `content/` | Text blocks, profiles, 2027 forecasts, almanac terms, Khmer New Year table |
-| `scripts/` | Generators (sky, daily buffer, LNY table), validators, contrast and token checks |
-| `/styleguide/` | Every token and component in light and dark (noindex) |
-
-See DECISIONS.md for conventions, CREDITS.md for licences, CONTENT_GUIDELINES.md for the editorial checklist, LAUNCH.md for go-live steps.
+| `app/` | pages and API routes |
+| `components/` | UI (server), `components/client/` interactive islands |
+| `lib/` | engines: `western`, `sky`, `skyEvents`, `reading-engine`, `chinese`, `almanac`, `khmer`, `compatibility`, `calculator`; server: `db`, `auth`, `seed`, `backup` |
+| `content/` | reading blocks, profiles, 2027 forecasts |
+| `app/styles/tokens.css` | the only place raw design values live |
+| `docs/research/` | Khmer traditions research, feature research and scored brainstorm |

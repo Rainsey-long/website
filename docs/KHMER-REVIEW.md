@@ -31,3 +31,5 @@ Every Khmer string below is a machine-assisted draft. Edit reading text and prof
 | `lib/goodHours.ts`, `lib/luckyFinder.ts`, `lib/skyEvents.ts`, `lib/chinese.ts`, `lib/ics.ts`, `lib/cities.ts` | Planetary-hour themes, occasions, eclipse kinds and phase names, lucky colours, feed titles, Cambodian city names |
 | `app/privacy`, `app/terms`, `app/disclaimer` | Legal pages: check faithfulness to the English (the Khmer page says English prevails) |
 | Every `defineMessages({ en, km })` block in `app/**` and `components/**` | Interface text. Terms to confirm: "Chhankitek" rendered as វិធីគណនាចន្ទគតិប្រពៃណី; Choul Chnam Thmey as បុណ្យចូលឆ្នាំថ្មីប្រពៃណីជាតិ; calendar weekday abbreviations ច/អ/ពុ/ព្រ/សុ/ស/អា; Yang/Yin as យ៉ាង/យីន; clash as ឆុង; the Khmer home title (an original phrasing, not a translation of the English tagline) |
+
+Noted by the UI review: Cancer is now spelled កក្កដ everywhere (was កក៌ដ; confirm the form you prefer); ខ្លាស for the White Tiger spirit (ខ្លា + ស) reads oddly at the end of a line on /km/good-hours; check ឆសុខដុម on pair pages.

@@ -77,6 +77,28 @@
   }
 }
 
+/* Khmer pages (<html lang="km">): +0.15 line-height on every type step (§3.2).
+   The Tailwind text-* utilities read these tokens, so a plain line-height on
+   [lang="km"] never reached headings, chips or small text (measured: Khmer h1
+   at 1.15, display at 1.05). Values are the Latin steps above plus 0.15. */
+:root:lang(km) {
+  --lh-display: 1.2;
+  --lh-h1: 1.3;
+  --lh-h2: 1.4;
+  --lh-h3: 1.45;
+  --lh-reading: 1.8;
+  --lh-body: 1.65;
+  --lh-small: 1.6;
+}
+@media (min-width: 768px) {
+  :root:lang(km) {
+    --lh-display: 1.15;
+    --lh-h1: 1.25;
+    --lh-h2: 1.35;
+    --lh-reading: 1.85;
+  }
+}
+
 :root[data-theme="dark"],
 .theme-dark {
   --paper: #141933;

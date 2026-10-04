@@ -35,9 +35,9 @@ export default async function Readings({ searchParams }: Search) {
       <h1 className="text-h1">Readings</h1>
       <p className="mt-2 max-w-reading text-small text-muted">Edit the words, not the meaning: each block is chosen by the Moon&apos;s house and phase. Warm, short sentences; no exclamation marks, health, money actions, guarantees or doom. An empty Khmer box shows the English text on Khmer pages.</p>
       <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-small">
-        {TOPICS.map((t) => <Link key={t} className={`link ${t === topic ? "font-semibold" : ""}`} aria-current={t === topic ? "page" : undefined} href={href(t, show)}>{t[0].toUpperCase() + t.slice(1)}</Link>)}
+        {TOPICS.map((t) => <Link key={t} className={`link inline-flex min-h-tap items-center ${t === topic ? "font-semibold" : ""}`} aria-current={t === topic ? "page" : undefined} href={href(t, show)}>{t[0].toUpperCase() + t.slice(1)}</Link>)}
         <span className="text-muted" aria-hidden="true">·</span>
-        {SHOWS.map(([k, l]) => <Link key={k} className={`link ${k === show ? "font-semibold" : ""}`} aria-current={k === show ? "true" : undefined} href={href(topic, k)}>{l}</Link>)}
+        {SHOWS.map(([k, l]) => <Link key={k} className={`link inline-flex min-h-tap items-center ${k === show ? "font-semibold" : ""}`} aria-current={k === show ? "true" : undefined} href={href(topic, k)}>{l}</Link>)}
       </div>
       <form method="get" action="/admin/readings" className="mt-4 flex max-w-reading gap-3">
         <input type="hidden" name="topic" value={topic} />

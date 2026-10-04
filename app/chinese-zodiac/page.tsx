@@ -58,7 +58,7 @@ export default async function ChineseIndex() {
                 {years.map(({ y, z, lny }) => (
                   <tr key={y} className="border-t border-rule">
                     <td className="py-3 pr-4">{num(y, lang)}</td>
-                    <td className="py-3 pr-4"><Link className="link" href={`/chinese-zodiac/${z.animal.slug}`}>{lang === "km" ? `${animalName(z.animal.slug, lang)} ធាតុ${elementName(z.element, lang)}` : `${ELEMENT_NAME[z.element]} ${z.animal.name}`}</Link></td>
+                    <td className="py-1 pr-4"><Link className="link inline-flex min-h-tap items-center" href={`/chinese-zodiac/${z.animal.slug}`}>{lang === "km" ? `${animalName(z.animal.slug, lang)} ធាតុ${elementName(z.element, lang)}` : `${ELEMENT_NAME[z.element]} ${z.animal.name}`}</Link></td>
                     <td className="py-3">{longDate(lny, lang)}</td>
                   </tr>
                 ))}

@@ -21,7 +21,7 @@ export default async function EditContent({ searchParams }: Search) {
   return (
     <section>
       <p className="text-small"><Link className="link" href="/admin/content">All profiles and forecasts</Link></p>
-      <h1 className="mt-2 text-h1">{path} <span className="text-muted">({lang === "km" ? "Khmer" : "English"})</span></h1>
+      <h1 className="mt-2 text-h1 break-words">{path} <span className="text-muted">({lang === "km" ? "Khmer" : "English"})</span></h1>
       <p className="mt-2 max-w-reading text-small text-muted">
         {row ? `Showing your edit from ${row.updated_at.slice(0, 16)} UTC${row.updated_by ? ` by ${row.updated_by}` : ""}.` : original ? "Showing the original file." : "No Khmer version yet: this starts from the English text. Translate it and save."}
         {" "}Keep the part between the --- lines in the same shape; slug, animal, relation and outlook must not change. HTML is shown as plain text.

@@ -108,14 +108,17 @@ export function TraditionsMenu({ initial }: { initial: Tradition[] }) {
     router.refresh();
   };
 
+  // Below sm the panel spans the page gutters (static wrapper, left-4/right-4):
+  // anchored to the button's right edge it hung up to 142px off the left of a
+  // 360px screen, because the Khmer header labels push the button further left.
   return (
-    <div className="relative" ref={wrap}>
+    <div className="relative max-sm:static" ref={wrap}>
       <button type="button" className="inline-flex min-h-tap items-center gap-2 rounded-sm px-2 text-small font-semibold" aria-expanded={open} aria-controls="traditions-pop" onClick={() => setOpen((o) => !o)}>
         {t.traditions}
         <span className="hidden font-normal text-muted sm:inline">{picked.length === 3 ? t.all : picked.map((x) => TRADITION_LABEL[x][lang]).join(", ")}</span>
       </button>
       {open && (
-        <div id="traditions-pop" className="popover absolute right-0 z-40 mt-1 w-[var(--size-rail)] max-w-[calc(100vw-32px)] p-4">
+        <div id="traditions-pop" className="popover absolute right-0 z-40 mt-1 w-[var(--size-rail)] max-w-[calc(100vw-32px)] p-4 max-sm:left-4 max-sm:right-4 max-sm:w-auto">
           <fieldset>
             <legend className="font-semibold">{t.showMe}</legend>
             <p className="mt-1 text-small text-muted">{t.showMeHint}</p>

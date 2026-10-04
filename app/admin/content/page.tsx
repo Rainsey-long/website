@@ -51,7 +51,7 @@ export default async function ContentAdmin() {
                       const st = state(p, lang);
                       return (
                         <td key={lang} className="py-3 pr-3">
-                          <Link className="link" href={`/admin/content/edit?path=${encodeURIComponent(p)}&lang=${lang}`}>Edit</Link>
+                          <Link className="link inline-flex min-h-tap items-center" href={`/admin/content/edit?path=${encodeURIComponent(p)}&lang=${lang}`}>Edit</Link>
                           <span className={`block ${st.strong ? "font-semibold" : "text-muted"}`}>{st.label}</span>
                         </td>
                       );

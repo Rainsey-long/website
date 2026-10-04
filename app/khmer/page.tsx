@@ -98,7 +98,7 @@ export default async function KhmerHub() {
           <ul className="mt-4 grid grid-cols-2 gap-x-5 sm:grid-cols-3 md:grid-cols-4">
             {KHMER_ANIMALS.map((a) => (
               <li key={a.slug} className="border-b border-rule py-2">
-                {km ? <Link className="link" href={`/chinese-zodiac/${a.slug}`}>{a.km}</Link> : <><Link className="link" href={`/chinese-zodiac/${a.slug}`}>{a.en}</Link> <span lang="km">{a.km}</span></>} <span className="text-muted" lang={km ? "en" : undefined}>{a.roman}</span>
+                {km ? <Link className="link inline-flex min-h-tap items-center" href={`/chinese-zodiac/${a.slug}`}>{a.km}</Link> : <><Link className="link inline-flex min-h-tap items-center" href={`/chinese-zodiac/${a.slug}`}>{a.en}</Link> <span lang="km">{a.km}</span></>} <span className="text-muted" lang={km ? "en" : undefined}>{a.roman}</span>
               </li>
             ))}
           </ul>

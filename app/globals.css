@@ -134,9 +134,14 @@
     outline-offset: 2px;
   }
   .tabular { font-variant-numeric: tabular-nums; }
-  /* Khmer is a taller script (§3.2): +0.15 line-height wherever it appears. */
-  [lang="km"] { line-height: calc(var(--lh-body) + 0.15); }
-  .reading [lang="km"], .reading:lang(km) { line-height: calc(var(--lh-reading) + 0.15); }
+  /* Native checkboxes and radios take the ink colour, not the browser's blue; a filled
+     cinnabar box would break §6.5 (the seal is the only filled cinnabar shape). */
+  input[type="checkbox"], input[type="radio"] { accent-color: var(--ink); }
+  /* Khmer is a taller script (§3.2): +0.15 line-height wherever it appears.
+     Whole Khmer pages get it through the --lh-* tokens (tokens.css, :root:lang(km));
+     these rules cover Khmer spans inside English pages, so they never stack. */
+  :root:not(:lang(km)) [lang="km"] { line-height: calc(var(--lh-body) + 0.15); }
+  :root:not(:lang(km)) .reading [lang="km"] { line-height: calc(var(--lh-reading) + 0.15); }
   [hidden]:where(:not([hidden="until-found"])) { display: none !important; }
 }
 
@@ -334,7 +339,9 @@
   .cal-day.is-selected { background: var(--paper-raised); border-color: var(--ink); }
   .cal-day.is-today { border-color: var(--cinnabar); }
   .cal-num { font-size: var(--fs-h3); line-height: 1.1; font-family: var(--font-serif); }
-  .cal-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px; width: 100%; margin-top: auto; }
+  /* Lunar date on one line, marks on their own fixed-height line below, so marks line up across a row whatever the date width (Khmer two-digit dates wrapped the seal). */
+  .cal-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; margin-top: auto; }
+  .cal-marks { display: flex; align-items: center; gap: 4px; min-height: 16px; }
   .cal-dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; background: var(--clay); }
   .cal-sila { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; border: 1.5px solid var(--brass); }
   .today-key { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--cinnabar); border-radius: 4px; }

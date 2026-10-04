@@ -9,7 +9,7 @@ import type { Lang } from "./i18n";
 
 const SIGN: Record<string, { en: string; km: string }> = {
   aries: { en: "Aries", km: "មេស" }, taurus: { en: "Taurus", km: "ឧសភ" }, gemini: { en: "Gemini", km: "មិថុន" },
-  cancer: { en: "Cancer", km: "កក៌ដ" }, leo: { en: "Leo", km: "សីហ៍" }, virgo: { en: "Virgo", km: "កញ្ញ" },
+  cancer: { en: "Cancer", km: "កក្កដ" }, leo: { en: "Leo", km: "សីហ៍" }, virgo: { en: "Virgo", km: "កញ្ញ" },
   libra: { en: "Libra", km: "តុល" }, scorpio: { en: "Scorpio", km: "វិច្ឆិក" }, sagittarius: { en: "Sagittarius", km: "ធ្នូ" },
   capricorn: { en: "Capricorn", km: "មករ" }, aquarius: { en: "Aquarius", km: "កុម្ភៈ" }, pisces: { en: "Pisces", km: "មីន" },
 };

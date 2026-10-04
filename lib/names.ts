@@ -40,3 +40,23 @@ export const elementName = (element: string, lang: Lang) => get(ELEMENT, element
 export const planetName = (body: string, lang: Lang) => get(PLANET, body, lang);
 /** "Year of the Rat" / "ឆ្នាំជូត". */
 export const yearOf = (slug: string, lang: Lang) => (lang === "km" ? `ឆ្នាំ${get(ANIMAL, slug, "km")}` : `Year of the ${get(ANIMAL, slug, "en")}`);
+
+const COLOUR: Record<string, string> = {
+  Black: "ខ្មៅ", Blue: "ខៀវ", Brown: "ត្នោត", Gold: "មាស", Green: "បៃតង", Purple: "ស្វាយ", Red: "ក្រហម",
+  Silver: "ប្រាក់", Teal: "ខៀវបៃតង", White: "ស", Yellow: "លឿង", Orange: "ទឹកក្រូច", Pink: "ផ្កាឈូក", Grey: "ប្រផេះ",
+  Coral: "ផ្កាថ្ម", Navy: "ខៀវចាស់", Cream: "ក្រែម", Indigo: "ខៀវចាស់ស្វាយ", Turquoise: "ខៀវទឹកសមុទ្រ", Lavender: "ស្វាយស្រាល",
+};
+/** A colour name from the lucky-colour tables, by its English name (falls back to English). */
+export const colourName = (english: string, lang: Lang) => (lang === "km" ? (COLOUR[english] ?? english) : english);
+
+const PHASE: Record<string, string> = {
+  "new moon": "ព្រះចន្ទងងឹត", "waxing crescent": "ព្រះចន្ទចាប់ផ្ដើមភ្លឺ", "first quarter": "ព្រះចន្ទកន្លះដើមខែ",
+  "waxing gibbous": "ព្រះចន្ទជិតពេញវង់", "full moon": "ព្រះចន្ទពេញវង់", "waning gibbous": "ព្រះចន្ទចាប់ផ្ដើមរួញ",
+  "last quarter": "ព្រះចន្ទកន្លះចុងខែ", "waning crescent": "ព្រះចន្ទជិតងងឹត",
+};
+/** Moon phase names (lib/sky.ts phaseNameFromAngle output) in the page language. */
+export const moonPhaseName = (english: string, lang: Lang) => (lang === "km" ? (PHASE[english] ?? english) : english);
+
+const TOPIC: Record<string, string> = { love: "ស្នេហា", career: "ការងារ", money: "ហិរញ្ញវត្ថុ", mood: "អារម្មណ៍" };
+/** Reading topics (love, career, money, mood). */
+export const topicName = (topic: string, lang: Lang, english: string) => (lang === "km" ? (TOPIC[topic] ?? english) : english);

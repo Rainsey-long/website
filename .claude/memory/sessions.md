@@ -2,6 +2,12 @@
 
 One entry per working session, at most ~10 lines: what changed, the commit range, what is left open. This is the cross-session memory for "what happened last time"; the why of each change is in its commit message.
 
+## 2026-10-04 (night) — weekly horoscopes
+
+- `/horoscope/[sign]/week[/monday]` from `lib/weekly.ts`: 48 lunation × house overviews (`content/weekly/lunations.json`, admin Weekly tab), best days from the daily engine, Moon path, planet events.
+- Security review: whole-year sky results get their own memo and a site-wide ceiling on new years (`skyYearsAvailable`), also on `/sky/retrogrades`; feedback paths limited to the 12 signs. UI review: tap targets, h1 size, Khmer title wrap.
+- Open: Khmer review of the weekly texts; owner asked to move the project to an external SSD (not reachable from the cloud container; clone from GitHub).
+
 ## 2026-10-04 (evening) — top three features from the brainstorm
 
 - Date converter `/tools/date-converter` (Khmer and Chinese lunar, both reverse lookups) with a client-only age tool (`lib/age.ts`: a birth date never reaches the server); Khmer year tables cached per year with a ceiling on cache misses (security review).

@@ -366,3 +366,31 @@
 
   .mirror { display: inline-flex; transform: scaleX(-1); }
 }
+
+/* Printable monthly calendar (DESIGN_SYSTEM.md §6.19). The sheet carries the
+   light palette (.theme-light) so it prints as ink on paper in either theme. */
+@layer components {
+  .print-sheet { background: var(--paper-raised); color: var(--ink); padding: 16px; border: 1px solid var(--rule); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .print-scroll { overflow-x: auto; }
+  .print-cal { width: 100%; min-width: var(--size-print-sheet); table-layout: fixed; border-collapse: collapse; }
+  .print-cal th { padding: 4px 8px; text-align: left; font-size: var(--fs-small); font-weight: 600; border-bottom: 2px solid var(--ink); }
+  .print-cal td { height: 96px; padding: 4px 8px; vertical-align: top; border: 1px solid var(--rule-strong); overflow: hidden; }
+  .print-cal td.is-today { outline: 2px solid var(--cinnabar); outline-offset: -2px; }
+  .print-num { display: block; font-size: var(--fs-h3); line-height: var(--lh-h3); }
+  .print-line { display: flex; align-items: center; gap: 4px; font-size: var(--fs-small); line-height: var(--lh-small); }
+  .print-fest { display: block; margin-top: 4px; font-size: var(--fs-small); line-height: var(--lh-small); font-weight: 600; overflow-wrap: break-word; }
+}
+
+@page calendar { size: A4 landscape; margin: 8mm; }
+
+@media print {
+  /* Site chrome (header, footer, skip link, toast) and on-screen controls never print. */
+  body > :not(main), .no-print { display: none !important; }
+  html, body { background: none !important; color-scheme: light !important; }
+  main > div { max-width: none; padding: 0; }
+  .print-sheet { page: calendar; border: 0; padding: 0 4px; }
+  .print-cal { min-width: 0; }
+  .print-scroll { overflow: visible; }
+  .print-cal td { height: 64px; }
+  .print-cal td.is-today { outline: 0; }
+}

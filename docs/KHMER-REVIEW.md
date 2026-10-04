@@ -43,3 +43,11 @@ Noted by the UI review: Cancer is now spelled កក្កដ everywhere (was �
 | `lib/ics.ts` | Khmer calendar-feed titles and descriptions (e.g. "ព្រះចន្ទ… ក្នុងរាសី…", "…ដើរថយក្រោយ", "ចូលឆ្នាំខ្មែរ៖ … យាងមក") |
 | `app/og/[slug]/route.tsx` | Khmer share-card text ("មេឃថ្ងៃនេះ", "ឆ្នាំចិន និងឆ្នាំខ្មែរ") |
 | `app/styleguide/page.tsx` | Internal page; low priority |
+
+## Added 2026-10-04: date converter, colour of the day, printable calendar
+
+| Where | What to check |
+|---|---|
+| `app/tools/date-converter/page.tsx`, `components/client/AgeTool.tsx` | Converter and age tool: "បម្លែងកាលបរិច្ឆេទ", "អាយុតាមរបៀបចិន" for the Chinese nominal age (虚岁), "ខែអធិក" for a Chinese leap month, "ឆ្នាំអធិកមាស", the explanations of the reverse lookups |
+| `app/khmer/colours/page.tsx`, `components/khmer/KhmerDayCard.tsx` | "ពណ៌ប្រចាំថ្ងៃ", "ពណ៌មង្គល", the newer-book colours (ខៀវខ្ចី sky blue, ស white), "ពណ៌ដូនតា" for ancestral colour |
+| `app/lucky-days/[yyyy]/[mm]/print/page.tsx` | Printable calendar header, legend and "ខែ៩" as the mark for the first day of a Chinese lunar month |

@@ -23,8 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const y = Number(today.slice(0, 4));
   const out: MetadataRoute.Sitemap = [
     u("", "daily", 1), u("/horoscope", "daily", 0.9), u("/zodiac"), u("/chinese-zodiac"), u("/chinese-zodiac/2027", "monthly", 0.8),
-    u("/compatibility"), u("/chinese-compatibility"), u("/tools/zodiac-calculator", "monthly", 0.8), u("/tools/compatibility-checker"), u("/tools/birth-chart", "monthly", 0.8), u("/lucky-days/finder", "monthly", 0.7), u("/good-hours", "daily", 0.7),
-    u("/khmer", "daily", 0.8), u("/khmer/new-year", "weekly", 0.8), u("/sky", "daily", 0.7), u("/feeds"),
+    u("/compatibility"), u("/chinese-compatibility"), u("/tools/zodiac-calculator", "monthly", 0.8), u("/tools/compatibility-checker"), u("/tools/birth-chart", "monthly", 0.8), u("/tools/date-converter", "monthly", 0.8), u("/lucky-days/finder", "monthly", 0.7), u("/good-hours", "daily", 0.7),
+    u("/khmer", "daily", 0.8), u("/khmer/new-year", "weekly", 0.8), u("/khmer/colours", "daily", 0.7), u("/sky", "daily", 0.7), u("/feeds"),
     u("/southeast-asian-zodiac"), u("/southeast-asian-zodiac/khmer"), u("/southeast-asian-zodiac/vietnamese"),
     u("/about", "yearly", 0.3), u("/contact", "yearly", 0.3), u("/privacy", "yearly", 0.2), u("/terms", "yearly", 0.2), u("/disclaimer", "yearly", 0.2),
   ];

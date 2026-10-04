@@ -34,6 +34,7 @@ const T = defineMessages({
     festivals: "Khmer festivals this month",
     finder: "Find a lucky date for an occasion",
     hours: "Today's good hours",
+    print: "Print this month",
     how: "How these calendars work",
     howChinese: "The Chinese almanac, the tong shu, marks each day with a day spirit and a day officer. Favourable spirits get the seal; days where both lean unfavourable get a small dot. The clash animal is the zodiac animal opposite the day's branch.",
     note: "Traditions to enjoy and reflect on, not rules. Medical and catch-all almanac entries are left out. Choose which traditions you see in the header.",
@@ -48,6 +49,7 @@ const T = defineMessages({
     festivals: "ពិធីបុណ្យខ្មែរក្នុងខែនេះ",
     finder: "រកថ្ងៃល្អសម្រាប់កម្មវិធីណាមួយ",
     hours: "ម៉ោងល្អថ្ងៃនេះ",
+    print: "បោះពុម្ពខែនេះ",
     how: "របៀបដែលប្រតិទិនទាំងនេះដំណើរការ",
     howChinese: "ប្រតិទិនចិន (តុងស៊ូ) កំណត់ថ្ងៃនីមួយៗដោយទេវតាប្រចាំថ្ងៃ និងមន្ត្រីប្រចាំថ្ងៃ។ ថ្ងៃដែលទេវតាល្អ ទទួលបានត្រា។ ថ្ងៃដែលទាំងពីរមិនសូវល្អ មានចំណុចតូចមួយ។ សត្វឆុង គឺជាសត្វដែលនៅទល់មុខនឹងសាខាដីរបស់ថ្ងៃនោះ។",
     note: "ទាំងនេះជាប្រពៃណីសម្រាប់រីករាយ និងពិចារណា មិនមែនជាច្បាប់ទេ។ ព័ត៌មានទាក់ទងនឹងសុខភាព និងព័ត៌មានទូទៅពេក ត្រូវបានដកចេញ។ អ្នកអាចជ្រើសរើសប្រពៃណីដែលចង់មើលនៅផ្នែកខាងលើ។",
@@ -126,9 +128,7 @@ export default async function Month({ params }: Params) {
                 <ul className="mt-2">{festivals.map((d) => <li key={d.date} className="border-b border-rule py-2"><span className="tabular">{num(Number(d.date.slice(8)), lang)}</span> · {km ? d.khmer!.festival!.km : d.khmer!.festival!.en}</li>)}</ul>
               </section>
             )}
-            {wantChinese && (
-              <p className="mb-6"><Link className="link" href="/lucky-days/finder">{t.finder}</Link> · <Link className="link" href="/good-hours">{t.hours}</Link></p>
-            )}
+            <p className="mb-6"><Link className="link" href={`${href({ y: year, m: month })}/print`}>{t.print}</Link>{wantChinese && <> · <Link className="link" href="/lucky-days/finder">{t.finder}</Link> · <Link className="link" href="/good-hours">{t.hours}</Link></>}</p>
             <h2 className="text-h3">{t.how}</h2>
             <div className="reading mt-3 text-body">
               {wantChinese && <p>{t.howChinese}</p>}

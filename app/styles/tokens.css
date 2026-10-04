@@ -40,6 +40,15 @@
   --shadow-lift: 0 1px 2px rgba(28, 35, 64, 0.08), 0 8px 24px rgba(28, 35, 64, 0.08);
   --focus: var(--cinnabar);
 
+  color-scheme: light;
+}
+
+/* Type and size tokens sit on :root only. They used to share the block above,
+   so .theme-light (the printable calendar sheet) reset them: the sheet got the
+   mobile type scale at every width and lost the Khmer line heights below
+   (measured: Khmer h1 at 1.15 inside the sheet). A palette class changes
+   colour, never type. */
+:root {
   /* Type scale, mobile values (§3.2) */
   --fs-display: 2.5rem;   --lh-display: 1.05;
   --fs-h1: 2rem;          --lh-h1: 1.15;
@@ -58,11 +67,10 @@
   --size-tap: 48px;
   --size-glyph: 24px;
   --size-glyph-lg: 40px;
+  --size-print-sheet: 720px; /* printable calendar: narrowest width the 7-column grid stays legible */
   --size-ad-mobile: 280px;
   --size-ad-rail: 600px;
   --size-ad-content: 250px;
-
-  color-scheme: light;
 }
 
 @media (min-width: 768px) {

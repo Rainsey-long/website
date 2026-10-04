@@ -11,12 +11,15 @@ Every page below also exists in Khmer at `/km<path>` (the admin at `/km/admin`),
 | `/compatibility`, `/compatibility/[a]-and-[b]`, `/chinese-compatibility/...` | 78 + 78 canonical pairs; reversed order 308s | rule tables |
 | `/khmer` | Khmer hub: today's lunar date, New Year countdown, birth weekdays, the 12 animals, what is and isn't computed | Khmer engine, DB override |
 | `/khmer/new-year` | Moha Songkran moment, festival days, the angel and posture, all seven angels, the owner's official time/saying | Khmer engine, DB override |
+| `/khmer/colours` | Colour of the day: today's weekday colour, the next seven days, newer-book variants | Khmer weekday table |
 | `/khmer/born-on/[weekday]` | Birth-weekday portrait, colour, planet, angel | static |
 | `/lucky-days/[yyyy]/[mm]` | Calendar: Chinese almanac marks and/or Khmer lunar days, holy days, festivals (by tradition choice) | almanac + Khmer engines |
 | `/sky`, `/sky/moon/[yyyy]/[mm]`, `/sky/retrogrades/[yyyy]` | Positions, phases, ingresses, stations + shadows, eclipses, in the visitor's zone | sky events |
 | `/feeds`, `/feeds/[name].ics` | Subscribable calendars: moon phases, retrogrades, eclipses, Khmer holy days, Khmer festivals | sky + Khmer engines |
 | `/tools/birth-chart` | Client-side natal chart: wheel, ten planets, whole-sign houses, aspects, plain-English reading (`lib/natal.ts`, `lib/natalCopy.ts`) | browser only |
 | `/good-hours?city=&date=` | Chinese double-hours (good/quiet, spirit, clash) and planetary hours from local sunrise for a city and day (`lib/goodHours.ts`) | almanac + astronomy |
+| `/lucky-days/[yyyy]/[mm]/print` | One-page A4 landscape printable calendar (noindex), traditions as chosen; print CSS at the end of `app/globals.css` | almanac + Khmer engines |
+| `/tools/date-converter?d=&ky=&kmo=&kph=&kd=&cy=&cm=&cd=&cl=` | A date in the Khmer and Chinese calendars; Khmer lunar date → Gregorian (`findKhmerDates`, scans the year); Chinese lunar date → Gregorian (`findChineseDate`); AgeTool is client-only (`lib/age.ts`), a birth date never reaches the server | `lib/converter.ts` |
 | `/lucky-days/finder?occasion=&from=&months=&a1=&a2=` | Chinese almanac days listing an occasion as favourable, minus clash days, up to 6 months (`lib/luckyFinder.ts`) | almanac |
 | `/tools/zodiac-calculator` | Client-side: sun/moon/rising, Chinese, Khmer (animal at the Songkran minute, birth weekday, lunar birth date) | browser only |
 | `/tools/compatibility-checker` | Picks a pair page | — |

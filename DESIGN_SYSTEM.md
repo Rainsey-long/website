@@ -242,6 +242,15 @@ A natal chart drawn in the DayDial's hand (§6.1): fine ink sign ring with glyph
 ### 6.17 Finder form (lucky-date finder)
 A GET form so results have a shareable URL and work without JavaScript: occasion (select), start month (month input), length (select: 1, 3 or 6 months), and up to two "people born in the Year of …" selects. Results: a list of dates (full date, day pillar, why: matched terms, officer, spirit), never a ranking or a score. Empty result: say so and offer the next longer range.
 
+### 6.18 Date converter and AgeTool
+GET forms (§6.17 pattern) so every answer has a URL: one date field with the primary button, then two reverse lookups (Khmer lunar date, Chinese lunar date) with secondary buttons. Results are a definition list: label column on the left from `sm`, value on the right, rows split by hairlines; no cards, no score. Impossible lunar dates say why in words ("That month has only 29 days…"). **AgeTool** is a client form in the same layout: a birth date is worked out in the browser and never joins a GET form or URL (owner privacy rule), and the intro line says so.
+
+### 6.19 Printable calendar
+A single sheet, A4 landscape (`@page calendar`), always in the light palette (`.theme-light`) so it prints as ink on paper in either theme. A bordered table, Monday first: Gregorian number in the serif, then one small line per tradition (Khmer lunar day with the holy-day ring; Chinese lunar day with seal or dot), festival names in semibold `small`. Legend, festival list and the disclaimer under the grid. On screen it sits in a sideways-scrolling region (min width `--size-print-sheet`) with a primary "Print this calendar" button; site chrome and controls never print.
+
+### 6.20 Colour of the day
+Today's weekday colour as a large swatch (`--size-glyph-lg`, §2 Khmer swatch rule: 1px `rule-strong` border, the name always in text), the meaning and angel in one sentence, then a plain list of the next seven days. A short "colours vary between almanacs" note lists the newer-book variants. The Khmer day card (home, Khmer hub) carries a one-line version with a small swatch.
+
 ---
 
 ## 7. Page templates (wireframes)
@@ -372,3 +381,4 @@ Month heading with previous/next → AlmanacCalendar → selected day detail →
 | 2026-10-04 | Khmer pages use Khmer numerals and written-out Khmer dates; `<html lang="km">` applies the Khmer line height site-wide | DESIGN_SYSTEM §8.5, §8.8 |
 | 2026-10-04 | Khmer pages redefine the `--lh-*` tokens (+0.15 on every step) under `:root:lang(km)`; the `[lang="km"]` base rule now covers only Khmer spans on English pages. Checkboxes and radios use `accent-color: ink` | The text utilities set their own line-height, so the +0.15 of §3.2 never reached Khmer headings, chips or small text (measured h1 1.15, display 1.05). Native controls were the browser blue, and a cinnabar fill is reserved for the seal (§6.5) |
 | 2026-10-04 | AlmanacCalendar: holy-day ring, seal and dot sit on their own fixed-height line under the lunar date; animal and year links in lists get the 44px tap height | Khmer two-digit dates wrapped the marks, so they jumped between rows; small inline links failed §8.7 |
+| 2026-10-04 | Added Date converter + AgeTool (§6.18), Printable calendar (§6.19, token `--size-print-sheet`, the only print styles), Colour of the day (§6.20) | Top three features from FEATURES.md §7; the age tool stays client-side because a birth date must not reach the server |

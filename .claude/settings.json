@@ -9,7 +9,8 @@
       "Bash(npm run validate:blocks)",
       "Bash(npm run db:preflight)",
       "Bash(npm run release:check)",
-      "Bash(npm run agents:report)"
+      "Bash(npm run agents:report)",
+      "Bash(npm run docs:budget)"
     ]
   },
   "hooks": {
@@ -17,15 +18,36 @@
       {
         "matcher": "Agent",
         "hooks": [
-          { "type": "command", "command": "node .claude/hooks/agent-tier-check.cjs" },
-          { "type": "command", "command": "node .claude/hooks/agent-run-ledger.cjs" }
+          {
+            "type": "command",
+            "command": "node .claude/hooks/agent-tier-check.cjs"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/agent-run-ledger.cjs"
+          }
         ]
       }
     ],
     "PostToolUse": [
       {
         "matcher": "Agent",
-        "hooks": [{ "type": "command", "command": "node .claude/hooks/agent-run-ledger.cjs" }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/agent-run-ledger.cjs"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/session-start.sh"
+          }
+        ]
       }
     ]
   }

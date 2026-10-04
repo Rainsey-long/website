@@ -1,5 +1,9 @@
 # Session memory
 
-CamboMath uses the user-scoped `claude-mem` plugin (corpora queried with `prime_corpus` then `query_corpus`) to answer "why was this done?" from recorded sessions instead of grepping a huge history file. Nothing in this repo configures it; if the plugin is available in a session, the same approach applies here.
+The memory for this repo is committed, because cloud sessions start in a fresh container where nothing outside git survives:
 
-Until a corpus exists for this repo, the memory is written down: `DECISIONS.md` (why a convention), `.claude/system-state.md` (what is true now), commit messages (the why behind each change), and `docs/research/` (what was researched and rejected). Prefer adding a line to one of those over relying on any session's memory.
+- `.claude/memory/MEMORY.md` — lessons that cost time. Auto-loaded (imported by CLAUDE.md); keep it under 3 KB.
+- `.claude/memory/sessions.md` — one short entry per session (what changed, what is open). Read on demand.
+- `.claude/hooks/session-start.sh` — at the start of a cloud session installs dependencies if missing and prints the branch, recent commits, uncommitted files and the doc-size budget, so a session does not spend tool calls rediscovering them.
+
+If the user-scoped `claude-mem` plugin is available (CamboMath uses it: `prime_corpus`, then `query_corpus`), it can answer "why was this done?" from recorded sessions; it is an addition to the committed memory, never a replacement.

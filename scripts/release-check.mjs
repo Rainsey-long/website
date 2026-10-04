@@ -26,7 +26,7 @@ const tsc = run("npx", ["tsc", "--noEmit"]);
 record("tsc --noEmit", tsc.status === 0, tsc.status === 0 ? "clean" : last(tsc.stdout));
 const lint = run("npx", ["eslint"]);
 record("eslint", lint.status === 0, lint.status === 0 ? "0 problems" : last(lint.stdout));
-for (const [name, script] of [["text blocks", "validate:blocks"], ["contrast (WCAG AA)", "check:contrast"], ["design tokens", "check:tokens"], ["tests", "test"]]) {
+for (const [name, script] of [["text blocks", "validate:blocks"], ["contrast (WCAG AA)", "check:contrast"], ["design tokens", "check:tokens"], ["doc token budget", "docs:budget"], ["tests", "test"]]) {
   const r = run("npm", ["run", "-s", script]);
   record(name, r.status === 0, last(r.stdout) || last(r.stderr));
 }

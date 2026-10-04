@@ -23,6 +23,12 @@ Every `Agent` brief names a TIER (the `agent-tier-check` hook denies one that do
 
 **Subagents in the shared tree report their diff and do not commit**; the parent commits. Only an agent in its own worktree commits its own work.
 
+## Memory and the token budget
+
+- **End of a session:** add one short entry to `.claude/memory/sessions.md` (what changed, what is open) and, only if something cost real time and is not obvious from the code, one line to `.claude/memory/MEMORY.md` (keep it under 3 KB). Both are committed; nothing else survives a cloud container.
+- **Auto-loaded docs stay under budget** (`npm run docs:budget`, also in `release:check`). Over budget: move detail to `.claude/reference/` or `docs/` and leave a pointer; never add an `@` import without measuring.
+- **Start from what is known:** the session hook prints the branch, recent commits and uncommitted files; read `system-state.md` and the last `sessions.md` entry before exploring.
+
 ## Research and new features
 
 Order: (1) `docs/research/FEATURES.md` and `docs/research/KHMER-TRADITIONS.md` (already researched and scored; don't redo it), (2) `DECISIONS.md` and `system-state.md`, (3) only then the internet. Label findings PRIMARY (read the source) or SUMMARY (search snippet). Write findings back as a new dated section; never rewrite an old one.

@@ -16,7 +16,8 @@
     "db:preflight": "node scripts/db-preflight.mjs",
     "release:check": "node scripts/release-check.mjs",
     "agents:report": "node scripts/agent-report.mjs",
-    "hooks:install": "sh scripts/install-hooks.sh"
+    "hooks:install": "sh scripts/install-hooks.sh",
+    "docs:budget": "node scripts/doc-budget.mjs"
   },
   "dependencies": {
     "@fontsource-variable/newsreader": "5.3.0",

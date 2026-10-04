@@ -9,6 +9,7 @@
 @.claude/environment.md
 @.claude/error-handling.md
 @.claude/role.md
+@.claude/memory/MEMORY.md
 
 # Almanac — daily horoscopes, Chinese zodiac, Khmer traditions
 
@@ -41,6 +42,7 @@ Built on the same stack and production shape as the owner's other site, CamboMat
 | `environment.md` | Env vars, Railway + Cloudflare shape |
 | `error-handling.md` | Failure modes |
 | `role.md` | Working restrictions, commit/deploy rules, agent budget |
+| `memory/MEMORY.md` | Lessons that cost time (committed memory; `sessions.md` beside it is the session log) |
 
 **On demand:**
 
@@ -55,5 +57,5 @@ Built on the same stack and production shape as the owner's other site, CamboMat
 | `docs/OWNER-ACTIONS.md` · `docs/KHMER-REVIEW.md` | What waits on the owner · Khmer text needing a native read |
 | `.claude/reference/agent-budget.md` · `agent-runs.md` | Before dispatching a subagent · what agents have cost (`npm run agents:report`) |
 | `.claude/reference/routes.md` | What each route does |
-| `.claude/reference/memory.md` | Session memory (claude-mem) |
+| `.claude/reference/memory.md` · `.claude/memory/sessions.md` | How memory works here · what each past session did |
 | `docs/I18N.md` | **Any visible text**: how English/Khmer works, the helpers, and how to write Khmer |

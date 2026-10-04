@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PairPicker from "../../components/PairPicker.astro";
+import Glyph from "../../components/Glyph.astro";
+import { ANIMALS } from "../../lib/chinese";
+import { chineseScore, RELATION_NAME, pairSlug } from "../../lib/compatibility";
+---
+<BaseLayout title="Chinese zodiac compatibility" description="Compatibility for all 78 Chinese zodiac animal pairings, from the Three Harmonies to the Six Clashes, with love, friendship and work scores." breadcrumbs={[{ name: "Chinese compatibility", href: "/chinese-compatibility/" }]}>
+  <div class="mx-auto max-w-page safe-x py-6">
+    <h1 class="text-h1">Chinese zodiac compatibility</h1>
+    <p class="reading mt-3 text-muted">Traditional tables group the animals into harmonies, clashes and harms. Pick two animals to see how they fit. Looking for star signs? See <a class="link text-ink" href="/compatibility/">Western compatibility</a>.</p>
+    <PairPicker options={ANIMALS} base="/chinese-compatibility/" noun="animal" heading="Check two animals" a="rat" b="dragon" />
+    <div class="mt-7 grid gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+      {ANIMALS.map((s) => (
+        <section aria-labelledby={`c-${s.slug}`}>
+          <h2 id={`c-${s.slug}`} class="flex items-center gap-2 text-h3"><Glyph name={s.slug} set="animal" class="size-5" />{s.name}</h2>
+          <ul class="mt-2">
+            {ANIMALS.map((o) => {
+              const sc = chineseScore(s, o);
+              return (
+                <li class="flex justify-between gap-3 border-b border-rule py-1">
+                  <a class="link inline-flex min-h-tap items-center" href={`/chinese-compatibility/${pairSlug(s.slug, o.slug)}/`}>{s.name} and {o.name}</a>
+                  <span class="self-center text-small text-muted"><span class="sr-only">{RELATION_NAME[sc.relation]}, </span><span class="tabular">{sc.score}</span></span>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

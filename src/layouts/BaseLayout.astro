@@ -1,0 +1,110 @@
+---
+/**
+ * BaseLayout — every page. Head (title, description, canonical, Open Graph,
+ * Twitter, JSON-LD incl. BreadcrumbList), the pre-paint theme script, header,
+ * footer and the optional analytics beacon.
+ * Props:
+ *   title, description   unique per page (plan §9)
+ *   breadcrumbs          [{name, href}] — rendered visually and as JSON-LD
+ *   jsonLd               extra structured data objects (Article, FAQPage…)
+ *   ogImage              absolute or root-relative image path
+ *   noindex              for /styleguide and error pages
+ *   wide                 page uses the full container instead of the reading column
+ */
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { SITE_NAME, SITE_URL, FEATURES } from "../config/site";
+
+export interface Crumb { name: string; href: string }
+interface Props {
+  title: string;
+  description: string;
+  breadcrumbs?: Crumb[];
+  jsonLd?: object[];
+  ogImage?: string;
+  ogType?: "website" | "article";
+  noindex?: boolean;
+}
+const { title, description, breadcrumbs = [], jsonLd = [], ogImage = "/og/default.png", ogType = "website", noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+const fullTitle = Astro.url.pathname === "/" ? `${SITE_NAME}: ${title}` : `${title} | ${SITE_NAME}`;
+const image = new URL(ogImage, SITE_URL).href;
+const crumbsLd = breadcrumbs.length
+  ? [{
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [{ name: "Home", href: "/" }, ...breadcrumbs].map((c, i) => ({
+        "@type": "ListItem", position: i + 1, name: c.name, item: new URL(c.href, SITE_URL).href,
+      })),
+    }]
+  : [];
+const ld = [...crumbsLd, ...jsonLd];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="alternate" hreflang="en" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <meta name="theme-color" content="#F6F7F4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141933" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <script is:inline>
+      /* Apply the saved theme before first paint (design system §2.2). */
+      try { var t = localStorage.getItem("theme"); if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+    </script>
+    {ld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-raised focus:p-3 focus:rounded-sm">Skip to content</a>
+    <Header />
+    <main id="main" class="flex-1">
+      {breadcrumbs.length > 0 && <Breadcrumbs items={breadcrumbs} />}
+      <slot />
+    </main>
+    <Footer />
+    <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+    {FEATURES.CF_ANALYTICS_TOKEN && (
+      <script defer is:inline src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: FEATURES.CF_ANALYTICS_TOKEN })}></script>
+    )}
+  </body>
+</html>
+
+<style is:global>
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: max(24px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 16px;
+    border-radius: 4px;
+    box-shadow: var(--shadow-lift);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    z-index: 60;
+    animation: toast-in 200ms var(--ease-out, ease-out);
+  }
+  @keyframes toast-in { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, 0); } }
+</style>

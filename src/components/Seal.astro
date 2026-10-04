@@ -1,0 +1,15 @@
+---
+/** Seal — the cinnabar almanac stamp (§6.5). The only filled cinnabar shape on the site. Decorative; the label beside it carries the meaning. Props: size "sm" | "md". */
+interface Props { size?: "sm" | "md" }
+const { size = "md" } = Astro.props;
+---
+<svg viewBox="0 0 32 32" class:list={["seal", size]} aria-hidden="true">
+  <circle cx="16" cy="16" r="15" class="disc" />
+  <path d="M10 11h12M16 8v16M11 16h10M10.5 21h11" class="mark" />
+</svg>
+<style>
+  .seal.md { width: 32px; height: 32px; }
+  .seal.sm { width: 16px; height: 16px; }
+  .disc { fill: var(--cinnabar); }
+  .mark { fill: none; stroke: var(--on-accent); stroke-width: 1.75; stroke-linecap: round; }
+</style>

@@ -1,0 +1,134 @@
+---
+/**
+ * Header (DESIGN_SYSTEM.md §6.10): wordmark, primary nav, "My sign" shortcut
+ * (shown once a sign is remembered), theme toggle. Mobile: wordmark + menu
+ * button opening a full-height sheet. The language switch is deferred to
+ * Phase 7 (DECISIONS.md) — English is the only language at launch.
+ */
+import Glyph from "./Glyph.astro";
+import { SITE_NAME } from "../config/site";
+const NAV = [
+  { href: "/horoscope/", label: "Horoscopes" },
+  { href: "/chinese-zodiac/", label: "Chinese zodiac" },
+  { href: "/compatibility/", label: "Compatibility" },
+  { href: "/lucky-days/", label: "Lucky days" },
+];
+const path = Astro.url.pathname;
+const current = (href: string) => (path.startsWith(href) ? "page" : undefined);
+---
+<header class="border-b border-rule bg-paper" style="padding-top: env(safe-area-inset-top)">
+  <div class="mx-auto flex max-w-page items-center gap-4 safe-x py-3">
+    <a href="/" class="serif mr-auto text-h3 no-underline" style="font-weight:500">{SITE_NAME}</a>
+
+    <nav aria-label="Main" class="hidden lg:block">
+      <ul class="flex items-center gap-5">
+        {NAV.map((n) => (
+          <li><a href={n.href} class="link" aria-current={current(n.href)}>{n.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href="#" data-my-sign hidden class="hidden items-center gap-2 rounded-full border border-cinnabar px-3 py-1 text-small font-semibold no-underline sm:inline-flex">
+      <span data-my-sign-glyph></span><span data-my-sign-label>My sign</span>
+    </a>
+
+    <button type="button" data-theme-toggle class="inline-flex size-tap items-center justify-center rounded-full text-ink" aria-label="Switch to dark theme">
+      <span data-icon="moon"><Glyph name="moon" set="ui" /></span>
+      <span data-icon="sun" hidden><Glyph name="sun" set="ui" /></span>
+    </button>
+
+    <button type="button" data-menu-open class="inline-flex size-tap items-center justify-center rounded-full lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="menu-sheet">
+      <Glyph name="menu" set="ui" />
+    </button>
+  </div>
+
+  <dialog id="menu-sheet" class="menu-sheet" aria-label="Menu">
+    <div class="flex items-center justify-between border-b border-rule safe-x py-3">
+      <span class="serif text-h3">{SITE_NAME}</span>
+      <button type="button" data-menu-close class="inline-flex size-tap items-center justify-center rounded-full" aria-label="Close menu">
+        <Glyph name="close" set="ui" />
+      </button>
+    </div>
+    <nav aria-label="Main" class="safe-x py-5">
+      <ul class="flex flex-col">
+        <li data-my-sign-item hidden><a href="#" data-my-sign-sheet class="block border-b border-rule py-4 text-h3 serif">My sign</a></li>
+        {NAV.map((n) => (
+          <li><a href={n.href} class="block border-b border-rule py-4 text-h3 serif" aria-current={current(n.href)}>{n.label}</a></li>
+        ))}
+        <li><a href="/tools/zodiac-calculator/" class="block border-b border-rule py-4 text-h3 serif">Find my sign</a></li>
+      </ul>
+    </nav>
+  </dialog>
+</header>
+
+<style>
+  [aria-current="page"] { text-decoration-thickness: 2px; text-decoration-color: var(--cinnabar); }
+  .menu-sheet {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    background: var(--paper);
+    color: var(--ink);
+    border: 0;
+    padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  }
+  .menu-sheet::backdrop { background: var(--ink); opacity: 0.4; }
+  a.serif { text-decoration: none; }
+</style>
+
+<script>
+  import { readStore, writeStore, MY_SIGN_KEY } from "../lib/client";
+  const SIGN_NAMES: Record<string, string> = {
+    aries: "Aries", taurus: "Taurus", gemini: "Gemini", cancer: "Cancer", leo: "Leo", virgo: "Virgo",
+    libra: "Libra", scorpio: "Scorpio", sagittarius: "Sagittarius", capricorn: "Capricorn", aquarius: "Aquarius", pisces: "Pisces",
+  };
+
+  // Theme toggle: explicit choice stored, otherwise follows the system.
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>("[data-theme-toggle]")!;
+  const isDark = () =>
+    root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const paint = () => {
+    const dark = isDark();
+    toggle.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+    toggle.querySelector<HTMLElement>('[data-icon="moon"]')!.hidden = dark;
+    toggle.querySelector<HTMLElement>('[data-icon="sun"]')!.hidden = !dark;
+  };
+  toggle.addEventListener("click", () => {
+    const next = isDark() ? "light" : "dark";
+    root.dataset.theme = next;
+    writeStore("theme", next);
+    paint();
+  });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paint);
+  paint();
+
+  // Menu sheet.
+  const sheet = document.getElementById("menu-sheet") as HTMLDialogElement;
+  const openBtn = document.querySelector<HTMLButtonElement>("[data-menu-open]")!;
+  openBtn.addEventListener("click", () => { sheet.showModal(); openBtn.setAttribute("aria-expanded", "true"); });
+  sheet.addEventListener("close", () => openBtn.setAttribute("aria-expanded", "false"));
+  sheet.querySelector("[data-menu-close]")!.addEventListener("click", () => sheet.close());
+
+  // "My sign" shortcut.
+  function showMySign() {
+    const sign = readStore(MY_SIGN_KEY);
+    const name = sign && SIGN_NAMES[sign];
+    const chip = document.querySelector<HTMLAnchorElement>("[data-my-sign]")!;
+    const item = document.querySelector<HTMLElement>("[data-my-sign-item]")!;
+    if (!name) { chip.hidden = true; item.hidden = true; return; }
+    const href = `/horoscope/${sign}/`;
+    chip.href = href;
+    chip.hidden = false;
+    chip.querySelector("[data-my-sign-label]")!.textContent = `My sign: ${name}`;
+    item.hidden = false;
+    const link = item.querySelector<HTMLAnchorElement>("a")!;
+    link.href = href;
+    link.textContent = `My sign: ${name}`;
+  }
+  showMySign();
+  window.addEventListener("mysign:change", showMySign);
+  void writeStore;
+</script>

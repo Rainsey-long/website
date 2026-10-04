@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ChipGrid from "../../components/ChipGrid.astro";
+import { animalChips } from "../../lib/pages";
+import { ANIMALS, zodiacYear, ELEMENT_NAME, lunarNewYear } from "../../lib/chinese";
+import { longDate } from "../../lib/dates";
+const years = Array.from({ length: 12 }, (_, i) => 2020 + i).map((y) => ({ y, z: zodiacYear(y), lny: lunarNewYear(y) }));
+---
+<BaseLayout title="Chinese zodiac animals and years" description="The 12 Chinese zodiac animals: personality profiles, the years for each animal, the five elements and when each year begins." breadcrumbs={[{ name: "Chinese zodiac", href: "/chinese-zodiac/" }]}>
+  <div class="mx-auto max-w-page safe-x py-6">
+    <h1 class="text-h1">Chinese zodiac</h1>
+    <p class="reading mt-3 text-muted">Twelve animals take turns ruling the years, each paired with one of five elements. A zodiac year starts at Lunar New Year, so January and early February birthdays often belong to the year before.</p>
+    <div class="mt-6"><ChipGrid items={animalChips()} set="animal" /></div>
+    <p class="mt-5"><a class="link" href="/chinese-zodiac/2027/">2027 Year of the Fire Goat forecasts</a> · <a class="link" href="/tools/zodiac-calculator/">Find your animal</a></p>
+    <section class="mt-7 border-t border-rule pt-5" aria-labelledby="years-h">
+      <h2 id="years-h" class="text-h2">Recent zodiac years</h2>
+      <div class="mt-4 overflow-x-auto">
+        <table class="w-full text-left tabular">
+          <thead class="text-small text-muted"><tr><th class="py-2 pr-4 font-medium">Year</th><th class="py-2 pr-4 font-medium">Animal</th><th class="py-2 font-medium">Starts</th></tr></thead>
+          <tbody>
+            {years.map(({ y, z, lny }) => (
+              <tr class="border-t border-rule">
+                <td class="py-3 pr-4">{y}</td>
+                <td class="py-3 pr-4"><a class="link" href={`/chinese-zodiac/${z.animal.slug}/`}>{ELEMENT_NAME[z.element]} {z.animal.name}</a></td>
+                <td class="py-3">{longDate(lny)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

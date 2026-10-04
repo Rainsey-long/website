@@ -1,0 +1,67 @@
+---
+/** Dated daily reading (plan §8), rolling window only (plan §10). */
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import ReadingSection from "../../../../components/ReadingSection.astro";
+import DayDial from "../../../../components/DayDial.astro";
+import Share from "../../../../components/Share.astro";
+import AdSlot from "../../../../components/AdSlot.astro";
+import SaveSign from "../../../../components/SaveSign.astro";
+import RelatedLinks from "../../../../components/RelatedLinks.astro";
+import { SIGNS } from "../../../../lib/western";
+import { dailyReading } from "../../../../lib/reading-engine";
+import { skyForDay } from "../../../../lib/sky";
+import { dailyWindow } from "../../../../lib/pages";
+import { longDate } from "../../../../lib/dates";
+import { pairSlug } from "../../../../lib/compatibility";
+import { articleLd } from "../../../../lib/content";
+import { SITE_URL } from "../../../../config/site";
+
+export function getStaticPaths() {
+  const window = dailyWindow();
+  const skies = new Map(window.map((d) => [d, skyForDay(d)]));
+  return SIGNS.flatMap((sign) =>
+    window.map((date, i) => ({
+      params: { sign: sign.slug, date },
+      props: { sign, date, sky: skies.get(date)!, prev: window[i - 1] ?? null, next: window[i + 1] ?? null },
+    })),
+  );
+}
+const { sign, date, sky, prev, next } = Astro.props;
+const reading = dailyReading(sign, date, sky);
+const url = new URL(`/horoscope/${sign.slug}/${date}/`, SITE_URL).href;
+const title = `${sign.name} horoscope for ${longDate(date)}`;
+const description = `${sign.name} horoscope for ${longDate(date)}: love, career, money and mood, plus your lucky colour, number and hour.`;
+const opposite = SIGNS[(sign.index + 6) % 12];
+---
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={`/og/${sign.slug}.png`}
+  ogType="article"
+  breadcrumbs={[{ name: "Horoscopes", href: "/horoscope/" }, { name: sign.name, href: `/horoscope/${sign.slug}/` }, { name: longDate(date), href: `/horoscope/${sign.slug}/${date}/` }]}
+  jsonLd={[articleLd({ headline: title, description, url, date })]}
+>
+  <div class="mx-auto max-w-page safe-x py-5 lg:grid lg:grid-cols-[minmax(0,1fr)_var(--size-rail)] lg:gap-7">
+    <div class="max-w-reading">
+      <div class="md:flex md:items-start md:justify-between md:gap-5">
+        <div class="flex-1">
+          <ReadingSection reading={reading} prevHref={prev ? `/horoscope/${sign.slug}/${prev}/` : null} nextHref={next ? `/horoscope/${sign.slug}/${next}/` : null} />
+        </div>
+      </div>
+      <div class="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+        <DayDial sky={sky} selected={sign.slug} size="small" caption={false} id="date-dial" />
+        <p class="text-small text-muted">On this day the Moon was in {SIGNS[sky.moon.signIndex].name} ({sky.moon.phaseName}, {sky.moon.illumination}% lit), in your solar house of {reading.theme}.</p>
+      </div>
+      <div class="mt-5 flex flex-wrap gap-3"><SaveSign slug={sign.slug} name={sign.name} /></div>
+      <Share title={title} text={`My ${sign.name} horoscope for ${longDate(date)}`} url={url} />
+      <AdSlot placement="afterReading" />
+      <RelatedLinks links={[
+        { href: `/horoscope/${sign.slug}/`, label: `${sign.name} horoscope today` },
+        { href: `/zodiac/${sign.slug}/`, label: `${sign.name} personality profile` },
+        { href: `/compatibility/${pairSlug(sign.slug, opposite.slug)}/`, label: `${sign.name} and ${opposite.name} compatibility` },
+        { href: "/chinese-zodiac/2027/", label: "2027 Year of the Fire Goat forecast" },
+      ]} />
+    </div>
+    <div class="hidden lg:block"><AdSlot placement="rail" /></div>
+  </div>
+</BaseLayout>

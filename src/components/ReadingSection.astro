@@ -1,0 +1,42 @@
+---
+/**
+ * ReadingSection (§6.3): sign glyph + name (display) + date (small), prev/next
+ * day links, the four topics in fixed order (Love, Career, Money, Mood) each
+ * with an EnergyMeter, separated by hairline rules. Ends with the LuckyRow.
+ * Props: reading (DailyReading), prevHref, nextHref, headingLevel ("h1" on reading pages)
+ */
+import Glyph from "./Glyph.astro";
+import EnergyMeter from "./EnergyMeter.astro";
+import LuckyRow from "./LuckyRow.astro";
+import type { DailyReading } from "../lib/reading-engine";
+import { fullDate } from "../lib/dates";
+interface Props { reading: DailyReading; prevHref?: string | null; nextHref?: string | null; showHeader?: boolean }
+const { reading, prevHref, nextHref, showHeader = true } = Astro.props;
+---
+<article class="reading-section" data-date={reading.date}>
+  {showHeader && (
+    <header>
+      <nav aria-label="Day" class="flex justify-between text-small">
+        {prevHref ? <a class="link inline-flex min-h-tap items-center gap-1" href={prevHref} rel="prev"><Glyph name="chevron-left" set="ui" class="size-4" />Yesterday</a> : <span></span>}
+        {nextHref ? <a class="link inline-flex min-h-tap items-center gap-1" href={nextHref} rel="next">Tomorrow<Glyph name="chevron-right" set="ui" class="size-4" /></a> : <span></span>}
+      </nav>
+      <h1 class="mt-3 flex items-center gap-3 text-display">
+        <Glyph name={reading.sign.slug} set="western" class="size-glyph-lg shrink-0" />
+        <span>{reading.sign.name}</span>
+      </h1>
+      <p class="mt-2 text-small text-muted"><time datetime={reading.date}>{fullDate(reading.date)}</time></p>
+    </header>
+  )}
+  <div class="mt-6">
+    {reading.topics.map((t) => (
+      <section class="border-t border-rule py-5" aria-labelledby={`t-${t.topic}-${reading.date}`}>
+        <div class="flex items-center justify-between gap-4">
+          <h2 id={`t-${t.topic}-${reading.date}`} class="text-h3">{t.label}</h2>
+          <EnergyMeter value={t.energy} />
+        </div>
+        <p class="reading mt-3">{t.text}</p>
+      </section>
+    ))}
+  </div>
+  <LuckyRow color={reading.lucky.color} number={reading.lucky.number} hour={reading.lucky.hour} seal={reading.lucky.seal} />
+</article>

@@ -1,0 +1,27 @@
+---
+/** Footer (§6.10): section links, legal pages, and the disclaimer line. */
+import { DISCLAIMER, SITE_NAME } from "../config/site";
+const SECTIONS = [
+  { title: "Readings", links: [["/horoscope/", "Daily horoscopes"], ["/chinese-zodiac/", "Chinese zodiac"], ["/chinese-zodiac/2027/", "2027 Year of the Fire Goat"], ["/lucky-days/", "Lucky days"]] },
+  { title: "Tools", links: [["/tools/zodiac-calculator/", "Find my sign"], ["/tools/compatibility-checker/", "Compatibility checker"], ["/compatibility/", "Western compatibility"], ["/chinese-compatibility/", "Chinese compatibility"]] },
+  { title: "Learn", links: [["/zodiac/", "Western signs"], ["/southeast-asian-zodiac/", "Southeast Asian zodiac"], ["/about/", "About"], ["/contact/", "Contact"]] },
+  { title: "Legal", links: [["/privacy/", "Privacy"], ["/terms/", "Terms"], ["/disclaimer/", "Disclaimer"]] },
+];
+const year = new Date().getUTCFullYear();
+---
+<footer class="mt-9 border-t border-rule" style="padding-bottom: env(safe-area-inset-bottom)">
+  <div class="mx-auto max-w-page safe-x py-7">
+    <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
+      {SECTIONS.map((s) => (
+        <nav aria-label={s.title}>
+          <h2 class="mb-3 font-sans text-small font-semibold text-muted" style="font-family: var(--font-sans)">{s.title}</h2>
+          <ul class="flex flex-col gap-2">
+            {s.links.map(([href, label]) => <li><a class="link" href={href}>{label}</a></li>)}
+          </ul>
+        </nav>
+      ))}
+    </div>
+    <p class="mt-7 border-t border-rule pt-5 text-small text-muted">{DISCLAIMER}</p>
+    <p class="mt-2 text-small text-muted">© {year} {SITE_NAME}</p>
+  </div>
+</footer>

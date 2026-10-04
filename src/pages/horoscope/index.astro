@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ChipGrid from "../../components/ChipGrid.astro";
+import { signChips } from "../../lib/pages";
+---
+<BaseLayout title="Daily horoscopes for all 12 signs" description="Today's horoscope for every zodiac sign: love, career, money and mood, written from where the Moon really is today." breadcrumbs={[{ name: "Horoscopes", href: "/horoscope/" }]}>
+  <div class="mx-auto max-w-page safe-x py-6">
+    <h1 class="text-h1">Daily horoscopes</h1>
+    <p class="reading mt-3 text-muted">Pick your sign for today's reading. Each one follows the Moon's real position through the zodiac, so it changes every day.</p>
+    <div class="mt-6"><ChipGrid items={signChips()} set="western" remember /></div>
+    <p class="mt-5">Not sure of your sign? <a class="link" href="/tools/zodiac-calculator/">Find my sign</a></p>
+  </div>
+</BaseLayout>

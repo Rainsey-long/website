@@ -1,0 +1,16 @@
+---
+/** Prose — long-form Markdown in reading typography (§3.2): headings h2, hairline-separated sections, max 66ch. */
+---
+<div class="prose reading"><slot /></div>
+<style>
+  .prose :global(h2) { font-size: var(--fs-h2); line-height: var(--lh-h2); margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule); }
+  .prose :global(h2:first-child) { margin-top: 0; }
+  .prose :global(h3) { font-size: var(--fs-h3); line-height: var(--lh-h3); margin-top: 32px; }
+  .prose :global(p) { margin-top: 16px; }
+  .prose :global(ul), .prose :global(ol) { margin-top: 16px; padding-left: 24px; }
+  .prose :global(ul) { list-style: disc; }
+  .prose :global(ol) { list-style: decimal; }
+  .prose :global(li + li) { margin-top: 8px; }
+  .prose :global(a) { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .prose :global(a:hover) { text-decoration-thickness: 2px; }
+</style>

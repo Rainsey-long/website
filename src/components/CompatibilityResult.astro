@@ -1,0 +1,46 @@
+---
+/**
+ * CompatibilityResult (§6.6): two glyphs facing each other with the
+ * relationship name between them, a large tabular score with "match", and
+ * love/friendship/work sub-scores as EnergyMeters. Colour (jade/clay) only
+ * reinforces the band label, which always says it in words.
+ * Props: a, b ({slug, name}), set, relationName, score {score, love, friendship, work}, headingLevel
+ */
+import Glyph from "./Glyph.astro";
+import EnergyMeter from "./EnergyMeter.astro";
+import { scoreBand, toMeter, type PairScore } from "../lib/compatibility";
+interface Side { slug: string; name: string }
+interface Props { a: Side; b: Side; set: "western" | "animal"; relationName: string; score: PairScore; title?: string }
+const { a, b, set, relationName, score, title } = Astro.props;
+const band = scoreBand(score.score);
+---
+<section class="compat border-b-2 border-ink pb-6">
+  {title && <h1 class="text-h1">{title}</h1>}
+  <div class="mt-6 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+    <div class="flex flex-col items-center gap-2 text-center">
+      <Glyph name={a.slug} set={set} class="size-9" />
+      <span class="serif text-h3">{a.name}</span>
+    </div>
+    <p class="text-center text-small font-semibold text-muted">{relationName}</p>
+    <div class="flex flex-col items-center gap-2 text-center">
+      <span class="mirror"><Glyph name={b.slug} set={set} class="size-9" /></span>
+      <span class="serif text-h3">{b.name}</span>
+    </div>
+  </div>
+  <div class="mt-6 flex flex-wrap items-end justify-between gap-5">
+    <p class="flex items-baseline gap-2">
+      <span class="serif text-display tabular">{score.score}</span>
+      <span class="text-small text-muted">match</span>
+      <span class:list={["ml-3 text-small font-semibold", band.tone === "high" ? "text-jade" : band.tone === "low" ? "text-clay" : "text-ink"]}>{band.label}</span>
+    </p>
+    <dl class="grid grid-cols-3 gap-5 text-small">
+      <div><dt class="text-muted">Love</dt><dd class="mt-1"><EnergyMeter value={toMeter(score.love)} label="Love" /></dd></div>
+      <div><dt class="text-muted">Friendship</dt><dd class="mt-1"><EnergyMeter value={toMeter(score.friendship)} label="Friendship" /></dd></div>
+      <div><dt class="text-muted">Work</dt><dd class="mt-1"><EnergyMeter value={toMeter(score.work)} label="Work" /></dd></div>
+    </dl>
+  </div>
+</section>
+<style>
+  /* Glyphs face each other. */
+  .mirror { display: inline-flex; transform: scaleX(-1); }
+</style>

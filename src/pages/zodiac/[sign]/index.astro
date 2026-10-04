@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Glyph from "../../../components/Glyph.astro";
+import Prose from "../../../components/Prose.astro";
+import Faq from "../../../components/Faq.astro";
+import AdSlot from "../../../components/AdSlot.astro";
+import AffiliateBox from "../../../components/AffiliateBox.astro";
+import RelatedLinks from "../../../components/RelatedLinks.astro";
+import { SIGNS, ELEMENT_LABEL, MODALITY_LABEL } from "../../../lib/western";
+import { westernProfile, faqLd, articleLd } from "../../../lib/content";
+import { westernScore, pairSlug } from "../../../lib/compatibility";
+import { SITE_URL } from "../../../config/site";
+
+export function getStaticPaths() {
+  return SIGNS.map((sign) => ({ params: { sign: sign.slug }, props: { sign } }));
+}
+const { sign } = Astro.props;
+const profile = westernProfile(sign.slug);
+const fm = profile?.frontmatter;
+const title = `${sign.name} traits, love and career`;
+const description = fm?.summary ?? `${sign.name} personality profile: strengths, challenges, love and career.`;
+const url = new URL(`/zodiac/${sign.slug}/`, SITE_URL).href;
+const best = SIGNS.filter((s) => s.slug !== sign.slug).map((s) => ({ s, score: westernScore(sign, s).score })).sort((a, b) => b.score - a.score).slice(0, 3);
+const Content = profile?.Content;
+---
+<BaseLayout title={title} description={description} ogType="article" ogImage={`/og/${sign.slug}.png`}
+  breadcrumbs={[{ name: "Zodiac signs", href: "/zodiac/" }, { name: sign.name, href: `/zodiac/${sign.slug}/` }]}
+  jsonLd={[articleLd({ headline: `${sign.name} zodiac sign`, description, url }), ...faqLd(fm?.faq)]}>
+  <div class="mx-auto max-w-page safe-x py-5 lg:grid lg:grid-cols-[minmax(0,1fr)_var(--size-rail)] lg:gap-7">
+    <article class="max-w-reading">
+      <h1 class="flex items-center gap-3 text-display"><Glyph name={sign.slug} set="western" class="size-glyph-lg shrink-0" />{sign.name}</h1>
+      <p class="mt-2 text-small text-muted tabular">{sign.range}</p>
+      <dl class="mt-5 grid grid-cols-2 gap-4 border-y border-rule py-4 text-small sm:grid-cols-4">
+        <div><dt class="text-muted">Element</dt><dd class="mt-1 flex items-center gap-2 font-semibold"><span class={`swatch bg-el-${sign.element}`} aria-hidden="true"></span>{ELEMENT_LABEL[sign.element]}</dd></div>
+        <div><dt class="text-muted">Quality</dt><dd class="mt-1 font-semibold">{MODALITY_LABEL[sign.modality]}</dd></div>
+        <div><dt class="text-muted">Ruler</dt><dd class="mt-1 font-semibold">{sign.ruler.replace(/^the /, "The ")}</dd></div>
+        {fm?.luckyDay && <div><dt class="text-muted">Lucky day</dt><dd class="mt-1 font-semibold">{fm.luckyDay}</dd></div>}
+      </dl>
+      {fm?.traits && <p class="mt-4 text-muted">{fm.traits.join(" · ")}</p>}
+      <p class="mt-5"><a class="btn-primary" href={`/horoscope/${sign.slug}/`}>Read today's {sign.name} horoscope</a></p>
+      <div class="mt-7">
+        {Content ? <Prose><Content /></Prose> : <p class="reading">{description}</p>}
+      </div>
+      <AdSlot placement="inContent" />
+      <section class="mt-7 border-t border-rule pt-5" aria-labelledby="best-h">
+        <h2 id="best-h" class="text-h2">Best matches for {sign.name}</h2>
+        <ul class="mt-3">
+          {best.map(({ s, score }) => (
+            <li class="flex justify-between border-b border-rule py-3"><a class="link" href={`/compatibility/${pairSlug(sign.slug, s.slug)}/`}>{sign.name} and {s.name}</a><span class="tabular text-muted">{score}</span></li>
+          ))}
+        </ul>
+      </section>
+      <Faq items={fm?.faq ?? []} />
+      <AffiliateBox title={`${sign.name} gifts`} text={`Thoughtful, small gifts inspired by ${sign.name}.`} href="#" store="Etsy" />
+      <RelatedLinks links={[
+        { href: `/horoscope/${sign.slug}/`, label: `${sign.name} horoscope today` },
+        { href: "/compatibility/", label: "Compatibility for every pair" },
+        { href: "/tools/zodiac-calculator/", label: "Find your moon and rising signs" },
+      ]} />
+    </article>
+    <div class="hidden lg:block"><AdSlot placement="rail" /></div>
+  </div>
+</BaseLayout>
+<style>.swatch { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }</style>

@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import CompatibilityResult from "../../../components/CompatibilityResult.astro";
+import PairPicker from "../../../components/PairPicker.astro";
+import RelatedLinks from "../../../components/RelatedLinks.astro";
+import AdSlot from "../../../components/AdSlot.astro";
+import AffiliateBox from "../../../components/AffiliateBox.astro";
+import Share from "../../../components/Share.astro";
+import { ANIMALS, elementRelation } from "../../../lib/chinese";
+import { chineseScore, RELATION_NAME, pairSlug } from "../../../lib/compatibility";
+import { chineseCopy } from "../../../lib/compat-copy";
+import { articleLd } from "../../../lib/content";
+import { SITE_URL } from "../../../config/site";
+
+export function getStaticPaths() {
+  const out = [];
+  for (const a of ANIMALS) for (const b of ANIMALS) if (a.slug <= b.slug) out.push({ params: { pair: pairSlug(a.slug, b.slug) }, props: { a, b } });
+  return out;
+}
+const { a, b } = Astro.props;
+const s = chineseScore(a, b);
+const copy = chineseCopy(a, b, s.relation, elementRelation(a.branchElement, b.branchElement));
+const relationName = RELATION_NAME[s.relation];
+const title = `${a.name} and ${b.name} Chinese zodiac compatibility`;
+const description = `${a.name} and ${b.name}: ${relationName}, ${s.score}% match. How these animals connect in love, friendship and work.`;
+const url = new URL(`/chinese-compatibility/${pairSlug(a.slug, b.slug)}/`, SITE_URL).href;
+const others = ANIMALS.filter((x) => chineseScore(a, x).relation === "three-harmonies" && x.slug !== b.slug && x.slug !== a.slug).slice(0, 2);
+---
+<BaseLayout title={title} description={description} ogType="article"
+  breadcrumbs={[{ name: "Chinese compatibility", href: "/chinese-compatibility/" }, { name: `${a.name} and ${b.name}`, href: `/chinese-compatibility/${pairSlug(a.slug, b.slug)}/` }]}
+  jsonLd={[articleLd({ headline: title, description, url })]}>
+  <div class="mx-auto max-w-reading safe-x py-5 box-content">
+    <CompatibilityResult a={a} b={b} set="animal" relationName={relationName} score={s} title={title} />
+    <div class="reading mt-6">
+      <h2 class="text-h2">How these animals connect</h2>
+      {copy.connect.map((p) => <p class="mt-3">{p}</p>)}
+      <h2 class="mt-7 text-h2">Strengths</h2>
+      <ul class="mt-3 list-disc pl-5">{copy.strengths.map((p) => <li class="mt-2">{p}</li>)}</ul>
+      <AdSlot placement="inContent" />
+      <h2 class="mt-7 text-h2">Challenges</h2>
+      <ul class="mt-3 list-disc pl-5">{copy.challenges.map((p) => <li class="mt-2">{p}</li>)}</ul>
+      <h2 class="mt-7 text-h2">Advice</h2>
+      <ul class="mt-3 list-disc pl-5">{copy.advice.map((p) => <li class="mt-2">{p}</li>)}</ul>
+    </div>
+    <Share title={title} text={`${a.name} and ${b.name}: ${s.score}% match`} url={url} />
+    <PairPicker options={ANIMALS} base="/chinese-compatibility/" noun="animal" a={a.slug} b={b.slug} />
+    <AffiliateBox title="Zodiac animal gifts" text="Small, well-made gifts for the animals in your life." href="#" store="Etsy" />
+    <RelatedLinks heading="Related pairs and readings" links={[
+      ...others.map((o) => ({ href: `/chinese-compatibility/${pairSlug(a.slug, o.slug)}/`, label: `${a.name} and ${o.name}` })),
+      { href: `/chinese-zodiac/${a.slug}/2027/`, label: `${a.name} in 2027` },
+      { href: `/chinese-zodiac/${b.slug}/2027/`, label: `${b.name} in 2027` },
+      { href: `/chinese-zodiac/${a.slug}/`, label: `${a.name} profile` },
+    ]} />
+  </div>
+</BaseLayout>

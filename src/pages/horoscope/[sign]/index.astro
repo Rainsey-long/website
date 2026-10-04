@@ -1,0 +1,95 @@
+---
+/**
+ * Sign hub (plan §8): shows today's reading. The page carries yesterday, today
+ * and tomorrow (by build date) and a tiny script shows the one matching the
+ * visitor's local date, so "today" is right in every time zone (§8.5).
+ */
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ReadingSection from "../../../components/ReadingSection.astro";
+import DayDial from "../../../components/DayDial.astro";
+import Glyph from "../../../components/Glyph.astro";
+import Share from "../../../components/Share.astro";
+import AdSlot from "../../../components/AdSlot.astro";
+import SaveSign from "../../../components/SaveSign.astro";
+import RelatedLinks from "../../../components/RelatedLinks.astro";
+import { SIGNS } from "../../../lib/western";
+import { dailyReading } from "../../../lib/reading-engine";
+import { skyForDay } from "../../../lib/sky";
+import { addDays, buildToday, fullDate } from "../../../lib/dates";
+import { pairSlug } from "../../../lib/compatibility";
+import { articleLd } from "../../../lib/content";
+import { SITE_URL } from "../../../config/site";
+
+export function getStaticPaths() {
+  return SIGNS.map((sign) => ({ params: { sign: sign.slug }, props: { sign } }));
+}
+const { sign } = Astro.props;
+const today = buildToday();
+const days = [addDays(today, -1), today, addDays(today, 1)];
+const readings = days.map((d) => dailyReading(sign, d));
+const sky = skyForDay(today);
+const url = new URL(`/horoscope/${sign.slug}/`, SITE_URL).href;
+const title = `${sign.name} horoscope today`;
+const description = `Today's ${sign.name} horoscope: love, career, money and mood, with your lucky colour, number and hour.`;
+const pairs = SIGNS.filter((s) => s.element === sign.element || Math.abs(s.index - sign.index) === 6).filter((s) => s.slug !== sign.slug).slice(0, 3);
+---
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={`/og/${sign.slug}.png`}
+  ogType="article"
+  breadcrumbs={[{ name: "Horoscopes", href: "/horoscope/" }, { name: sign.name, href: `/horoscope/${sign.slug}/` }]}
+  jsonLd={[articleLd({ headline: title, description, url, date: today })]}
+>
+  <div class="mx-auto max-w-page safe-x py-5 lg:grid lg:grid-cols-[minmax(0,1fr)_var(--size-rail)] lg:gap-7">
+    <div class="max-w-reading">
+      <header class="flex items-start justify-between gap-5">
+        <div>
+          <h1 class="flex items-center gap-3 text-display">
+            <Glyph name={sign.slug} set="western" class="size-glyph-lg shrink-0" />
+            <span>{sign.name}</span>
+          </h1>
+          <p class="mt-2 text-small text-muted">Horoscope for <span data-hub-date>{fullDate(today)}</span></p>
+        </div>
+        <div class="hidden md:block"><DayDial sky={sky} selected={sign.slug} size="small" caption={false} id="hub-dial" /></div>
+      </header>
+
+      {readings.map((r, i) => (
+        <div data-day={r.date} hidden={i !== 1} data-label={fullDate(r.date)}>
+          <ReadingSection reading={r} showHeader={false} />
+          <p class="mt-4 text-small"><a class="link" href={`/horoscope/${sign.slug}/${r.date}/`}>Permanent link to this reading</a></p>
+        </div>
+      ))}
+
+      <nav aria-label="Day" class="mt-5 flex flex-wrap gap-3">
+        <a class="btn-secondary" href={`/horoscope/${sign.slug}/${days[2]}/`} data-tomorrow>Read tomorrow</a>
+        <SaveSign slug={sign.slug} name={sign.name} />
+      </nav>
+
+      <Share title={title} text={`My ${sign.name} horoscope for today`} url={url} />
+      <AdSlot placement="afterReading" />
+      <RelatedLinks links={[
+        { href: `/zodiac/${sign.slug}/`, label: `${sign.name} personality profile` },
+        ...pairs.map((p) => ({ href: `/compatibility/${pairSlug(sign.slug, p.slug)}/`, label: `${sign.name} and ${p.name} compatibility` })),
+        { href: "/chinese-zodiac/2027/", label: "2027 Year of the Fire Goat forecast" },
+      ]} />
+    </div>
+    <div class="hidden lg:block"><AdSlot placement="rail" /></div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { localToday } from "../../../lib/client";
+  const local = localToday();
+  const blocks = [...document.querySelectorAll<HTMLElement>("[data-day]")];
+  const match = blocks.find((b) => b.dataset.day === local);
+  if (match) {
+    blocks.forEach((b) => (b.hidden = b !== match));
+    document.querySelector("[data-hub-date]")!.textContent = match.dataset.label!;
+    const i = blocks.indexOf(match);
+    const tomorrow = document.querySelector<HTMLAnchorElement>("[data-tomorrow]")!;
+    const next = blocks[i + 1];
+    if (next) tomorrow.href = tomorrow.href.replace(/\d{4}-\d{2}-\d{2}/, next.dataset.day!);
+    else tomorrow.hidden = true;
+  }
+</script>

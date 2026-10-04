@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ChipGrid from "../../components/ChipGrid.astro";
+import { signChips } from "../../lib/pages";
+import { SIGNS, ELEMENT_LABEL } from "../../lib/western";
+const byElement = (["fire", "earth", "air", "water"] as const).map((el) => ({ el, signs: SIGNS.filter((s) => s.element === el) }));
+---
+<BaseLayout title="The 12 zodiac signs" description="Personality profiles for all 12 Western zodiac signs: strengths, challenges, love and work, grouped by element." breadcrumbs={[{ name: "Zodiac signs", href: "/zodiac/" }]}>
+  <div class="mx-auto max-w-page safe-x py-6">
+    <h1 class="text-h1">The 12 zodiac signs</h1>
+    <p class="reading mt-3 text-muted">Your sun sign is where the Sun was on the day you were born. Pick a sign to read its profile.</p>
+    <div class="mt-6"><ChipGrid items={signChips((s) => `/zodiac/${s}/`)} set="western" remember /></div>
+    <div class="mt-7 grid gap-6 border-t border-rule pt-6 sm:grid-cols-2 lg:grid-cols-4">
+      {byElement.map(({ el, signs }) => (
+        <section>
+          <h2 class="flex items-center gap-2 text-h3"><span class={`swatch bg-el-${el}`} aria-hidden="true"></span>{ELEMENT_LABEL[el]} signs</h2>
+          <ul class="mt-2">{signs.map((s) => <li><a class="link inline-flex min-h-tap items-center" href={`/zodiac/${s.slug}/`}>{s.name}</a></li>)}</ul>
+        </section>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+<style>.swatch { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }</style>

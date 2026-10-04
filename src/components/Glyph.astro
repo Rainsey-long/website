@@ -1,0 +1,24 @@
+---
+/**
+ * Glyph — renders an original zodiac glyph or a UI icon (DESIGN_SYSTEM.md §4.4).
+ * Props:
+ *   name   glyph key (western sign slug, animal slug, or UI icon name)
+ *   set    "western" | "animal" | "ui"
+ *   label  accessible label; omit for decorative glyphs (gets aria-hidden)
+ *   class  sizing/colour classes, e.g. "size-glyph text-ink"
+ */
+import { ANIMAL_GLYPHS, UI_ICONS, WESTERN_GLYPHS, type GlyphPart } from "../icons/glyphs";
+interface Props { name: string; set: "western" | "animal" | "ui"; label?: string; class?: string }
+const { name, set, label, class: cls = "size-glyph" } = Astro.props;
+const table = set === "western" ? WESTERN_GLYPHS : set === "animal" ? ANIMAL_GLYPHS : UI_ICONS;
+const parts: GlyphPart[] = table[name] ?? [];
+---
+<svg
+  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+  stroke-linecap="round" stroke-linejoin="round" class={cls}
+  role={label ? "img" : undefined} aria-label={label} aria-hidden={label ? undefined : "true"} focusable="false"
+>
+  {parts.map(([tag, attrs]) =>
+    tag === "path" ? <path {...attrs} /> : tag === "circle" ? <circle {...attrs} /> : <ellipse {...attrs} />
+  )}
+</svg>

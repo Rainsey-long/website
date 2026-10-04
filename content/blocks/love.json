@@ -1,0 +1,554 @@
+[
+ {
+  "id": "love-h1-01",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    1
+   ]
+  },
+  "tone": "warm",
+  "text": "The Moon lights up your own sign, so your feelings sit close to the surface. Let someone see the real you today. It is more attractive than any act."
+ },
+ {
+  "id": "love-h1-02",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    1
+   ]
+  },
+  "tone": "warm",
+  "text": "You feel more like yourself than you have all week. Lead with that ease. Someone notices how comfortable you are in your own skin."
+ },
+ {
+  "id": "love-h1-03",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    1
+   ]
+  },
+  "tone": "warm",
+  "text": "Today is about what you want, said plainly. If something in a relationship needs to change, you have the clarity to name it kindly."
+ },
+ {
+  "id": "love-h2-01",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    2
+   ]
+  },
+  "tone": "warm",
+  "text": "Small comforts speak loudly today. A shared meal or a thoughtful gesture says more than a big declaration."
+ },
+ {
+  "id": "love-h2-02",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    2
+   ]
+  },
+  "tone": "warm",
+  "text": "You may notice what you value in a partner more clearly now. Steadiness and kindness win over sparkle."
+ },
+ {
+  "id": "love-h2-03",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    2
+   ]
+  },
+  "tone": "warm",
+  "text": "Affection shows up in practical ways. Offer help without being asked, and notice who does the same for you."
+ },
+ {
+  "id": "love-h3-01",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    3
+   ]
+  },
+  "tone": "warm",
+  "text": "Conversation is your love language today. A light message or a long talk could shift something between you and someone special."
+ },
+ {
+  "id": "love-h3-02",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    3
+   ]
+  },
+  "tone": "warm",
+  "text": "Words come easily, so use them warmly. Ask a question you have been curious about and really listen to the answer."
+ },
+ {
+  "id": "love-h3-03",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    3
+   ]
+  },
+  "tone": "warm",
+  "text": "A playful exchange of messages sets the tone. Keep it light and let the conversation wander where it wants."
+ },
+ {
+  "id": "love-h4-01",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    4
+   ]
+  },
+  "tone": "warm",
+  "text": "Home feels like the heart of things today. Quiet time together means more than going out."
+ },
+ {
+  "id": "love-h4-02",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    4
+   ]
+  },
+  "tone": "warm",
+  "text": "Old feelings may surface, softly. Share a memory with someone close. It can bring you nearer to each other."
+ },
+ {
+  "id": "love-h4-03",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    4
+   ]
+  },
+  "tone": "warm",
+  "text": "You want to feel safe and settled. Say so. The right person will be glad to make room for that."
+ },
+ {
+  "id": "love-h5-01",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    5
+   ]
+  },
+  "tone": "warm",
+  "text": "Romance and fun are in the air. Say yes to something spontaneous, and let yourself be a little playful."
+ },
+ {
+  "id": "love-h5-02",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    5
+   ]
+  },
+  "tone": "warm",
+  "text": "Your warmth is easy to see today. Flirt a little, laugh a lot, and do not overthink it."
+ },
+ {
+  "id": "love-h5-03",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    5
+   ]
+  },
+  "tone": "warm",
+  "text": "A date, a game or a creative project shared with someone special could be the highlight of your day."
+ },
+ {
+  "id": "love-h6-01",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    6
+   ]
+  },
+  "tone": "warm",
+  "text": "Love lives in the small routines today. Making someone's day easier is its own kind of romance."
+ },
+ {
+  "id": "love-h6-02",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    6
+   ]
+  },
+  "tone": "warm",
+  "text": "Notice the everyday habits you share with a partner or friend. A tiny change could make both of you happier."
+ },
+ {
+  "id": "love-h6-03",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    6
+   ]
+  },
+  "tone": "warm",
+  "text": "Practical care counts. Cook, tidy or plan something together. Doing ordinary things side by side feels quietly close."
+ },
+ {
+  "id": "love-h7-01",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    7
+   ]
+  },
+  "tone": "warm",
+  "text": "Partnerships take centre stage. Meet people halfway and you may be surprised by how much they give back."
+ },
+ {
+  "id": "love-h7-02",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    7
+   ]
+  },
+  "tone": "warm",
+  "text": "One-to-one time matters most today. Give someone your full attention and the connection deepens."
+ },
+ {
+  "id": "love-h7-03",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    7
+   ]
+  },
+  "tone": "warm",
+  "text": "Today shows you how you work as a pair. Talk about what each of you needs, without keeping score."
+ },
+ {
+  "id": "love-h8-01",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    8
+   ]
+  },
+  "tone": "warm",
+  "text": "Feelings run deep today. A heartfelt conversation could build real trust between you and someone close."
+ },
+ {
+  "id": "love-h8-02",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    8
+   ]
+  },
+  "tone": "warm",
+  "text": "You may want more closeness than usual. Be honest about it, and let the other person meet you at their own pace."
+ },
+ {
+  "id": "love-h8-03",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    8
+   ]
+  },
+  "tone": "warm",
+  "text": "Something unspoken is ready to be shared. Choose a calm moment and say it gently."
+ },
+ {
+  "id": "love-h9-01",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    9
+   ]
+  },
+  "tone": "warm",
+  "text": "You are drawn to someone who widens your world. A conversation about big ideas can feel surprisingly romantic."
+ },
+ {
+  "id": "love-h9-02",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    9
+   ]
+  },
+  "tone": "warm",
+  "text": "Plan something new together, even if it is small. A different café or a new route home adds a little adventure."
+ },
+ {
+  "id": "love-h9-03",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    9
+   ]
+  },
+  "tone": "warm",
+  "text": "Curiosity is attractive today. Ask about someone's dreams and share one of your own."
+ },
+ {
+  "id": "love-h10-01",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    10
+   ]
+  },
+  "tone": "warm",
+  "text": "Your public life and your love life overlap a little today. Let a partner see what you are working toward."
+ },
+ {
+  "id": "love-h10-02",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    10
+   ]
+  },
+  "tone": "warm",
+  "text": "You may feel pulled between duty and affection. A short, sincere check-in keeps both sides happy."
+ },
+ {
+  "id": "love-h10-03",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    10
+   ]
+  },
+  "tone": "warm",
+  "text": "Respect is romantic today. Recognise what someone close has achieved, and say so out loud."
+ },
+ {
+  "id": "love-h11-01",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    11
+   ]
+  },
+  "tone": "warm",
+  "text": "Friendship and love blend nicely. Time with a group could bring a warm connection your way."
+ },
+ {
+  "id": "love-h11-02",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    11
+   ]
+  },
+  "tone": "warm",
+  "text": "Talk about the future with someone you care about. Shared hopes bring you closer."
+ },
+ {
+  "id": "love-h11-03",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    11
+   ]
+  },
+  "tone": "warm",
+  "text": "Easy, friendly energy suits you today. Keep plans relaxed and inclusive."
+ },
+ {
+  "id": "love-h12-01",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    12
+   ]
+  },
+  "tone": "warm",
+  "text": "You may want a little more privacy than usual. That is fine. Quiet closeness can be the most tender kind."
+ },
+ {
+  "id": "love-h12-02",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    12
+   ]
+  },
+  "tone": "warm",
+  "text": "Feelings are softer and harder to put into words today. Let actions do the talking."
+ },
+ {
+  "id": "love-h12-03",
+  "topic": "love",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    12
+   ]
+  },
+  "tone": "warm",
+  "text": "Take time to understand what you need before asking someone else for it. Clarity comes when you slow down."
+ },
+ {
+  "id": "love-phase-new-01",
+  "topic": "love",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "new"
+   ]
+  },
+  "tone": "warm",
+  "text": "The new Moon favours fresh starts in matters of the heart."
+ },
+ {
+  "id": "love-phase-new-02",
+  "topic": "love",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "new"
+   ]
+  },
+  "tone": "warm",
+  "text": "A quiet new Moon is a good time to set an intention for your relationships."
+ },
+ {
+  "id": "love-phase-waxing-01",
+  "topic": "love",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waxing"
+   ]
+  },
+  "tone": "warm",
+  "text": "The growing Moon supports building trust step by step."
+ },
+ {
+  "id": "love-phase-waxing-02",
+  "topic": "love",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waxing"
+   ]
+  },
+  "tone": "warm",
+  "text": "Momentum builds as the Moon grows. Small efforts in love add up."
+ },
+ {
+  "id": "love-phase-full-01",
+  "topic": "love",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "full"
+   ]
+  },
+  "tone": "warm",
+  "text": "The full Moon can make feelings stronger. Pause before you react."
+ },
+ {
+  "id": "love-phase-full-02",
+  "topic": "love",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "full"
+   ]
+  },
+  "tone": "warm",
+  "text": "Under the full Moon, something in a relationship becomes clear."
+ },
+ {
+  "id": "love-phase-waning-01",
+  "topic": "love",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waning"
+   ]
+  },
+  "tone": "warm",
+  "text": "The waning Moon helps you release old hurts."
+ },
+ {
+  "id": "love-phase-waning-02",
+  "topic": "love",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waning"
+   ]
+  },
+  "tone": "warm",
+  "text": "As the Moon wanes, let go of expectations that weigh on you."
+ },
+ {
+  "id": "love-retro-venus-01",
+  "topic": "love",
+  "kind": "modifier",
+  "conditions": {
+   "retrograde": [
+    "venus"
+   ]
+  },
+  "tone": "warm",
+  "text": "Venus is retrograde, a good time to reflect on what you value."
+ },
+ {
+  "id": "love-retro-venus-02",
+  "topic": "love",
+  "kind": "modifier",
+  "conditions": {
+   "retrograde": [
+    "venus"
+   ]
+  },
+  "tone": "warm",
+  "text": "With Venus retrograde, revisit rather than rush in matters of the heart."
+ }
+]

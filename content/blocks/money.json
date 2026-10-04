@@ -1,0 +1,578 @@
+[
+ {
+  "id": "money-h1-01",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    1
+   ]
+  },
+  "tone": "warm",
+  "text": "You feel more in charge of your choices today. Think about what you truly want before you spend."
+ },
+ {
+  "id": "money-h1-02",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    1
+   ]
+  },
+  "tone": "warm",
+  "text": "Your personal style is calling, but the best purchase may be no purchase at all."
+ },
+ {
+  "id": "money-h1-03",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    1
+   ]
+  },
+  "tone": "warm",
+  "text": "A clear head helps with money matters. Make a simple plan for the week ahead."
+ },
+ {
+  "id": "money-h2-01",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    2
+   ]
+  },
+  "tone": "warm",
+  "text": "Money matters are in focus. Review your budget and notice where small amounts add up."
+ },
+ {
+  "id": "money-h2-02",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    2
+   ]
+  },
+  "tone": "warm",
+  "text": "It is a good day to think about what gives you real value, not just what is new."
+ },
+ {
+  "id": "money-h2-03",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    2
+   ]
+  },
+  "tone": "warm",
+  "text": "Steady habits beat quick wins. Keep an eye on everyday spending."
+ },
+ {
+  "id": "money-h3-01",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    3
+   ]
+  },
+  "tone": "warm",
+  "text": "Compare before you commit. A little research can save you more than you expect."
+ },
+ {
+  "id": "money-h3-02",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    3
+   ]
+  },
+  "tone": "warm",
+  "text": "Conversations about money go smoothly today. Ask the question you have been putting off."
+ },
+ {
+  "id": "money-h3-03",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    3
+   ]
+  },
+  "tone": "warm",
+  "text": "Paperwork and admin are easier than usual. Sort the small things while you can."
+ },
+ {
+  "id": "money-h4-01",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    4
+   ]
+  },
+  "tone": "warm",
+  "text": "Home costs may need attention. Sort out household plans calmly and early."
+ },
+ {
+  "id": "money-h4-02",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    4
+   ]
+  },
+  "tone": "warm",
+  "text": "Spending on comfort feels tempting. Choose what you will still enjoy next month."
+ },
+ {
+  "id": "money-h4-03",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    4
+   ]
+  },
+  "tone": "warm",
+  "text": "Family and money may overlap today. Keep conversations kind and clear."
+ },
+ {
+  "id": "money-h5-01",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    5
+   ]
+  },
+  "tone": "warm",
+  "text": "Treats are fine in moderation. Enjoy something small without guilt."
+ },
+ {
+  "id": "money-h5-02",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    5
+   ]
+  },
+  "tone": "warm",
+  "text": "Fun can be free. Look for pleasures that do not cost much."
+ },
+ {
+  "id": "money-h5-03",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    5
+   ]
+  },
+  "tone": "warm",
+  "text": "You may feel generous today. Give in a way that feels good and stays comfortable."
+ },
+ {
+  "id": "money-h6-01",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    6
+   ]
+  },
+  "tone": "warm",
+  "text": "Organise your accounts, receipts or bills. Order brings peace of mind."
+ },
+ {
+  "id": "money-h6-02",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    6
+   ]
+  },
+  "tone": "warm",
+  "text": "Everyday efficiency is your friend. One small saving repeated often makes a difference."
+ },
+ {
+  "id": "money-h6-03",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    6
+   ]
+  },
+  "tone": "warm",
+  "text": "A practical day for money. Tidy up the loose ends."
+ },
+ {
+  "id": "money-h7-01",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    7
+   ]
+  },
+  "tone": "warm",
+  "text": "Shared costs and agreements are in focus. Talk openly and keep things fair."
+ },
+ {
+  "id": "money-h7-02",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    7
+   ]
+  },
+  "tone": "warm",
+  "text": "A partner's view on money could be helpful. Listen with an open mind."
+ },
+ {
+  "id": "money-h7-03",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    7
+   ]
+  },
+  "tone": "warm",
+  "text": "Fair deals come from clear conversations. Agree on the details before you begin."
+ },
+ {
+  "id": "money-h8-01",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    8
+   ]
+  },
+  "tone": "warm",
+  "text": "Shared resources need care. Sort out who owes what, calmly and kindly."
+ },
+ {
+  "id": "money-h8-02",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    8
+   ]
+  },
+  "tone": "warm",
+  "text": "A good day to review long-term plans. Steady patience serves you best."
+ },
+ {
+  "id": "money-h8-03",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    8
+   ]
+  },
+  "tone": "warm",
+  "text": "Let go of an old money worry that no longer applies. Focus on what you can do today."
+ },
+ {
+  "id": "money-h9-01",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    9
+   ]
+  },
+  "tone": "warm",
+  "text": "Big plans need a budget. Dream freely, then add up the costs."
+ },
+ {
+  "id": "money-h9-02",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    9
+   ]
+  },
+  "tone": "warm",
+  "text": "Learning about money can be empowering. Read or ask before you decide."
+ },
+ {
+  "id": "money-h9-03",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    9
+   ]
+  },
+  "tone": "warm",
+  "text": "Travel or study costs may come up. Plan ahead and you will feel calmer."
+ },
+ {
+  "id": "money-h10-01",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    10
+   ]
+  },
+  "tone": "warm",
+  "text": "Your effort at work may connect to your income. Keep a record of what you achieve."
+ },
+ {
+  "id": "money-h10-02",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    10
+   ]
+  },
+  "tone": "warm",
+  "text": "Think long term today. Small, steady choices build security."
+ },
+ {
+  "id": "money-h10-03",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    10
+   ]
+  },
+  "tone": "warm",
+  "text": "Professional growth can be an investment in yourself. Consider what would help most."
+ },
+ {
+  "id": "money-h11-01",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    11
+   ]
+  },
+  "tone": "warm",
+  "text": "Group outings can add up. Suggest something everyone can afford."
+ },
+ {
+  "id": "money-h11-02",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    11
+   ]
+  },
+  "tone": "warm",
+  "text": "Your goals give your spending direction. Ask whether each purchase moves you closer."
+ },
+ {
+  "id": "money-h11-03",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    11
+   ]
+  },
+  "tone": "warm",
+  "text": "Friends may share a useful tip. Take what fits your situation and leave the rest."
+ },
+ {
+  "id": "money-h12-01",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    12
+   ]
+  },
+  "tone": "warm",
+  "text": "A quiet day for money. Avoid rushed decisions and wait for clarity."
+ },
+ {
+  "id": "money-h12-02",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    12
+   ]
+  },
+  "tone": "warm",
+  "text": "Notice any spending you do for comfort. Kind awareness is enough, no guilt needed."
+ },
+ {
+  "id": "money-h12-03",
+  "topic": "money",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    12
+   ]
+  },
+  "tone": "warm",
+  "text": "Reflect on what security means to you. Your answer may surprise you."
+ },
+ {
+  "id": "money-phase-new-01",
+  "topic": "money",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "new"
+   ]
+  },
+  "tone": "warm",
+  "text": "The new Moon is a good time to start a savings habit."
+ },
+ {
+  "id": "money-phase-new-02",
+  "topic": "money",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "new"
+   ]
+  },
+  "tone": "warm",
+  "text": "Begin a fresh budget while the Moon is new."
+ },
+ {
+  "id": "money-phase-waxing-01",
+  "topic": "money",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waxing"
+   ]
+  },
+  "tone": "warm",
+  "text": "Steady habits grow stronger as the Moon waxes."
+ },
+ {
+  "id": "money-phase-waxing-02",
+  "topic": "money",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waxing"
+   ]
+  },
+  "tone": "warm",
+  "text": "Small, regular choices gather strength with the growing Moon."
+ },
+ {
+  "id": "money-phase-full-01",
+  "topic": "money",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "full"
+   ]
+  },
+  "tone": "warm",
+  "text": "The full Moon may tempt you to overspend. Sleep on big decisions."
+ },
+ {
+  "id": "money-phase-full-02",
+  "topic": "money",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "full"
+   ]
+  },
+  "tone": "warm",
+  "text": "Under the full Moon, take stock before you commit."
+ },
+ {
+  "id": "money-phase-waning-01",
+  "topic": "money",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waning"
+   ]
+  },
+  "tone": "warm",
+  "text": "The waning Moon favours trimming what you no longer need."
+ },
+ {
+  "id": "money-phase-waning-02",
+  "topic": "money",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waning"
+   ]
+  },
+  "tone": "warm",
+  "text": "Clear out an old subscription or habit as the Moon wanes."
+ },
+ {
+  "id": "money-retro-mercury-01",
+  "topic": "money",
+  "kind": "modifier",
+  "conditions": {
+   "retrograde": [
+    "mercury"
+   ]
+  },
+  "tone": "warm",
+  "text": "Mercury is retrograde, so double-check messages and plans."
+ },
+ {
+  "id": "money-retro-mercury-02",
+  "topic": "money",
+  "kind": "modifier",
+  "conditions": {
+   "retrograde": [
+    "mercury"
+   ]
+  },
+  "tone": "warm",
+  "text": "With Mercury retrograde, review before you send or sign."
+ },
+ {
+  "id": "money-retro-venus-01",
+  "topic": "money",
+  "kind": "modifier",
+  "conditions": {
+   "retrograde": [
+    "venus"
+   ]
+  },
+  "tone": "warm",
+  "text": "Venus is retrograde, a good time to reflect on what you value."
+ },
+ {
+  "id": "money-retro-venus-02",
+  "topic": "money",
+  "kind": "modifier",
+  "conditions": {
+   "retrograde": [
+    "venus"
+   ]
+  },
+  "tone": "warm",
+  "text": "With Venus retrograde, revisit rather than rush in matters of the heart."
+ }
+]

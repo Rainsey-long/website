@@ -1,0 +1,578 @@
+[
+ {
+  "id": "career-h1-01",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    1
+   ]
+  },
+  "tone": "warm",
+  "text": "You come across as confident and capable today. It is a good moment to put your own ideas forward."
+ },
+ {
+  "id": "career-h1-02",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    1
+   ]
+  },
+  "tone": "warm",
+  "text": "Take the lead on something you care about. People are ready to follow your direction."
+ },
+ {
+  "id": "career-h1-03",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    1
+   ]
+  },
+  "tone": "warm",
+  "text": "Fresh starts suit you now. Set one clear intention for your work and act on it."
+ },
+ {
+  "id": "career-h2-01",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    2
+   ]
+  },
+  "tone": "warm",
+  "text": "Focus on work that brings steady, practical results. Finishing one thing well beats starting three."
+ },
+ {
+  "id": "career-h2-02",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    2
+   ]
+  },
+  "tone": "warm",
+  "text": "You may see more clearly what your skills are worth. Let that quiet confidence guide how you present your work."
+ },
+ {
+  "id": "career-h2-03",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    2
+   ]
+  },
+  "tone": "warm",
+  "text": "A patient approach pays off today. Build on what is already working."
+ },
+ {
+  "id": "career-h3-01",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    3
+   ]
+  },
+  "tone": "warm",
+  "text": "Emails, calls and meetings go well today. Say what you mean clearly and you will be understood."
+ },
+ {
+  "id": "career-h3-02",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    3
+   ]
+  },
+  "tone": "warm",
+  "text": "A good day to write, pitch or explain. Your words land with more weight than usual."
+ },
+ {
+  "id": "career-h3-03",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    3
+   ]
+  },
+  "tone": "warm",
+  "text": "Short conversations open useful doors. Reach out to a colleague you have not spoken to in a while."
+ },
+ {
+  "id": "career-h4-01",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    4
+   ]
+  },
+  "tone": "warm",
+  "text": "Work may feel quieter, which gives you room to organise. Tidy your space and your plans."
+ },
+ {
+  "id": "career-h4-02",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    4
+   ]
+  },
+  "tone": "warm",
+  "text": "You may prefer working behind the scenes today. That is where the solid groundwork gets done."
+ },
+ {
+  "id": "career-h4-03",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    4
+   ]
+  },
+  "tone": "warm",
+  "text": "If you can, work somewhere comfortable. A calm setting helps you think things through."
+ },
+ {
+  "id": "career-h5-01",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    5
+   ]
+  },
+  "tone": "warm",
+  "text": "Creativity flows easily. Bring a playful idea to the table, even if it feels unusual."
+ },
+ {
+  "id": "career-h5-02",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    5
+   ]
+  },
+  "tone": "warm",
+  "text": "You enjoy your work more when you can put your own stamp on it. Look for that chance today."
+ },
+ {
+  "id": "career-h5-03",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    5
+   ]
+  },
+  "tone": "warm",
+  "text": "Let yourself experiment a little. A fresh approach could solve an old problem."
+ },
+ {
+  "id": "career-h6-01",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    6
+   ]
+  },
+  "tone": "warm",
+  "text": "Routine tasks go smoothly. Clear your to-do list and you will feel lighter by evening."
+ },
+ {
+  "id": "career-h6-02",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    6
+   ]
+  },
+  "tone": "warm",
+  "text": "Details matter today. Checking your work twice saves time later."
+ },
+ {
+  "id": "career-h6-03",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    6
+   ]
+  },
+  "tone": "warm",
+  "text": "A good day to improve how you work. One small change to your system can save hours this month."
+ },
+ {
+  "id": "career-h7-01",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    7
+   ]
+  },
+  "tone": "warm",
+  "text": "Teamwork is your strength today. Join forces with someone whose skills complement yours."
+ },
+ {
+  "id": "career-h7-02",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    7
+   ]
+  },
+  "tone": "warm",
+  "text": "A client, partner or colleague may need your attention. Listen first, then offer your view."
+ },
+ {
+  "id": "career-h7-03",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    7
+   ]
+  },
+  "tone": "warm",
+  "text": "Agreements and collaborations are favoured. Make sure everyone understands the plan."
+ },
+ {
+  "id": "career-h8-01",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    8
+   ]
+  },
+  "tone": "warm",
+  "text": "You may see what needs to change at work. Focus on what you can influence and let the rest settle."
+ },
+ {
+  "id": "career-h8-02",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    8
+   ]
+  },
+  "tone": "warm",
+  "text": "Shared projects need clear roles today. A frank, friendly talk clears the air."
+ },
+ {
+  "id": "career-h8-03",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    8
+   ]
+  },
+  "tone": "warm",
+  "text": "Look beneath the surface of a problem. The real cause is easier to fix than the symptoms."
+ },
+ {
+  "id": "career-h9-01",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    9
+   ]
+  },
+  "tone": "warm",
+  "text": "Learning something new gives your work fresh energy. A course, a book or a mentor could help."
+ },
+ {
+  "id": "career-h9-02",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    9
+   ]
+  },
+  "tone": "warm",
+  "text": "Think about the bigger picture. Where do you want your work to take you this year?"
+ },
+ {
+  "id": "career-h9-03",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    9
+   ]
+  },
+  "tone": "warm",
+  "text": "Ideas from far away, or from a different field, could spark a useful solution."
+ },
+ {
+  "id": "career-h10-01",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    10
+   ]
+  },
+  "tone": "warm",
+  "text": "Your work is in the spotlight. Present your progress with quiet pride."
+ },
+ {
+  "id": "career-h10-02",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    10
+   ]
+  },
+  "tone": "warm",
+  "text": "A good day for goals. Take one concrete step toward something you want to achieve."
+ },
+ {
+  "id": "career-h10-03",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    10
+   ]
+  },
+  "tone": "warm",
+  "text": "People in charge may notice your effort. Keep doing steady, honest work."
+ },
+ {
+  "id": "career-h11-01",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    11
+   ]
+  },
+  "tone": "warm",
+  "text": "Networking feels natural today. A friendly chat could lead to something useful later."
+ },
+ {
+  "id": "career-h11-02",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    11
+   ]
+  },
+  "tone": "warm",
+  "text": "Group projects go well. Share credit generously and the whole team benefits."
+ },
+ {
+  "id": "career-h11-03",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    11
+   ]
+  },
+  "tone": "warm",
+  "text": "Think about where your work fits into your wider hopes. Small steps add up."
+ },
+ {
+  "id": "career-h12-01",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    12
+   ]
+  },
+  "tone": "warm",
+  "text": "You may prefer to work quietly and alone. Use the time to finish things and reflect."
+ },
+ {
+  "id": "career-h12-02",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    12
+   ]
+  },
+  "tone": "warm",
+  "text": "It is a good day to review rather than launch. Look back at what has worked so far."
+ },
+ {
+  "id": "career-h12-03",
+  "topic": "career",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    12
+   ]
+  },
+  "tone": "warm",
+  "text": "Rest your mind between tasks. The answer you need may come when you stop pushing."
+ },
+ {
+  "id": "career-phase-new-01",
+  "topic": "career",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "new"
+   ]
+  },
+  "tone": "warm",
+  "text": "The new Moon is a good moment to plan a new project."
+ },
+ {
+  "id": "career-phase-new-02",
+  "topic": "career",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "new"
+   ]
+  },
+  "tone": "warm",
+  "text": "Set one clear work goal while the Moon is new."
+ },
+ {
+  "id": "career-phase-waxing-01",
+  "topic": "career",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waxing"
+   ]
+  },
+  "tone": "warm",
+  "text": "The growing Moon supports steady progress on your plans."
+ },
+ {
+  "id": "career-phase-waxing-02",
+  "topic": "career",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waxing"
+   ]
+  },
+  "tone": "warm",
+  "text": "Keep building. The waxing Moon rewards consistent effort."
+ },
+ {
+  "id": "career-phase-full-01",
+  "topic": "career",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "full"
+   ]
+  },
+  "tone": "warm",
+  "text": "The full Moon may bring a project to a finish line."
+ },
+ {
+  "id": "career-phase-full-02",
+  "topic": "career",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "full"
+   ]
+  },
+  "tone": "warm",
+  "text": "Results become visible under the full Moon. Notice what is working."
+ },
+ {
+  "id": "career-phase-waning-01",
+  "topic": "career",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waning"
+   ]
+  },
+  "tone": "warm",
+  "text": "The waning Moon is ideal for tidying up and finishing."
+ },
+ {
+  "id": "career-phase-waning-02",
+  "topic": "career",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waning"
+   ]
+  },
+  "tone": "warm",
+  "text": "Wrap up loose ends while the Moon wanes."
+ },
+ {
+  "id": "career-retro-mercury-01",
+  "topic": "career",
+  "kind": "modifier",
+  "conditions": {
+   "retrograde": [
+    "mercury"
+   ]
+  },
+  "tone": "warm",
+  "text": "Mercury is retrograde, so double-check messages and plans."
+ },
+ {
+  "id": "career-retro-mercury-02",
+  "topic": "career",
+  "kind": "modifier",
+  "conditions": {
+   "retrograde": [
+    "mercury"
+   ]
+  },
+  "tone": "warm",
+  "text": "With Mercury retrograde, review before you send or sign."
+ },
+ {
+  "id": "career-retro-mars-01",
+  "topic": "career",
+  "kind": "modifier",
+  "conditions": {
+   "retrograde": [
+    "mars"
+   ]
+  },
+  "tone": "warm",
+  "text": "Mars is retrograde, so pace yourself and avoid needless conflict."
+ },
+ {
+  "id": "career-retro-mars-02",
+  "topic": "career",
+  "kind": "modifier",
+  "conditions": {
+   "retrograde": [
+    "mars"
+   ]
+  },
+  "tone": "warm",
+  "text": "With Mars retrograde, steady effort beats forcing things."
+ }
+]

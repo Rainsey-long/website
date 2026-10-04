@@ -1,0 +1,650 @@
+[
+ {
+  "id": "mood-h1-01",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    1
+   ]
+  },
+  "tone": "warm",
+  "text": "You feel more like yourself today. Trust your instincts and take up a little more space."
+ },
+ {
+  "id": "mood-h1-02",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    1
+   ]
+  },
+  "tone": "warm",
+  "text": "Energy is good and your mood is bright. Start something you have been meaning to do."
+ },
+ {
+  "id": "mood-h1-03",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    1
+   ]
+  },
+  "tone": "warm",
+  "text": "Today is a good day to look after you first. A small act of self-care goes a long way."
+ },
+ {
+  "id": "mood-h2-01",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    2
+   ]
+  },
+  "tone": "warm",
+  "text": "You crave calm and comfort. Slow down and enjoy simple pleasures."
+ },
+ {
+  "id": "mood-h2-02",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    2
+   ]
+  },
+  "tone": "warm",
+  "text": "Steadiness suits you. A familiar routine helps you feel grounded."
+ },
+ {
+  "id": "mood-h2-03",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    2
+   ]
+  },
+  "tone": "warm",
+  "text": "Notice what makes you feel secure, and give yourself a little more of it."
+ },
+ {
+  "id": "mood-h3-01",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    3
+   ]
+  },
+  "tone": "warm",
+  "text": "Your mind is busy and curious. Write things down so ideas do not slip away."
+ },
+ {
+  "id": "mood-h3-02",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    3
+   ]
+  },
+  "tone": "warm",
+  "text": "Chatting with others lifts your mood. Reach out to someone you enjoy talking to."
+ },
+ {
+  "id": "mood-h3-03",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    3
+   ]
+  },
+  "tone": "warm",
+  "text": "A walk, a podcast or a good conversation helps you think clearly."
+ },
+ {
+  "id": "mood-h4-01",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    4
+   ]
+  },
+  "tone": "warm",
+  "text": "You may feel more sensitive than usual. Be gentle with yourself."
+ },
+ {
+  "id": "mood-h4-02",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    4
+   ]
+  },
+  "tone": "warm",
+  "text": "Home is your recharge station today. Spend time somewhere that feels safe."
+ },
+ {
+  "id": "mood-h4-03",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    4
+   ]
+  },
+  "tone": "warm",
+  "text": "Old memories may visit. Let them pass through kindly."
+ },
+ {
+  "id": "mood-h5-01",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    5
+   ]
+  },
+  "tone": "warm",
+  "text": "Your mood is playful and warm. Make time for something you love."
+ },
+ {
+  "id": "mood-h5-02",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    5
+   ]
+  },
+  "tone": "warm",
+  "text": "Creative energy is high. Draw, write, cook or dance, just for the joy of it."
+ },
+ {
+  "id": "mood-h5-03",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    5
+   ]
+  },
+  "tone": "warm",
+  "text": "Laughter comes easily today. Share it."
+ },
+ {
+  "id": "mood-h6-01",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    6
+   ]
+  },
+  "tone": "warm",
+  "text": "A tidy space helps you feel calm. Small chores can be surprisingly satisfying."
+ },
+ {
+  "id": "mood-h6-02",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    6
+   ]
+  },
+  "tone": "warm",
+  "text": "Simple routines steady your mood. Eat well, move a little and rest when you need to."
+ },
+ {
+  "id": "mood-h6-03",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    6
+   ]
+  },
+  "tone": "warm",
+  "text": "You feel best when you are useful. Help someone with something small."
+ },
+ {
+  "id": "mood-h7-01",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    7
+   ]
+  },
+  "tone": "warm",
+  "text": "Other people affect your mood more than usual. Choose company that feels kind."
+ },
+ {
+  "id": "mood-h7-02",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    7
+   ]
+  },
+  "tone": "warm",
+  "text": "Balance is the theme. Give and receive in equal measure."
+ },
+ {
+  "id": "mood-h7-03",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    7
+   ]
+  },
+  "tone": "warm",
+  "text": "A good chat with someone you trust leaves you feeling lighter."
+ },
+ {
+  "id": "mood-h8-01",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    8
+   ]
+  },
+  "tone": "warm",
+  "text": "Your feelings run deep today. Give yourself room to process them."
+ },
+ {
+  "id": "mood-h8-02",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    8
+   ]
+  },
+  "tone": "warm",
+  "text": "A good day to let go of something that no longer serves you."
+ },
+ {
+  "id": "mood-h8-03",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    8
+   ]
+  },
+  "tone": "warm",
+  "text": "You may feel intense. Channel it into something focused and meaningful."
+ },
+ {
+  "id": "mood-h9-01",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    9
+   ]
+  },
+  "tone": "warm",
+  "text": "Restlessness is a sign you want something new. Explore an idea, a place or a book."
+ },
+ {
+  "id": "mood-h9-02",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    9
+   ]
+  },
+  "tone": "warm",
+  "text": "You feel optimistic. Let that hopeful mood carry you."
+ },
+ {
+  "id": "mood-h9-03",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    9
+   ]
+  },
+  "tone": "warm",
+  "text": "Big questions are on your mind. Write down what you would like to learn."
+ },
+ {
+  "id": "mood-h10-01",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    10
+   ]
+  },
+  "tone": "warm",
+  "text": "You feel driven. Use that energy wisely and remember to pause."
+ },
+ {
+  "id": "mood-h10-02",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    10
+   ]
+  },
+  "tone": "warm",
+  "text": "A sense of purpose lifts your mood. Notice how far you have come."
+ },
+ {
+  "id": "mood-h10-03",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    10
+   ]
+  },
+  "tone": "warm",
+  "text": "Pressure may feel higher. Take things one step at a time."
+ },
+ {
+  "id": "mood-h11-01",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    11
+   ]
+  },
+  "tone": "warm",
+  "text": "Friendly energy lifts you up. Reach out to your people."
+ },
+ {
+  "id": "mood-h11-02",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    11
+   ]
+  },
+  "tone": "warm",
+  "text": "You feel hopeful about the future. Dream a little."
+ },
+ {
+  "id": "mood-h11-03",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    11
+   ]
+  },
+  "tone": "warm",
+  "text": "Being part of something bigger feels good today."
+ },
+ {
+  "id": "mood-h12-01",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    12
+   ]
+  },
+  "tone": "warm",
+  "text": "You need more quiet than usual. Honour it."
+ },
+ {
+  "id": "mood-h12-02",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    12
+   ]
+  },
+  "tone": "warm",
+  "text": "A reflective mood suits you. Journal, rest or simply be still."
+ },
+ {
+  "id": "mood-h12-03",
+  "topic": "mood",
+  "kind": "base",
+  "conditions": {
+   "house": [
+    12
+   ]
+  },
+  "tone": "warm",
+  "text": "Recharge today so you can shine tomorrow."
+ },
+ {
+  "id": "mood-phase-new-01",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "new"
+   ]
+  },
+  "tone": "warm",
+  "text": "The new Moon invites a quiet reset."
+ },
+ {
+  "id": "mood-phase-new-02",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "new"
+   ]
+  },
+  "tone": "warm",
+  "text": "Begin again, gently, under the new Moon."
+ },
+ {
+  "id": "mood-phase-waxing-01",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waxing"
+   ]
+  },
+  "tone": "warm",
+  "text": "Your energy grows with the Moon."
+ },
+ {
+  "id": "mood-phase-waxing-02",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waxing"
+   ]
+  },
+  "tone": "warm",
+  "text": "The waxing Moon brings a gradual lift."
+ },
+ {
+  "id": "mood-phase-full-01",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "full"
+   ]
+  },
+  "tone": "warm",
+  "text": "The full Moon can stir strong emotions. Breathe and stay present."
+ },
+ {
+  "id": "mood-phase-full-02",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "full"
+   ]
+  },
+  "tone": "warm",
+  "text": "Feelings peak with the full Moon. Be kind to yourself."
+ },
+ {
+  "id": "mood-phase-waning-01",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waning"
+   ]
+  },
+  "tone": "warm",
+  "text": "The waning Moon supports rest and release."
+ },
+ {
+  "id": "mood-phase-waning-02",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonPhase": [
+    "waning"
+   ]
+  },
+  "tone": "warm",
+  "text": "Let things slow down as the Moon wanes."
+ },
+ {
+  "id": "mood-retro-mars-01",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "retrograde": [
+    "mars"
+   ]
+  },
+  "tone": "warm",
+  "text": "Mars is retrograde, so pace yourself and avoid needless conflict."
+ },
+ {
+  "id": "mood-retro-mars-02",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "retrograde": [
+    "mars"
+   ]
+  },
+  "tone": "warm",
+  "text": "With Mars retrograde, steady effort beats forcing things."
+ },
+ {
+  "id": "mood-element-fire-01",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonElement": [
+    "fire"
+   ]
+  },
+  "tone": "warm",
+  "text": "The Moon in a fire sign adds warmth and courage."
+ },
+ {
+  "id": "mood-element-fire-02",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonElement": [
+    "fire"
+   ]
+  },
+  "tone": "warm",
+  "text": "Fire-sign energy from the Moon gives you a spark."
+ },
+ {
+  "id": "mood-element-earth-01",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonElement": [
+    "earth"
+   ]
+  },
+  "tone": "warm",
+  "text": "The Moon in an earth sign keeps you grounded."
+ },
+ {
+  "id": "mood-element-earth-02",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonElement": [
+    "earth"
+   ]
+  },
+  "tone": "warm",
+  "text": "Earth-sign energy from the Moon favours practical steps."
+ },
+ {
+  "id": "mood-element-air-01",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonElement": [
+    "air"
+   ]
+  },
+  "tone": "warm",
+  "text": "The Moon in an air sign makes ideas flow."
+ },
+ {
+  "id": "mood-element-air-02",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonElement": [
+    "air"
+   ]
+  },
+  "tone": "warm",
+  "text": "Air-sign energy from the Moon helps you connect."
+ },
+ {
+  "id": "mood-element-water-01",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonElement": [
+    "water"
+   ]
+  },
+  "tone": "warm",
+  "text": "The Moon in a water sign deepens feelings."
+ },
+ {
+  "id": "mood-element-water-02",
+  "topic": "mood",
+  "kind": "modifier",
+  "conditions": {
+   "moonElement": [
+    "water"
+   ]
+  },
+  "tone": "warm",
+  "text": "Water-sign energy from the Moon invites empathy."
+ }
+]

@@ -5,3 +5,7 @@ dist/
 *.log
 .env*
 content/data/daily/
+.next/
+data/
+next-env.d.ts
+*.tsbuildinfo

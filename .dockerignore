@@ -1,0 +1,20 @@
+# Rebuilt inside the image; a host node_modules can carry the wrong better-sqlite3 binary.
+node_modules
+.next
+out
+# THE IMPORTANT ONE: the SQLite database and backups belong on the volume,
+# never in an image (and a dev database would fail the boot check anyway).
+data
+.git
+.github
+.env
+.env.*
+!.env.example
+.claude
+docs
+tests
+*.md
+!content/**/*.md
+npm-debug.log*
+.DS_Store
+*.tsbuildinfo

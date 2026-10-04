@@ -1,15 +1,22 @@
 // Design-system guard (DESIGN_SYSTEM.md §10.2): no hardcoded hex/rgb colours,
 // px font sizes, off-scale spacing or off-scale radii in components, layouts
-// and pages. Raw values live only in src/styles/tokens.css (and the OG card
+// and pages. Raw values live only in app/styles/tokens.css (and the OG card
 // renderer, which cannot read CSS variables).
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 
-const ROOTS = ["src/components", "src/layouts", "src/pages"];
-const ALLOW_FILES = new Set(["src/pages/og/[slug].png.ts"]);
+const ROOTS = ["app", "components"];
+// tokens.css holds the values; the OG renderer and the theme-color meta cannot read CSS variables.
+const ALLOW_FILES = new Set(["app/styles/tokens.css", "app/og/[slug]/route.tsx", "app/layout.tsx", "app/styleguide/page.tsx"]);
 const SCALE = new Set([0, 4, 8, 12, 16, 24, 32, 48, 64, 96, 128]);
 const files = [];
-const walk = (d) => { for (const f of readdirSync(d)) { const p = join(d, f); statSync(p).isDirectory() ? walk(p) : /\.(astro|ts|css)$/.test(p) && files.push(p); } };
+const walk = (d) => {
+  for (const f of readdirSync(d)) {
+    const p = join(d, f);
+    if (statSync(p).isDirectory()) walk(p);
+    else if (/\.(tsx?|css)$/.test(p)) files.push(p);
+  }
+};
 ROOTS.forEach(walk);
 
 const problems = [];

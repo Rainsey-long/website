@@ -1,8 +1,8 @@
 // WCAG contrast check for every token pair used for text or UI (design system §2.2).
-// Reads the hex values straight from src/styles/tokens.css so it can't drift.
+// Reads the hex values straight from app/styles/tokens.css so it can't drift.
 import { readFileSync } from "node:fs";
 
-const css = readFileSync(new URL("../src/styles/tokens.css", import.meta.url), "utf8");
+const css = readFileSync(new URL("../app/styles/tokens.css", import.meta.url), "utf8");
 
 function block(selector: string): Record<string, string> {
   const at = css.indexOf(selector);

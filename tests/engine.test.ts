@@ -1,14 +1,15 @@
 import { describe, expect, it } from "vitest";
 import * as Astronomy from "astronomy-engine";
-import { sunSign, signBySlug } from "../src/lib/western";
-import { zodiacYearForDate, zodiacLabel, animalBySlug, lunarNewYear, luckyNumbers } from "../src/lib/chinese";
-import { chineseScore, westernScore, pairSlug } from "../src/lib/compatibility";
-import { ascendant, ascendantFromRamc, meanObliquity, moonInfo, skyForDay } from "../src/lib/sky";
-import { hash, rng } from "../src/lib/seed";
-import { traditions, traditionsDiffer } from "../src/lib/sea-variants";
-import { almanacDay } from "../src/lib/almanac";
-import { localToUtc, baziYear } from "../src/lib/calculator";
+import { sunSign, signBySlug } from "../lib/western";
+import { zodiacYearForDate, zodiacLabel, animalBySlug, lunarNewYear, luckyNumbers } from "../lib/chinese";
+import { chineseScore, westernScore, pairSlug } from "../lib/compatibility";
+import { ascendant, ascendantFromRamc, meanObliquity, moonInfo, skyForDay } from "../lib/sky";
+import { hash, rng } from "../lib/random";
+import { traditions, traditionsDiffer } from "../lib/sea-variants";
+import { almanacDay } from "../lib/almanac";
+import { localToUtc, baziYear } from "../lib/calculator";
 import { Solar } from "lunar-javascript";
+import { khmerDay, songkran, khmerAnimalAt } from "../lib/khmer";
 
 const noonUtc = (y: number, m: number, d: number) => new Date(Date.UTC(y, m - 1, d, 12));
 const label = (y: number, m: number, d: number) => zodiacLabel(zodiacYearForDate(y, m, d));
@@ -88,7 +89,7 @@ describe("seeded RNG", () => {
 
 describe("houses (solar-sign)", () => {
   it("house = ((moon − sun + 12) mod 12) + 1", async () => {
-    const { solarHouse } = await import("../src/lib/reading-engine");
+    const { solarHouse } = await import("../lib/reading-engine");
     expect(solarHouse(0, 0)).toBe(1);
     expect(solarHouse(7, 0)).toBe(8);
     expect(solarHouse(0, 11)).toBe(2);
@@ -183,16 +184,16 @@ describe("calculator time handling", () => {
 
 describe("reading engine", () => {
   it("is deterministic per sign and date", async () => {
-    const { dailyReading } = await import("../src/lib/reading-engine");
+    const { dailyReading } = await import("../lib/reading-engine");
     const s = signBySlug("scorpio")!;
     expect(dailyReading(s, "2026-10-05")).toEqual(dailyReading(s, "2026-10-05"));
   });
 
   it("no full reading repeats for any sign within 30 days, across a full year", async () => {
-    const { dailyReading } = await import("../src/lib/reading-engine");
-    const { skyForDay } = await import("../src/lib/sky");
-    const { SIGNS } = await import("../src/lib/western");
-    const { addDays } = await import("../src/lib/dates");
+    const { dailyReading } = await import("../lib/reading-engine");
+    const { skyForDay } = await import("../lib/sky");
+    const { SIGNS } = await import("../lib/western");
+    const { addDays } = await import("../lib/dates");
     const days: string[] = [];
     for (let i = 0; i < 365; i++) days.push(addDays("2026-10-01", i));
     const skies = new Map(days.map((d) => [d, skyForDay(d)]));
@@ -213,5 +214,72 @@ describe("Lunar New Year table", () => {
     for (let y = 1900; y <= 2100; y++) {
       expect(lunarNewYear(y)).toBe(Lunar.fromYmd(y, 1, 1).getSolar().toYmd());
     }
+  });
+});
+
+describe("Khmer calendar (Chhankitek via momentkh)", () => {
+  it("matches known festival dates", () => {
+    expect(khmerDay("2025-05-11").festival?.id).toBe("visak-bochea");
+    expect(khmerDay("2024-05-22").festival?.id).toBe("visak-bochea");
+    expect(khmerDay("2026-05-01").festival?.id).toBe("visak-bochea");
+    expect(khmerDay("2025-09-22").festival?.id).toBe("pchum-ben");
+    expect(khmerDay("2026-10-11").festival?.id).toBe("pchum-ben");
+  });
+  it("labels today's date the Khmer way", () => {
+    expect(khmerDay("2026-10-04").labelKm).toBe("ថ្ងៃអាទិត្យ ៨រោច ខែភទ្របទ ឆ្នាំមមី អដ្ឋស័ក ព.ស. ២៥៧០");
+    expect(khmerDay("2026-10-04").sila).toBe(true);
+  });
+  it("puts four holy days in every lunar month", () => {
+    let count = 0;
+    for (let d = new Date(Date.UTC(2026, 0, 1)); d.getUTCFullYear() === 2026; d.setUTCDate(d.getUTCDate() + 1)) {
+      if (khmerDay(d.toISOString().slice(0, 10)).sila) count++;
+    }
+    expect(count).toBeGreaterThanOrEqual(48);
+    expect(count).toBeLessThanOrEqual(52);
+  });
+  it("Moha Songkran moment and angel match km.wikipedia 2020–2026", () => {
+    const expected: Array<[number, string, string, string]> = [
+      [2020, "2020-04-13", "20:48", "Koreak Tevy"], [2021, "2021-04-14", "04:00", "Mondea Tevy"],
+      [2022, "2022-04-14", "10:00", "Kirinei Tevy"], [2023, "2023-04-14", "16:00", "Kimira Tevy"],
+      [2024, "2024-04-13", "22:17", "Mohorea Tevy"], [2025, "2025-04-14", "04:48", "Koreak Tevy"],
+      [2026, "2026-04-14", "10:48", "Reaksa Tevy"],
+    ];
+    for (const [y, date, time, angel] of expected) {
+      const s = songkran(y);
+      expect([s.date, s.time, s.angel.roman]).toEqual([date, time, angel]);
+    }
+  });
+  it("an official override replaces the calculated moment", () => {
+    const s = songkran(2024, { date: "2024-04-13", time: "22:24" });
+    expect(s.time).toBe("22:24");
+    expect(s.source).toBe("official");
+  });
+  it("the Khmer animal turns at the Songkran minute, not the day", () => {
+    expect(khmerAnimalAt("2026-04-14", "10:47").slug).toBe("snake");
+    expect(khmerAnimalAt("2026-04-14", "10:49").slug).toBe("horse");
+  });
+});
+
+describe("sky events against published 2026 tables", () => {
+  it("retrograde stations", async () => {
+    const { retrogradesForYear } = await import("../lib/skyEvents");
+    const r = retrogradesForYear(2026).map((x) => `${x.planet} ${x.stationRx.at.slice(0, 10)} ${x.stationD.at.slice(0, 10)}`);
+    expect(r).toContain("mercury 2026-02-26 2026-03-20");
+    expect(r).toContain("mercury 2026-06-29 2026-07-23");
+    expect(r).toContain("mercury 2026-10-24 2026-11-13");
+    expect(r).toContain("venus 2026-10-03 2026-11-14");
+    expect(r.some((x) => x.startsWith("mars"))).toBe(false); // Mars turns retrograde in January 2027
+  }, 30_000);
+  it("eclipses", async () => {
+    const { eclipsesForYear } = await import("../lib/skyEvents");
+    expect(eclipsesForYear(2026).map((e) => `${e.body} ${e.kind} ${e.at.slice(0, 10)}`)).toEqual([
+      "sun annular 2026-02-17", "moon total 2026-03-03", "sun total 2026-08-12", "moon partial 2026-08-28",
+    ]);
+  });
+  it("moon phases for October 2026", async () => {
+    const { moonPhases } = await import("../lib/skyEvents");
+    expect(moonPhases("2026-10-01T00:00:00Z", "2026-11-01T00:00:00Z").map((p) => `${p.name} ${p.at.slice(0, 10)}`)).toEqual([
+      "Last quarter 2026-10-03", "New moon 2026-10-10", "First quarter 2026-10-18", "Full moon 2026-10-26",
+    ]);
   });
 });

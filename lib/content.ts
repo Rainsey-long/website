@@ -42,7 +42,7 @@ export type Loaded<T> = { fm: T; html: string; translated: boolean };
 const ROOT = path.join(process.cwd(), "content");
 
 const escapeHtml = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-// "/\\x" is excluded too: browsers read a leading /\ as //, i.e. another site.
+// "/\x" is excluded too: browsers read a leading /\ as //, i.e. another site.
 const SAFE_HREF = /^(https?:\/\/|mailto:|\/(?![/\\])|#)/i;
 const md = new Marked({
   renderer: {

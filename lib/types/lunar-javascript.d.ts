@@ -4,6 +4,9 @@ declare module "lunar-javascript" {
     static fromYmd(y: number, m: number, d: number): Solar;
     getLunar(): Lunar;
     toYmd(): string;
+    getYear(): number;
+    getMonth(): number;
+    getDay(): number;
     next(days: number): Solar;
   }
   export class Lunar {
@@ -25,6 +28,16 @@ declare module "lunar-javascript" {
     getDayTianShenLuck(): string;
     getZhiXing(): string;
     getTimes(): LunarTime[];
+  }
+  export class LunarYear {
+    static fromYear(y: number): LunarYear;
+    /** The leap month's number, or 0 when the year has none. */
+    getLeapMonth(): number;
+  }
+  export class LunarMonth {
+    /** A negative month is the leap month of that number. */
+    static fromYm(y: number, m: number): LunarMonth;
+    getDayCount(): number;
   }
   export class LunarTime {
     getGan(): string;

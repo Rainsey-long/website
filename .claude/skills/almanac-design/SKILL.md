@@ -44,3 +44,7 @@ Every page must read well with any non-empty combination of Western / Chinese / 
 ## Before you call it done
 
 360px and 1280px · light and dark · each tradition combination the page reacts to · keyboard · reduced motion · no layout shift · copy follows DESIGN_SYSTEM.md §9 · nothing from §1.3. Then dispatch `ui-ux-designer` (mandatory for visible changes).
+
+## Both languages, always
+
+Every page renders in English (`/x`) and Khmer (`/km/x`); design for both at once. Strings come from co-located `defineMessages` pairs (`docs/I18N.md`); Khmer runs 30–40% longer and uses Khmer numerals, so check chips, buttons, table cells and calendar cells in Khmer at 360px. Components added since the first build: HoursList (§6.15), BirthChartWheel (§6.16), Finder form (§6.17), the header language switch (§6.10).

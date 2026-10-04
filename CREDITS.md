@@ -13,9 +13,9 @@
 | [Newsreader](https://fonts.google.com/specimen/Newsreader) | SIL OFL 1.1 | Display and reading type, self-hosted via @fontsource |
 | [Figtree](https://fonts.google.com/specimen/Figtree) | SIL OFL 1.1 | UI type, self-hosted via @fontsource |
 | [Noto Serif Khmer](https://fonts.google.com/noto/specimen/Noto+Serif+Khmer), [Kantumruy Pro](https://fonts.google.com/specimen/Kantumruy+Pro) | SIL OFL 1.1 | Khmer script |
-| [Lucide](https://lucide.dev) | ISC | UI icon shapes (menu, close, sun, moon, chevrons, share, link), redrawn in `src/icons/glyphs.ts` |
+| [Lucide](https://lucide.dev) | ISC | UI icon shapes (menu, close, sun, moon, chevrons, share, link), redrawn in `lib/glyphs.ts` |
 
-Zodiac and animal glyphs are original drawings (`src/icons/glyphs.ts`). All reading, profile, forecast and compatibility text is original. City coordinates and time zones are public facts compiled by hand. No text is copied from Wikipedia or other sites.
+Zodiac and animal glyphs are original drawings (`lib/glyphs.ts`). All reading, profile, forecast and compatibility text is original. City coordinates and time zones are public facts compiled by hand. No text is copied from Wikipedia or other sites.
 
 Khmer tradition tables (New Year angels, weekday colours and meanings) are facts from the Khmer Customs Committee of the Buddhist Institute (1960) as tabulated on km.wikipedia (CC BY-SA); our wording is original. Research sources: `docs/research/KHMER-TRADITIONS.md`.
 

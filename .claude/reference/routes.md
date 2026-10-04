@@ -1,5 +1,7 @@
 # Routes
 
+Every page below also exists in Khmer at `/km<path>` (the admin at `/km/admin`), rewritten by `proxy.ts` to the same component (`docs/I18N.md`). Non-page URLs take `?lang=km` instead: `/feeds/<name>.ics?lang=km`, `/og/<slug>?lang=km`, and API routes for their messages.
+
 | Route | What | Data |
 |---|---|---|
 | `/` | Home, sections per chosen tradition: your reading (remembered sign), DayDial night band, Khmer today + New Year, sign picker, birth-weekday chips, Chinese animals + almanac strip, 2027, pairs | engines + DB block text |
@@ -24,4 +26,4 @@
 | `/admin/content`, `/admin/content/edit?path=&lang=` | Profiles and 2027 forecasts: owner edits per language, stored in `content_overrides`, reset to the repository file | DB + `content/` |
 | `/admin/songkran` · `/admin/feedback` · `/admin/accounts` · `/admin/backups` | Official Khmer New Year moment · feedback triage, delete, CSV · add/remove admins, change password · list backups, back up now | DB / volume |
 | `/api/health`, `/api/feedback`, `/api/admin/login`, `/api/admin/blocks/[id]`, `/api/admin/songkran/[year]`, `/api/admin/content`, `/api/admin/feedback` (+ `/export` CSV), `/api/admin/users`, `/api/admin/password`, `/api/admin/backups`, `/api/cron/backup` | see `.claude/security.md` | DB |
-| `/og/[slug]`, `/sitemap.xml`, `/robots.txt` | share cards, sitemap, robots | |
+| `/og/[slug]` (`?lang=km`), `/sitemap.xml` (both languages with hreflang alternates), `/robots.txt` | share cards (Khmer shaped with HarfBuzz), sitemap, robots | |

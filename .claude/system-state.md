@@ -9,6 +9,8 @@
 - Content: 196 reading blocks (all `draft`), 12 Western + 12 Chinese profiles, 12 Fire Goat 2027 forecasts, 156 compatibility pairs (templated), 7 Khmer birth-weekday portraits. All original, all awaiting owner review.
 - Khmer traditions: lunar calendar, holy days, festivals, Moha Songkran + angel (2020–2026 match km.wikipedia's table), birth weekday, tradition switch.
 - Sky: moon calendar, ingresses, retrogrades with shadows, eclipses (2026 matches published tables), .ics feeds.
+- Tools: birth chart, good hours, lucky-date finder. Admin: overview, readings, profiles/forecasts, Khmer New Year, feedback, admins, backups.
+- Memory: committed in `.claude/memory/` (MEMORY.md auto-loaded, sessions.md on demand); the SessionStart hook installs deps and prints status in cloud sessions.
 
 ## Baselines
 
@@ -20,6 +22,7 @@
 | `npm run check:contrast` | all pairs AA |
 | `npm run check:tokens` | 0 violations |
 | `npm run db:preflight` | CLEAN |
+| `npm run docs:budget` | auto-loaded docs under 36 KB |
 
 ## Open items
 

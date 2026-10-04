@@ -16,14 +16,16 @@ Every piece of copy, human- or machine-drafted, passes this checklist before it 
 - Text copied or closely paraphrased from any other site.
 
 ## Text blocks (`content/blocks/*.json`)
-- The owner edits wording in `/admin` (Reading text tab). Edits and approvals live in the database and are never overwritten by a deploy.
+- Every block has English `text` and a Khmer draft `text_km` (the generator keeps `text_km` when it regenerates). The owner edits both in `/admin/readings`.
+- The owner edits wording in `/admin/readings`. Edits and approvals live in the database and are never overwritten by a deploy.
 - Developers add or restructure blocks in `scripts/blocks-source.py` and re-run it. Untouched drafts follow code changes; owner-edited ones don't.
 - Each topic needs exactly 3 base blocks per house (the variety rotation relies on it).
 - `npm run validate:blocks` runs on every build and fails on malformed blocks, banned wording, or missing coverage.
-- Target for launch: grow to ≈ 6 variants per house. Changing the count means updating the rotation in `src/lib/reading-engine.ts` and its test.
+- Target for launch: grow to ≈ 6 variants per house. Changing the count means updating the rotation in `lib/reading-engine.ts` and its test.
 
 ## Long-form (`content/profiles`, `content/yearly`)
-- Frontmatter fields are read by the pages; keep `summary` ≤ 155 characters.
+- Khmer versions live at the same path under `content/km/`. The owner can also edit either language in `/admin/content`; those edits override the file until reset.
+- Frontmatter fields are read by the pages; keep `summary` ≤ 155 characters. `slug`, `animal`, `relation` and `outlook` are read by code: never change them in a translation.
 - Check every year/element against `zodiacYear()` before publishing.
 
 ## Review status

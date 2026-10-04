@@ -37,7 +37,7 @@ The result should feel like **a beautifully printed daily almanac page that happ
 
 ## 2. Color tokens
 
-Defined once in `src/styles/tokens.css` as CSS variables and mapped into Tailwind. Components use semantic names only (e.g. `bg-surface`, `text-ink`), never raw hex.
+Defined once in `app/styles/tokens.css` as CSS variables and mapped into Tailwind (`app/globals.css`, `@theme inline`). Components use semantic names only (e.g. `bg-surface`, `text-ink`), never raw hex.
 
 ### 2.1 Base palette
 
@@ -164,7 +164,7 @@ All from Google Fonts (SIL Open Font License), **self-hosted** via `@fontsource`
 
 ## 6. Components
 
-All components live in `src/components/`, use tokens only, and are documented here. New component = add a section here first.
+All components live in `components/` (server) and `components/client/` (interactive), use tokens only, and are documented here. New component = add a section here first.
 
 ### 6.1 DayDial (signature element)
 A circular sky chart: the 12-sign wheel as a fine ink ring with glyphs, tick marks in `brass`, and markers for today's Moon (phase-accurate moon glyph) and Sun. The visitor's sign (if chosen) is ringed in `cinnabar`.
@@ -211,9 +211,9 @@ Month grid, Monday-first, tabular numerals. Each day: Gregorian number large, lu
 - Labels say exactly what happens: "Show my signs", "Check compatibility", "Read tomorrow".
 
 ### 6.10 Header, navigation, footer
-- Header: wordmark (left), nav (Horoscopes, Chinese zodiac, Compatibility, Lucky days), theme toggle, language switch. On mobile: wordmark + menu button opening a full-height sheet.
+- Header: wordmark (left), nav (Horoscopes, Chinese zodiac, Khmer, Compatibility, Lucky days, Sky), "My sign", the Traditions menu, the language switch (English ↔ ខ្មែរ), theme toggle. On mobile: wordmark, Traditions, language, theme and a menu button opening a full-height sheet; below 480px the Traditions panel spans the page gutters.
 - "My sign" shortcut appears in the header once a sign is remembered.
-- Footer: section links, legal pages, disclaimer line: "For entertainment and reflection. Not medical, legal, or financial advice."
+- Footer: section links (Readings, Calendars, Tools, About), legal pages, the language switch, disclaimer line: "For entertainment and reflection. Not medical, legal, or financial advice." (Khmer pages show the Khmer line).
 
 ### 6.11 AdSlot
 - Reserved fixed-height container (mobile 280px, desktop rail 600px, in-content 250px) so ads never shift layout.
@@ -316,7 +316,7 @@ Month heading with previous/next → AlmanacCalendar → selected day detail →
 5. **Dates** always written out in the page's language ("5 October 2026"); use the visitor's local date for "today".
 6. **Performance budgets** (per page): JS ≤ 50 KB gzipped, CSS ≤ 30 KB, LCP < 2.0s and CLS < 0.05 on a mid-range phone (4G). Fail CI on regression.
 7. **Accessibility:** WCAG 2.2 AA. Semantic HTML, one `h1` per page, visible focus ring (2px `cinnabar` outline, 2px offset), full keyboard support, tap targets ≥ 44px, `lang` attribute per page and per mixed-language span, alt text for every meaningful image.
-8. **Internationalization ready:** no text baked into images or SVGs (except glyphs); all strings in locale files; layouts must survive 40% longer text (Khmer, Vietnamese) without breaking.
+8. **Bilingual (English and Khmer):** every visible string has both languages (co-located `defineMessages` pairs, `docs/I18N.md`); no text baked into SVGs except glyphs; Khmer inside share images is HarfBuzz-shaped (`lib/khmerShape.ts`); layouts must survive 40% longer text without breaking.
 
 ---
 
@@ -334,7 +334,7 @@ Month heading with previous/next → AlmanacCalendar → selected day detail →
 ---
 
 ## 10. Implementation rules for Claude Code
-1. Tokens live in `src/styles/tokens.css` (CSS variables, light + dark) and are mapped in `tailwind.config` under semantic names. Disable Tailwind's default color palette so raw colors can't be used.
+1. Tokens live in `app/styles/tokens.css` (CSS variables, light + dark) and are mapped in `app/globals.css` (`@theme inline`) under semantic names. Disable Tailwind's default color palette so raw colors can't be used.
 2. No hardcoded hex, px font sizes, spacing, or radius in components. Lint rule or CI grep to enforce.
 3. Build a `/styleguide` page (excluded from sitemap, `noindex`) showing every token and component in light and dark mode. Update it whenever a component changes.
 4. Each component: props documented in a comment block, works in both themes, keyboard accessible, tested at 360px and 1280px width.

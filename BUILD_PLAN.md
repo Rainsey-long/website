@@ -1,3 +1,5 @@
+> **Historical plan (written before the build).** The product goals here still stand, but the stack and several mechanics changed at the owner's request: Next.js 16 + SQLite on Railway instead of static Astro on Cloudflare Pages, readings computed per request instead of pre-generated JSON, share images by next/og, English and Khmer from the start instead of Phase 7. `DECISIONS.md` records every departure; `.claude/system-state.md` says what is true now.
+
 # Zodiac & Chinese Horoscope Website — Build Plan for Claude Code
 
 > Handoff document. Read this file **and `DESIGN_SYSTEM.md`** fully before writing code. `DESIGN_SYSTEM.md` is binding for every UI change. Work phase by phase, run tests at the end of each phase, and ask the owner before changing scope, adding paid services, or adding any runtime AI.

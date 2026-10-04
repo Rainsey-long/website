@@ -25,7 +25,9 @@ npm run release:check  # all gates, GO / NO-GO (add -- --build before a deploy)
 | Chinese | `chinese.ts`, `almanac.ts`, `data/lny.json` | Animal at Lunar New Year, BaZi year at Lichun, tong shu day |
 | Khmer | `khmer.ts`, `sea-variants.ts`, `khmerWeekdayCopy.ts`, `songkranStore.ts` | Chhankitek lunar date, sila days, festivals, Moha Songkran + angel, birth weekday |
 | Sky events | `skyEvents.ts`, `ics.ts` | Exact phases, Moon ingresses, stations + shadows, eclipses, .ics feeds |
-| Compatibility | `compatibility.ts`, `compat-copy.ts` | Rule tables → scores and varied copy |
+| Compatibility | `compatibility.ts`, `compat-copy.ts` | Rule tables → scores and varied copy (same random choices in both languages) |
+| Personal tools | `natal.ts` + `natalCopy.ts` (browser), `goodHours.ts`, `luckyFinder.ts` | Birth chart, Chinese + planetary hours, lucky-date finder |
+| Languages | `i18n.ts`, `names.ts`, `langServer.ts`, `khmerShape.ts` | `/km` routing helpers, bilingual strings and names, Khmer shaping for images |
 
 ### Engine invariants
 

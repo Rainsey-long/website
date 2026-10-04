@@ -16,7 +16,7 @@ import { weeklyReading, type WeekEvent } from "@/lib/weekly";
 import { blockTexts } from "@/lib/blockText";
 import { HOUSE_THEME, HOUSE_THEME_KM, TOPIC_LABEL, TOPIC_LABEL_KM, TOPICS } from "@/lib/reading-engine";
 import { addDays, fromKey, fullDate, weekRange, weekdayName } from "@/lib/dates";
-import { eclipseName, phaseName, planetNameIn, signNameIn } from "@/lib/skyEvents";
+import { eclipseName, phaseName, planetNameIn, signNameIn, skyYearsAvailable } from "@/lib/skyEvents";
 import { absolute, articleLd } from "@/lib/seo";
 import { getLang } from "@/lib/langServer";
 import { defineMessages, type Lang } from "@/lib/i18n";
@@ -30,7 +30,7 @@ const T = defineMessages({
     h1: (s: string) => `${s} weekly horoscope`,
     overview: "The week ahead",
     lunation: (phase: string, date: string, sign: string, theme: string) => `${phase} on ${date}, in ${sign}: your house of ${theme}.`,
-    carried: (phase: string, date: string, sign: string, theme: string) => `No new, full or quarter Moon falls this week, so it carries the mood of the ${phase.toLowerCase()} on ${date}, in ${sign}: your house of ${theme}.`,
+    carried: (phase: string, date: string, sign: string, theme: string) => `No new, full or quarter Moon falls this week. It carries on from the ${phase.toLowerCase()} on ${date}, in ${sign}: your house of ${theme}.`,
     best: "Best days", bestIntro: "The day each part of life gets the most support this week, from your daily readings.",
     path: "The Moon's week", pathIntro: "The Moon moves through about two signs of your chart each week. Where it is shows what is on your mind.",
     sky: "In the sky this week", none: "No planet changes sign or direction this week.",
@@ -41,13 +41,14 @@ const T = defineMessages({
     daily: (s: string) => `${s} horoscope today`, others: "Other signs this week",
     my: (s: string, r: string) => `My ${s} weekly horoscope, ${r}`,
     note: "Days are counted Monday to Sunday in universal time. For entertainment and reflection.",
+    busy: "Many people are reading their week right now. Try again in a few minutes.",
   },
   km: {
     crumb: "ហោរាសាស្ត្រ", week: "សប្ដាហ៍នេះ", weekNav: "សប្ដាហ៍", prev: "សប្ដាហ៍មុន", next: "សប្ដាហ៍បន្ទាប់",
     h1: (s: string) => `ហោរាសាស្ត្រប្រចាំសប្ដាហ៍ រាសី${s}`,
     overview: "សប្ដាហ៍ខាងមុខ",
     lunation: (phase: string, date: string, sign: string, theme: string) => `${phase} នៅ${date} ក្នុងរាសី${sign}៖ ផ្នែក${theme}របស់អ្នក។`,
-    carried: (phase: string, date: string, sign: string, theme: string) => `សប្ដាហ៍នេះគ្មានព្រះចន្ទថ្មី ពេញវង់ ឬកន្លះទេ ដូច្នេះវានាំយកអារម្មណ៍របស់${phase} នៅ${date} ក្នុងរាសី${sign}៖ ផ្នែក${theme}របស់អ្នក។`,
+    carried: (phase: string, date: string, sign: string, theme: string) => `សប្ដាហ៍នេះគ្មានព្រះចន្ទងងឹត ព្រះចន្ទពេញវង់ ឬព្រះចន្ទកន្លះទេ។ វាបន្តពី${phase} នៅ${date} ក្នុងរាសី${sign}៖ ផ្នែក${theme}របស់អ្នក។`,
     best: "ថ្ងៃល្អបំផុត", bestIntro: "ថ្ងៃដែលផ្នែកនីមួយៗនៃជីវិតទទួលបានការគាំទ្រច្រើនបំផុតក្នុងសប្ដាហ៍នេះ តាមការទស្សន៍ទាយប្រចាំថ្ងៃរបស់អ្នក។",
     path: "ដំណើររបស់ព្រះចន្ទក្នុងសប្ដាហ៍នេះ", pathIntro: "ព្រះចន្ទឆ្លងកាត់ប្រហែលពីររាសីនៃតារាងរបស់អ្នកក្នុងមួយសប្ដាហ៍។ ទីតាំងរបស់វាបង្ហាញពីអ្វីដែលនៅក្នុងគំនិតរបស់អ្នក។",
     sky: "នៅលើមេឃសប្ដាហ៍នេះ", none: "សប្ដាហ៍នេះគ្មានភពណាប្ដូររាសី ឬប្ដូរទិសដៅទេ។",
@@ -58,6 +59,7 @@ const T = defineMessages({
     daily: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}`, others: "រាសីផ្សេងទៀតសប្ដាហ៍នេះ",
     my: (s: string, r: string) => `ហោរាសាស្ត្រប្រចាំសប្ដាហ៍ រាសី${s} របស់ខ្ញុំ ${r}`,
     note: "ថ្ងៃត្រូវបានរាប់ពីថ្ងៃច័ន្ទដល់ថ្ងៃអាទិត្យ តាមម៉ោងសកល។ សម្រាប់ការកម្សាន្ត និងការឆ្លុះបញ្ចាំង។",
+    busy: "ឥឡូវនេះមានមនុស្សច្រើនកំពុងអានសប្ដាហ៍របស់ខ្លួន។ សូមព្យាយាមម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
   },
 });
 
@@ -80,6 +82,12 @@ export default async function WeeklyPage({ sign, monday }: { sign: WesternSign; 
   const t = T[lang];
   const km = lang === "km";
   const name = signName(sign.slug, lang);
+  // The years lib/weekly.ts reads stations and eclipses from; computing a new
+  // one is charged against the site-wide ceiling in lib/skyEvents.ts.
+  const y = Number(monday.slice(0, 4)), y2 = Number(addDays(monday, 7).slice(0, 4));
+  if (!skyYearsAvailable([...new Set([y - 1, y, y2])])) {
+    return <div className="mx-auto max-w-reading safe-x py-7"><h1 className="text-h1">{t.h1(name)}</h1><p className="mt-3">{t.busy}</p></div>;
+  }
   const w = weeklyReading(sign, monday, blockTexts(lang), lang);
   const range = weekRange(monday, lang);
   const title = `${t.h1(name)} · ${range}`;
@@ -100,7 +108,7 @@ export default async function WeeklyPage({ sign, monday }: { sign: WesternSign; 
             {validMonday(prev) ? <Link className="link inline-flex min-h-tap items-center gap-1" href={`/horoscope/${sign.slug}/week/${prev}`} rel="prev"><Glyph name="chevron-left" set="ui" className="size-4" />{t.prev}</Link> : <span />}
             {validMonday(next) ? <Link className="link inline-flex min-h-tap items-center gap-1" href={`/horoscope/${sign.slug}/week/${next}`} rel="next">{t.next}<Glyph name="chevron-right" set="ui" className="size-4" /></Link> : <span />}
           </nav>
-          <h1 className="mt-3 flex items-center gap-3 text-display">
+          <h1 className="mt-3 flex items-center gap-3 text-h1">
             <Glyph name={sign.slug} set="western" className="size-glyph-lg shrink-0" />
             <span>{t.h1(name)}</span>
           </h1>
@@ -115,11 +123,11 @@ export default async function WeeklyPage({ sign, monday }: { sign: WesternSign; 
           <section className="border-t border-rule py-5" aria-labelledby="wk-best">
             <h2 id="wk-best" className="text-h3">{t.best}</h2>
             <p className="mt-2 text-small text-muted">{t.bestIntro}</p>
-            <dl className="mt-3 grid grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-4">
+            <dl className="mt-3 grid grid-cols-2 gap-x-5 gap-y-2 sm:grid-cols-4">
               {TOPICS.map((topic) => (
                 <div key={topic}>
                   <dt className="text-small font-semibold">{(km ? TOPIC_LABEL_KM : TOPIC_LABEL)[topic]}</dt>
-                  <dd><Link className="link" href={`/horoscope/${sign.slug}/${w.best[topic].date}`}>{dayName(w.best[topic].date, lang)}</Link></dd>
+                  <dd><Link className="link inline-flex min-h-tap items-center" href={`/horoscope/${sign.slug}/${w.best[topic].date}`}>{dayName(w.best[topic].date, lang)}</Link></dd>
                 </div>
               ))}
             </dl>
@@ -130,7 +138,7 @@ export default async function WeeklyPage({ sign, monday }: { sign: WesternSign; 
             <p className="mt-2 text-small text-muted">{t.pathIntro}</p>
             <ul className="mt-3">
               {w.moonPath.map((m) => (
-                <li key={m.from} className="grid gap-1 border-t border-rule py-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] sm:gap-5">
+                <li key={m.from} className="grid gap-1 border-t border-rule py-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] sm:items-baseline sm:gap-5">
                   <span className="text-small font-semibold">{span(m.from, m.to)}</span>
                   <span>{signNameIn(m.signIndex, lang)} · {m.theme}</span>
                 </li>
@@ -143,7 +151,7 @@ export default async function WeeklyPage({ sign, monday }: { sign: WesternSign; 
             {w.events.length === 0 ? <p className="mt-3">{t.none}</p> : (
               <ul className="mt-3">
                 {w.events.map((e) => (
-                  <li key={`${e.kind}-${e.body}-${e.date}`} className="grid gap-1 border-t border-rule py-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] sm:gap-5">
+                  <li key={`${e.kind}-${e.body}-${e.date}`} className="grid gap-1 border-t border-rule py-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] sm:items-baseline sm:gap-5">
                     <span className="text-small font-semibold">{dayName(e.date, lang)}</span>
                     <span>{eventLine(e, lang)}</span>
                   </li>

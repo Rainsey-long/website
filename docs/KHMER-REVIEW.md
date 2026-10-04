@@ -57,4 +57,4 @@ Noted by the UI review: Cancer is now spelled កក្កដ everywhere (was �
 | Where | What to check |
 |---|---|
 | `content/weekly/lunations.json` (`text_km`, 48 blocks; also editable in `/km/admin/readings?topic=week`) | The weekly overviews: one per Moon phase (new, first quarter, full, last quarter) and house |
-| `components/WeeklyPage.tsx`, `lib/weeklyMeta.ts`, `app/horoscope/page.tsx`, `app/horoscope/[sign]/page.tsx` | "ហោរាសាស្ត្រប្រចាំសប្ដាហ៍", "ផ្នែក…របស់អ្នក" for a house, the planet-event sentences ("ចាប់ផ្ដើមដើរថយក្រោយ", "ដើរទៅមុខវិញ"), "ថ្ងៃល្អបំផុត" |
+| `components/WeeklyPage.tsx`, `lib/weeklyMeta.ts`, `app/horoscope/page.tsx`, `app/horoscope/[sign]/page.tsx` | "ហោរាសាស្ត្រប្រចាំសប្ដាហ៍", "ផ្នែក…របស់អ្នក" for a house, the planet-event sentences ("ចាប់ផ្ដើមដើរថយក្រោយ", "ដើរទៅមុខវិញ"), "ថ្ងៃល្អបំផុត", the carried-over Moon line, and the two "busy, try again" lines (weekly page, `/sky/retrogrades`) |

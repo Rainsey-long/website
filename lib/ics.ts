@@ -9,12 +9,28 @@ import { addDays } from "./dates";
 
 export interface IcsEvent { uid: string; title: string; description?: string; start: string; allDay?: boolean; end?: string }
 
-const esc = (s: string) => s.replace(/\\/g, "\\\\").replace(/;/g, "\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+const esc = (s: string) => s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
 const stamp = (iso: string) => iso.replace(/[-:]/g, "").replace(/\.\d{3}/, "");
 const day = (d: string) => d.replace(/-/g, "");
 
-/** Fold lines at 75 octets as RFC 5545 requires (approximated by characters). */
-const fold = (line: string) => line.match(/.{1,73}/g)!.join("\r\n ");
+/**
+ * Fold lines at 75 octets as RFC 5545 §3.1 requires. Counted in UTF-8 bytes,
+ * not characters: a Khmer character is 3 octets, so a character count let
+ * Khmer lines reach 113 octets. Never splits a code point; a continuation line
+ * starts with one space, so it carries at most 74 octets of content.
+ */
+function fold(line: string): string {
+  const out: string[] = [];
+  let cur = "", bytes = 0;
+  for (const ch of line) {
+    const n = Buffer.byteLength(ch);
+    if (bytes + n > (out.length === 0 ? 75 : 74)) { out.push(cur); cur = ""; bytes = 0; }
+    cur += ch;
+    bytes += n;
+  }
+  out.push(cur);
+  return out.join("\r\n ");
+}
 
 export function toIcs(name: string, events: IcsEvent[]): string {
   const now = stamp(new Date().toISOString().slice(0, 19) + "Z");

@@ -10,11 +10,19 @@ import { SITE_URL } from "./site";
 export async function readJsonCapped<T>(req: Request, maxBytes: number): Promise<{ ok: true; value: T } | { ok: false; res: NextResponse }> {
   const text = await req.text();
   if (Buffer.byteLength(text) > maxBytes) return { ok: false, res: NextResponse.json({ error: "Too large" }, { status: 413 }) };
+  let value: unknown;
   try {
-    return { ok: true, value: JSON.parse(text) as T };
+    value = JSON.parse(text);
   } catch {
     return { ok: false, res: NextResponse.json({ error: "Bad request" }, { status: 400 }) };
   }
+  // Every caller destructures an object. `null` (valid JSON) used to throw on
+  // destructuring and surface as an unhandled 500, reachable anonymously via
+  // /api/feedback; arrays and primitives are refused here for the same reason.
+  if (value === null || typeof value !== "object" || Array.isArray(value)) {
+    return { ok: false, res: NextResponse.json({ error: "Bad request" }, { status: 400 }) };
+  }
+  return { ok: true, value: value as T };
 }
 
 /** Refuse cross-site state changes. Browsers always send Origin on POST/PATCH/PUT/DELETE fetches. */

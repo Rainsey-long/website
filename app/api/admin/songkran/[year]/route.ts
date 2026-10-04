@@ -6,7 +6,9 @@ import { json, readJsonCapped, sameOrigin } from "@/lib/http";
 export async function PUT(req: Request, { params }: { params: Promise<{ year: string }> }) {
   if (!(await getSession())) return json({ error: "Unauthorized" }, 401);
   if (!sameOrigin(req)) return json({ error: "Forbidden" }, 403);
-  const year = Number((await params).year);
+  // Canonical four digits only: Number() also accepts "2.0e3", " 2000", "0x7d0".
+  const raw = (await params).year;
+  const year = /^\d{4}$/.test(raw) ? Number(raw) : NaN;
   if (!Number.isInteger(year) || year < 1950 || year > 2100) return json({ error: "Not found" }, 404);
   const body = await readJsonCapped<{ officialAt?: unknown; tumneay?: unknown; source?: unknown }>(req, 16_384);
   if (!body.ok) return body.res;

@@ -4,8 +4,8 @@ import { DISCLAIMER, SITE_NAME } from "@/lib/site";
 
 const SECTIONS: Array<{ title: string; links: Array<[string, string]> }> = [
   { title: "Readings", links: [["/horoscope", "Daily horoscopes"], ["/chinese-zodiac", "Chinese zodiac"], ["/chinese-zodiac/2027", "2027 Year of the Fire Goat"], ["/khmer", "Khmer traditions"]] },
-  { title: "Calendars", links: [["/lucky-days", "Lucky days"], ["/khmer/new-year", "Khmer New Year"], ["/sky/moon", "Moon calendar"], ["/sky/retrogrades", "Retrogrades and eclipses"]] },
-  { title: "Tools", links: [["/tools/zodiac-calculator", "Find my sign"], ["/tools/compatibility-checker", "Compatibility checker"], ["/compatibility", "Western compatibility"], ["/chinese-compatibility", "Chinese compatibility"]] },
+  { title: "Calendars", links: [["/lucky-days", "Lucky days"], ["/lucky-days/finder", "Find a lucky date"], ["/good-hours", "Good hours"], ["/khmer/new-year", "Khmer New Year"], ["/sky/moon", "Moon calendar"], ["/sky/retrogrades", "Retrogrades and eclipses"]] },
+  { title: "Tools", links: [["/tools/zodiac-calculator", "Find my sign"], ["/tools/birth-chart", "Birth chart"], ["/tools/compatibility-checker", "Compatibility checker"], ["/compatibility", "Western compatibility"], ["/chinese-compatibility", "Chinese compatibility"]] },
   { title: "About", links: [["/zodiac", "Western signs"], ["/southeast-asian-zodiac", "Southeast Asian zodiac"], ["/feeds", "Calendar feeds"], ["/about", "About"], ["/contact", "Contact"], ["/privacy", "Privacy"], ["/terms", "Terms"], ["/disclaimer", "Disclaimer"]] },
 ];
 

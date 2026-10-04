@@ -43,7 +43,29 @@ export interface AlmanacDay {
   avoid: string[];
   clash: Animal;
   quality: DayQuality;
+  /** The day officer (建除十二值星), Chinese and English. */
+  officer: { hanzi: string; en: string };
+  /** The day spirit (十二天神) and whether the almanac counts it auspicious. */
+  spirit: { hanzi: string; en: string; auspicious: boolean };
+  /** Untranslated 宜 / 忌 terms, for matching occasions (lib/luckyFinder.ts). */
+  goodRaw: string[];
+  avoidRaw: string[];
 }
+
+/** The twelve day officers. English names follow common almanac translations. */
+export const OFFICERS: Record<string, string> = {
+  建: "Establish", 除: "Remove", 满: "Full", 平: "Balance", 定: "Stable", 执: "Initiate",
+  破: "Break", 危: "Danger", 成: "Success", 收: "Receive", 开: "Open", 闭: "Close",
+};
+
+/** The twelve spirits that rule days and double-hours (黄道 / 黑道). */
+export const SPIRITS: Record<string, string> = {
+  青龙: "Azure Dragon", 明堂: "Bright Hall", 天刑: "Heavenly Punishment", 朱雀: "Vermilion Bird",
+  金匮: "Golden Coffer", 天德: "Heavenly Virtue", 白虎: "White Tiger", 玉堂: "Jade Hall",
+  天牢: "Heavenly Prison", 玄武: "Black Tortoise", 司命: "Life Keeper", 勾陈: "Hook Array",
+};
+
+export const HANZI_TO_ANIMAL = HANZI_ANIMAL;
 
 export function translateTerms(terms: string[]): string[] {
   const out: string[] = [];
@@ -88,5 +110,9 @@ export function almanacDay(key: string): AlmanacDay {
     avoid: translateTerms(ji),
     clash: ANIMALS.find((a) => a.slug === HANZI_ANIMAL[lunar.getDayChongShengXiao()])!,
     quality,
+    officer: { hanzi: officer, en: OFFICERS[officer] ?? officer },
+    spirit: { hanzi: lunar.getDayTianShen(), en: SPIRITS[lunar.getDayTianShen()] ?? lunar.getDayTianShen(), auspicious: luck === "吉" },
+    goodRaw: yi,
+    avoidRaw: ji,
   };
 }

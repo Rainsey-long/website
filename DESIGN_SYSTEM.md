@@ -233,6 +233,15 @@ Native Web Share API on mobile; fallback buttons (copy link, Facebook, X, Telegr
 - 404: "This page doesn't exist. Pick your sign below." + SignPicker.
 - Errors never apologize; they say what happened and what to do.
 
+### 6.15 HoursList (good hours)
+A plain list, one row per hour: time range (tabular), the hour's name, and a short label in words ("Good hour" / "Quiet hour"). Good Chinese hours carry the small seal glyph, never a filled colour bar. The current hour is outlined in `cinnabar` (1px, `radius-sm`) and marked "Now" in text. No progress bars, no timeline graphics: the times are the information.
+
+### 6.16 BirthChartWheel
+A natal chart drawn in the DayDial's hand (§6.1): fine ink sign ring with glyphs, brass ticks, planets as planet glyphs on an inner ring, aspect lines in the centre (`rule-strong` for trine/sextile, `ink-muted` dashed for square/opposition; never red or green), and the ascendant on the left as a longer ink axis. Without a birth time the wheel starts at 0° Aries and draws no axis. Planets closer than 7° are stepped inwards so glyphs never overlap. Sizes as the DayDial. The wheel is decorative for screen readers; the same data is in the placements list below it (`aria-describedby`).
+
+### 6.17 Finder form (lucky-date finder)
+A GET form so results have a shareable URL and work without JavaScript: occasion (select), start month (month input), length (select: 1, 3 or 6 months), and up to two "people born in the Year of …" selects. Results: a list of dates (full date, day pillar, why: matched terms, officer, spirit), never a ranking or a score. Empty result: say so and offer the next longer range.
+
 ---
 
 ## 7. Page templates (wireframes)
@@ -358,3 +367,4 @@ Month heading with previous/next → AlmanacCalendar → selected day detail →
 | 2026-10-04 | Header gains a "Traditions" control (Western / Chinese / Khmer, at least one on) | Owner: the visitor decides which traditions the site shows |
 | 2026-10-04 | `MoonGlyph` (small phase moon), `SkyPanel` ("the sky behind this reading" disclosure) | Moon calendar and reading transparency features |
 | 2026-10-04 | Nav adds "Khmer" and "Sky"; footer regrouped (Readings, Calendars, Tools, About) | New sections |
+| 2026-10-04 | Added HoursList (§6.15), BirthChartWheel (§6.16), Finder form (§6.17), and planet glyphs in `lib/glyphs.ts` | Good hours, birth chart and lucky-date finder from the scored feature research |

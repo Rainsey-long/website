@@ -45,7 +45,15 @@ Conventions chosen where the plan left room, and every departure from BUILD_PLAN
 ## Features chosen from the research shortlist (docs/research/FEATURES.md)
 
 Built now: Khmer calendar and holy days (score 29), moon calendar (28), retrograde and eclipse calendar (27), "the sky behind this reading" (26), .ics feeds (27), "was this helpful" feedback (23, worded as helpful, not accurate), tradition switch (25).
-Next candidates: natal chart wheel (26), lucky-date finder by occasion (26), Chinese good hours (25), personal transit readings (24, large content cost), BaZi four pillars (22).
+Built second (2026-10-04): natal chart wheel (26), lucky-date finder by occasion (26), good hours (25).
+Next candidates: personal transit readings (24, large content cost: ~600 text blocks), BaZi four pillars (22), personal year forecast (22), saved family profiles (needs local storage only).
+
+| Feature | Decision | Why |
+|---|---|---|
+| Birth chart | Whole-sign houses; orbs 8/7/5 (+2 for Sun/Moon); no aspects between Uranus, Neptune and Pluto; unknown time = noon, no houses, sign changes flagged | Whole-sign works at every latitude; published orbs; generational aspects say nothing personal |
+| Birth chart | Computed in the browser, never sent | Owner rule: birth details never leave the browser |
+| Good hours | Chinese hours on the local clock, Zi split at midnight (13 rows); planetary hours from real sunrise/sunset, 24 equal hours from 06:00 where the Sun does not rise or set | Most almanacs and apps; polar fallback stated on the page |
+| Lucky-date finder | Chinese almanac only; a day needs the occasion in 宜, not in 忌, not "challenging", no clash with chosen animals; ranges 1, 3 or 6 months | Khmer good-day picking stays with an achar (owner rule); the tong shu publishes its own list |
 
 ## Smaller
 

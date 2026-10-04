@@ -40,6 +40,20 @@ export const ANIMAL_GLYPHS: Record<string, GlyphPart[]> = {
   pig: [c(12, 13.2, 6.8), p("M6.6 8.6 5.2 4.2l4.2 2.2"), p("M17.4 8.6l1.4-4.4-4.2 2.2"), e(12, 15, 2.6, 1.8), c(11.1, 15, 0.4), c(12.9, 15, 0.4), c(9.4, 11.6, 0.4), c(14.6, 11.6, 0.4)],
 };
 
+/** Planet glyphs (birth chart), same grid and stroke as the sign glyphs. */
+export const PLANET_GLYPHS: Record<string, GlyphPart[]> = {
+  sun: [c(12, 12, 8), c(12, 12, 1.2)],
+  moon: [p("M15 4a8 8 0 1 0 0 16 6.2 6.2 0 0 1 0-16Z")],
+  mercury: [p("M8.5 3.5a3.5 3.5 0 0 0 7 0"), c(12, 10.5, 4), p("M12 14.5v6.5"), p("M9.5 18h5")],
+  venus: [c(12, 9, 5), p("M12 14v7"), p("M9 18h6")],
+  mars: [c(10, 14, 5.2), p("M13.7 10.3 19 5"), p("M14.5 5H19v4.5")],
+  jupiter: [p("M5.5 5.5c2.4-1.4 5.3.3 5.3 3 0 2.6-2.5 5.2-5.3 8H19"), p("M15.5 3.5v17")],
+  saturn: [p("M6 4h6"), p("M9 2v15.5"), p("M9 11c1.6-2.6 7-2.4 7 1.2 0 2.6-3.2 3.6-3.2 6.2 0 1.4 1 2.1 2.2 1.6")],
+  uranus: [c(12, 18, 2.6), p("M12 15.4V4"), p("M6 4v10"), p("M18 4v10"), p("M6 9h12")],
+  neptune: [p("M5 5c0 6 2.8 8.5 7 8.5S19 11 19 5"), p("M12 3v18"), p("M9 18h6")],
+  pluto: [p("M6.5 4.5a5.5 5.5 0 0 0 11 0"), c(12, 5.5, 2.2), p("M12 10.5V21"), p("M9 17h6")],
+};
+
 /** Lucide icons (ISC licence), re-drawn at 1.5px to match (§4.4). */
 export const UI_ICONS: Record<string, GlyphPart[]> = {
   menu: [p("M4 6h16"), p("M4 12h16"), p("M4 18h16")],

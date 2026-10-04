@@ -287,6 +287,10 @@
   .daydial .sign-link:focus-visible .wedge { stroke: var(--dial-ring); stroke-width: 2; }
   .daydial .glyph { fill: none; stroke: var(--dial-ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
   .daydial .selected { fill: none; stroke: var(--dial-ring); stroke-width: 2; }
+  /* BirthChartWheel (§6.16): aspects in neutral inks, never red/green. */
+  .daydial .axis line { stroke: var(--dial-ink); stroke-width: 1.5; }
+  .daydial .asp-soft { stroke: var(--rule-strong); stroke-width: 0.75; }
+  .daydial .asp-hard { stroke: var(--ink-muted); stroke-width: 0.75; stroke-dasharray: 3 3; }
   .daydial .sun-disc { fill: none; stroke: var(--brass); stroke-width: 1.5; }
   .daydial .sun-dot { fill: var(--brass); }
   .daydial .moon-dark { fill: var(--paper); }

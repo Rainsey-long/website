@@ -13,6 +13,9 @@
 | `/lucky-days/[yyyy]/[mm]` | Calendar: Chinese almanac marks and/or Khmer lunar days, holy days, festivals (by tradition choice) | almanac + Khmer engines |
 | `/sky`, `/sky/moon/[yyyy]/[mm]`, `/sky/retrogrades/[yyyy]` | Positions, phases, ingresses, stations + shadows, eclipses, in the visitor's zone | sky events |
 | `/feeds`, `/feeds/[name].ics` | Subscribable calendars: moon phases, retrogrades, eclipses, Khmer holy days, Khmer festivals | sky + Khmer engines |
+| `/tools/birth-chart` | Client-side natal chart: wheel, ten planets, whole-sign houses, aspects, plain-English reading (`lib/natal.ts`, `lib/natalCopy.ts`) | browser only |
+| `/good-hours?city=&date=` | Chinese double-hours (good/quiet, spirit, clash) and planetary hours from local sunrise for a city and day (`lib/goodHours.ts`) | almanac + astronomy |
+| `/lucky-days/finder?occasion=&from=&months=&a1=&a2=` | Chinese almanac days listing an occasion as favourable, minus clash days, up to 6 months (`lib/luckyFinder.ts`) | almanac |
 | `/tools/zodiac-calculator` | Client-side: sun/moon/rising, Chinese, Khmer (animal at the Songkran minute, birth weekday, lunar birth date) | browser only |
 | `/tools/compatibility-checker` | Picks a pair page | — |
 | `/southeast-asian-zodiac[/khmer|/vietnamese]`, `/about`, `/contact`, `/privacy`, `/terms`, `/disclaimer`, `/styleguide` (noindex) | | |

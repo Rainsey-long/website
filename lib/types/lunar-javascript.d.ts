@@ -24,5 +24,15 @@ declare module "lunar-javascript" {
     getDayTianShen(): string;
     getDayTianShenLuck(): string;
     getZhiXing(): string;
+    getTimes(): LunarTime[];
+  }
+  export class LunarTime {
+    getGan(): string;
+    getZhi(): string;
+    getMinHm(): string;
+    getMaxHm(): string;
+    getTianShen(): string;
+    getTianShenLuck(): string;
+    getChongShengXiao(): string;
   }
 }

@@ -16,7 +16,7 @@
 |---|---|
 | `npx tsc --noEmit` | clean |
 | `npm run lint` | **0** problems |
-| `npm test` | 39 passing |
+| `npm test` | 51 passing |
 | `npm run check:contrast` | all pairs AA |
 | `npm run check:tokens` | 0 violations |
 | `npm run db:preflight` | CLEAN |
@@ -27,4 +27,5 @@
 - Khmer calendar validated against the cases in tests and the research table; validation against Roath Kim Soeun's tables for 200+ dates (research §1.3) not yet done.
 - No Khmer-language UI yet (`/km` locale): Phase 7 of the build plan. Khmer script appears inline in Khmer features.
 - Reading block library is 196 of the ~360 the plan targets.
-- Not built from the research shortlist yet: natal chart wheel, personal transit readings, BaZi four pillars, lucky-date finder by occasion, email digest (see docs/research/FEATURES.md).
+- Built 2026-10-04 (second pass): birth chart (`/tools/birth-chart`), good hours (`/good-hours`), lucky-date finder (`/lucky-days/finder`). Their wording (`lib/natalCopy.ts`, `PLANET_HOUR` in `lib/goodHours.ts`) is draft.
+- Not built from the research shortlist yet: personal transit readings, BaZi four pillars, personal year forecast, family profiles, email digest (see docs/research/FEATURES.md).

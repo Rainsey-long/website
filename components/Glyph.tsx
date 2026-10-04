@@ -1,9 +1,9 @@
 /**
  * Glyph — original zodiac glyph or UI icon (DESIGN_SYSTEM.md §4.4).
- * name: sign slug, animal slug or UI icon; set: "western" | "animal" | "ui";
+ * name: sign slug, animal slug, planet or UI icon; set: "western" | "animal" | "planet" | "ui";
  * label: accessible name (omit for decorative → aria-hidden).
  */
-import { ANIMAL_GLYPHS, UI_ICONS, WESTERN_GLYPHS, type GlyphPart } from "@/lib/glyphs";
+import { ANIMAL_GLYPHS, PLANET_GLYPHS, UI_ICONS, WESTERN_GLYPHS, type GlyphPart } from "@/lib/glyphs";
 
 export function GlyphParts({ parts }: { parts: GlyphPart[] }) {
   return (
@@ -15,8 +15,8 @@ export function GlyphParts({ parts }: { parts: GlyphPart[] }) {
   );
 }
 
-export default function Glyph({ name, set, label, className = "size-glyph" }: { name: string; set: "western" | "animal" | "ui"; label?: string; className?: string }) {
-  const table = set === "western" ? WESTERN_GLYPHS : set === "animal" ? ANIMAL_GLYPHS : UI_ICONS;
+export default function Glyph({ name, set, label, className = "size-glyph" }: { name: string; set: "western" | "animal" | "planet" | "ui"; label?: string; className?: string }) {
+  const table = set === "western" ? WESTERN_GLYPHS : set === "animal" ? ANIMAL_GLYPHS : set === "planet" ? PLANET_GLYPHS : UI_ICONS;
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"
       className={className} role={label ? "img" : undefined} aria-label={label} aria-hidden={label ? undefined : true} focusable="false">

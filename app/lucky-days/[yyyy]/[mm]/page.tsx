@@ -86,6 +86,9 @@ export default async function Month({ params }: Params) {
                 <ul className="mt-2">{festivals.map((d) => <li key={d.date} className="border-b border-rule py-2"><span className="tabular">{Number(d.date.slice(8))}</span> · {d.khmer!.festival!.en}</li>)}</ul>
               </section>
             )}
+            {wantChinese && (
+              <p className="mb-6"><Link className="link" href="/lucky-days/finder">Find a lucky date for an occasion</Link> · <Link className="link" href="/good-hours">Today&apos;s good hours</Link></p>
+            )}
             <h2 className="text-h3">How these calendars work</h2>
             <div className="reading mt-3 text-body">
               {wantChinese && <p>The Chinese almanac, the tong shu, marks each day with a day spirit and a day officer. Favourable spirits get the seal; days where both lean unfavourable get a small dot. The clash animal is the zodiac animal opposite the day&apos;s branch.</p>}

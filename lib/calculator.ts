@@ -14,35 +14,11 @@ import { birthWeekday, khmerAnimalAt, khmerDay, type KhmerDay, type Weekday } fr
 
 const ANIMAL_BY_SLUG = Object.fromEntries(ANIMALS.map((a) => [a.slug, a]));
 
-export interface City {
-  name: string;
-  country: string;
-  lat: number;
-  lon: number;
-  tz: string;
-}
+export type { City } from "./zone";
+import type { City } from "./zone";
 
-/** Offset (minutes) of an IANA zone from UTC at a given instant. */
-function zoneOffsetMinutes(instant: Date, tz: string): number {
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: tz, hourCycle: "h23",
-    year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit",
-  }).formatToParts(instant);
-  const get = (t: string) => Number(parts.find((p) => p.type === t)?.value);
-  const asUtc = Date.UTC(get("year"), get("month") - 1, get("day"), get("hour"), get("minute"), get("second"));
-  return (asUtc - instant.getTime()) / 60000;
-}
-
-/** Local wall-clock date + time in an IANA zone → UTC instant. */
-export function localToUtc(dateKey: string, time: string, tz: string): Date {
-  const [y, m, d] = dateKey.split("-").map(Number);
-  const [hh, mm] = time.split(":").map(Number);
-  const guess = Date.UTC(y, m - 1, d, hh, mm);
-  let offset = zoneOffsetMinutes(new Date(guess), tz);
-  // Second pass settles DST transitions.
-  offset = zoneOffsetMinutes(new Date(guess - offset * 60000), tz);
-  return new Date(guess - offset * 60000);
-}
+export { localToUtc } from "./zone";
+import { localToUtc } from "./zone";
 
 const BRANCH_NAMES = ["Zi", "Chou", "Yin", "Mao", "Chen", "Si", "Wu", "Wei", "Shen", "You", "Xu", "Hai"];
 

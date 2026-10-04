@@ -128,6 +128,7 @@ export default function Calculator({ cities, traditions }: { cities: City[]; tra
             <ul className="mt-2">
               {show("western") && <li className="border-b border-rule py-2"><Link className="link" href={`/horoscope/${r.sun.slug}`}>{r.sun.name} horoscope today</Link></li>}
               {show("western") && <li className="border-b border-rule py-2"><Link className="link" href={`/zodiac/${r.sun.slug}`}>{r.sun.name} profile</Link></li>}
+              {show("western") && <li className="border-b border-rule py-2"><Link className="link" href="/tools/birth-chart">Your full birth chart</Link></li>}
               {(show("chinese") || show("khmer")) && <li className="border-b border-rule py-2"><Link className="link" href={`/chinese-zodiac/${r.chinese.animal.slug}/2027`}>{r.chinese.animal.name} in 2027</Link></li>}
               {show("khmer") && <li className="border-b border-rule py-2"><Link className="link" href="/khmer/new-year">Khmer New Year and its angel</Link></li>}
             </ul>

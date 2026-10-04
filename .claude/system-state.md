@@ -16,7 +16,7 @@
 |---|---|
 | `npx tsc --noEmit` | clean |
 | `npm run lint` | **0** problems |
-| `npm test` | 51 passing |
+| `npm test` | 57 passing |
 | `npm run check:contrast` | all pairs AA |
 | `npm run check:tokens` | 0 violations |
 | `npm run db:preflight` | CLEAN |

@@ -8,6 +8,7 @@ import { chineseHours, planetaryHours } from "../lib/goodHours";
 import { findLuckyDays, OCCASIONS } from "../lib/luckyFinder";
 import { findAspects, midheaven, natalChart } from "../lib/natal";
 import { addDays } from "../lib/dates";
+import { almanacDay } from "../lib/almanac";
 
 const ZHI = "子丑寅卯辰巳午未申酉戌亥";
 
@@ -73,6 +74,10 @@ describe("lucky-date finder", () => {
       expect(r.day.quality).not.toBe("challenging");
       expect(r.matched).toContain("Weddings");
     }
+  });
+  it("translates every almanac term through the last supported year", () => {
+    // 酬神 first appears on 2100-02-16; a missing label threw and 500'd three pages.
+    for (let d = "2099-01-01"; d <= "2100-12-31"; d = addDays(d, 1)) expect(() => almanacDay(d)).not.toThrow();
   });
   it("caps the range", () => {
     const travel = OCCASIONS.find((o) => o.slug === "travel")!;

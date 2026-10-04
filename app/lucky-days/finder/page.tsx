@@ -33,7 +33,10 @@ export default async function Finder({ searchParams }: Search) {
   const animals = [sp.a1, sp.a2].filter((a): a is string => !!a && ANIMALS.some((x) => x.slug === a));
   const [fy, fm] = fromMonth.split("-").map(Number);
   const start = fromMonth === now.slice(0, 7) ? now : `${fromMonth}-01`;
-  const endExclusive = new Date(Date.UTC(fy, fm - 1 + months, 1));
+  // Never search past the last supported year: from December 2100 a 3- or
+  // 6-month range reached 2101, where the Lunar New Year table ends and the
+  // almanac throws (a 500 on a public page).
+  const endExclusive = new Date(Math.min(Date.UTC(fy, fm - 1 + months, 1), Date.UTC(CALENDAR_YEARS.max + 1, 0, 1)));
   const days = Math.round((endExclusive.getTime() - Date.parse(`${start}T00:00:00Z`)) / 86400000);
   const results = occasion ? findLuckyDays({ occasion, from: start, days, avoidAnimals: animals }) : null;
   const longer = LENGTHS.find((l) => l > months);

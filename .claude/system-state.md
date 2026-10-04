@@ -31,4 +31,4 @@
 - English and Khmer (2026-10-04): every page has a `/km` twin (`docs/I18N.md`). All Khmer text is a draft awaiting a native reader (`docs/KHMER-REVIEW.md`). Everything is bilingual, including the admin (`/km/admin`), the .ics feeds (`?lang=km`) and share images (`/og/<slug>?lang=km`, HarfBuzz-shaped).
 - Reading block library is 196 of the ~360 the plan targets.
 - Built 2026-10-04 (second pass): birth chart (`/tools/birth-chart`), good hours (`/good-hours`), lucky-date finder (`/lucky-days/finder`). Their wording (`lib/natalCopy.ts`, `PLANET_HOUR` in `lib/goodHours.ts`) is draft.
-- Not built from the research shortlist yet: personal transit readings, BaZi four pillars, personal year forecast, family profiles, email digest (see docs/research/FEATURES.md).
+- Next features, ranked: `docs/research/FEATURES.md` §7 (date converter + Khmer age tool, colour to wear, printable calendar, weekly horoscopes, Telegram card).

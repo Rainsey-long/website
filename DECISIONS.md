@@ -46,7 +46,7 @@ Conventions chosen where the plan left room, and every departure from BUILD_PLAN
 
 Built now: Khmer calendar and holy days (score 29), moon calendar (28), retrograde and eclipse calendar (27), "the sky behind this reading" (26), .ics feeds (27), "was this helpful" feedback (23, worded as helpful, not accurate), tradition switch (25).
 Built second (2026-10-04): natal chart wheel (26), lucky-date finder by occasion (26), good hours (25).
-Next candidates: personal transit readings (24, large content cost: ~600 text blocks), BaZi four pillars (22), personal year forecast (22), saved family profiles (needs local storage only).
+Next candidates (re-ranked 2026-10-04, docs/research/FEATURES.md §7): a date converter with a Khmer age / Buddhist-era tool, today's colour to wear, a printable monthly calendar, weekly horoscopes, a Telegram daily card; then almanac day pages, solar terms, an installable app, family profiles (browser only), numerology, personal transits.
 
 | Feature | Decision | Why |
 |---|---|---|

@@ -2,6 +2,14 @@
 
 One entry per working session, at most ~10 lines: what changed, the commit range, what is left open. This is the cross-session memory for "what happened last time"; the why of each change is in its commit message.
 
+## 2026-10-04 (later) — docs sync, memory, token budget, brainstorm round 2
+
+- Committed memory in `.claude/memory/` (MEMORY.md auto-loaded, this log on demand) and a SessionStart hook (cloud only: installs deps, sets the git hooks path, prints status).
+- `npm run docs:budget` (auto-loaded docs under 36 KB, a release:check gate); agent-budget.md cut from 17.7 KB to 2.4 KB.
+- Every Markdown doc synced with the code (paths, bilingual rules, admin, tools).
+- FEATURES.md §7: 13 new ideas scored; top picks are the date converter with a Khmer age tool, colour to wear, a printable calendar, weekly horoscopes, a Telegram card.
+- Open: as before, plus the hook only runs once this branch is the default branch's content.
+
 ## 2026-10-04 — the site, end to end (one long session)
 
 - Built the site as Astro, then ported to Next.js 16 + SQLite on Railway at the owner's request (CamboMath's shape and rules, agent docs, hooks, gates).

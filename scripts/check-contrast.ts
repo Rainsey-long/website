@@ -5,8 +5,9 @@ import { readFileSync } from "node:fs";
 const css = readFileSync(new URL("../src/styles/tokens.css", import.meta.url), "utf8");
 
 function block(selector: string): Record<string, string> {
-  const start = css.indexOf(selector + " {");
-  if (start < 0) throw new Error(`selector not found: ${selector}`);
+  const at = css.indexOf(selector);
+  if (at < 0) throw new Error(`selector not found: ${selector}`);
+  const start = css.indexOf("{", at);
   const body = css.slice(start, css.indexOf("}", start));
   const out: Record<string, string> = {};
   for (const m of body.matchAll(/--([a-z0-9-]+):\s*(#[0-9a-fA-F]{6})/g)) out[m[1]] = m[2];

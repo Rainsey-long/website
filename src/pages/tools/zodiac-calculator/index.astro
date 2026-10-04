@@ -1,0 +1,178 @@
+---
+/**
+ * Calculator (§6.7, wireframe §7.3). Everything runs in the browser;
+ * nothing is stored or sent (plan §2.3).
+ */
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import cities from "../../../data/cities.json";
+const sorted = [...cities].sort((a, b) => a.name.localeCompare(b.name));
+const todayIso = new Date().toISOString().slice(0, 10);
+---
+<BaseLayout title="What's my zodiac sign? Sun, moon, rising and Chinese animal" description="Find your sun, moon and rising signs, your Chinese zodiac animal and element, and your Khmer and Vietnamese animal. Free, private, works in your browser." breadcrumbs={[{ name: "Find my sign", href: "/tools/zodiac-calculator/" }]}>
+  <div class="mx-auto max-w-reading safe-x py-6 box-content">
+    <h1 class="text-h1">Find my sign</h1>
+    <p class="reading mt-3 text-muted">Enter your birth date to see your Western and Chinese signs. Add a time and place for your moon and rising signs. Your details stay on this device.</p>
+
+    <form id="calc" class="mt-6 flex flex-col gap-5" novalidate>
+      <div>
+        <label class="label" for="birth-date">Birth date</label>
+        <input class="field tabular" type="date" id="birth-date" name="date" required min="1900-01-01" max={todayIso} aria-describedby="date-error" />
+        <p id="date-error" class="mt-2 text-small font-semibold text-cinnabar" hidden></p>
+      </div>
+      <div>
+        <label class="label" for="birth-time">Birth time <span class="font-normal text-muted">(optional)</span></label>
+        <input class="field tabular" type="time" id="birth-time" name="time" />
+        <label class="mt-3 inline-flex min-h-tap items-center gap-3">
+          <input type="checkbox" id="time-unknown" class="size-5 accent-[var(--ink)]" />
+          <span>I don't know my birth time</span>
+        </label>
+      </div>
+      <div>
+        <label class="label" for="birth-city">Birth city <span class="font-normal text-muted">(optional)</span></label>
+        <input class="field" id="birth-city" name="city" list="city-list" autocomplete="off" aria-describedby="city-hint city-error" />
+        <datalist id="city-list">{sorted.map((c) => <option value={`${c.name}, ${c.country}`} />)}</datalist>
+        <p id="city-hint" class="mt-2 text-small text-muted">Start typing and pick from the list. Choose the nearest large city if yours is missing.</p>
+        <p id="city-error" class="mt-2 text-small font-semibold text-cinnabar" hidden></p>
+      </div>
+      <div><button type="submit" class="btn-primary">Show my signs</button></div>
+    </form>
+
+    <section id="results" class="mt-8 scroll-mt-5" hidden aria-labelledby="results-h" tabindex="-1">
+      <h2 id="results-h" class="text-h2">Your signs</h2>
+      <p id="cusp-note" class="mt-4 border border-rule p-4" hidden></p>
+
+      <h3 class="mt-6 text-h3">Western zodiac</h3>
+      <dl class="mt-3 grid gap-4 sm:grid-cols-3">
+        <div class="border-t-2 border-ink pt-3"><dt class="text-small text-muted">Sun sign</dt><dd class="mt-1 serif text-h2" data-r="sun"></dd><dd class="text-small"><a class="link" data-r="sun-link" href="#">Today's reading</a></dd></div>
+        <div class="border-t-2 border-ink pt-3"><dt class="text-small text-muted">Moon sign</dt><dd class="mt-1 serif text-h2" data-r="moon"></dd><dd class="text-small text-muted" data-r="moon-note"></dd></div>
+        <div class="border-t-2 border-ink pt-3"><dt class="text-small text-muted">Rising sign</dt><dd class="mt-1 serif text-h2" data-r="rising"></dd><dd class="text-small text-muted" data-r="rising-note"></dd></div>
+      </dl>
+
+      <h3 class="mt-7 text-h3">Chinese zodiac</h3>
+      <dl class="mt-3 grid gap-4 sm:grid-cols-3">
+        <div class="border-t-2 border-ink pt-3"><dt class="text-small text-muted">Animal</dt><dd class="mt-1 serif text-h2" data-r="animal"></dd><dd class="text-small"><a class="link" data-r="animal-link" href="#">Profile</a></dd></div>
+        <div class="border-t-2 border-ink pt-3"><dt class="text-small text-muted">Element</dt><dd class="mt-1 serif text-h2" data-r="element"></dd></div>
+        <div class="border-t-2 border-ink pt-3"><dt class="text-small text-muted">Yin or yang</dt><dd class="mt-1 serif text-h2" data-r="yinyang"></dd></div>
+      </dl>
+      <p class="mt-3 text-small text-muted" data-r="bazi"></p>
+
+      <h3 class="mt-7 text-h3">Southeast Asian traditions</h3>
+      <ul class="mt-3" data-r="traditions"></ul>
+      <p class="mt-3 text-small text-muted" data-r="trad-note"></p>
+
+      <h3 class="mt-7 text-h3">Lucky colours and numbers</h3>
+      <p class="mt-3"><span data-r="colours"></span>. Numbers <span class="tabular" data-r="numbers"></span>.</p>
+      <p class="mt-1 text-small text-muted">From your Chinese year element, by tradition.</p>
+
+      <nav aria-label="Next steps" class="mt-7 border-t border-rule pt-5">
+        <h3 class="text-h3">Read next</h3>
+        <ul class="mt-2" data-r="links"></ul>
+      </nav>
+    </section>
+  </div>
+  <script type="application/json" id="cities" set:html={JSON.stringify(cities)}></script>
+</BaseLayout>
+
+<script>
+  import { calculate, type City } from "../../../lib/calculator";
+  import { ELEMENT_NAME } from "../../../lib/chinese";
+
+  const form = document.getElementById("calc") as HTMLFormElement;
+  const dateEl = document.getElementById("birth-date") as HTMLInputElement;
+  const timeEl = document.getElementById("birth-time") as HTMLInputElement;
+  const unknownEl = document.getElementById("time-unknown") as HTMLInputElement;
+  const cityEl = document.getElementById("birth-city") as HTMLInputElement;
+  const results = document.getElementById("results")!;
+  const cities: City[] = JSON.parse(document.getElementById("cities")!.textContent!);
+  const $ = (k: string) => results.querySelector<HTMLElement>(`[data-r="${k}"]`)!;
+
+  unknownEl.addEventListener("change", () => {
+    timeEl.disabled = unknownEl.checked;
+    if (unknownEl.checked) timeEl.value = "";
+  });
+
+  function setError(input: HTMLInputElement, errId: string, msg: string | null) {
+    const err = document.getElementById(errId)!;
+    err.textContent = msg ?? "";
+    err.hidden = !msg;
+    input.setAttribute("aria-invalid", msg ? "true" : "false");
+  }
+
+  function localTodayIso() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  }
+
+  function li(html: [string, string?][]) {
+    const el = document.createElement("li");
+    el.className = "border-b border-rule py-2";
+    for (const [text, href] of html) {
+      if (href) { const a = document.createElement("a"); a.className = "link"; a.href = href; a.textContent = text; el.append(a); }
+      else el.append(text);
+    }
+    return el;
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const date = dateEl.value;
+    const today = localTodayIso();
+    let ok = true;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date < "1900-01-01" || date > today) {
+      setError(dateEl, "date-error", "Enter a date between 1900 and today.");
+      ok = false;
+    } else setError(dateEl, "date-error", null);
+
+    let city: City | null = null;
+    const cityText = cityEl.value.trim();
+    if (cityText) {
+      city = cities.find((c) => `${c.name}, ${c.country}`.toLowerCase() === cityText.toLowerCase() || c.name.toLowerCase() === cityText.toLowerCase()) ?? null;
+      if (!city) { setError(cityEl, "city-error", "Pick a city from the list, or leave this empty."); ok = false; }
+      else setError(cityEl, "city-error", null);
+    } else setError(cityEl, "city-error", null);
+
+    if (!ok) { (form.querySelector('[aria-invalid="true"]') as HTMLElement)?.focus(); return; }
+
+    const time = !unknownEl.checked && timeEl.value ? timeEl.value : null;
+    const r = calculate({ date, time, city, fallbackTz: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC" });
+
+    $("sun").textContent = r.sun.name;
+    ($("sun-link") as HTMLAnchorElement).href = `/horoscope/${r.sun.slug}/`;
+    $("moon").textContent = r.moon.name;
+    $("moon-note").textContent = r.moonUncertain ? "The Moon changed sign that day. Add your birth time to be sure." : r.assumedNoon ? "Worked out for midday." : "";
+    $("rising").textContent = r.rising ? r.rising.name : "Not known";
+    $("rising-note").textContent = r.rising ? "" : "Needs your birth time and city.";
+
+    const cusp = document.getElementById("cusp-note")!;
+    if (r.sunCusp) {
+      cusp.textContent = `You were born on the cusp of ${r.sun.name} and ${r.sunCusp.name}. ${r.assumedNoon ? "Check with your birth time." : `At your birth time the Sun was in ${r.sun.name}.`}`;
+      cusp.hidden = false;
+    } else cusp.hidden = true;
+
+    $("animal").textContent = r.chinese.animal.name;
+    ($("animal-link") as HTMLAnchorElement).href = `/chinese-zodiac/${r.chinese.animal.slug}/`;
+    $("element").textContent = ELEMENT_NAME[r.chinese.element];
+    $("yinyang").textContent = r.chinese.yinYang === "yang" ? "Yang" : "Yin";
+    $("bazi").textContent = `Zodiac year ${r.chinese.year}, counted from Lunar New Year. Your BaZi year pillar, which turns at the start of spring (about 4 February), is ${r.bazi.pillar} (${r.bazi.label}).`;
+
+    $("traditions").replaceChildren(...r.traditions.map((t) => li([[`${t.label}: `], [t.animalName]])));
+    $("trad-note").textContent = r.traditionsDiffer
+      ? "Your animal differs between traditions. In Cambodia the animal year changes at Khmer New Year in mid-April, not at Lunar New Year."
+      : "All three traditions agree on your animal.";
+
+    $("colours").textContent = r.luckyColors.join(", ");
+    $("numbers").textContent = r.luckyNumbers.join(", ");
+
+    $("links").replaceChildren(
+      li([[`${r.sun.name} horoscope today`, `/horoscope/${r.sun.slug}/`]]),
+      li([[`${r.sun.name} profile`, `/zodiac/${r.sun.slug}/`]]),
+      li([[`${r.chinese.animal.name} in 2027`, `/chinese-zodiac/${r.chinese.animal.slug}/2027/`]]),
+      li([[`${r.sun.name} compatibility`, `/compatibility/`]]),
+    );
+
+    results.hidden = false;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    results.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    results.focus({ preventScroll: true });
+  });
+</script>

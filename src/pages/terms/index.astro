@@ -1,0 +1,17 @@
+---
+import TextPage from "../../layouts/TextPage.astro";
+import { SITE_NAME, CONTACT_EMAIL } from "../../config/site";
+---
+<TextPage title="Terms" path="/terms/" updated="4 October 2026" description={`Terms of use for ${SITE_NAME}.`}>
+  <p>By using {SITE_NAME} you agree to these terms.</p>
+  <h2>Entertainment and reflection</h2>
+  <p>Readings, forecasts, compatibility scores and almanac days are for entertainment and reflection. They are not medical, legal, financial or professional advice. Please don't make important decisions based on them alone.</p>
+  <h2>Our content</h2>
+  <p>The text, glyphs and design on this site are original and belong to {SITE_NAME}. You're welcome to share links and short quotes with credit. Please don't copy whole pages.</p>
+  <h2>Links and purchases</h2>
+  <p>Some pages link to other sites, including shops. We aren't responsible for their content, products or terms. Where we may earn a commission, we say so next to the link.</p>
+  <h2>Changes</h2>
+  <p>We may update these terms. The date above shows the latest version.</p>
+  <h2>Contact</h2>
+  <p><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
+</TextPage>

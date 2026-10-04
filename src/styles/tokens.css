@@ -5,7 +5,8 @@
  * prefers-color-scheme fallback (kept identical; the contrast script checks
  * the [data-theme="dark"] block).
  */
-:root {
+:root,
+.theme-light {
   --paper: #F6F7F4;
   --paper-raised: #FFFFFF;
   --ink: #1C2340;
@@ -68,7 +69,8 @@
   }
 }
 
-:root[data-theme="dark"] {
+:root[data-theme="dark"],
+.theme-dark {
   --paper: #141933;
   --paper-raised: #1C2244;
   --ink: #E9EAF2;

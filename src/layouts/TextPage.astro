@@ -1,0 +1,14 @@
+---
+/** TextPage — simple reading-column page for legal and informational content. Props: title, description, crumb */
+import BaseLayout from "./BaseLayout.astro";
+import Prose from "../components/Prose.astro";
+interface Props { title: string; description: string; path: string; updated?: string; noindex?: boolean }
+const { title, description, path, updated, noindex } = Astro.props;
+---
+<BaseLayout title={title} description={description} noindex={noindex} breadcrumbs={[{ name: title, href: path }]}>
+  <div class="mx-auto max-w-reading safe-x py-6 box-content">
+    <h1 class="text-h1">{title}</h1>
+    {updated && <p class="mt-2 text-small text-muted">Last updated {updated}</p>}
+    <div class="mt-6"><Prose><slot /></Prose></div>
+  </div>
+</BaseLayout>

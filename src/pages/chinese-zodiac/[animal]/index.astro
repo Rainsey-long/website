@@ -29,7 +29,7 @@ const today = almanacDay(buildToday());
 const clashToday = today.clash.slug === animal.slug;
 const Content = profile?.Content;
 ---
-<BaseLayout title={title} description={description} ogType="article"
+<BaseLayout title={title} description={description} ogType="article" ogImage={`/og/animal-${animal.slug}.png`}
   breadcrumbs={[{ name: "Chinese zodiac", href: "/chinese-zodiac/" }, { name: animal.name, href: `/chinese-zodiac/${animal.slug}/` }]}
   jsonLd={[articleLd({ headline: `The ${animal.name} in the Chinese zodiac`, description, url }), ...faqLd(fm?.faq)]}>
   <div class="mx-auto max-w-page safe-x py-5 lg:grid lg:grid-cols-[minmax(0,1fr)_var(--size-rail)] lg:gap-7">

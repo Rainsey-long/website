@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Prose from "../../components/Prose.astro";
+import Glyph from "../../components/Glyph.astro";
+import { ANIMALS } from "../../lib/chinese";
+import { KHMER_NAMES, VIETNAMESE_NAMES } from "../../lib/sea-variants";
+---
+<BaseLayout title="The zodiac in Southeast Asia" description="How the twelve-animal zodiac works in Cambodia and Vietnam: Khmer New Year in April, the Vietnamese Cat and Buffalo, and why your animal can differ." breadcrumbs={[{ name: "Southeast Asian zodiac", href: "/southeast-asian-zodiac/" }]}>
+  <div class="mx-auto max-w-page safe-x py-6">
+    <h1 class="text-h1">The zodiac in Southeast Asia</h1>
+    <div class="mt-5 max-w-reading">
+      <Prose>
+        <p>The twelve animals travelled across Asia and settled into local calendars along the way. Cambodia and Vietnam share the same cycle as China, with two differences worth knowing.</p>
+        <h2>Cambodia: the year turns in April</h2>
+        <p>In Cambodia the animal year changes at Khmer New Year, in mid-April, rather than at Lunar New Year. If you were born between Lunar New Year and Khmer New Year, your Khmer animal is the one from the year before. <a href="/southeast-asian-zodiac/khmer/">Read the Khmer guide</a>.</p>
+        <h2>Vietnam: the Cat and the Buffalo</h2>
+        <p>Vietnam counts the year from Tết, the same day as Lunar New Year, but two animals change. The Cat takes the Rabbit's place, and the Buffalo stands in for the Ox. <a href="/southeast-asian-zodiac/vietnamese/">Read the Vietnamese guide</a>.</p>
+      </Prose>
+    </div>
+    <section class="mt-7 border-t border-rule pt-5" aria-labelledby="names-h">
+      <h2 id="names-h" class="text-h2">The animals in three traditions</h2>
+      <div class="mt-4 overflow-x-auto">
+        <table class="w-full text-left">
+          <thead class="text-small text-muted"><tr><th class="py-2 pr-4 font-medium">Chinese</th><th class="py-2 pr-4 font-medium">Khmer</th><th class="py-2 font-medium">Vietnamese</th></tr></thead>
+          <tbody>
+            {ANIMALS.map((a) => (
+              <tr class="border-t border-rule">
+                <td class="py-3 pr-4"><a class="link inline-flex items-center gap-2" href={`/chinese-zodiac/${a.slug}/`}><Glyph name={a.slug} set="animal" class="size-5" />{a.name}</a></td>
+                <td class="py-3 pr-4">{KHMER_NAMES[a.index]}</td>
+                <td class="py-3">{VIETNAMESE_NAMES[a.index]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-small text-muted">Khmer names are romanized and awaiting review by a native speaker.</p>
+      <p class="mt-5"><a class="btn-primary" href="/tools/zodiac-calculator/">Find my animal in each tradition</a></p>
+    </section>
+  </div>
+</BaseLayout>

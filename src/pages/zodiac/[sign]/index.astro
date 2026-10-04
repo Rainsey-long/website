@@ -23,7 +23,7 @@ const url = new URL(`/zodiac/${sign.slug}/`, SITE_URL).href;
 const best = SIGNS.filter((s) => s.slug !== sign.slug).map((s) => ({ s, score: westernScore(sign, s).score })).sort((a, b) => b.score - a.score).slice(0, 3);
 const Content = profile?.Content;
 ---
-<BaseLayout title={title} description={description} ogType="article" ogImage={`/og/${sign.slug}.png`}
+<BaseLayout title={title} description={description} ogType="article" ogImage={`/og/${sign.slug}.png`} 
   breadcrumbs={[{ name: "Zodiac signs", href: "/zodiac/" }, { name: sign.name, href: `/zodiac/${sign.slug}/` }]}
   jsonLd={[articleLd({ headline: `${sign.name} zodiac sign`, description, url }), ...faqLd(fm?.faq)]}>
   <div class="mx-auto max-w-page safe-x py-5 lg:grid lg:grid-cols-[minmax(0,1fr)_var(--size-rail)] lg:gap-7">

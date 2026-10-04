@@ -27,7 +27,7 @@ const url = new URL(`/chinese-zodiac/${animal.slug}/2027/`, SITE_URL).href;
 const allies = ANIMALS.filter((o) => o.slug !== animal.slug && ["three-harmonies", "six-harmonies"].includes(chineseScore(animal, o).relation));
 const Content = forecast?.Content;
 ---
-<BaseLayout title={title} description={description} ogType="article"
+<BaseLayout title={title} description={description} ogType="article" ogImage={`/og/animal-${animal.slug}.png`}
   breadcrumbs={[{ name: "Chinese zodiac", href: "/chinese-zodiac/" }, { name: "2027", href: "/chinese-zodiac/2027/" }, { name: animal.name, href: `/chinese-zodiac/${animal.slug}/2027/` }]}
   jsonLd={[articleLd({ headline: title, description, url })]}>
   <div class="mx-auto max-w-page safe-x py-5 lg:grid lg:grid-cols-[minmax(0,1fr)_var(--size-rail)] lg:gap-7">

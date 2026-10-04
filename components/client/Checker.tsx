@@ -1,4 +1,5 @@
 "use client";
+import { useLocalePath } from "./LangProvider";
 /** Compatibility checker: pick a system and two of each, go to the pair page. */
 import { useRouter } from "next/navigation";
 import { useId, useState } from "react";
@@ -6,6 +7,7 @@ import { useId, useState } from "react";
 type Opt = { slug: string; name: string };
 export default function Checker({ signs, animals }: { signs: Opt[]; animals: Opt[] }) {
   const router = useRouter();
+  const lp = useLocalePath();
   const id = useId();
   const [type, setType] = useState<"western" | "chinese">("western");
   const list = type === "western" ? signs : animals;
@@ -19,7 +21,7 @@ export default function Checker({ signs, animals }: { signs: Opt[]; animals: Opt
     <form className="mt-6 flex flex-col gap-5" onSubmit={(e) => {
       e.preventDefault();
       const [x, y] = [a, b].sort();
-      router.push(`/${type === "western" ? "compatibility" : "chinese-compatibility"}/${x}-and-${y}`);
+      router.push(lp(`/${type === "western" ? "compatibility" : "chinese-compatibility"}/${x}-and-${y}`));
     }}>
       <fieldset>
         <legend className="label">System</legend>

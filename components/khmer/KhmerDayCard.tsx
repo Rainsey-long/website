@@ -2,7 +2,7 @@
  * Today in the Khmer calendar: lunar date in Khmer script with romanised
  * English, BE year, animal year and sak, holy day and festival flags.
  */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import type { KhmerDay } from "@/lib/khmer";
 
 export default function KhmerDayCard({ day, heading = "Today in the Khmer calendar", headingId = "khmer-today" }: { day: KhmerDay; heading?: string; headingId?: string }) {

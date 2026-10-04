@@ -40,12 +40,13 @@ export function SignOut() {
   return <button type="button" className="btn-secondary" onClick={async () => { await send("/api/admin/login", "DELETE"); router.replace("/admin/login"); }}>Sign out</button>;
 }
 
-export function BlockEditor({ id, text, review }: { id: string; text: string; review: "draft" | "approved" }) {
+export function BlockEditor({ id, text, textKm, review }: { id: string; text: string; textKm: string; review: "draft" | "approved" }) {
   const router = useRouter();
   const [value, setValue] = useState(text);
+  const [valueKm, setValueKm] = useState(textKm);
   const [msg, setMsg] = useState<string | null>(null);
   const save = async (nextReview: "draft" | "approved") => {
-    const r = await send(`/api/admin/blocks/${id}`, "PATCH", { text: value, review: nextReview });
+    const r = await send(`/api/admin/blocks/${id}`, "PATCH", { text: value, text_km: valueKm, review: nextReview });
     setMsg(r.ok ? (nextReview === "approved" ? "Approved" : "Saved") : r.error ?? "Save failed");
     if (r.ok) router.refresh();
   };
@@ -53,10 +54,12 @@ export function BlockEditor({ id, text, review }: { id: string; text: string; re
     <div className="mt-2">
       <label className="sr-only" htmlFor={`b-${id}`}>Text for {id}</label>
       <textarea id={`b-${id}`} className="field py-2 reading" rows={3} value={value} onChange={(e) => setValue(e.target.value)} />
+      <label className="mt-2 block text-small text-muted" htmlFor={`bk-${id}`}>Khmer <span className="font-normal">(empty shows the English text on Khmer pages)</span></label>
+      <textarea id={`bk-${id}`} lang="km" className="field py-2 reading" rows={3} value={valueKm} onChange={(e) => setValueKm(e.target.value)} />
       <div className="mt-2 flex flex-wrap items-center gap-3">
         <button type="button" className="btn-primary" onClick={() => save("approved")}>{review === "approved" ? "Save" : "Save and approve"}</button>
         {review === "approved" && <button type="button" className="btn-secondary" onClick={() => save("draft")}>Back to draft</button>}
-        {review === "draft" && value !== text && <button type="button" className="btn-secondary" onClick={() => save("draft")}>Save as draft</button>}
+        {review === "draft" && (value !== text || valueKm !== textKm) && <button type="button" className="btn-secondary" onClick={() => save("draft")}>Save as draft</button>}
         {msg && <span className="text-small text-muted" role="status">{msg}</span>}
       </div>
     </div>

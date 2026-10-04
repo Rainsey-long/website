@@ -1,5 +1,5 @@
 /** Moon calendar (research feature #2): phase and Moon sign each day, exact phase and ingress times. */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Glyph from "@/components/Glyph";

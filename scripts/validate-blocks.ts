@@ -27,6 +27,12 @@ for (const file of readdirSync(dir).filter((f) => f.endsWith(".json"))) {
     if (typeof b.text !== "string" || b.text.length < 20 || b.text.length > 400) errors.push(`${where}: text length`);
     if (b.text && !/[.?]$/.test(b.text)) errors.push(`${where}: text must end with a full stop`);
     for (const re of BANNED) if (re.test(b.text ?? "")) errors.push(`${where}: banned wording ${re}`);
+    if (b.text_km !== undefined) {
+      // Khmer draft (lib/i18n.ts): ends with the Khmer full stop, no exclamation marks.
+      if (typeof b.text_km !== "string" || b.text_km.length < 10 || b.text_km.length > 800) errors.push(`${where}: text_km length`);
+      else if (!/[។?]$/.test(b.text_km)) errors.push(`${where}: text_km must end with ។`);
+      if (typeof b.text_km === "string" && b.text_km.includes("!")) errors.push(`${where}: text_km has an exclamation mark`);
+    }
     const c = b.conditions ?? {};
     const keys = Object.keys(c);
     if (b.kind === "base") {

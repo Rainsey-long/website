@@ -55,7 +55,7 @@ export default async function Admin({ searchParams }: Search) {
               {rows.map((r) => (
                 <li key={r.id} className="border-b border-rule py-4">
                   <p className="text-small text-muted tabular">{r.id} · {r.kind} · {r.conditions} · {r.review}{r.updated_by ? ` · edited by ${r.updated_by}` : ""}</p>
-                  <BlockEditor id={r.id} text={r.text} review={r.review} />
+                  <BlockEditor id={r.id} text={r.text} textKm={r.text_km} review={r.review} />
                   {r.text !== r.source_text && <p className="mt-2 text-small text-muted">Original: {r.source_text}</p>}
                 </li>
               ))}

@@ -3,7 +3,7 @@
  * lib/sky.ts; the Moon is drawn at its actual phase and eases into position
  * once (600ms, off under reduced motion). Tapping a sign opens its reading.
  */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import { SIGNS } from "@/lib/western";
 import type { SkyDay } from "@/lib/sky";
 import { WESTERN_GLYPHS } from "@/lib/glyphs";

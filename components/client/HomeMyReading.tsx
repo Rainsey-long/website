@@ -1,6 +1,6 @@
 "use client";
 /** "Your reading today" (§8.1): first on the homepage once a sign is remembered. */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import { MY_SIGN_EVENT, MY_SIGN_KEY, SIGN_NAMES, localToday, writeStore } from "@/lib/client";
 import { WESTERN_GLYPHS } from "@/lib/glyphs";
 import { GlyphParts } from "../Glyph";

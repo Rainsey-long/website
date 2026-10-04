@@ -1,5 +1,5 @@
 /** The seven birth weekdays as chips: Khmer name, English day, colour swatch. */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import { WEEKDAYS } from "@/lib/khmer";
 
 export default function WeekdayChips({ heading = "Born on which day?", headingId = "weekday-h" }: { heading?: string; headingId?: string }) {

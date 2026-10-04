@@ -1,5 +1,5 @@
 /** Birth-weekday profile (research §3): planet, colour, personal angel, a short portrait. */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import AngelCard from "@/components/khmer/AngelCard";

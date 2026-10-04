@@ -1,5 +1,5 @@
 /** The sky now: positions, the next phases, current retrogrades, next eclipse. */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import DayDial from "@/components/DayDial";
 import MoonGlyph from "@/components/MoonGlyph";

@@ -2,7 +2,7 @@
  * ChipGrid — SignPicker / AnimalPicker (§6.2): 12 chips, 4×3 mobile, 6×2 desktop,
  * tap targets ≥ 48px. The remembered sign gets the cinnabar ring (client island).
  */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import Glyph from "./Glyph";
 import { RememberedChipStyle } from "./client/Remembered";
 

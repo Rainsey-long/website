@@ -1,6 +1,8 @@
 /**
  * Sitemap (plan §9). Dynamic, not prerendered: a build-time sitemap would
  * describe the build's clock and database (CamboMath environment.md #3).
+ * Every page is listed in English and Khmer, each entry naming both versions
+ * as hreflang alternates (lib/i18n.ts).
  */
 import type { MetadataRoute } from "next";
 import { SIGNS } from "@/lib/western";
@@ -10,11 +12,13 @@ import { pairSlug } from "@/lib/compatibility";
 import { dailyWindow } from "@/lib/pages";
 import { dateInZone } from "@/lib/today";
 import { DEFAULT_TZ, SITE_URL } from "@/lib/site";
+import { localePath } from "@/lib/i18n";
 
 export const dynamic = "force-dynamic";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const u = (p: string, changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "monthly", priority = 0.5) => ({ url: `${SITE_URL}${p}`, changeFrequency, priority });
+  const abs = (p: string) => `${SITE_URL}${p === "/" ? "" : p}`;
   const today = dateInZone(DEFAULT_TZ);
   const y = Number(today.slice(0, 4));
   const out: MetadataRoute.Sitemap = [
@@ -41,5 +45,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
     out.push(u(`/sky/retrogrades/${year}`, "monthly", 0.6));
   }
-  return out;
+  // Each page in both languages; each entry names both versions.
+  return out.flatMap((e) => {
+    const path = e.url.slice(SITE_URL.length) || "/";
+    const languages = { en: abs(path), km: abs(localePath(path, "km")) };
+    return [
+      { ...e, url: languages.en, alternates: { languages } },
+      { ...e, url: languages.km, alternates: { languages } },
+    ];
+  });
 }

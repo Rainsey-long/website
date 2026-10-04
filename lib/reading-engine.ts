@@ -36,6 +36,8 @@ export interface Block {
     moonElement?: Array<"fire" | "earth" | "air" | "water">;
   };
   tone: string;
+  /** Khmer draft (docs/KHMER-REVIEW.md); empty or absent falls back to `text`. */
+  text_km?: string;
   text: string;
 }
 

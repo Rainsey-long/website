@@ -1,4 +1,5 @@
 "use client";
+import { useLocalePath } from "./LangProvider";
 /** "Try another pair" (wireframe §7.4): two selects → the canonical pair page. */
 import { useRouter } from "next/navigation";
 import { useId, useState } from "react";
@@ -7,6 +8,7 @@ export default function PairPicker({ options, base, a, b, heading = "Try another
   options: Array<{ slug: string; name: string }>; base: string; a?: string; b?: string; heading?: string; noun: string;
 }) {
   const router = useRouter();
+  const lp = useLocalePath();
   const id = useId();
   const [x, setX] = useState(a ?? options[0].slug);
   const [y, setY] = useState(b ?? options[1].slug);
@@ -14,7 +16,7 @@ export default function PairPicker({ options, base, a, b, heading = "Try another
     <form className="mt-7 border-t border-rule pt-5" onSubmit={(e) => {
       e.preventDefault();
       const [p, q] = [x, y].sort();
-      router.push(`${base}${p}-and-${q}`);
+      router.push(lp(`${base}${p}-and-${q}`));
     }}>
       <h2 className="text-h3">{heading}</h2>
       <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">

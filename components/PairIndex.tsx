@@ -1,5 +1,5 @@
 /** Index of every pair for one system, grouped by first sign/animal. */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import Glyph from "./Glyph";
 import { pairSlug } from "@/lib/compatibility";
 

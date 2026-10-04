@@ -1,5 +1,5 @@
 /** Lucky days month (wireframe §7.6), with the Khmer calendar when chosen. */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Glyph from "@/components/Glyph";

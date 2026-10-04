@@ -14,6 +14,9 @@ import Footer from "@/components/Footer";
 import ZoneCookie from "@/components/client/ZoneCookie";
 import { FEATURES, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 import { visitorZone } from "@/lib/today";
+import { getLang } from "@/lib/langServer";
+import { LANG_TAG } from "@/lib/i18n";
+import { LangProvider } from "@/components/client/LangProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -41,18 +44,21 @@ const THEME_SCRIPT = `try{var t=localStorage.getItem("theme");if(t==="dark"||t==
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const zone = await visitorZone();
+  const lang = await getLang();
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={LANG_TAG[lang]} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body>
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-raised focus:p-3 focus:rounded-sm">Skip to content</a>
-        <Header />
-        <main id="main" className="flex-1">{children}</main>
-        <Footer />
-        <div id="toast" role="status" aria-live="polite" className="toast" hidden />
-        <ZoneCookie serverZone={zone} />
+        <LangProvider lang={lang}>
+          <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-raised focus:p-3 focus:rounded-sm">{lang === "km" ? "រំលងទៅខ្លឹមសារ" : "Skip to content"}</a>
+          <Header />
+          <main id="main" className="flex-1">{children}</main>
+          <Footer />
+          <div id="toast" role="status" aria-live="polite" className="toast" hidden />
+          <ZoneCookie serverZone={zone} />
+        </LangProvider>
         {FEATURES.CF_ANALYTICS_TOKEN && (
           <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: FEATURES.CF_ANALYTICS_TOKEN })} />
         )}

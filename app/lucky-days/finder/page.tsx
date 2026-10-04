@@ -3,7 +3,7 @@
  * Searches the Chinese almanac only; Khmer good-day picking is deliberately not
  * built (CLAUDE.md owner rules). A GET form: results have a URL and need no JS.
  */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Seal from "@/components/Seal";
 import { findLuckyDays, OCCASIONS, type FinderResult } from "@/lib/luckyFinder";

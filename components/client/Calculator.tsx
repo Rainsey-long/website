@@ -4,7 +4,7 @@
  * nothing is stored or sent (plan §2.3). Sections follow the visitor's
  * chosen traditions.
  */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import { useId, useRef, useState } from "react";
 import { calculate, type CalculatorResult, type City } from "@/lib/calculator";
 import { ELEMENT_NAME } from "@/lib/chinese";

@@ -2,7 +2,7 @@
  * ReadingSection (§6.3): sign + date header with prev/next, the four topics
  * in fixed order with EnergyMeters, hairline rules, then the LuckyRow.
  */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import Glyph from "./Glyph";
 import EnergyMeter from "./EnergyMeter";
 import LuckyRow from "./LuckyRow";

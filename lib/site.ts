@@ -7,6 +7,7 @@ export const DOMAIN = "example.com";
 /** Absolute origin. Set NEXT_PUBLIC_SITE_URL in Railway's BUILD environment (it is inlined). */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || `https://${DOMAIN}`).replace(/\/$/, "");
 export const SITE_TAGLINE = "Daily horoscopes, Chinese zodiac and lucky days";
+export const SITE_TAGLINE_KM = "ហោរាសាស្ត្រប្រចាំថ្ងៃ ឆ្នាំចិន និងថ្ងៃល្អ";
 
 /** Dated daily pages listed in the sitemap: last N days + next M days. Any date 1900–2100 still renders. */
 export const DAILY_WINDOW = { pastDays: 60, futureDays: 2 };
@@ -40,5 +41,7 @@ export const FEATURES = {
 
 export const DISCLAIMER =
   "For entertainment and reflection. Not medical, legal, or financial advice.";
+export const DISCLAIMER_KM =
+  "សម្រាប់ការកម្សាន្ត និងការពិចារណា។ មិនមែនជាដំបូន្មានវេជ្ជសាស្ត្រ ច្បាប់ ឬហិរញ្ញវត្ថុឡើយ។";
 
 export const CONTACT_EMAIL = `hello@${DOMAIN}`;

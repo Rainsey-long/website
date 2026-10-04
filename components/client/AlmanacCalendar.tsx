@@ -6,7 +6,7 @@
  * Today outlined in cinnabar; arrow keys move between days; the detail panel
  * follows the selection.
  */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import { useRef, useState, useSyncExternalStore } from "react";
 import Seal from "../Seal";
 import { localToday } from "@/lib/client";

@@ -1,5 +1,5 @@
 /** Homepage (wireframe §7.1), arranged by the traditions the visitor chose. */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import DayDial from "@/components/DayDial";
 import ChipGrid from "@/components/ChipGrid";
 import LuckyRow from "@/components/LuckyRow";

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 /** RelatedLinks — a proper link list (wireframe §7.2 "Related"). */
 export default function RelatedLinks({ heading = "Related", links }: { heading?: string; links: Array<{ href: string; label: string }> }) {
   return (

@@ -1,5 +1,5 @@
 /** Retrograde and eclipse calendar (research feature #5). Calm framing: an optical effect, a time to review. */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Glyph from "@/components/Glyph";

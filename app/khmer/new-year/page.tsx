@@ -1,5 +1,5 @@
 /** Khmer New Year: Moha Songkran moment, festival days, the year's angel. Official time and prediction come from the admin when entered. */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import AngelCard from "@/components/khmer/AngelCard";
 import Countdown from "@/components/client/Countdown";

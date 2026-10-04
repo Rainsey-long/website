@@ -4,7 +4,7 @@
  * for a chosen city and day. A GET form, so it works without JavaScript and
  * every view has a URL.
  */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Glyph from "@/components/Glyph";
 import Seal from "@/components/Seal";

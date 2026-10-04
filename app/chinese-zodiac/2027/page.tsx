@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Glyph from "@/components/Glyph";
 import EnergyMeter from "@/components/EnergyMeter";

@@ -1,5 +1,5 @@
 /** Khmer traditions hub: what can be computed honestly, and links into each. */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import KhmerDayCard from "@/components/khmer/KhmerDayCard";
 import WeekdayChips from "@/components/khmer/WeekdayChips";

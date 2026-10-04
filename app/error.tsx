@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 /** Page-level error boundary (CamboMath pattern). Says what happened and what to do; never apologises (§6.14). */
 export default function Error({ reset }: { error: Error; reset: () => void }) {
   return (

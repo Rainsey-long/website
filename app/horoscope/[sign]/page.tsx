@@ -1,5 +1,5 @@
 /** Sign hub (plan §8): today's reading, with yesterday/tomorrow ready for the visitor's local date. */
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ReadingSection from "@/components/ReadingSection";

@@ -129,6 +129,10 @@ function migrate(d: Database.Database): void {
     CREATE INDEX IF NOT EXISTS idx_feedback_created ON feedback(created_at);
   `);
   addColumnIfMissing(d, "users", "session_epoch", "session_epoch INTEGER NOT NULL DEFAULT 0");
+  // Khmer reading text (lib/i18n.ts). Same rule as the English pair: the seed
+  // follows source_text_km only while the owner has not edited text_km.
+  addColumnIfMissing(d, "text_blocks", "text_km", "text_km TEXT NOT NULL DEFAULT ''");
+  addColumnIfMissing(d, "text_blocks", "source_text_km", "source_text_km TEXT NOT NULL DEFAULT ''");
   runFileMigrations(d);
 }
 
@@ -139,6 +143,7 @@ export type TextBlockRow = {
   conditions: string;
   text: string;
   source_text: string;
+  text_km: string;
   review: "draft" | "approved";
   updated_at: string;
   updated_by: string | null;

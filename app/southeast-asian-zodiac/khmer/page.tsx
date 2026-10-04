@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/client/LocaleLink";
 import TextPage from "@/components/TextPage";
 import { KHMER_ANIMALS, songkran } from "@/lib/khmer";
 import { lunarNewYear } from "@/lib/chinese";

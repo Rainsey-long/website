@@ -4,8 +4,8 @@ dist/
 .DS_Store
 *.log
 .env*
-content/data/daily/
+!.env.example
 .next/
-data/
+/data/
 next-env.d.ts
 *.tsbuildinfo

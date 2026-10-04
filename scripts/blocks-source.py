@@ -215,7 +215,14 @@ for topic, houses in H.items():
         for el, texts in ELEMENT.items():
             for i, t in enumerate(texts):
                 blocks.append({"id": f"mood-element-{el}-{i+1:02d}", "topic": "mood", "kind": "modifier", "conditions": {"moonElement": [el]}, "tone": "warm", "text": t})
-    with open(os.path.join(out, f"{topic}.json"), "w") as f:
+    # Keep the Khmer drafts (text_km) already in the file: this script only
+    # writes English. If you change a block's English, re-translate its text_km.
+    target = os.path.join(out, f"{topic}.json")
+    if os.path.exists(target):
+        with open(target) as f:
+            km = {b["id"]: b["text_km"] for b in json.load(f) if b.get("text_km")}
+        blocks = [{**b, "text_km": km[b["id"]]} if b["id"] in km else b for b in blocks]
+    with open(target, "w") as f:
         json.dump(blocks, f, ensure_ascii=False, indent=1)
         f.write("\n")
     print(topic, len(blocks))

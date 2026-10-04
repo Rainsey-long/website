@@ -9,7 +9,8 @@
    ]
   },
   "tone": "warm",
-  "text": "You feel more in charge of your choices today. Think about what you truly want before you spend."
+  "text": "You feel more in charge of your choices today. Think about what you truly want before you spend.",
+  "text_km": "ថ្ងៃនេះ អ្នកមានអារម្មណ៍ថាគ្រប់គ្រងជម្រើសរបស់ខ្លួនបានច្រើនជាងមុន។ សូមគិតពីអ្វីដែលអ្នកពិតជាចង់បាន មុននឹងចាយ។"
  },
  {
   "id": "money-h1-02",
@@ -21,7 +22,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Your personal style is calling, but the best purchase may be no purchase at all."
+  "text": "Your personal style is calling, but the best purchase may be no purchase at all.",
+  "text_km": "រចនាបថផ្ទាល់ខ្លួនរបស់អ្នកកំពុងហៅអ្នក ប៉ុន្តែការទិញដ៏ល្អបំផុត ប្រហែលជាការមិនទិញអ្វីសោះ។"
  },
  {
   "id": "money-h1-03",
@@ -33,7 +35,8 @@
    ]
   },
   "tone": "warm",
-  "text": "A clear head helps with money matters. Make a simple plan for the week ahead."
+  "text": "A clear head helps with money matters. Make a simple plan for the week ahead.",
+  "text_km": "គំនិតច្បាស់លាស់ ជួយក្នុងរឿងលុយកាក់។ សូមធ្វើផែនការសាមញ្ញមួយសម្រាប់សប្ដាហ៍ខាងមុខ។"
  },
  {
   "id": "money-h2-01",
@@ -45,7 +48,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Money matters are in focus. Review your budget and notice where small amounts add up."
+  "text": "Money matters are in focus. Review your budget and notice where small amounts add up.",
+  "text_km": "រឿងលុយកាក់ ស្ថិតនៅចំកណ្ដាលនៃការយកចិត្តទុកដាក់។ សូមពិនិត្យថវិការបស់អ្នក ហើយកត់សម្គាល់កន្លែងដែលចំនួនតូចៗបូកគ្នាបានច្រើន។"
  },
  {
   "id": "money-h2-02",
@@ -57,7 +61,8 @@
    ]
   },
   "tone": "warm",
-  "text": "It is a good day to think about what gives you real value, not just what is new."
+  "text": "It is a good day to think about what gives you real value, not just what is new.",
+  "text_km": "ជាថ្ងៃល្អដើម្បីគិតពីអ្វីដែលផ្ដល់តម្លៃពិតប្រាកដដល់អ្នក មិនមែនត្រឹមតែអ្វីដែលថ្មីនោះទេ។"
  },
  {
   "id": "money-h2-03",
@@ -69,7 +74,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Steady habits beat quick wins. Keep an eye on everyday spending."
+  "text": "Steady habits beat quick wins. Keep an eye on everyday spending.",
+  "text_km": "ទម្លាប់នឹងនរ ល្អជាងការចំណេញរហ័ស។ សូមតាមដានការចំណាយប្រចាំថ្ងៃ។"
  },
  {
   "id": "money-h3-01",
@@ -81,7 +87,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Compare before you commit. A little research can save you more than you expect."
+  "text": "Compare before you commit. A little research can save you more than you expect.",
+  "text_km": "សូមប្រៀបធៀបមុននឹងសម្រេចចិត្ត។ ការស្រាវជ្រាវបន្តិចបន្តួច អាចសន្សំបានច្រើនជាងអ្វីដែលអ្នករំពឹង។"
  },
  {
   "id": "money-h3-02",
@@ -93,7 +100,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Conversations about money go smoothly today. Ask the question you have been putting off."
+  "text": "Conversations about money go smoothly today. Ask the question you have been putting off.",
+  "text_km": "ការជជែកអំពីលុយកាក់ ដំណើរការរលូននៅថ្ងៃនេះ។ សូមសួរសំណួរដែលអ្នកបានពន្យារពេលយូរមកហើយ។"
  },
  {
   "id": "money-h3-03",
@@ -105,7 +113,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Paperwork and admin are easier than usual. Sort the small things while you can."
+  "text": "Paperwork and admin are easier than usual. Sort the small things while you can.",
+  "text_km": "ឯកសារ និងកិច្ចការរដ្ឋបាល ងាយស្រួលជាងធម្មតា។ សូមរៀបចំរឿងតូចៗ ខណៈដែលអ្នកអាចធ្វើបាន។"
  },
  {
   "id": "money-h4-01",
@@ -117,7 +126,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Home costs may need attention. Sort out household plans calmly and early."
+  "text": "Home costs may need attention. Sort out household plans calmly and early.",
+  "text_km": "ចំណាយលើផ្ទះ អាចត្រូវការការយកចិត្តទុកដាក់។ សូមរៀបចំផែនការគ្រួសារដោយស្ងប់ស្ងាត់ និងមុនពេល។"
  },
  {
   "id": "money-h4-02",
@@ -129,7 +139,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Spending on comfort feels tempting. Choose what you will still enjoy next month."
+  "text": "Spending on comfort feels tempting. Choose what you will still enjoy next month.",
+  "text_km": "ការចំណាយលើភាពស្រួលខ្លួន គួរឱ្យទាក់ទាញ។ សូមជ្រើសរើសអ្វីដែលអ្នកនឹងនៅតែពេញចិត្តនៅខែក្រោយ។"
  },
  {
   "id": "money-h4-03",
@@ -141,7 +152,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Family and money may overlap today. Keep conversations kind and clear."
+  "text": "Family and money may overlap today. Keep conversations kind and clear.",
+  "text_km": "គ្រួសារ និងលុយកាក់ អាចជាប់ទាក់ទងគ្នានៅថ្ងៃនេះ។ សូមរក្សាការសន្ទនាឱ្យទន់ភ្លន់ និងច្បាស់លាស់។"
  },
  {
   "id": "money-h5-01",
@@ -153,7 +165,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Treats are fine in moderation. Enjoy something small without guilt."
+  "text": "Treats are fine in moderation. Enjoy something small without guilt.",
+  "text_km": "ការផ្ដល់រង្វាន់ដល់ខ្លួនឯងល្អ បើធ្វើក្នុងកម្រិតសមល្មម។ សូមរីករាយនឹងអ្វីតូចមួយ ដោយមិនមានអារម្មណ៍ខុស។"
  },
  {
   "id": "money-h5-02",
@@ -165,7 +178,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Fun can be free. Look for pleasures that do not cost much."
+  "text": "Fun can be free. Look for pleasures that do not cost much.",
+  "text_km": "ភាពសប្បាយ អាចមិនចំណាយលុយ។ សូមស្វែងរកការកម្សាន្តដែលមិនសូវចំណាយច្រើន។"
  },
  {
   "id": "money-h5-03",
@@ -177,7 +191,8 @@
    ]
   },
   "tone": "warm",
-  "text": "You may feel generous today. Give in a way that feels good and stays comfortable."
+  "text": "You may feel generous today. Give in a way that feels good and stays comfortable.",
+  "text_km": "អ្នកប្រហែលជាមានចិត្តសប្បុរសនៅថ្ងៃនេះ។ សូមផ្ដល់តាមរបៀបដែលធ្វើឱ្យអ្នកសប្បាយចិត្ត ហើយនៅតែស្រួលសម្រាប់អ្នក។"
  },
  {
   "id": "money-h6-01",
@@ -189,7 +204,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Organise your accounts, receipts or bills. Order brings peace of mind."
+  "text": "Organise your accounts, receipts or bills. Order brings peace of mind.",
+  "text_km": "សូមរៀបចំគណនី បង្កាន់ដៃ ឬវិក្កយបត្ររបស់អ្នក។ សណ្ដាប់ធ្នាប់នាំមកនូវភាពស្ងប់ចិត្ត។"
  },
  {
   "id": "money-h6-02",
@@ -201,7 +217,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Everyday efficiency is your friend. One small saving repeated often makes a difference."
+  "text": "Everyday efficiency is your friend. One small saving repeated often makes a difference.",
+  "text_km": "ប្រសិទ្ធភាពប្រចាំថ្ងៃ គឺជាមិត្តរបស់អ្នក។ ការសន្សំតូចមួយដែលធ្វើញឹកញាប់ បង្កើតភាពខុសគ្នាបាន។"
  },
  {
   "id": "money-h6-03",
@@ -213,7 +230,8 @@
    ]
   },
   "tone": "warm",
-  "text": "A practical day for money. Tidy up the loose ends."
+  "text": "A practical day for money. Tidy up the loose ends.",
+  "text_km": "ជាថ្ងៃជាក់ស្ដែងសម្រាប់រឿងលុយកាក់។ សូមបញ្ចប់កិច្ចការតូចៗដែលនៅសល់។"
  },
  {
   "id": "money-h7-01",
@@ -225,7 +243,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Shared costs and agreements are in focus. Talk openly and keep things fair."
+  "text": "Shared costs and agreements are in focus. Talk openly and keep things fair.",
+  "text_km": "ការចំណាយរួមគ្នា និងកិច្ចព្រមព្រៀង ស្ថិតនៅចំកណ្ដាលនៃការយកចិត្តទុកដាក់។ សូមនិយាយដោយបើកចំហ ហើយរក្សាភាពយុត្តិធម៌។"
  },
  {
   "id": "money-h7-02",
@@ -237,7 +256,8 @@
    ]
   },
   "tone": "warm",
-  "text": "A partner's view on money could be helpful. Listen with an open mind."
+  "text": "A partner's view on money could be helpful. Listen with an open mind.",
+  "text_km": "ទស្សនៈរបស់ដៃគូអំពីលុយកាក់ អាចមានប្រយោជន៍។ សូមស្ដាប់ដោយចិត្តបើកចំហ។"
  },
  {
   "id": "money-h7-03",
@@ -249,7 +269,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Fair deals come from clear conversations. Agree on the details before you begin."
+  "text": "Fair deals come from clear conversations. Agree on the details before you begin.",
+  "text_km": "កិច្ចព្រមព្រៀងដ៏យុត្តិធម៌ កើតចេញពីការសន្ទនាច្បាស់លាស់។ សូមឯកភាពលើព័ត៌មានលម្អិត មុននឹងចាប់ផ្ដើម។"
  },
  {
   "id": "money-h8-01",
@@ -261,7 +282,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Shared resources need care. Sort out who owes what, calmly and kindly."
+  "text": "Shared resources need care. Sort out who owes what, calmly and kindly.",
+  "text_km": "ធនធានរួមគ្នា ត្រូវការការថែទាំ។ សូមដោះស្រាយថាអ្នកណាជំពាក់អ្វី ដោយស្ងប់ស្ងាត់ និងទន់ភ្លន់។"
  },
  {
   "id": "money-h8-02",
@@ -273,7 +295,8 @@
    ]
   },
   "tone": "warm",
-  "text": "A good day to review long-term plans. Steady patience serves you best."
+  "text": "A good day to review long-term plans. Steady patience serves you best.",
+  "text_km": "ជាថ្ងៃល្អដើម្បីពិនិត្យផែនការរយៈពេលវែងឡើងវិញ។ ការអត់ធ្មត់នឹងនរ ជួយអ្នកបានល្អបំផុត។"
  },
  {
   "id": "money-h8-03",
@@ -285,7 +308,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Let go of an old money worry that no longer applies. Focus on what you can do today."
+  "text": "Let go of an old money worry that no longer applies. Focus on what you can do today.",
+  "text_km": "សូមដោះលែងការព្រួយបារម្ភចាស់អំពីលុយកាក់ ដែលលែងពាក់ព័ន្ធហើយ។ សូមផ្ដោតលើអ្វីដែលអ្នកអាចធ្វើបាននៅថ្ងៃនេះ។"
  },
  {
   "id": "money-h9-01",
@@ -297,7 +321,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Big plans need a budget. Dream freely, then add up the costs."
+  "text": "Big plans need a budget. Dream freely, then add up the costs.",
+  "text_km": "ផែនការធំៗ ត្រូវការថវិកា។ សូមស្រមៃដោយសេរី រួចបូកសរុបការចំណាយ។"
  },
  {
   "id": "money-h9-02",
@@ -309,7 +334,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Learning about money can be empowering. Read or ask before you decide."
+  "text": "Learning about money can be empowering. Read or ask before you decide.",
+  "text_km": "ការរៀនអំពីលុយកាក់ អាចផ្ដល់កម្លាំងដល់អ្នក។ សូមអាន ឬសួរ មុននឹងសម្រេចចិត្ត។"
  },
  {
   "id": "money-h9-03",
@@ -321,7 +347,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Travel or study costs may come up. Plan ahead and you will feel calmer."
+  "text": "Travel or study costs may come up. Plan ahead and you will feel calmer.",
+  "text_km": "ការចំណាយលើការធ្វើដំណើរ ឬការសិក្សា អាចលេចឡើង។ សូមគ្រោងទុកជាមុន ហើយអ្នកនឹងមានអារម្មណ៍ស្ងប់ជាង។"
  },
  {
   "id": "money-h10-01",
@@ -333,7 +360,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Your effort at work may connect to your income. Keep a record of what you achieve."
+  "text": "Your effort at work may connect to your income. Keep a record of what you achieve.",
+  "text_km": "ការខិតខំរបស់អ្នកនៅកន្លែងធ្វើការ អាចភ្ជាប់ទៅនឹងប្រាក់ចំណូលរបស់អ្នក។ សូមកត់ត្រានូវអ្វីដែលអ្នកសម្រេចបាន។"
  },
  {
   "id": "money-h10-02",
@@ -345,7 +373,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Think long term today. Small, steady choices build security."
+  "text": "Think long term today. Small, steady choices build security.",
+  "text_km": "ថ្ងៃនេះ សូមគិតឱ្យវែងឆ្ងាយ។ ជម្រើសតូចៗ និងនឹងនរ កសាងសុវត្ថិភាព។"
  },
  {
   "id": "money-h10-03",
@@ -357,7 +386,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Professional growth can be an investment in yourself. Consider what would help most."
+  "text": "Professional growth can be an investment in yourself. Consider what would help most.",
+  "text_km": "ការរីកចម្រើនក្នុងអាជីព អាចជាការវិនិយោគលើខ្លួនឯង។ សូមពិចារណាថាអ្វីនឹងជួយអ្នកបានច្រើនជាងគេ។"
  },
  {
   "id": "money-h11-01",
@@ -369,7 +399,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Group outings can add up. Suggest something everyone can afford."
+  "text": "Group outings can add up. Suggest something everyone can afford.",
+  "text_km": "ការដើរលេងជាក្រុម អាចចំណាយច្រើនដោយមិនដឹងខ្លួន។ សូមស្នើអ្វីមួយដែលគ្រប់គ្នាអាចមានលទ្ធភាពចំណាយ។"
  },
  {
   "id": "money-h11-02",
@@ -381,7 +412,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Your goals give your spending direction. Ask whether each purchase moves you closer."
+  "text": "Your goals give your spending direction. Ask whether each purchase moves you closer.",
+  "text_km": "គោលដៅរបស់អ្នក ផ្ដល់ទិសដៅដល់ការចំណាយ។ សូមសួរខ្លួនឯងថា ការទិញនីមួយៗនាំអ្នកកាន់តែខិតជិតគោលដៅឬទេ។"
  },
  {
   "id": "money-h11-03",
@@ -393,7 +425,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Friends may share a useful tip. Take what fits your situation and leave the rest."
+  "text": "Friends may share a useful tip. Take what fits your situation and leave the rest.",
+  "text_km": "មិត្តភក្ដិអាចចែករំលែកគន្លឹះមានប្រយោជន៍។ សូមយកអ្វីដែលសមនឹងស្ថានភាពរបស់អ្នក ហើយទុកអ្វីដែលនៅសល់។"
  },
  {
   "id": "money-h12-01",
@@ -405,7 +438,8 @@
    ]
   },
   "tone": "warm",
-  "text": "A quiet day for money. Avoid rushed decisions and wait for clarity."
+  "text": "A quiet day for money. Avoid rushed decisions and wait for clarity.",
+  "text_km": "ជាថ្ងៃស្ងប់ស្ងាត់សម្រាប់រឿងលុយកាក់។ សូមជៀសវាងការសម្រេចចិត្តប្រញាប់ប្រញាល់ ហើយរង់ចាំឱ្យអ្វីៗច្បាស់។"
  },
  {
   "id": "money-h12-02",
@@ -417,7 +451,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Notice any spending you do for comfort. Kind awareness is enough, no guilt needed."
+  "text": "Notice any spending you do for comfort. Kind awareness is enough, no guilt needed.",
+  "text_km": "សូមកត់សម្គាល់ការចំណាយណាដែលអ្នកធ្វើដើម្បីលួងចិត្ត។ ការដឹងខ្លួនដោយចិត្តល្អ គឺគ្រប់គ្រាន់ហើយ មិនចាំបាច់មានអារម្មណ៍ខុសទេ។"
  },
  {
   "id": "money-h12-03",
@@ -429,7 +464,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Reflect on what security means to you. Your answer may surprise you."
+  "text": "Reflect on what security means to you. Your answer may surprise you.",
+  "text_km": "សូមពិចារណាថា សុវត្ថិភាពមានន័យយ៉ាងណាចំពោះអ្នក។ ចម្លើយរបស់អ្នក អាចធ្វើឱ្យអ្នកភ្ញាក់ផ្អើល។"
  },
  {
   "id": "money-phase-new-01",
@@ -441,7 +477,8 @@
    ]
   },
   "tone": "warm",
-  "text": "The new Moon is a good time to start a savings habit."
+  "text": "The new Moon is a good time to start a savings habit.",
+  "text_km": "ព្រះចន្ទងងឹត ជាពេលល្អដើម្បីចាប់ផ្ដើមទម្លាប់សន្សំប្រាក់។"
  },
  {
   "id": "money-phase-new-02",
@@ -453,7 +490,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Begin a fresh budget while the Moon is new."
+  "text": "Begin a fresh budget while the Moon is new.",
+  "text_km": "សូមចាប់ផ្ដើមថវិកាថ្មីមួយ ខណៈព្រះចន្ទនៅងងឹត។"
  },
  {
   "id": "money-phase-waxing-01",
@@ -465,7 +503,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Steady habits grow stronger as the Moon waxes."
+  "text": "Steady habits grow stronger as the Moon waxes.",
+  "text_km": "ទម្លាប់នឹងនរ កាន់តែរឹងមាំ ពេលព្រះចន្ទកំពុងភ្លឺឡើង។"
  },
  {
   "id": "money-phase-waxing-02",
@@ -477,7 +516,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Small, regular choices gather strength with the growing Moon."
+  "text": "Small, regular choices gather strength with the growing Moon.",
+  "text_km": "ជម្រើសតូចៗ និងទៀងទាត់ ទទួលបានកម្លាំងបន្ថែម ជាមួយព្រះចន្ទដែលកំពុងភ្លឺឡើង។"
  },
  {
   "id": "money-phase-full-01",
@@ -489,7 +529,8 @@
    ]
   },
   "tone": "warm",
-  "text": "The full Moon may tempt you to overspend. Sleep on big decisions."
+  "text": "The full Moon may tempt you to overspend. Sleep on big decisions.",
+  "text_km": "ព្រះចន្ទពេញវង់ អាចទាក់ទាញអ្នកឱ្យចាយលើស។ សូមទុកការសម្រេចចិត្តធំៗ ឱ្យដល់ថ្ងៃស្អែកសិន។"
  },
  {
   "id": "money-phase-full-02",
@@ -501,7 +542,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Under the full Moon, take stock before you commit."
+  "text": "Under the full Moon, take stock before you commit.",
+  "text_km": "ក្រោមព្រះចន្ទពេញវង់ សូមពិនិត្យស្ថានភាពជាមុនសិន មុននឹងសម្រេចចិត្ត។"
  },
  {
   "id": "money-phase-waning-01",
@@ -513,7 +555,8 @@
    ]
   },
   "tone": "warm",
-  "text": "The waning Moon favours trimming what you no longer need."
+  "text": "The waning Moon favours trimming what you no longer need.",
+  "text_km": "ព្រះចន្ទដែលកំពុងរួញ គាំទ្រការកាត់បន្ថយអ្វីដែលអ្នកលែងត្រូវការ។"
  },
  {
   "id": "money-phase-waning-02",
@@ -525,7 +568,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Clear out an old subscription or habit as the Moon wanes."
+  "text": "Clear out an old subscription or habit as the Moon wanes.",
+  "text_km": "សូមបោះបង់ការជាវប្រចាំចាស់មួយ ឬទម្លាប់ចាស់មួយ ពេលព្រះចន្ទកំពុងរួញ។"
  },
  {
   "id": "money-retro-mercury-01",
@@ -537,7 +581,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Mercury is retrograde, so double-check messages and plans."
+  "text": "Mercury is retrograde, so double-check messages and plans.",
+  "text_km": "ព្រះពុធកំពុងដើរថយក្រោយ ដូច្នេះសូមពិនិត្យសារ និងផែនការពីរដង។"
  },
  {
   "id": "money-retro-mercury-02",
@@ -549,7 +594,8 @@
    ]
   },
   "tone": "warm",
-  "text": "With Mercury retrograde, review before you send or sign."
+  "text": "With Mercury retrograde, review before you send or sign.",
+  "text_km": "ពេលព្រះពុធដើរថយក្រោយ សូមពិនិត្យឡើងវិញមុននឹងផ្ញើ ឬចុះហត្ថលេខា។"
  },
  {
   "id": "money-retro-venus-01",
@@ -561,7 +607,8 @@
    ]
   },
   "tone": "warm",
-  "text": "Venus is retrograde, a good time to reflect on what you value."
+  "text": "Venus is retrograde, a good time to reflect on what you value.",
+  "text_km": "ព្រះសុក្រកំពុងដើរថយក្រោយ ជាពេលល្អដើម្បីពិចារណាអំពីអ្វីដែលអ្នកឱ្យតម្លៃ។"
  },
  {
   "id": "money-retro-venus-02",
@@ -573,6 +620,7 @@
    ]
   },
   "tone": "warm",
-  "text": "With Venus retrograde, revisit rather than rush in matters of the heart."
+  "text": "With Venus retrograde, revisit rather than rush in matters of the heart.",
+  "text_km": "ពេលព្រះសុក្រដើរថយក្រោយ សូមពិនិត្យរឿងបេះដូងឡើងវិញ ជាជាងប្រញាប់ប្រញាល់។"
  }
 ]

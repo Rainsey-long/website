@@ -34,7 +34,7 @@ const nextConfig: NextConfig = {
   /** The image optimiser is an unauthenticated CPU sink and nothing here uses it. */
   images: { unoptimized: true },
   poweredByHeader: false,
-  serverExternalPackages: ["better-sqlite3"],
+  serverExternalPackages: ["better-sqlite3", "harfbuzzjs"],
   async headers() {
     return [
       {

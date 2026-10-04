@@ -11,11 +11,12 @@
 | Content | gray-matter + marked (repository Markdown only) |
 | Fonts | @fontsource: Newsreader (variable + static woff for share cards), Figtree, Noto Serif Khmer, Kantumruy Pro |
 | Tests | Vitest 5 (engines). No browser test runner; browser checks are throwaway Playwright scripts against the pre-installed Chromium |
-| Share images | next/og ImageResponse |
+| Share images | next/og ImageResponse; Khmer text shaped with harfbuzzjs 1.6.2 (WOFF fonts unpacked to SFNT in `lib/khmerShape.ts`) |
 
 Constraints that outlive a version bump:
 - **No auth library**: admin auth is hand-rolled scrypt + HMAC (CamboMath's design).
 - **`lunar-javascript` must not reach the client bundle** (size). `lib/chinese.ts` reads the generated LNY table; regenerate with `npm run generate:lny`, a test asserts it matches the library.
 - **momentkh is called with explicit numbers, never a Date** (its Date paths use the host zone).
+- **next/og cannot shape Khmer.** Khmer in an image goes through `shapedLine()`; harfbuzzjs is in `serverExternalPackages` (it loads a wasm file at runtime).
 - **Not serverless.** The database is a file; `instrumentation.ts` refuses to boot on Vercel/Netlify/Lambda/Cloud Run/Cloudflare Pages.
 - Lint toolchain (eslint-config-next 16.3.0) carries 5 high npm-audit findings in dev-only glob dependencies; CamboMath carries the same. Not shipped in the image.

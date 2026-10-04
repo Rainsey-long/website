@@ -7,6 +7,7 @@
 | [Next.js](https://nextjs.org), React | MIT | Framework |
 | [better-sqlite3](https://github.com/WiseLibs/better-sqlite3) | MIT | Database |
 | [@thyrith/momentkh](https://github.com/ThyrithSor/momentkh) | MIT, © 2018 ThyrithSor | Khmer lunisolar calendar (Chhankitek), Moha Songkran |
+| [harfbuzzjs](https://github.com/harfbuzz/harfbuzzjs) | MIT (HarfBuzz: Old MIT) | Shaping Khmer text in share images |
 | [marked](https://marked.js.org), [gray-matter](https://github.com/jonschlinkert/gray-matter) | MIT | Repository Markdown |
 | [Tailwind CSS](https://tailwindcss.com) | MIT | Styling |
 | [Newsreader](https://fonts.google.com/specimen/Newsreader) | SIL OFL 1.1 | Display and reading type, self-hosted via @fontsource |

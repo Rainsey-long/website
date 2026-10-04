@@ -26,7 +26,8 @@ export function pageMetadata(opts: {
   noindex?: boolean;
 }): Metadata {
   const lang = opts.lang ?? "en";
-  const image = absolute(opts.ogImage ?? "/og/default");
+  // Khmer pages share the Khmer card (app/og, ?lang=km).
+  const image = absolute((opts.ogImage ?? "/og/default") + (lang === "km" ? "?lang=km" : ""));
   const url = absolute(localePath(opts.path, lang));
   return {
     title: opts.title,

@@ -3,7 +3,8 @@
  * calendar app updates events rather than duplicating them. No personal data.
  */
 import { DOMAIN, SITE_NAME } from "./site";
-import { eclipsesForYear, moonPhases, retrogradesForYear, signName } from "./skyEvents";
+import { eclipseName, eclipsesForYear, moonPhases, phaseName, planetNameIn, retrogradesForYear, signNameIn } from "./skyEvents";
+import { khmerDigits, type Lang } from "./i18n";
 import { khmerDay, songkran } from "./khmer";
 import { addDays } from "./dates";
 
@@ -32,9 +33,9 @@ function fold(line: string): string {
   return out.join("\r\n ");
 }
 
-export function toIcs(name: string, events: IcsEvent[]): string {
+export function toIcs(name: string, events: IcsEvent[], lang: Lang = "en"): string {
   const now = stamp(new Date().toISOString().slice(0, 19) + "Z");
-  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", `PRODID:-//${SITE_NAME}//${DOMAIN}//EN`, "CALSCALE:GREGORIAN", "METHOD:PUBLISH", `X-WR-CALNAME:${esc(name)}`, "REFRESH-INTERVAL;VALUE=DURATION:P1D"];
+  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", `PRODID:-//${SITE_NAME}//${DOMAIN}//${lang.toUpperCase()}`, "CALSCALE:GREGORIAN", "METHOD:PUBLISH", `X-WR-CALNAME:${esc(name)}`, "REFRESH-INTERVAL;VALUE=DURATION:P1D"];
   for (const e of events) {
     lines.push("BEGIN:VEVENT", `UID:${e.uid}@${DOMAIN}`, `DTSTAMP:${now}`);
     if (e.allDay) {
@@ -50,7 +51,7 @@ export function toIcs(name: string, events: IcsEvent[]): string {
   return lines.map(fold).join("\r\n") + "\r\n";
 }
 
-/** `titleKm`/`aboutKm` are for the /km/feeds page only; the .ics files stay English. */
+/** Feed names in both languages; `?lang=km` serves the Khmer edition of each file. */
 export const FEEDS = {
   "moon-phases": { title: "Moon phases", about: "New moons, first quarters, full moons and last quarters, with the Moon's sign.", titleKm: "ដំណាក់កាលព្រះចន្ទ", aboutKm: "ព្រះចន្ទងងឹត ព្រះចន្ទកន្លះដើមខែ ព្រះចន្ទពេញវង់ និងព្រះចន្ទកន្លះចុងខែ ព្រមទាំងរាសីដែលព្រះចន្ទស្ថិតនៅ។" },
   retrogrades: { title: "Retrogrades", about: "Each planet's retrograde period from Mercury to Saturn, as an all-day span.", titleKm: "ភពដើរថយក្រោយ", aboutKm: "រយៈពេលដែលភពនីមួយៗដើរថយក្រោយ ចាប់ពីព្រះពុធដល់ព្រះសៅរ៍ ជាព្រឹត្តិការណ៍ពេញមួយថ្ងៃ។" },
@@ -60,30 +61,47 @@ export const FEEDS = {
 } as const;
 export type FeedName = keyof typeof FEEDS;
 
-export function feedEvents(name: FeedName, fromYear: number, toYear: number): IcsEvent[] {
+/**
+ * Events for one feed, in English or Khmer. A Khmer edition has its own UIDs
+ * (suffix "-km") so someone subscribed to both languages does not see one
+ * overwrite the other.
+ */
+export function feedEvents(name: FeedName, fromYear: number, toYear: number, lang: Lang = "en"): IcsEvent[] {
+  const km = lang === "km";
+  const sfx = km ? "-km" : "";
+  const sign = (i: number) => signNameIn(i, lang);
   const out: IcsEvent[] = [];
   const from = `${fromYear}-01-01`, to = `${toYear + 1}-01-01`;
   if (name === "moon-phases") {
     for (const p of moonPhases(`${from}T00:00:00Z`, `${to}T00:00:00Z`)) {
-      out.push({ uid: `moon-${stamp(p.at.slice(0, 16) + ":00Z")}`, title: `${p.name} in ${signName(p.signIndex)}`, start: p.at });
+      out.push({ uid: `moon-${stamp(p.at.slice(0, 16) + ":00Z")}${sfx}`, title: km ? `${phaseName(p, "km")} ក្នុងរាសី${sign(p.signIndex)}` : `${p.name} in ${sign(p.signIndex)}`, start: p.at });
     }
   } else if (name === "retrogrades") {
     for (let y = fromYear; y <= toYear; y++) for (const r of retrogradesForYear(y)) {
-      out.push({ uid: `rx-${r.planet}-${r.stationRx.at.slice(0, 10)}`, title: `${r.name} retrograde`, allDay: true, start: r.stationRx.at.slice(0, 10), end: addDays(r.stationD.at.slice(0, 10), 1), description: `Turns retrograde in ${signName(r.stationRx.signIndex)}, turns direct in ${signName(r.stationD.signIndex)}.` });
+      const planet = planetNameIn(r.planet, lang);
+      out.push({
+        uid: `rx-${r.planet}-${r.stationRx.at.slice(0, 10)}${sfx}`, allDay: true, start: r.stationRx.at.slice(0, 10), end: addDays(r.stationD.at.slice(0, 10), 1),
+        title: km ? `${planet}ដើរថយក្រោយ` : `${r.name} retrograde`,
+        description: km ? `ចាប់ផ្ដើមដើរថយក្រោយក្នុងរាសី${sign(r.stationRx.signIndex)} ហើយដើរទៅមុខវិញក្នុងរាសី${sign(r.stationD.signIndex)}។` : `Turns retrograde in ${sign(r.stationRx.signIndex)}, turns direct in ${sign(r.stationD.signIndex)}.`,
+      });
     }
   } else if (name === "eclipses") {
     for (let y = fromYear; y <= toYear; y++) for (const e of eclipsesForYear(y)) {
-      out.push({ uid: `eclipse-${e.body}-${e.at.slice(0, 10)}`, title: `${e.kind[0].toUpperCase() + e.kind.slice(1)} ${e.body === "sun" ? "solar" : "lunar"} eclipse`, start: e.at });
+      out.push({ uid: `eclipse-${e.body}-${e.at.slice(0, 10)}${sfx}`, title: eclipseName(e, lang), start: e.at });
     }
   } else {
     for (let d = from; d < to; d = addDays(d, 1)) {
       const k = khmerDay(d);
-      if (name === "khmer-holy-days" && k.sila) out.push({ uid: `sila-${d}`, title: "Buddhist holy day (ថ្ងៃសីល)", allDay: true, start: d, description: `${k.labelEn}. ${k.labelKm}` });
-      if (name === "khmer-festivals" && k.festival && k.festival.id !== "khmer-new-year") out.push({ uid: `kh-${k.festival.id}-${d}`, title: `${k.festival.en} (${k.festival.km})`, allDay: true, start: d });
+      if (name === "khmer-holy-days" && k.sila) out.push({ uid: `sila-${d}${sfx}`, title: km ? "ថ្ងៃសីល" : "Buddhist holy day (ថ្ងៃសីល)", allDay: true, start: d, description: km ? k.labelKm : `${k.labelEn}. ${k.labelKm}` });
+      if (name === "khmer-festivals" && k.festival && k.festival.id !== "khmer-new-year") out.push({ uid: `kh-${k.festival.id}-${d}${sfx}`, title: km ? k.festival.km : `${k.festival.en} (${k.festival.km})`, allDay: true, start: d });
     }
     if (name === "khmer-festivals") for (let y = fromYear; y <= toYear; y++) {
       const s = songkran(y);
-      out.push({ uid: `kh-new-year-${y}`, title: `Khmer New Year: ${s.angel.roman} arrives`, allDay: true, start: s.days[0].date, end: addDays(s.days[s.days.length - 1].date, 1), description: `Moha Songkran ${s.date} ${s.time} (UTC+7).` });
+      out.push({
+        uid: `kh-new-year-${y}${sfx}`, allDay: true, start: s.days[0].date, end: addDays(s.days[s.days.length - 1].date, 1),
+        title: km ? `ចូលឆ្នាំខ្មែរ៖ ${s.angel.km} យាងមក` : `Khmer New Year: ${s.angel.roman} arrives`,
+        description: km ? `មហាសង្ក្រាន្ត ${khmerDigits(s.date)} ម៉ោង ${khmerDigits(s.time)} (ម៉ោងកម្ពុជា)។` : `Moha Songkran ${s.date} ${s.time} (UTC+7).`,
+      });
     }
   }
   return out;

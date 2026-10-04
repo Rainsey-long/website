@@ -8,17 +8,20 @@ export const dynamic = "force-dynamic";
 const limiter = createRateLimiter(10 * 60_000, 600);
 const memo = new Map<string, { at: number; body: string }>();
 
-export async function GET(_req: Request, { params }: { params: Promise<{ file: string }> }) {
+export async function GET(req: Request, { params }: { params: Promise<{ file: string }> }) {
   const { file } = await params;
   const name = file.replace(/\.ics$/, "");
   if (!file.endsWith(".ics") || !Object.prototype.hasOwnProperty.call(FEEDS, name)) return new Response("Not found", { status: 404 });
   if (limiter(GLOBAL_LIMIT_KEY)) return new Response("Busy, try again shortly", { status: 429, headers: { "Retry-After": "60" } });
   const year = Number(dateInZone(DEFAULT_TZ).slice(0, 4));
-  const key = `${name}:${year}`;
+  // ?lang=km serves the Khmer edition; anything else is English (bounded memo: 5 feeds × 2 languages).
+  const lang = new URL(req.url).searchParams.get("lang") === "km" ? "km" : "en";
+  const key = `${name}:${lang}:${year}`;
   let hit = memo.get(key);
   if (!hit || Date.now() - hit.at > 6 * 3600_000) {
-    hit = { at: Date.now(), body: toIcs(FEEDS[name as FeedName].title, feedEvents(name as FeedName, year - 1, year + 2)) };
+    const feed = FEEDS[name as FeedName];
+    hit = { at: Date.now(), body: toIcs(lang === "km" ? feed.titleKm : feed.title, feedEvents(name as FeedName, year - 1, year + 2, lang), lang) };
     memo.set(key, hit);
   }
-  return new Response(hit.body, { headers: { "Content-Type": "text/calendar; charset=utf-8", "Cache-Control": "public, max-age=21600", "Content-Disposition": `inline; filename="${name}.ics"` } });
+  return new Response(hit.body, { headers: { "Content-Type": "text/calendar; charset=utf-8", "Cache-Control": "public, max-age=21600", "Content-Disposition": `inline; filename="${name}${lang === "km" ? "-km" : ""}.ics"` } });
 }

@@ -21,7 +21,7 @@ const T = defineMessages({
     intro: "បន្ថែមប្រតិទិនទាំងនេះទៅក្នុងកម្មវិធីប្រតិទិនដែលអ្នកកំពុងប្រើ។ វាធ្វើបច្ចុប្បន្នភាពដោយខ្លួនឯង ហើយមិនចាំបាច់ចុះឈ្មោះអ្វីទេ។",
     subscribe: "ជាវ",
     google: "បន្ថែមទៅ Google Calendar",
-    note: "ឈ្មោះព្រឹត្តិការណ៍ក្នុងប្រតិទិនទាំងនេះ នៅជាភាសាអង់គ្លេសនៅឡើយ។",
+    note: "",
   },
 });
 
@@ -43,7 +43,7 @@ export default async function Feeds() {
         {t.note && <p className="mt-2 text-small text-muted">{t.note}</p>}
         <ul className="mt-6">
           {Object.entries(FEEDS).map(([name, f]) => {
-            const https = absolute(`/feeds/${name}.ics`);
+            const https = absolute(`/feeds/${name}.ics${km ? "?lang=km" : ""}`);
             const webcal = https.replace(/^https?:/, "webcal:");
             return (
               <li key={name} className="border-b border-rule py-4">

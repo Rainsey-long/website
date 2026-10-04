@@ -255,3 +255,52 @@ Ranking blends total score with strategic fit (SEO moat from exact, verifiable d
 - Khmer calendar libs: https://npmjs.com/package/@thyrith/momentkh , https://root.packagist.org/packages/asorasoft/chhankitek (SUMMARY)
 - VOC definitions: https://theastrologypodcast.com/transcripts/tap-ep-292-transcript-defining-the-void-of-course-moon/ , https://www.skyscript.co.uk/glossary/void-of-course (SUMMARY)
 - Khmer culture: https://foreignpolicy.com/?p=8655 , https://ling-app.com/blog/khmer-calendar/ (SUMMARY)
+
+---
+
+## 7. Brainstorm round 2 (2026-10-04), after the bilingual build
+
+Sources: the shortlist above, what the site now has, and the audience it now serves (Khmer readers as well as English). No new web research in this round; every new idea is labelled KNOWLEDGE unless it extends a researched one. Scores use the same scale as §3 (higher is always better, out of 30).
+
+### Built since §3
+
+Moon calendar (#1), retrogrades and eclipses (#2), natal chart (#3), Khmer calendar and holy days (#7), good hours (#9), tradition switch (#12), share cards (#13, now in Khmer too), feedback (#16), sky panel (#17), lucky-date finder (#18), .ics feeds (#30), plus an owner admin and the whole site in English and Khmer.
+
+### Still open from §3 and still worth it
+
+| # | Feature | Total | Why now |
+|---|---|---|---|
+| 21 | Lunar / Gregorian / Khmer date converter | 27 | All three engines exist; a converter is mostly UI. High search volume in Khmer ("ថ្ងៃនេះ ខែអ្វី") |
+| 20 | 24 solar terms with exact times | 27 | `SearchSunLongitude` is already used for Lichun; one page per term per year is evergreen |
+| 19 | Today's lucky colour by weekday (Khmer/Thai custom) | 27 | Weekday colours already exist (`lib/khmer.ts`); a daily "colour to wear" line is a daily return reason in Cambodia |
+| 5 | Chinese almanac day page (宜忌, officer, clash, directions) | 27 | The calendar has the data in a panel; a page per day is linkable and indexable |
+| 26 | Numerology (life path, personal year) | 25 | Pure arithmetic, no birth data stored |
+| 4 | Personal transits | 24 | Biggest content cost (~600 blocks per language now) |
+| 8 | Family profiles, saved in the browser only | 23 | Lets the calculators remember "me, mum, my child" without accounts |
+
+### New ideas
+
+| # | Feature | Benefit | Accuracy | Calm-fit | Effort (5=easy) | SEO/Retention | Privacy (5=safe) | Total |
+|---|---|---|---|---|---|---|---|---|
+| 32 | **Printable monthly calendar** (A4, Khmer lunar dates, holy days, festivals, Chinese good days; print CSS, no PDF service) | 5 | 5 | 5 | 4 | 4 | 5 | **28** |
+| 33 | **Weekly and monthly horoscopes** per sign, from the Moon's path through the week (reuses the block engine; needs new weekly blocks) | 5 | 4 | 5 | 3 | 5 | 5 | **27** |
+| 34 | **Telegram channel of the daily card** (bot posts the Khmer and English share image each morning; Telegram is the main channel in Cambodia; free API, owner creates the bot) | 4 | 5 | 4 | 4 | 5 | 5 | **27** |
+| 35 | **Installable web app + offline "today"** (manifest, a small service worker caching today's pages) | 4 | 5 | 5 | 4 | 4 | 5 | **27** |
+| 36 | **Site search** over signs, animals, festivals and pages in both languages (static index, no service) | 4 | 5 | 5 | 4 | 3 | 5 | **26** |
+| 37 | **Khmer age and Buddhist-era year tool** (BE year, Khmer animal year, sak, Khmer-reckoned age) | 4 | 5 | 5 | 5 | 4 | 5 | **28** |
+| 38 | **"This week in the sky" email-free digest page** (one URL per week: phases, ingresses, holy days, festivals, good days) | 4 | 5 | 5 | 4 | 4 | 5 | **27** |
+| 39 | **Owner analytics in the admin** (page views and top pages from Cloudflare Web Analytics, no cookies) | 3 | 5 | 5 | 3 | 4 | 4 | **24** |
+| 40 | **Gardening by the Moon** (planting days by phase and sign) | 3 | 3 | 5 | 4 | 3 | 5 | 23 |
+| 41 | **Pagoda holy-day reminders in the calendar feeds with the eve marked** (ថ្ងៃសីល eve) | 3 | 5 | 5 | 5 | 3 | 5 | 26 |
+| 42 | Daily tarot | 3 | 1 | 4 | 4 | 4 | 5 | 21 — rejected again: no accuracy basis |
+| 43 | AI chat about your chart | — | — | — | — | — | — | rejected: owner rule, no runtime AI |
+| 44 | Wedding / house-moving good days by the Khmer calendar | — | — | — | — | — | — | rejected: owner rule, left to an achar |
+
+### Recommended order
+
+1. **Date converter (#21) together with the Khmer age / Buddhist-era tool (#37)** — one page, two engines already built, strongest Khmer search intent.
+2. **Today's colour to wear (#19)** on the home page and the Khmer hub — a one-line daily habit.
+3. **Printable monthly calendar (#32)** — Cambodian households hang monthly calendars; print CSS over the existing calendar data.
+4. **Weekly horoscopes (#33)** — the largest SEO gain; content first (blocks in both languages), then the page.
+5. **Telegram daily card (#34)** — needs the owner to create a bot and channel; the images already exist.
+6. Then: almanac day pages and solar terms (#5, #20), installable app (#35), weekly sky digest (#38), family profiles (#8), numerology (#26), transits (#4).

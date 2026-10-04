@@ -6,7 +6,7 @@
 
 - Branch `claude/zodiac-site` of `Rainsey-long/website` (orphan; `master` is an unrelated 2018 Flutter docs fork). Not deployed yet.
 - Next.js 16 on the CamboMath production shape (Docker, Railway volume, one replica). Ported from an earlier Astro static build on 2026-10-04 at the owner's request.
-- Content: 196 reading blocks (all `draft`), 12 Western + 12 Chinese profiles, 12 Fire Goat 2027 forecasts, 156 compatibility pairs (templated), 7 Khmer birth-weekday portraits. All original, all awaiting owner review.
+- Content: 196 daily reading blocks and 48 weekly overviews (all `draft`), 12 Western + 12 Chinese profiles, 12 Fire Goat 2027 forecasts, 156 compatibility pairs (templated), 7 Khmer birth-weekday portraits. All original, all awaiting owner review.
 - Khmer traditions: lunar calendar, holy days, festivals, Moha Songkran + angel (2020–2026 match km.wikipedia's table), birth weekday, tradition switch.
 - Sky: moon calendar, ingresses, retrogrades with shadows, eclipses (2026 matches published tables), .ics feeds.
 - Tools: birth chart, good hours, lucky-date finder, date converter + in-browser age tool, colour of the day (`/khmer/colours`), printable month (`/lucky-days/YYYY/MM/print`). Admin: overview, readings, profiles/forecasts, Khmer New Year, feedback, admins, backups.
@@ -31,4 +31,4 @@
 - English and Khmer (2026-10-04): every page has a `/km` twin (`docs/I18N.md`). All Khmer text is a draft awaiting a native reader (`docs/KHMER-REVIEW.md`). Everything is bilingual, including the admin (`/km/admin`), the .ics feeds (`?lang=km`) and share images (`/og/<slug>?lang=km`, HarfBuzz-shaped).
 - Reading block library is 196 of the ~360 the plan targets.
 - Built 2026-10-04 (second pass): birth chart (`/tools/birth-chart`), good hours (`/good-hours`), lucky-date finder (`/lucky-days/finder`). Their wording (`lib/natalCopy.ts`, `PLANET_HOUR` in `lib/goodHours.ts`) is draft.
-- Next features, ranked: `docs/research/FEATURES.md` §7. Built 2026-10-04: the top three. Next: weekly horoscopes (#46), Telegram daily card (#47).
+- Next features, ranked: `docs/research/FEATURES.md` §7. Built 2026-10-04: the top three and weekly horoscopes (#46, `/horoscope/[sign]/week`). Next: Telegram daily card (#47, needs the owner's bot).

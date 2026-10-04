@@ -45,5 +45,25 @@ for (const file of readdirSync(dir).filter((f) => f.endsWith(".json"))) {
   }
   for (let h = 1; h <= 12; h++) if ((coverage.get(h) ?? 0) !== 3) errors.push(`${file}: house ${h} needs exactly 3 base variants (the rotation in reading-engine.ts relies on it)`);
 }
+
+// Weekly overviews (lib/weekly.ts): exactly one block per Moon phase and house.
+const WEEK_PHASES = ["new", "first", "full", "last"];
+const weekly = JSON.parse(readFileSync(new URL("../content/weekly/lunations.json", import.meta.url), "utf8"));
+const weekSeen = new Set<string>();
+for (const b of weekly) {
+  count++;
+  const where = `weekly:${b?.id ?? "?"}`;
+  if (typeof b.id !== "string" || !/^week-[a-z]+-\d+$/.test(b.id) || ids.has(b.id)) errors.push(`${where}: bad or duplicate id`);
+  ids.add(b.id);
+  if (b.topic !== "week" || b.kind !== "base") errors.push(`${where}: topic must be week, kind base`);
+  const ph = b.conditions?.phase, hs = b.conditions?.house;
+  if (!WEEK_PHASES.includes(ph) || !Array.isArray(hs) || hs.length !== 1 || !(hs[0] >= 1 && hs[0] <= 12)) errors.push(`${where}: needs one phase and one house`);
+  else weekSeen.add(`${ph}-${hs[0]}`);
+  if (typeof b.text !== "string" || b.text.length < 20 || b.text.length > 400 || !/[.?]$/.test(b.text)) errors.push(`${where}: text`);
+  for (const re of BANNED) if (re.test(b.text ?? "")) errors.push(`${where}: banned wording ${re}`);
+  if (typeof b.text_km !== "string" || !/[។?]$/.test(b.text_km) || b.text_km.includes("!")) errors.push(`${where}: text_km`);
+}
+for (const ph of WEEK_PHASES) for (let h = 1; h <= 12; h++) if (!weekSeen.has(`${ph}-${h}`)) errors.push(`weekly: missing ${ph} moon in house ${h}`);
+
 if (errors.length) { console.error(errors.join("\n")); process.exit(1); }
 console.log(`Blocks OK: ${count} blocks.`);

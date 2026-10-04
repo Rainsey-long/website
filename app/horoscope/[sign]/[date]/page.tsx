@@ -12,6 +12,7 @@ import { SaveSign } from "@/components/client/Remembered";
 import Feedback from "@/components/client/Feedback";
 import { SIGNS, signBySlug } from "@/lib/western";
 import { dailyReading } from "@/lib/reading-engine";
+import { mondayOf } from "@/lib/weekly";
 import { blockTexts } from "@/lib/blockText";
 import { skyForDay } from "@/lib/sky";
 import { addDays, longDate } from "@/lib/dates";
@@ -34,7 +35,7 @@ const T = defineMessages({
     permalink: "Permanent link to this reading", day: "Day", tomorrow: "Read tomorrow",
     myToday: (s: string) => `My ${s} horoscope for today`, myDate: (s: string, d: string) => `My ${s} horoscope for ${d}`,
     profile: (s: string) => `${s} personality profile`, pair: (a: string, b: string) => `${a} and ${b} compatibility`,
-    goat: "2027 Year of the Fire Goat forecast",
+    goat: "2027 Year of the Fire Goat forecast", week: (s: string) => `${s} weekly horoscope for that week`,
   },
   km: {
     crumb: "ហោរាសាស្ត្រ", today: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}`,
@@ -45,7 +46,7 @@ const T = defineMessages({
     permalink: "តំណអចិន្ត្រៃយ៍ទៅការអាននេះ", day: "ថ្ងៃ", tomorrow: "អានថ្ងៃស្អែក",
     myToday: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s} របស់ខ្ញុំ`, myDate: (s: string, d: string) => `ហោរាសាស្ត្ររាសី${s} របស់ខ្ញុំ សម្រាប់${d}`,
     profile: (s: string) => `ប្រវត្តិរូបបុគ្គលិកលក្ខណៈរាសី${s}`, pair: (a: string, b: string) => `ភាពត្រូវគ្នារវាងរាសី${a} និងរាសី${b}`,
-    goat: "ការព្យាករឆ្នាំមមែ ធាតុភ្លើង ២០២៧",
+    goat: "ការព្យាករឆ្នាំមមែ ធាតុភ្លើង ២០២៧", week: (s: string) => `ហោរាសាស្ត្រប្រចាំសប្ដាហ៍ រាសី${s} សម្រាប់សប្ដាហ៍នោះ`,
   },
 });
 
@@ -111,6 +112,7 @@ export default async function DatedReading({ params }: Params) {
           <AdSlot placement="afterReading" />
           <RelatedLinks links={[
             { href: `/horoscope/${sign.slug}`, label: t.today(name) },
+            { href: `/horoscope/${sign.slug}/week/${mondayOf(date)}`, label: t.week(name) },
             { href: `/zodiac/${sign.slug}`, label: t.profile(name) },
             { href: `/compatibility/${pairSlug(sign.slug, opposite.slug)}`, label: t.pair(name, signName(opposite.slug, lang)) },
             { href: "/chinese-zodiac/2027", label: t.goat },

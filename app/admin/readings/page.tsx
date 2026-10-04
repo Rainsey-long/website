@@ -1,5 +1,5 @@
 /**
- * Admin: daily reading text, both languages. Filter by topic and by state
+ * Admin: daily and weekly reading text, both languages. Filter by topic and by state
  * (awaiting review, approved, missing Khmer, all) or search the words.
  */
 import Link from "@/components/client/LocaleLink";
@@ -13,14 +13,14 @@ import { getLang } from "@/lib/langServer";
 
 export const dynamic = "force-dynamic";
 type Search = { searchParams: Promise<{ topic?: string; show?: string; q?: string }> };
-const TOPICS = ["love", "career", "money", "mood"] as const;
+const TOPICS = ["love", "career", "money", "mood", "week"] as const;
 const SHOWS = ["draft", "nokm", "approved", "all"] as const;
 
 const T = defineMessages({
   en: {
     title: "Readings",
     lead: "Edit the words, not the meaning: each block is chosen by the Moon's house and phase. Warm, short sentences; no exclamation marks, health, money actions, guarantees or doom. An empty Khmer box shows the English text on Khmer pages.",
-    topics: { love: "Love", career: "Career", money: "Money", mood: "Mood" },
+    topics: { love: "Love", career: "Career", money: "Money", mood: "Mood", week: "Weekly" },
     shows: { draft: "Awaiting review", nokm: "Missing Khmer", approved: "Approved", all: "All" },
     review: { draft: "draft", approved: "approved" },
     searchLabel: "Search reading text",
@@ -34,7 +34,7 @@ const T = defineMessages({
   km: {
     title: "ការទស្សន៍ទាយប្រចាំថ្ងៃ",
     lead: "កែពាក្យ មិនមែនកែអត្ថន័យទេ៖ ប្លុកនីមួយៗត្រូវបានជ្រើសរើសតាមផ្ទះ និងដំណាក់កាលរបស់ព្រះចន្ទ។ សូមសរសេរប្រយោគខ្លីៗ និងកក់ក្ដៅ គ្មានសញ្ញាឧទាន សុខភាព ការណែនាំពីលុយកាក់ ការធានា ឬរឿងអាក្រក់។ ប្រអប់ខ្មែរដែលទុកទទេ នឹងបង្ហាញអត្ថបទអង់គ្លេសនៅលើទំព័រខ្មែរ។",
-    topics: { love: "ស្នេហា", career: "ការងារ", money: "ហិរញ្ញវត្ថុ", mood: "អារម្មណ៍" },
+    topics: { love: "ស្នេហា", career: "ការងារ", money: "ហិរញ្ញវត្ថុ", mood: "អារម្មណ៍", week: "ប្រចាំសប្ដាហ៍" },
     shows: { draft: "រង់ចាំការពិនិត្យ", nokm: "ខ្វះភាសាខ្មែរ", approved: "បានអនុម័ត", all: "ទាំងអស់" },
     review: { draft: "សេចក្ដីព្រាង", approved: "បានអនុម័ត" },
     searchLabel: "ស្វែងរកអត្ថបទទស្សន៍ទាយ",

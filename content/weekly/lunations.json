@@ -1,0 +1,674 @@
+[
+ {
+  "id": "week-new-1",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "new",
+   "house": [
+    1
+   ]
+  },
+  "tone": "begin",
+  "text": "A fresh start that is all about you. Choose one habit or goal that feels like your own, not anyone else's, and begin it quietly this week.",
+  "text_km": "ការចាប់ផ្ដើមថ្មីដែលទាក់ទងនឹងខ្លួនអ្នកផ្ទាល់។ សូមជ្រើសទម្លាប់ ឬគោលដៅមួយដែលជារបស់អ្នកពិតៗ មិនមែនរបស់អ្នកដទៃ ហើយចាប់ផ្ដើមវាដោយស្ងៀមស្ងាត់ក្នុងសប្ដាហ៍នេះ។"
+ },
+ {
+  "id": "week-new-2",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "new",
+   "house": [
+    2
+   ]
+  },
+  "tone": "begin",
+  "text": "A good week to set a simple intention about money and what you value. Small, steady changes matter more than big promises.",
+  "text_km": "សប្ដាហ៍ល្អសម្រាប់កំណត់បំណងសាមញ្ញមួយអំពីប្រាក់កាស និងអ្វីដែលអ្នកឲ្យតម្លៃ។ ការផ្លាស់ប្ដូរតូចៗ និងទៀងទាត់ សំខាន់ជាងការសន្យាធំៗ។"
+ },
+ {
+  "id": "week-new-3",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "new",
+   "house": [
+    3
+   ]
+  },
+  "tone": "begin",
+  "text": "Start the conversation you have been putting off, or begin a course, a journal or a new way of keeping in touch. Words started now tend to grow.",
+  "text_km": "ចាប់ផ្ដើមការសន្ទនាដែលអ្នកបានពន្យារពេល ឬចាប់ផ្ដើមវគ្គសិក្សា កំណត់ហេតុប្រចាំថ្ងៃ ឬរបៀបថ្មីក្នុងការរក្សាទំនាក់ទំនង។ ពាក្យដែលចាប់ផ្ដើមនៅពេលនេះ តែងតែរីកចម្រើន។"
+ },
+ {
+  "id": "week-new-4",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "new",
+   "house": [
+    4
+   ]
+  },
+  "tone": "begin",
+  "text": "Plant a seed at home. A small change to your space, or a new family habit, can make the weeks ahead feel calmer.",
+  "text_km": "សាបព្រួសគ្រាប់ពូជមួយនៅផ្ទះ។ ការផ្លាស់ប្ដូរតូចមួយក្នុងកន្លែងរស់នៅ ឬទម្លាប់គ្រួសារថ្មីមួយ អាចធ្វើឲ្យសប្ដាហ៍ខាងមុខស្ងប់ជាងមុន។"
+ },
+ {
+  "id": "week-new-5",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "new",
+   "house": [
+    5
+   ]
+  },
+  "tone": "begin",
+  "text": "Begin something just for joy this week: a hobby, a creative project, or a plan with someone who makes you laugh.",
+  "text_km": "ចាប់ផ្ដើមអ្វីមួយសម្រាប់តែភាពរីករាយក្នុងសប្ដាហ៍នេះ៖ ចំណង់ចំណូលចិត្ត គម្រោងច្នៃប្រឌិត ឬគម្រោងជាមួយអ្នកដែលធ្វើឲ្យអ្នកសើច។"
+ },
+ {
+  "id": "week-new-6",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "new",
+   "house": [
+    6
+   ]
+  },
+  "tone": "begin",
+  "text": "A clean slate for daily routines. Pick one habit to start, and keep it light enough that you will still enjoy it next month.",
+  "text_km": "ទំព័រថ្មីសម្រាប់ទម្លាប់ប្រចាំថ្ងៃ។ សូមជ្រើសទម្លាប់មួយដើម្បីចាប់ផ្ដើម ហើយធ្វើវាឲ្យស្រាលល្មម ដើម្បីឲ្យអ្នកនៅតែចូលចិត្តវានៅខែក្រោយ។"
+ },
+ {
+  "id": "week-new-7",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "new",
+   "house": [
+    7
+   ]
+  },
+  "tone": "begin",
+  "text": "A new chapter in one-to-one relationships. Say what you hope for in a partnership, at work or in love, and listen to what the other person hopes for too.",
+  "text_km": "ជំពូកថ្មីមួយក្នុងទំនាក់ទំនងមួយទល់នឹងមួយ។ និយាយពីអ្វីដែលអ្នកសង្ឃឹមក្នុងភាពជាដៃគូ ទាំងការងារ ឬស្នេហា ហើយស្ដាប់ក្ដីសង្ឃឹមរបស់ម្ខាងទៀតផងដែរ។"
+ },
+ {
+  "id": "week-new-8",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "new",
+   "house": [
+    8
+   ]
+  },
+  "tone": "begin",
+  "text": "A quiet week to begin letting go of something you have outgrown. Shared plans and joint money also benefit from a fresh, honest start.",
+  "text_km": "សប្ដាហ៍ស្ងាត់មួយដើម្បីចាប់ផ្ដើមលះបង់អ្វីដែលលែងសមនឹងអ្នក។ គម្រោងរួម និងប្រាក់រួមក៏ទទួលបានផលល្អពីការចាប់ផ្ដើមថ្មី និងស្មោះត្រង់ដែរ។"
+ },
+ {
+  "id": "week-new-9",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "new",
+   "house": [
+    9
+   ]
+  },
+  "tone": "begin",
+  "text": "Curiosity points you somewhere new. Sign up, plan the trip or open the book. Beginnings in learning come easily now.",
+  "text_km": "ការចង់ដឹងចង់ឃើញនាំអ្នកទៅកន្លែងថ្មី។ ចុះឈ្មោះ រៀបចំដំណើរ ឬបើកសៀវភៅ។ ការចាប់ផ្ដើមរៀនសូត្រងាយស្រួលនៅពេលនេះ។"
+ },
+ {
+  "id": "week-new-10",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "new",
+   "house": [
+    10
+   ]
+  },
+  "tone": "begin",
+  "text": "Set a clear intention for your work and your direction. One concrete first step this week counts for more than a perfect plan.",
+  "text_km": "កំណត់បំណងច្បាស់លាស់សម្រាប់ការងារ និងទិសដៅរបស់អ្នក។ ជំហានដំបូងជាក់ស្ដែងមួយក្នុងសប្ដាហ៍នេះ មានតម្លៃជាងផែនការដ៏ល្អឥតខ្ចោះ។"
+ },
+ {
+  "id": "week-new-11",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "new",
+   "house": [
+    11
+   ]
+  },
+  "tone": "begin",
+  "text": "A fresh start with friends and future plans. Reach out to someone who shares your hopes, and name one goal out loud.",
+  "text_km": "ការចាប់ផ្ដើមថ្មីជាមួយមិត្តភក្ដិ និងគម្រោងអនាគត។ ទាក់ទងទៅអ្នកដែលមានក្ដីសង្ឃឹមដូចអ្នក ហើយនិយាយគោលដៅមួយឲ្យឮៗ។"
+ },
+ {
+  "id": "week-new-12",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "new",
+   "house": [
+    12
+   ]
+  },
+  "tone": "begin",
+  "text": "A gentle week to rest and begin again from the inside. Quiet time now helps you see what you really want before you start anything big.",
+  "text_km": "សប្ដាហ៍ស្រទន់មួយដើម្បីសម្រាក ហើយចាប់ផ្ដើមម្ដងទៀតពីខាងក្នុង។ ពេលស្ងាត់ៗនៅពេលនេះ ជួយអ្នកឲ្យឃើញអ្វីដែលអ្នកចង់បានពិតៗ មុននឹងចាប់ផ្ដើមអ្វីធំៗ។"
+ },
+ {
+  "id": "week-first-1",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "first",
+   "house": [
+    1
+   ]
+  },
+  "tone": "act",
+  "text": "Time to act on something you started recently. A small push this week keeps your own plans moving, even if it feels a little uncomfortable.",
+  "text_km": "ដល់ពេលធ្វើសកម្មភាពលើអ្វីដែលអ្នកទើបចាប់ផ្ដើម។ ការជំរុញតិចតួចក្នុងសប្ដាហ៍នេះ ធ្វើឲ្យគម្រោងរបស់អ្នកបន្តដំណើរ ទោះបីមានអារម្មណ៍មិនស្រួលបន្តិចក៏ដោយ។"
+ },
+ {
+  "id": "week-first-2",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "first",
+   "house": [
+    2
+   ]
+  },
+  "tone": "act",
+  "text": "A money decision may ask for attention. Choose the practical option and adjust your budget calmly rather than all at once.",
+  "text_km": "ការសម្រេចចិត្តអំពីប្រាក់កាសអាចត្រូវការការយកចិត្តទុកដាក់។ ជ្រើសជម្រើសដែលអាចធ្វើបាន ហើយកែសម្រួលថវិកាដោយស្ងប់ស្ងាត់ មិនមែនម្ដងទាំងអស់ទេ។"
+ },
+ {
+  "id": "week-first-3",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "first",
+   "house": [
+    3
+   ]
+  },
+  "tone": "act",
+  "text": "Say it rather than hint at it. A clear message or a quick decision this week clears the way for easier talks later.",
+  "text_km": "និយាយឲ្យត្រង់ ជាជាងនិយាយបញ្ចៀស។ សារច្បាស់លាស់ ឬការសម្រេចចិត្តរហ័សក្នុងសប្ដាហ៍នេះ បើកផ្លូវសម្រាប់ការពិភាក្សាងាយស្រួលនៅពេលក្រោយ។"
+ },
+ {
+  "id": "week-first-4",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "first",
+   "house": [
+    4
+   ]
+  },
+  "tone": "act",
+  "text": "Something at home needs a decision. Tackle one practical task, and talk it through with the people it affects.",
+  "text_km": "មានរឿងនៅផ្ទះដែលត្រូវការការសម្រេចចិត្ត។ ដោះស្រាយកិច្ចការជាក់ស្ដែងមួយ ហើយពិភាក្សាជាមួយអ្នកដែលពាក់ព័ន្ធ។"
+ },
+ {
+  "id": "week-first-5",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "first",
+   "house": [
+    5
+   ]
+  },
+  "tone": "act",
+  "text": "Give a creative idea or a new romance a little courage this week. Showing up matters more than getting it perfect.",
+  "text_km": "ផ្ដល់ភាពក្លាហានបន្តិចដល់គំនិតច្នៃប្រឌិត ឬស្នេហាថ្មីក្នុងសប្ដាហ៍នេះ។ ការចេញមុខសំខាន់ជាងការធ្វើឲ្យល្អឥតខ្ចោះ។"
+ },
+ {
+  "id": "week-first-6",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "first",
+   "house": [
+    6
+   ]
+  },
+  "tone": "act",
+  "text": "Your routines get a gentle test. If a habit is not working, adjust it now instead of pushing through.",
+  "text_km": "ទម្លាប់របស់អ្នកទទួលការសាកល្បងស្រាលៗ។ បើទម្លាប់ណាមួយមិនដំណើរការ សូមកែវាឥឡូវនេះ ជាជាងបង្ខំបន្ត។"
+ },
+ {
+  "id": "week-first-7",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "first",
+   "house": [
+    7
+   ]
+  },
+  "tone": "act",
+  "text": "A partner or colleague may see things differently. Meet in the middle, and remember that working it out together is the point.",
+  "text_km": "ដៃគូ ឬសហការីអាចមើលឃើញរឿងខុសពីអ្នក។ ជួបគ្នាពាក់កណ្ដាលផ្លូវ ហើយចងចាំថា ការដោះស្រាយជាមួយគ្នា គឺជាគោលដៅ។"
+ },
+ {
+  "id": "week-first-8",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "first",
+   "house": [
+    8
+   ]
+  },
+  "tone": "act",
+  "text": "Shared plans may need a firm decision. Be honest about what you can give, and about what you need in return.",
+  "text_km": "គម្រោងរួមអាចត្រូវការការសម្រេចចិត្តដ៏មាំមួន។ និយាយដោយស្មោះពីអ្វីដែលអ្នកអាចផ្ដល់ និងអ្វីដែលអ្នកត្រូវការត្រឡប់មកវិញ។"
+ },
+ {
+  "id": "week-first-9",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "first",
+   "house": [
+    9
+   ]
+  },
+  "tone": "act",
+  "text": "A plan to travel or study asks for its next step. Book, apply, or ask the question you have been holding back.",
+  "text_km": "គម្រោងធ្វើដំណើរ ឬសិក្សា កំពុងរង់ចាំជំហានបន្ទាប់។ កក់ ដាក់ពាក្យ ឬសួរសំណួរដែលអ្នកបានទុកក្នុងចិត្ត។"
+ },
+ {
+  "id": "week-first-10",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "first",
+   "house": [
+    10
+   ]
+  },
+  "tone": "act",
+  "text": "Work asks for a decision or a bit of extra effort. Act on your priorities and let the less important things wait.",
+  "text_km": "ការងារទាមទារការសម្រេចចិត្ត ឬការខិតខំបន្ថែមបន្តិច។ ធ្វើតាមអាទិភាពរបស់អ្នក ហើយទុករឿងមិនសូវសំខាន់ឲ្យរង់ចាំ។"
+ },
+ {
+  "id": "week-first-11",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "first",
+   "house": [
+    11
+   ]
+  },
+  "tone": "act",
+  "text": "A group plan or a friend's request may need a clear yes or no. Choose what fits your goals, kindly.",
+  "text_km": "គម្រោងក្រុម ឬការស្នើសុំរបស់មិត្តភក្ដិ អាចត្រូវការចម្លើយច្បាស់ថា បាទ/ចាស ឬទេ។ ជ្រើសអ្វីដែលសមនឹងគោលដៅរបស់អ្នក ដោយសុភាព។"
+ },
+ {
+  "id": "week-first-12",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "first",
+   "house": [
+    12
+   ]
+  },
+  "tone": "act",
+  "text": "Something you have been avoiding may surface. Face it gently, one small step at a time, and give yourself extra rest.",
+  "text_km": "រឿងដែលអ្នកបានជៀសវាងអាចលេចឡើង។ ប្រឈមមុខនឹងវាដោយទន់ភ្លន់ មួយជំហានតូចម្ដងៗ ហើយសម្រាកឲ្យបានច្រើនជាងមុន។"
+ },
+ {
+  "id": "week-full-1",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "full",
+   "house": [
+    1
+   ]
+  },
+  "tone": "see",
+  "text": "You are more visible than usual. Feelings and results come to the surface, so it is a good week to show what you have been working on.",
+  "text_km": "អ្នកត្រូវបានគេមើលឃើញច្រើនជាងធម្មតា។ អារម្មណ៍ និងលទ្ធផលលេចចេញមក ដូច្នេះជាសប្ដាហ៍ល្អដើម្បីបង្ហាញអ្វីដែលអ្នកបានខិតខំធ្វើ។"
+ },
+ {
+  "id": "week-full-2",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "full",
+   "house": [
+    2
+   ]
+  },
+  "tone": "see",
+  "text": "Money matters come into focus. Look at what came in and went out with clear eyes, and appreciate what is going well.",
+  "text_km": "រឿងប្រាក់កាសកាន់តែច្បាស់។ ពិនិត្យមើលចំណូល និងចំណាយដោយភ្នែកច្បាស់ ហើយកោតសរសើរអ្វីដែលកំពុងដំណើរការល្អ។"
+ },
+ {
+  "id": "week-full-3",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "full",
+   "house": [
+    3
+   ]
+  },
+  "tone": "see",
+  "text": "A conversation or a piece of news brings clarity. Share what you have learned, and listen for what is said between the lines.",
+  "text_km": "ការសន្ទនា ឬដំណឹងមួយនាំមកនូវភាពច្បាស់លាស់។ ចែករំលែកអ្វីដែលអ្នកបានរៀន ហើយស្ដាប់អត្ថន័យដែលលាក់នៅក្នុងពាក្យ។"
+ },
+ {
+  "id": "week-full-4",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "full",
+   "house": [
+    4
+   ]
+  },
+  "tone": "see",
+  "text": "Home and family feel important this week. Make room for time together, and notice what makes your space feel like yours.",
+  "text_km": "ផ្ទះ និងគ្រួសារមានសារៈសំខាន់ក្នុងសប្ដាហ៍នេះ។ ទុកពេលនៅជាមួយគ្នា ហើយសង្កេតមើលអ្វីដែលធ្វើឲ្យកន្លែងរស់នៅជារបស់អ្នក។"
+ },
+ {
+  "id": "week-full-5",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "full",
+   "house": [
+    5
+   ]
+  },
+  "tone": "see",
+  "text": "Joy is easy to find. Enjoy something you made, a date or a day out, and let yourself be seen having fun.",
+  "text_km": "ភាពរីករាយងាយរកឃើញ។ រីករាយនឹងអ្វីដែលអ្នកបានបង្កើត ការណាត់ជួប ឬការដើរលេងមួយថ្ងៃ ហើយទុកឲ្យគេឃើញអ្នកសប្បាយ។"
+ },
+ {
+  "id": "week-full-6",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "full",
+   "house": [
+    6
+   ]
+  },
+  "tone": "see",
+  "text": "A project or routine reaches a natural finish. Wrap it up, notice what worked, and give yourself a proper pause.",
+  "text_km": "គម្រោង ឬទម្លាប់មួយឈានដល់ចំណុចបញ្ចប់ធម្មជាតិ។ បញ្ចប់វា សង្កេតមើលអ្វីដែលដំណើរការ ហើយផ្ដល់ពេលសម្រាកឲ្យខ្លួនឯងឲ្យបានត្រឹមត្រូវ។"
+ },
+ {
+  "id": "week-full-7",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "full",
+   "house": [
+    7
+   ]
+  },
+  "tone": "see",
+  "text": "Relationships come into clear light. Talk honestly with a partner or friend; you may both see more clearly what you need.",
+  "text_km": "ទំនាក់ទំនងកាន់តែច្បាស់។ និយាយដោយស្មោះជាមួយដៃគូ ឬមិត្តភក្ដិ ហើយអ្នកទាំងពីរអាចមើលឃើញកាន់តែច្បាស់ពីអ្វីដែលខ្លួនត្រូវការ។"
+ },
+ {
+  "id": "week-full-8",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "full",
+   "house": [
+    8
+   ]
+  },
+  "tone": "see",
+  "text": "Something unspoken is easier to see. A frank, kind talk about trust or shared plans helps you both move forward.",
+  "text_km": "រឿងដែលមិនទាន់បាននិយាយ កាន់តែងាយមើលឃើញ។ ការពិភាក្សាដោយត្រង់ និងសុភាពអំពីទំនុកចិត្ត ឬគម្រោងរួម ជួយអ្នកទាំងពីរឲ្យឆ្ពោះទៅមុខ។"
+ },
+ {
+  "id": "week-full-9",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "full",
+   "house": [
+    9
+   ]
+  },
+  "tone": "see",
+  "text": "A plan, a lesson or a trip reaches a high point. Share what you have discovered with someone who will enjoy hearing it.",
+  "text_km": "គម្រោង មេរៀន ឬដំណើរកម្សាន្តមួយ ឈានដល់កំពូល។ ចែករំលែកអ្វីដែលអ្នករកឃើញជាមួយអ្នកដែលនឹងរីករាយស្ដាប់។"
+ },
+ {
+  "id": "week-full-10",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "full",
+   "house": [
+    10
+   ]
+  },
+  "tone": "see",
+  "text": "Work brings a visible result. Take credit where it is due, and think about where you want to go next.",
+  "text_km": "ការងារនាំមកនូវលទ្ធផលដែលមើលឃើញ។ ទទួលយកការកោតសរសើរដែលសមនឹងអ្នក ហើយគិតពីទិសដៅបន្ទាប់ដែលអ្នកចង់ទៅ។"
+ },
+ {
+  "id": "week-full-11",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "full",
+   "house": [
+    11
+   ]
+  },
+  "tone": "see",
+  "text": "Friends and shared plans are in the spotlight. Celebrate with people who support you, and see which goals still feel right.",
+  "text_km": "មិត្តភក្ដិ និងគម្រោងរួម ស្ថិតក្នុងចំណុចកណ្ដាល។ អបអរជាមួយអ្នកដែលគាំទ្រអ្នក ហើយមើលថាគោលដៅណាខ្លះនៅតែសមស្រប។"
+ },
+ {
+  "id": "week-full-12",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "full",
+   "house": [
+    12
+   ]
+  },
+  "tone": "see",
+  "text": "A reflective week. Old feelings may rise; let them pass gently, and rest more than usual so you feel ready for what comes next.",
+  "text_km": "សប្ដាហ៍នៃការឆ្លុះបញ្ចាំង។ អារម្មណ៍ចាស់ៗអាចផុសឡើង សូមទុកឲ្យវាកន្លងផុតទៅដោយទន់ភ្លន់ ហើយសម្រាកឲ្យបានច្រើនជាងធម្មតា ដើម្បីត្រៀមខ្លួនសម្រាប់អ្វីដែលនឹងមកដល់។"
+ },
+ {
+  "id": "week-last-1",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "last",
+   "house": [
+    1
+   ]
+  },
+  "tone": "release",
+  "text": "A week to review how you show up. Let go of one habit or worry that no longer suits the person you are becoming.",
+  "text_km": "សប្ដាហ៍សម្រាប់ពិនិត្យមើលរបៀបដែលអ្នកបង្ហាញខ្លួន។ លះបង់ទម្លាប់ ឬការព្រួយបារម្ភមួយ ដែលលែងសមនឹងមនុស្សដែលអ្នកកំពុងក្លាយជា។"
+ },
+ {
+  "id": "week-last-2",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "last",
+   "house": [
+    2
+   ]
+  },
+  "tone": "release",
+  "text": "Tidy your money and your belongings. Cancel what you do not use, and keep what truly matters to you.",
+  "text_km": "រៀបចំប្រាក់កាស និងរបស់របររបស់អ្នក។ បោះបង់អ្វីដែលអ្នកមិនប្រើ ហើយរក្សាទុកអ្វីដែលពិតជាសំខាន់សម្រាប់អ្នក។"
+ },
+ {
+  "id": "week-last-3",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "last",
+   "house": [
+    3
+   ]
+  },
+  "tone": "release",
+  "text": "Clear your inbox and close open conversations. A simple thank you or sorry can make things lighter.",
+  "text_km": "សម្អាតប្រអប់សារ ហើយបញ្ចប់ការសន្ទនាដែលនៅចំហ។ ពាក្យអរគុណ ឬសុំទោសសាមញ្ញមួយ អាចធ្វើឲ្យអ្វីៗស្រាលជាងមុន។"
+ },
+ {
+  "id": "week-last-4",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "last",
+   "house": [
+    4
+   ]
+  },
+  "tone": "release",
+  "text": "Clear a corner at home. Letting go of things you no longer need makes space for calm.",
+  "text_km": "សម្អាតជ្រុងមួយនៅផ្ទះ។ ការលះបង់របស់ដែលអ្នកលែងត្រូវការ បង្កើតកន្លែងសម្រាប់ភាពស្ងប់ស្ងាត់។"
+ },
+ {
+  "id": "week-last-5",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "last",
+   "house": [
+    5
+   ]
+  },
+  "tone": "release",
+  "text": "Look back at what has made you happy lately. Keep what brings joy, and drop the plans that have started to feel like duties.",
+  "text_km": "ក្រឡេកមើលអ្វីដែលធ្វើឲ្យអ្នកសប្បាយចិត្តថ្មីៗនេះ។ រក្សាអ្វីដែលនាំមកនូវសេចក្ដីរីករាយ ហើយបោះបង់គម្រោងដែលចាប់ផ្ដើមមានអារម្មណ៍ដូចជាកាតព្វកិច្ច។"
+ },
+ {
+  "id": "week-last-6",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "last",
+   "house": [
+    6
+   ]
+  },
+  "tone": "release",
+  "text": "Simplify your routines. Finish the small tasks, and take one thing off your list that does not need doing.",
+  "text_km": "ធ្វើឲ្យទម្លាប់របស់អ្នកសាមញ្ញជាងមុន។ បញ្ចប់កិច្ចការតូចៗ ហើយដកកិច្ចការមួយដែលមិនចាំបាច់ចេញពីបញ្ជី។"
+ },
+ {
+  "id": "week-last-7",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "last",
+   "house": [
+    7
+   ]
+  },
+  "tone": "release",
+  "text": "Review your partnerships with a kind eye. Let small grudges go, and keep the agreements that work for both of you.",
+  "text_km": "ពិនិត្យភាពជាដៃគូរបស់អ្នកដោយចិត្តល្អ។ បំភ្លេចការអាក់អន់ចិត្តតូចៗ ហើយរក្សាកិច្ចព្រមព្រៀងដែលល្អសម្រាប់អ្នកទាំងពីរ។"
+ },
+ {
+  "id": "week-last-8",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "last",
+   "house": [
+    8
+   ]
+  },
+  "tone": "release",
+  "text": "A good week to close a chapter. Settle shared tasks and promises, and let what is finished be finished.",
+  "text_km": "សប្ដាហ៍ល្អសម្រាប់បិទជំពូកមួយ។ បញ្ចប់កិច្ចការ និងការសន្យារួម ហើយទុកឲ្យអ្វីដែលចប់ហើយ បានចប់។"
+ },
+ {
+  "id": "week-last-9",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "last",
+   "house": [
+    9
+   ]
+  },
+  "tone": "release",
+  "text": "Review your plans for study or travel. Drop what no longer excites you, and keep the ideas that still feel alive.",
+  "text_km": "ពិនិត្យគម្រោងសិក្សា ឬធ្វើដំណើររបស់អ្នក។ បោះបង់អ្វីដែលលែងធ្វើឲ្យអ្នករំភើប ហើយរក្សាគំនិតដែលនៅតែមានជីវិត។"
+ },
+ {
+  "id": "week-last-10",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "last",
+   "house": [
+    10
+   ]
+  },
+  "tone": "release",
+  "text": "Look at your work honestly. Finish what you can, hand over what you can, and let go of a goal that has changed.",
+  "text_km": "ក្រឡេកមើលការងាររបស់អ្នកដោយស្មោះត្រង់។ បញ្ចប់អ្វីដែលអាចបញ្ចប់ ប្រគល់អ្វីដែលអាចប្រគល់ ហើយលះបង់គោលដៅដែលបានផ្លាស់ប្ដូរ។"
+ },
+ {
+  "id": "week-last-11",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "last",
+   "house": [
+    11
+   ]
+  },
+  "tone": "release",
+  "text": "Some groups may need less of your time now. Be grateful for what they gave you, and focus on the people and goals that matter.",
+  "text_km": "ក្រុមខ្លះអាចត្រូវការពេលវេលារបស់អ្នកតិចជាងមុន។ ដឹងគុណចំពោះអ្វីដែលពួកគេបានផ្ដល់ ហើយផ្ដោតលើមនុស្ស និងគោលដៅដែលសំខាន់។"
+ },
+ {
+  "id": "week-last-12",
+  "topic": "week",
+  "kind": "base",
+  "conditions": {
+   "phase": "last",
+   "house": [
+    12
+   ]
+  },
+  "tone": "release",
+  "text": "Rest and let go. Quiet evenings and a little time alone help you finish this cycle feeling lighter.",
+  "text_km": "សម្រាក និងលះបង់។ ពេលល្ងាចស្ងាត់ៗ និងពេលនៅម្នាក់ឯងបន្តិច ជួយអ្នកឲ្យបញ្ចប់វដ្តនេះដោយអារម្មណ៍ស្រាលជាងមុន។"
+ }
+]

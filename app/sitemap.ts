@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/about", "yearly", 0.3), u("/contact", "yearly", 0.3), u("/privacy", "yearly", 0.2), u("/terms", "yearly", 0.2), u("/disclaimer", "yearly", 0.2),
   ];
   for (const s of SIGNS) {
-    out.push(u(`/horoscope/${s.slug}`, "daily", 0.9), u(`/zodiac/${s.slug}`, "monthly", 0.7));
+    out.push(u(`/horoscope/${s.slug}`, "daily", 0.9), u(`/horoscope/${s.slug}/week`, "weekly", 0.8), u(`/zodiac/${s.slug}`, "monthly", 0.7));
     for (const d of dailyWindow(today)) out.push(u(`/horoscope/${s.slug}/${d}`, "never", 0.4));
   }
   for (const a of ANIMALS) out.push(u(`/chinese-zodiac/${a.slug}`, "weekly", 0.7), u(`/chinese-zodiac/${a.slug}/2027`, "monthly", 0.8));

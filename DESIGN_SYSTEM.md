@@ -315,6 +315,9 @@ Animal glyph + "Rat in the year of the Fire Goat" → overview → love, career,
 ### 7.6 Lucky days
 Month heading with previous/next → AlmanacCalendar → selected day detail → how the almanac works (short explainer).
 
+### 7.7 Weekly horoscope
+Week navigation (previous/next) → sign glyph + "Aries weekly horoscope" + the date range → "The week ahead" (one muted line naming the lunation, its sign and house; then the overview in reading type) → "Best days" (four topics as a definition list, each day linking to that daily reading; no meters, no scores) → "The Moon's week" (days → sign and house theme, hairline rows) → "In the sky this week" (day → one sentence per planet event; an empty week says so) → feedback, share, related links, other signs this week. Same column and rail as the daily reading (§7.2).
+
 ---
 
 ## 8. UX rules
@@ -382,3 +385,4 @@ Month heading with previous/next → AlmanacCalendar → selected day detail →
 | 2026-10-04 | Khmer pages redefine the `--lh-*` tokens (+0.15 on every step) under `:root:lang(km)`; the `[lang="km"]` base rule now covers only Khmer spans on English pages. Checkboxes and radios use `accent-color: ink` | The text utilities set their own line-height, so the +0.15 of §3.2 never reached Khmer headings, chips or small text (measured h1 1.15, display 1.05). Native controls were the browser blue, and a cinnabar fill is reserved for the seal (§6.5) |
 | 2026-10-04 | AlmanacCalendar: holy-day ring, seal and dot sit on their own fixed-height line under the lunar date; animal and year links in lists get the 44px tap height | Khmer two-digit dates wrapped the marks, so they jumped between rows; small inline links failed §8.7 |
 | 2026-10-04 | Added Date converter + AgeTool (§6.18), Printable calendar (§6.19, token `--size-print-sheet`, the only print styles), Colour of the day (§6.20) | Top three features from FEATURES.md §7; the age tool stays client-side because a birth date must not reach the server |
+| 2026-10-04 | Weekly horoscope template (§7.7) | FEATURES.md #46: weekly readings from the week's lunation, the Moon's path and planet events |

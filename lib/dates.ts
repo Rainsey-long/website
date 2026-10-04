@@ -57,3 +57,19 @@ export function buildToday(): string {
   if (forced && /^\d{4}-\d{2}-\d{2}$/.test(forced)) return forced;
   return dayKey(new Date());
 }
+
+/** "5–11 October 2026", "28 September – 4 October 2026", "29 December 2025 – 4 January 2026"; Khmer likewise. */
+export function weekRange(monday: string, lang: Lang = "en"): string {
+  const sunday = addDays(monday, 6);
+  const a = fromKey(monday), b = fromKey(sunday);
+  const sameYear = a.getUTCFullYear() === b.getUTCFullYear();
+  const sameMonth = sameYear && a.getUTCMonth() === b.getUTCMonth();
+  if (lang === "km") {
+    if (sameMonth) return `ទី${khmerDigits(a.getUTCDate())}–${khmerDigits(b.getUTCDate())} ${monthYear(b.getUTCFullYear(), b.getUTCMonth() + 1, "km")}`;
+    if (sameYear) return `ទី${khmerDigits(a.getUTCDate())} ខែ${MONTHS_KM[a.getUTCMonth()]} – ${longDate(sunday, "km")}`;
+    return `${longDate(monday, "km")} – ${longDate(sunday, "km")}`;
+  }
+  if (sameMonth) return `${a.getUTCDate()}–${longDate(sunday)}`;
+  if (sameYear) return `${a.getUTCDate()} ${MONTHS[a.getUTCMonth()]} – ${longDate(sunday)}`;
+  return `${longDate(monday)} – ${longDate(sunday)}`;
+}

@@ -27,7 +27,7 @@ import { signName } from "@/lib/names";
 
 const T = defineMessages({
   en: {
-    crumb: "Horoscopes", today: (s: string) => `${s} horoscope today`,
+    crumb: "Horoscopes", week: "Read this week", today: (s: string) => `${s} horoscope today`,
     desc: (s: string) => `Today's ${s} horoscope: love, career, money and mood, with your lucky colour, number and hour.`,
     short: (s: string) => `Today's ${s} horoscope.`,
     forDate: (s: string, d: string) => `${s} horoscope for ${d}`,
@@ -38,7 +38,7 @@ const T = defineMessages({
     goat: "2027 Year of the Fire Goat forecast",
   },
   km: {
-    crumb: "ហោរាសាស្ត្រ", today: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}`,
+    crumb: "ហោរាសាស្ត្រ", week: "អានសប្ដាហ៍នេះ", today: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}`,
     desc: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះសម្រាប់រាសី${s}៖ ស្នេហា ការងារ ហិរញ្ញវត្ថុ និងអារម្មណ៍ ព្រមទាំងពណ៌ លេខ និងម៉ោងសំណាងរបស់អ្នក។`,
     short: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}។`,
     forDate: (s: string, d: string) => `ហោរាសាស្ត្ររាសី${s} សម្រាប់${d}`,
@@ -106,6 +106,7 @@ export default async function SignHub({ params }: Params) {
           </HubDayPicker>
           <nav aria-label={t.day} className="mt-5 flex flex-wrap gap-3">
             <Link className="btn-secondary" href={`/horoscope/${sign.slug}/${days[2]}`}>{t.tomorrow}</Link>
+            <Link className="btn-secondary" href={`/horoscope/${sign.slug}/week`}>{t.week}</Link>
             <SaveSign slug={sign.slug} name={name} />
           </nav>
           <Share title={title} text={t.myToday(name)} url={absolute(`/horoscope/${sign.slug}`)} />

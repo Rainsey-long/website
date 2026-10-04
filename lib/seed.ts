@@ -1,6 +1,7 @@
 /**
  * Seeding — idempotent and additive, run once per process (CamboMath pattern).
- *  - text_blocks: INSERT OR IGNORE every block in content/blocks/*.json.
+ *  - text_blocks: INSERT OR IGNORE every block in content/blocks/*.json and
+ *    the weekly overviews in content/weekly/lunations.json (topic "week").
  *    A block the owner has not touched (still draft, text == source_text)
  *    follows code edits; an edited or approved block is never overwritten.
  *    The Khmer text (text_km) follows its own source the same way, while the
@@ -11,6 +12,7 @@
 import { getDb, runAnalyze } from "./db";
 import { ADMIN_PASSWORD_MIN, hashPassword } from "./auth";
 import { BLOCKS, TOPICS } from "./reading-engine";
+import { WEEKLY_BLOCKS } from "./weekly";
 
 /** Dev-only default. instrumentation.ts refuses to boot production if any admin still verifies against it. */
 export const DEV_ADMIN_PASSWORD = "almanac-dev-only";
@@ -31,8 +33,8 @@ export function seedIfEmpty(): void {
   );
   let wrote = 0;
   db.transaction(() => {
-    for (const topic of TOPICS) {
-      for (const b of BLOCKS[topic]) {
+    for (const list of [...TOPICS.map((t) => BLOCKS[t]), WEEKLY_BLOCKS]) {
+      for (const b of list) {
         const cond = JSON.stringify(b.conditions);
         wrote += insert.run(b.id, b.topic, b.kind, cond, b.text, b.text).changes;
         wrote += follow.run(b.text, b.text, cond, b.id, b.text).changes;

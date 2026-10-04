@@ -51,3 +51,10 @@ Noted by the UI review: Cancer is now spelled កក្កដ everywhere (was �
 | `app/tools/date-converter/page.tsx`, `components/client/AgeTool.tsx` | Converter and age tool: "បម្លែងកាលបរិច្ឆេទ", "អាយុតាមរបៀបចិន" for the Chinese nominal age (虚岁), "ខែអធិក" for a Chinese leap month, "ឆ្នាំអធិកមាស", the explanations of the reverse lookups |
 | `app/khmer/colours/page.tsx`, `components/khmer/KhmerDayCard.tsx` | "ពណ៌ប្រចាំថ្ងៃ", "ពណ៌មង្គល", the newer-book colours (ខៀវខ្ចី sky blue, ស white), "ពណ៌ដូនតា" for ancestral colour |
 | `app/lucky-days/[yyyy]/[mm]/print/page.tsx` | Printable calendar header, legend and "ខែ៩" as the mark for the first day of a Chinese lunar month |
+
+## Added 2026-10-04: weekly horoscopes
+
+| Where | What to check |
+|---|---|
+| `content/weekly/lunations.json` (`text_km`, 48 blocks; also editable in `/km/admin/readings?topic=week`) | The weekly overviews: one per Moon phase (new, first quarter, full, last quarter) and house |
+| `components/WeeklyPage.tsx`, `lib/weeklyMeta.ts`, `app/horoscope/page.tsx`, `app/horoscope/[sign]/page.tsx` | "ហោរាសាស្ត្រប្រចាំសប្ដាហ៍", "ផ្នែក…របស់អ្នក" for a house, the planet-event sentences ("ចាប់ផ្ដើមដើរថយក្រោយ", "ដើរទៅមុខវិញ"), "ថ្ងៃល្អបំផុត" |

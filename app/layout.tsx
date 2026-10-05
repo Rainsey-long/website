@@ -12,6 +12,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ZoneCookie from "@/components/client/ZoneCookie";
+import ServiceWorkerRegister from "@/components/client/ServiceWorkerRegister";
 import { FEATURES, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site";
 import { visitorZone } from "@/lib/today";
 import { getLang } from "@/lib/langServer";
@@ -22,7 +23,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: `${SITE_NAME}: ${SITE_TAGLINE}`, template: `%s | ${SITE_NAME}` },
   description: "Daily horoscopes, the Chinese zodiac, Khmer traditions and lucky days, written from where the Moon really is today.",
-  icons: { icon: "/favicon.svg" },
+  icons: { icon: "/favicon.svg", apple: "/icons/apple-touch-icon.png" },
+  appleWebApp: { capable: true, title: SITE_NAME, statusBarStyle: "default" },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
     other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } : undefined,
@@ -58,6 +60,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Footer />
           <div id="toast" role="status" aria-live="polite" className="toast" hidden />
           <ZoneCookie serverZone={zone} />
+          <ServiceWorkerRegister />
         </LangProvider>
         {FEATURES.CF_ANALYTICS_TOKEN && (
           <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: FEATURES.CF_ANALYTICS_TOKEN })} />

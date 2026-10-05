@@ -7,7 +7,7 @@ import { join } from "node:path";
 
 const ROOTS = ["app", "components"];
 // tokens.css holds the values; the OG renderer and the theme-color meta cannot read CSS variables.
-const ALLOW_FILES = new Set(["app/styles/tokens.css", "app/og/[slug]/route.tsx", "app/layout.tsx", "app/styleguide/page.tsx"]);
+const ALLOW_FILES = new Set(["app/styles/tokens.css", "app/og/[slug]/route.tsx", "app/layout.tsx", "app/manifest.ts", "app/styleguide/page.tsx"]); // og, layout (theme-color) and manifest cannot read CSS variables
 const SCALE = new Set([0, 4, 8, 12, 16, 24, 32, 48, 64, 96, 128]);
 const files = [];
 const walk = (d) => {

@@ -34,7 +34,7 @@ export const isLang = (v: string | null | undefined): v is Lang => v === "en" ||
 
 /** Paths that have no Khmer twin and are never prefixed (.ics feeds take ?lang=km). */
 // The admin has a Khmer twin too (/km/admin); API routes take ?lang= instead (lib/http.ts requestLang).
-const UNLOCALISED = /^\/(api|og|_next)(\/|$)|^\/feeds\/.+\.ics$|^\/(robots\.txt|sitemap\.xml|favicon\.svg|ads\.txt)$/;
+const UNLOCALISED = /^\/(api|og|_next)(\/|$)|^\/feeds\/.+\.ics$|^\/(robots\.txt|sitemap\.xml|favicon\.svg|ads\.txt|sw\.js|manifest\.webmanifest)$/;
 
 export function isLocalisable(path: string): boolean {
   return path.startsWith("/") && !path.startsWith("//") && !UNLOCALISED.test(path);

@@ -17,6 +17,8 @@ const csp = `
   img-src 'self' data: blob:;
   font-src 'self';
   connect-src 'self'${cf.connect};
+  worker-src 'self';
+  manifest-src 'self';
   object-src 'none';
   base-uri 'self';
   form-action 'self';
@@ -50,6 +52,8 @@ const nextConfig: NextConfig = {
           { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
         ],
       },
+      // The service worker must be re-checked on every visit so a fix reaches visitors at once.
+      { source: "/sw.js", headers: [{ key: "Cache-Control", value: "no-cache" }, { key: "Content-Type", value: "application/javascript; charset=utf-8" }] },
       { source: "/api/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
       { source: "/admin/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }, { key: "Cache-Control", value: "no-store" }] },
       { source: "/km/admin/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }, { key: "Cache-Control", value: "no-store" }] },

@@ -5,7 +5,7 @@
  * 12 Aug 2026, the same values tests/engine.test.ts pins for the sky pages.
  */
 import { describe, expect, it } from "vitest";
-import { isMonday, mondayOf, weeklyReading, WEEKLY_BLOCKS, PHASE_KEYS } from "@/lib/weekly";
+import { isMonday, mondayOf, weeklyReading, weekSkyEvents, weekSkyYears, WEEKLY_BLOCKS, PHASE_KEYS } from "@/lib/weekly";
 import { dailyReading, TOPICS } from "@/lib/reading-engine";
 import { SIGNS, signBySlug } from "@/lib/western";
 import { addDays } from "@/lib/dates";
@@ -30,6 +30,16 @@ describe("weekly horoscope", () => {
     expect(weeklyReading(signBySlug("libra")!, "2026-10-05").overview.id).toBe("week-new-1");
     // Full Moon 26 Oct 2026 in Taurus: Aries' 2nd house.
     expect(weeklyReading(aries, "2026-10-26").overview.id).toBe("week-full-2");
+  });
+
+  it("gives the same sign-independent sky events for the /sky/week digest", () => {
+    // Mercury turns retrograde on 26 Feb 2026 (the published 2026 table pinned in engine.test.ts).
+    const feb = weekSkyEvents("2026-02-23");
+    expect(feb.map((e) => `${e.kind} ${e.body} ${e.date}`)).toContain("station-rx mercury 2026-02-26");
+    expect(weekSkyEvents("2026-08-10").filter((e) => e.kind === "eclipse").map((e) => `${e.body} ${e.eclipseKind} ${e.date}`)).toEqual(["sun total 2026-08-12"]);
+    const withHouses = weeklyReading(aries, "2026-10-19").events.map((e) => { const copy: Partial<typeof e> = { ...e }; delete copy.house; return copy; });
+    expect(withHouses).toEqual(weekSkyEvents("2026-10-19"));
+    expect(weekSkyYears("2026-12-28")).toEqual([2025, 2026, 2027]);
   });
 
   it("lists stations and eclipses that fall in the week", () => {

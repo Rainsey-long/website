@@ -65,8 +65,13 @@ export type FeedName = keyof typeof FEEDS;
  * Events for one feed, in English or Khmer. A Khmer edition has its own UIDs
  * (suffix "-km") so someone subscribed to both languages does not see one
  * overwrite the other.
+ *
+ * `eve` (holy-day feed only, `?eve=1`) adds an all-day note the day before
+ * each ថ្ងៃសីល, so people who keep the precepts can prepare. Eve UIDs are the
+ * holy day's UID with "-eve" before the language suffix; the holy days'
+ * own UIDs never change.
  */
-export function feedEvents(name: FeedName, fromYear: number, toYear: number, lang: Lang = "en"): IcsEvent[] {
+export function feedEvents(name: FeedName, fromYear: number, toYear: number, lang: Lang = "en", opts: { eve?: boolean } = {}): IcsEvent[] {
   const km = lang === "km";
   const sfx = km ? "-km" : "";
   const sign = (i: number) => signNameIn(i, lang);
@@ -92,7 +97,10 @@ export function feedEvents(name: FeedName, fromYear: number, toYear: number, lan
   } else {
     for (let d = from; d < to; d = addDays(d, 1)) {
       const k = khmerDay(d);
-      if (name === "khmer-holy-days" && k.sila) out.push({ uid: `sila-${d}${sfx}`, title: km ? "ថ្ងៃសីល" : "Buddhist holy day (ថ្ងៃសីល)", allDay: true, start: d, description: km ? k.labelKm : `${k.labelEn}. ${k.labelKm}` });
+      if (name === "khmer-holy-days" && k.sila) {
+        if (opts.eve) out.push({ uid: `sila-${d}-eve${sfx}`, title: km ? "ថ្ងៃមុនថ្ងៃសីល" : "Eve of a Buddhist holy day (ថ្ងៃសីល)", allDay: true, start: addDays(d, -1), description: km ? `ថ្ងៃស្អែកជាថ្ងៃសីល ${k.labelKmShort}។` : `Tomorrow is a Buddhist holy day, the ${k.labelEn}. ${k.labelKmShort}` });
+        out.push({ uid: `sila-${d}${sfx}`, title: km ? "ថ្ងៃសីល" : "Buddhist holy day (ថ្ងៃសីល)", allDay: true, start: d, description: km ? k.labelKm : `${k.labelEn}. ${k.labelKm}` });
+      }
       if (name === "khmer-festivals" && k.festival && k.festival.id !== "khmer-new-year") out.push({ uid: `kh-${k.festival.id}-${d}${sfx}`, title: km ? k.festival.km : `${k.festival.en} (${k.festival.km})`, allDay: true, start: d });
     }
     if (name === "khmer-festivals") for (let y = fromYear; y <= toYear; y++) {

@@ -4,6 +4,7 @@
  * variables; keep them in step with app/styles/tokens.css (light theme).
  * English only (2026-10-05): an old `?lang=km` link gets the English card.
  */
+import { GLOBAL_LIMIT_KEY, createRateLimiter } from "@/lib/rateLimit";
 import { ImageResponse } from "next/og";
 import fs from "node:fs";
 import path from "node:path";
@@ -27,7 +28,12 @@ function glyphUri(parts: GlyphPart[]): string {
   return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;
 }
 
+/** ~29 ms of CPU per image (security audit 2026-10-05): one site-wide ceiling, like the feeds. */
+const g = globalThis as unknown as { __ogLimiter?: ReturnType<typeof createRateLimiter> };
+const ogLimiter = (g.__ogLimiter ??= createRateLimiter(10 * 60_000, 1200));
+
 export async function GET(_req: Request, { params }: { params: Promise<{ slug: string }> }) {
+  if (ogLimiter(GLOBAL_LIMIT_KEY)) return new Response("Busy, try again shortly", { status: 429, headers: { "Retry-After": "60" } });
   const { slug } = await params;
   let title = "Today's sky";
   let subtitle = SITE_TAGLINE;

@@ -39,7 +39,7 @@ describe("ads gate", () => {
     const a = await load({ NEXT_PUBLIC_AD_CLIENT_ID: "ca-pub-1234567890123456", NEXT_PUBLIC_AD_SLOT_AFTER_READING: "1234567890" });
     expect(a.adsAllowedOnPath("/horoscope/aries")).toBe(true);
     expect(a.adsAllowedOnPath("/")).toBe(true);
-    for (const p of ["/admin", "/admin/readings", "/api/feedback", "/search", "/offline", "/styleguide", "/lucky-days/2026/10/print"]) {
+    for (const p of ["/admin", "/admin/readings", "/api/feedback", "/search", "/offline", "/styleguide", "/lucky-days/2026/10/print", "/tools/zodiac-calculator", "/tools/birth-chart", "/tools/date-converter", "/tools/numerology", "/lucky-days/finder"]) {
       expect(a.adsAllowedOnPath(p), p).toBe(false);
     }
     expect(a.adsAllowedOnPath("/administrator-tips")).toBe(true); // prefix is a path segment, not a string prefix

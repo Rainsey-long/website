@@ -1,9 +1,13 @@
 /**
  * Admin sign-in / sign-out. Rate limiting follows CamboMath's measured fix:
- * a global ceiling gates pre-parse; the per-caller and per-username buckets
- * are PEEKED before authenticating and COUNTED only on failure, so the
- * correct password always works and resets both (a limiter that refuses
- * correct credentials is a lock-out primitive).
+ * the global, per-caller and per-username buckets are all PEEKED before
+ * authenticating and COUNTED only on failure, so the correct password always
+ * works (a limiter that refuses correct credentials is a lock-out
+ * primitive). The global bucket used to gate every request before parsing,
+ * which let 200 anonymous POSTs lock the owner out for ten minutes, again and
+ * again (security audit 2026-10-05). With a forgeable caller key, the global
+ * failure ceiling is the real guessing limit: about 28,800 wrong guesses a
+ * day against a 12-character minimum password.
  */
 import { cookies } from "next/headers";
 import { authenticate, bumpSessionEpoch, createSessionToken, getSession, SESSION_MAX_AGE, sessionCookieName } from "@/lib/auth";
@@ -28,7 +32,6 @@ const T = defineMessages({
 export async function POST(req: Request) {
   const t = T.en;
   if (!sameOrigin(req)) return json({ error: t.forbidden }, 403);
-  if (globalLimit(GLOBAL_LIMIT_KEY)) return json({ error: t.tooMany }, 429);
   const body = await readJsonCapped<{ username?: unknown; password?: unknown }>(req, 2048);
   if (!body.ok) return body.res;
   const { username, password } = body.value;
@@ -37,12 +40,13 @@ export async function POST(req: Request) {
   }
   seedIfEmpty();
   const ip = clientIp(req), user = username.trim().toLowerCase();
-  const ipLocked = ipLimit.peek(ip), userLocked = userLimit.peek(user);
+  const globalLocked = globalLimit.peek(GLOBAL_LIMIT_KEY), ipLocked = ipLimit.peek(ip), userLocked = userLimit.peek(user);
   const id = authenticate(username, password);
   if (!id) {
+    globalLimit(GLOBAL_LIMIT_KEY);
     ipLimit(ip);
     userLimit(user);
-    if (ipLocked || userLocked) return json({ error: t.tooMany }, 429);
+    if (globalLocked || ipLocked || userLocked) return json({ error: t.tooMany }, 429);
     return json({ error: t.noMatch }, 401);
   }
   ipLimit.reset(ip);

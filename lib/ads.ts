@@ -60,7 +60,11 @@ export const slotConfigured = (p: Placement) => adsConfigured() && /^\d{6,}$/.te
  * the tag itself loads on other content pages too, so the consent message can
  * be shown and answered on the first page a visitor opens.
  */
-const NO_AD_PREFIXES = ["/admin", "/api", "/offline", "/search", "/styleguide"];
+// /tools and the finder take birth details or personal dates, which the
+// privacy policy promises never leave the browser: a third-party script on
+// those pages could read the form or the page address (security audit
+// 2026-10-05). Ads stay off them entirely.
+const NO_AD_PREFIXES = ["/admin", "/api", "/offline", "/search", "/styleguide", "/tools", "/lucky-days/finder"];
 
 export function adsAllowedOnPath(path: string): boolean {
   if (!adsConfigured()) return false;

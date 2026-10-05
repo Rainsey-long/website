@@ -30,7 +30,7 @@ export async function POST(req: Request) {
   if (typeof path !== "string" || path.length > 200 || !FEEDBACK_PATH.test(path)) return json({ error: "Bad request" }, 400);
   if (verdict !== "helpful" && verdict !== "not_helpful") return json({ error: "Bad request" }, 400);
   const ids = Array.isArray(blockIds) ? blockIds.filter((x): x is string => typeof x === "string" && BLOCK_IDS.has(x)).slice(0, 12) : [];
-  const text = typeof comment === "string" ? comment.replace(/[\u0000-\u0008\u000B-\u001F\u007F]/g, "").trim().slice(0, 500) : "";
+  const text = typeof comment === "string" ? comment.replace(/[\u0000-\u0008\u000B-\u001F\u007F\u202A-\u202E\u2066-\u2069]/g, "").trim().slice(0, 500) : "";
   try {
     const db = getDb();
     const count = (db.prepare("SELECT COUNT(*) AS n FROM feedback").get() as { n: number }).n;

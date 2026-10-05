@@ -76,3 +76,5 @@ ALLOW_PROD_DEPLOY=1 git push origin HEAD:release/1.0.0        # only when the ow
 ## 7. After a deploy
 
 `/api/health` ok · home, one horoscope, `/khmer/new-year`, `/lucky-days` render · `/admin` signs in · `/sitemap.xml` uses your domain · a backup run succeeds · Railway logs show no `[boot]` warnings you didn't expect.
+
+Security follow-up (`docs/SECURITY-AUDIT-2026-10-05.md`): once the site runs, check who owns the volume (`ls -ld /app/data` in a Railway shell). If a non-root user can be given write access, switch the `Dockerfile` to `USER node`; until then the container runs as root.

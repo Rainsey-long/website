@@ -52,7 +52,7 @@ export default async function Privacy() {
       <ul>
         <li><code>mySign</code>: the sign you chose to remember, so the homepage opens on your reading.</li>
         <li><code>theme</code>: light or dark, if you picked one.</li>
-        <li><code>people</code>: only if you use &quot;Save this person&quot; in a tool. The labels, birth dates, times and cities you saved, up to six. &quot;Forget&quot; removes one person.</li>
+        <li><code>people</code>: only if you use “Save this person” in a tool. The labels, birth dates, times and cities you saved, up to six. “Forget” removes one person.</li>
       </ul>
       <p>If you install the site as an app, your browser also keeps copies of the last pages you visited so they open offline. Those copies stay on your device.</p>
 
@@ -60,7 +60,7 @@ export default async function Privacy() {
       <p>Our own cookies, first-party and never shared:</p>
       <ul>
         <li><code>traditions</code>: which traditions you chose to see (Western, Chinese, Khmer). Kept for a year.</li>
-        <li><code>tz</code>: your time zone name, so &quot;today&quot; matches your calendar. Kept for a year.</li>
+        <li><code>tz</code>: your time zone name, so “today” matches your calendar. Kept for a year.</li>
         <li><code>al_session</code>: set only when one of the site&apos;s own administrators signs in. Visitors never receive it.</li>
       </ul>
       <p>{ads ? "Advertising cookies set by Google and its partners are described under Advertising below." : "No advertising or tracking cookies are set."}</p>
@@ -78,7 +78,7 @@ export default async function Privacy() {
       <h2>Advertising</h2>
       {ads ? (
         <>
-          <p>We use Google AdSense to show ads, which keeps the site free. Ads appear in marked spaces after the content, never inside a reading or a form.</p>
+          <p>We use Google AdSense to show ads, which keeps the site free. Ads appear in marked spaces after the content, never inside a reading or a form. The ad code is never loaded on the tools where you enter birth details or personal dates, so what you type there stays on your device.</p>
           <p>Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this website or other websites. Google&apos;s use of advertising cookies enables it and its partners to serve ads to you based on your visit to this site and/or other sites on the Internet.</p>
           <p>You may opt out of personalised advertising by visiting <Ext href="https://adssettings.google.com">Google&apos;s Ads Settings</Ext>. You can also opt out of some other vendors&apos; personalised advertising at <Ext href="https://www.aboutads.info/choices">aboutads.info</Ext> or, in Europe, <Ext href="https://www.youronlinechoices.eu">youronlinechoices.eu</Ext>. How Google uses information from sites that use its services is explained at <Ext href="https://policies.google.com/technologies/partner-sites">policies.google.com/technologies/partner-sites</Ext>.</p>
           <p>If you are in the European Economic Area, the United Kingdom or Switzerland, Google&apos;s consent message asks you first, and without your consent you see only non-personalised or limited ads. You can change or withdraw your choice at any time: <PrivacyChoices />.</p>

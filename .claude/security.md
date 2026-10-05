@@ -13,7 +13,8 @@
 
 - Birth date, time and city in the calculator are computed **in the browser** and never sent. A change that posts them anywhere is a privacy regression.
 - Remembered sign and theme: localStorage only. Cookies: `traditions` (which traditions to show) and `tz` (IANA zone name, validated by `isValidZone`). Neither identifies anyone.
-- Feedback stores page, verdict, block ids, an optional comment (500 chars, control characters stripped). No IP, no identifier.
+- Feedback stores page, verdict, block ids, an optional comment (500 chars, control and bidi-override characters stripped). No IP, no identifier.
+- **The ad tag never loads where birth details are typed** (`/tools`, `/lucky-days/finder`; `adsAllowedOnPath` in `lib/ads.ts`). New personal-input tools go under `/tools` or on that list.
 
 ## Rules for every request handler
 
@@ -21,7 +22,7 @@
 2. **Same-origin on every state change** (`sameOrigin()` in `lib/http.ts`): Origin must match the site, the Host header or X-Forwarded-Host.
 3. **Cap the RAW body before parsing** (`readJsonCapped`). `next.config.ts` also bounds proxy body buffering at 1 MB.
 4. **Rate limits: global ceiling first, then per caller** (`lib/rateLimit.ts`, CamboMath's). `clientIp()` is only trustworthy with `TRUSTED_PROXY_HOPS` set; until then the global ceiling is the limit that holds.
-5. **Login:** per-IP and per-username buckets are PEEKED before authenticating and COUNTED only on failure; a correct password always succeeds and resets both. A username limit that refuses correct credentials is a lock-out primitive.
+5. **Login:** the global, per-IP and per-username buckets are all PEEKED before authenticating and COUNTED only on failure; a correct password always succeeds. Refusing correct credentials would be a lock-out primitive; the global failure ceiling is the real guessing bound.
 6. **Parameterised SQL only.** The admin dashboard's few dynamic SQL fragments are fixed strings chosen by code, never request text.
 7. **Generic errors out, details to the log.**
 8. **Cron routes** (`/api/cron/backup`): `Bearer` secret ≥ 32 chars compared with `timingSafeEqual` after a length check, before any work; 503 when unset; 409 while running. A new cron route gets its own secret.

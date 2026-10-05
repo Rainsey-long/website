@@ -10,6 +10,8 @@ import { calculate, type CalculatorResult, type City } from "@/lib/calculator";
 import type { Tradition } from "@/lib/traditions";
 import { localToday } from "@/lib/client";
 import { useLang } from "./LangProvider";
+import PeoplePicker from "./PeoplePicker";
+import { cityTextForSlug, slugForCityText } from "@/lib/people";
 import { defineMessages, khmerDigits, num, type Lang } from "@/lib/i18n";
 import { animalName, colourName, elementName, signName, yearOf } from "@/lib/names";
 import { VIETNAMESE_NAMES, type TraditionResult } from "@/lib/sea-variants";
@@ -115,6 +117,8 @@ export default function Calculator({ cities, traditions }: { cities: City[]; tra
   return (
     <>
       <form className="mt-6 flex flex-col gap-5" noValidate onSubmit={submit}>
+        <PeoplePicker current={{ date, time: unknown ? "" : time, city: slugForCityText(cities, cityText) }}
+          onPick={(p) => { setDate(p.date); setTime(p.time ?? ""); setUnknown(false); setCityText(cityTextForSlug(cities, p.city)); }} />
         <div>
           <label className="label" htmlFor={`${id}-date`}>{m.birthDate}</label>
           <input className="field tabular" type="date" id={`${id}-date`} required min="1900-01-01" value={date} onChange={(e) => setDate(e.target.value)} aria-invalid={!!errors.date} aria-describedby={`${id}-date-err`} />

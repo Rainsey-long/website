@@ -2,14 +2,13 @@
 import data from "./data/cities.json";
 import type { City } from "./zone";
 import type { Lang } from "./i18n";
+import { citySlug } from "./people";
 
 export interface CityEntry extends City {
   slug: string;
 }
 
-const slugify = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-
-export const CITIES: CityEntry[] = (data as City[]).map((c) => ({ ...c, slug: slugify(`${c.name}-${c.country}`) }));
+export const CITIES: CityEntry[] = (data as City[]).map((c) => ({ ...c, slug: citySlug(c.name, c.country) }));
 const BY_SLUG = new Map(CITIES.map((c) => [c.slug, c]));
 
 export function cityBySlug(slug: string | undefined): CityEntry | undefined {

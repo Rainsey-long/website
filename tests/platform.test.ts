@@ -53,7 +53,10 @@ describe("telegram", () => {
     vi.stubEnv("NODE_ENV", "production");
     vi.stubEnv("TELEGRAM_API_BASE", "https://evil.example");
     expect(telegramConfig()?.api).toBe("https://api.telegram.org");
+    // Localhost too: in production the token only ever goes to Telegram (security review 2026-10-05).
     vi.stubEnv("TELEGRAM_API_BASE", "http://127.0.0.1:3999");
+    expect(telegramConfig()?.api).toBe("https://api.telegram.org");
+    vi.stubEnv("NODE_ENV", "test");
     expect(telegramConfig()?.api).toBe("http://127.0.0.1:3999");
   });
 });

@@ -65,8 +65,15 @@ async function page(event) {
   } catch {
     const cached = await caches.match(request, { cacheName: PAGES });
     if (cached) return cached;
+    // Redirect to the offline page's own URL rather than serving its HTML under
+    // this one: the router sees the URL mismatch, navigates again and ends on
+    // "page not found" (security review 2026-10-05). Only navigations redirect.
     const km = new URL(request.url).pathname.startsWith("/km");
-    return (await caches.match(km ? OFFLINE.km : OFFLINE.en, { cacheName: PAGES })) || Response.error();
+    const offline = km ? OFFLINE.km : OFFLINE.en;
+    if (request.mode === "navigate" && (await caches.match(offline, { cacheName: PAGES }))) {
+      return Response.redirect(new URL(offline, self.location.origin).href, 302);
+    }
+    return Response.error();
   }
 }
 

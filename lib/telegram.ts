@@ -36,8 +36,9 @@ function apiBase(): string {
   if (!raw) return DEFAULT_API;
   try {
     const u = new URL(raw);
-    const local = ["localhost", "127.0.0.1", "[::1]"].includes(u.hostname);
-    if (process.env.NODE_ENV === "production" && !local) return DEFAULT_API;
+    // Tests only: in production the token must only ever go to Telegram over
+    // https (security review 2026-10-05), the same rule as CamboMath's R2_ENDPOINT.
+    if (process.env.NODE_ENV === "production") return DEFAULT_API;
     if (u.protocol !== "http:" && u.protocol !== "https:") return DEFAULT_API;
     return u.origin;
   } catch {
@@ -106,6 +107,10 @@ export async function postDailyCard(cfg: TelegramConfig, date = today()): Promis
   } catch (err) {
     // The error name only: a message could carry the request URL, which holds the token.
     status = err instanceof Error ? err.name : "error";
+    // A timeout leaves the outcome unknown: Telegram may already have posted.
+    // Count the day as done so a retry cannot post the same card twice; a
+    // missed day is the calmer failure (security review 2026-10-05).
+    if (status === "TimeoutError" || status === "AbortError") markPosted(date);
   }
   return { posted: false, date, reason: "send-failed", status };
 }

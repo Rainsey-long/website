@@ -11,7 +11,7 @@
 | `TRUSTED_PROXY_HOPS` | recommended | `1` on Railway with Cloudflare DNS-only, `2` with the orange proxy |
 | `TELEGRAM_CRON_SECRET` | optional (≥32) | bearer for `/api/cron/telegram`; unset = 503 |
 | `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` | optional, server-only | the bot and channel for the daily card |
-| `TELEGRAM_API_BASE` | tests only | ignored in production unless it points at localhost |
+| `TELEGRAM_API_BASE` | tests only | always ignored in production |
 | `BACKUP_RETAIN`, `DISK_BLOCK_PCT`, `DISK_WARN_PCT`, `MIN_FREE_MB` | optional | backup count and disk guard |
 | `PREFLIGHT_DATA_DIR` | scripts only | never set on a server |
 

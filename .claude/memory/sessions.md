@@ -2,6 +2,12 @@
 
 One entry per working session, at most ~10 lines: what changed, the commit range, what is left open. This is the cross-session memory for "what happened last time"; the why of each change is in its commit message.
 
+## 2026-10-05 — the rest of the feature list
+
+- Three worktree agents, merged: almanac day pages, solar terms, holy-day eve feed, sky week; numerology and saved people (browser only); installable app, search, Telegram card (waits on the owner's bot, OWNER-ACTIONS #11).
+- Reviews: security (offline redirect, Telegram base ignored in production, no double post on timeout); UI (tap targets, Khmer-first sky week, plain busy wording).
+- Not built and why: FEATURES.md "Status 2026-10-05". Open: Khmer review of the new strings.
+
 ## 2026-10-04 (night) — weekly horoscopes
 
 - `/horoscope/[sign]/week[/monday]` from `lib/weekly.ts`: 48 lunation × house overviews (`content/weekly/lunations.json`, admin Weekly tab), best days from the daily engine, Moon path, planet events.

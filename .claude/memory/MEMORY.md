@@ -4,6 +4,7 @@ Cloud sessions start in a fresh container: nothing outside git survives. This fi
 
 ## Lessons that cost time
 
+- **Agent worktrees start from the default branch** (`master`, an unrelated fork). Tell isolated agents to `git reset --hard claude/zodiac-site` first.
 - **A palette class (`.theme-light`) must only set colours.** Type and size tokens on `:root` only, or the class resets the type scale and the Khmer line heights.
 - **Printing in dark mode:** set `color-scheme: light` on html in `@media print`, or the canvas prints dark around a light sheet.
 - **Shared server state goes on `globalThis`.** Next bundles each route separately; a module-level cache or DB handle is a different copy per route (an admin edit never reached the pages).
@@ -16,7 +17,6 @@ Cloud sessions start in a fresh container: nothing outside git survives. This fi
 - **Browser checks:** playwright-core is not a dependency; install it in the scratchpad (`npm i playwright-core@1.56`) and launch `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`.
 - **The design token guard rejects off-scale values** (e.g. a 2px gap); use the 4px scale.
 - **Translators:** an agent writing Khmer must not edit `docs/KHMER-REVIEW.md` or other shared files; the parent collects their review lists.
-- **Local dev DB has a "Test entry" Songkran override for 2027** (data/, never committed); the auto-mode classifier refused deleting it.
 
 ## Where things are decided
 

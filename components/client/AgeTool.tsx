@@ -13,6 +13,7 @@ import { fullDate } from "@/lib/dates";
 import { defineMessages, khmerDigits } from "@/lib/i18n";
 import { animalName, elementName } from "@/lib/names";
 import { useLang } from "./LangProvider";
+import PeoplePicker from "./PeoplePicker";
 
 const T = defineMessages({
   en: {
@@ -75,6 +76,7 @@ export default function AgeTool() {
       <h2 id={`${id}-h`} className="text-h2">{t.heading}</h2>
       <p className="mt-2 text-muted">{t.intro}</p>
       <form className="mt-5 flex flex-col gap-5" noValidate onSubmit={submit}>
+        <PeoplePicker current={{ date }} onPick={(p) => setDate(p.date)} />
         <div>
           <label className="label" htmlFor={`${id}-d`}>{t.birth}</label>
           <input ref={input} className="field tabular" type="date" id={`${id}-d`} min="1900-01-01" value={date} onChange={(e) => setDate(e.target.value)} aria-invalid={error} aria-describedby={error ? `${id}-err` : undefined} />

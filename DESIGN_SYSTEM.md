@@ -211,9 +211,9 @@ Month grid, Monday-first, tabular numerals. Each day: Gregorian number large, lu
 - Labels say exactly what happens: "Show my signs", "Check compatibility", "Read tomorrow".
 
 ### 6.10 Header, navigation, footer
-- Header: wordmark (left), nav (Horoscopes, Chinese zodiac, Khmer, Compatibility, Lucky days, Sky), "My sign", the Traditions menu, the language switch (English ↔ ខ្មែរ), theme toggle. On mobile: wordmark, Traditions, language, theme and a menu button opening a full-height sheet; below 480px the Traditions panel spans the page gutters.
+- Header: wordmark (left), nav (Horoscopes, Chinese zodiac, Khmer, Compatibility, Lucky days, Sky), "My sign", search, the Traditions menu (English labels only), theme toggle. On mobile: wordmark, Traditions, theme and a menu button opening a full-height sheet; below 480px the Traditions panel spans the page gutters.
 - "My sign" shortcut appears in the header once a sign is remembered.
-- Footer: section links (Readings, Calendars, Tools, About), legal pages, disclaimer line: "For entertainment and reflection. Not medical, legal, or financial advice." (Khmer pages show the Khmer line).
+- Footer: section links (Readings, Calendars, Tools, About), legal pages, disclaimer line: "For entertainment and reflection. Not medical, legal, or financial advice."
 
 ### 6.11 AdSlot
 - Reserved fixed-height container (mobile 280px, desktop rail 600px, in-content 250px) so ads never shift layout.
@@ -399,3 +399,4 @@ Week navigation (previous/next) → sign glyph + "Aries weekly horoscope" + the 
 | 2026-10-05 | PeoplePicker (§6.21), numerology result (§6.22), search (§6.23); the almanac day, solar terms and sky week pages reuse the dated-list row pattern (label column, hairline rows, prev/next nav) | Remaining features from FEATURES.md §7 |
 | 2026-10-05 | English only: the Khmer language version, the language switch and Khmer share images were removed; Khmer fonts remain for inline tradition terms. Supersedes the 2026-10-04 language-switch, Khmer-numeral and `:root:lang(km)` rows | Owner decision; Google's publisher products do not support Khmer, and one language halves the copy to maintain |
 | 2026-10-05 | AdSlot holds a real AdSense unit; footer "Privacy and cookie settings" link; no Auto ads | Google AdSense readiness (`docs/ADSENSE.md`) |
+| 2026-10-05 | §6.10 brought in line with English only (no language switch, no Khmer glosses in the Traditions menu); `code` in long-form pages is Figtree semibold at the reading size, never a monospace third family | Leftovers from the language removal; the privacy page lists storage and cookie names |

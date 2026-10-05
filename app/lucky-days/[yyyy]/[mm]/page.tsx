@@ -5,7 +5,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Glyph from "@/components/Glyph";
 import AlmanacCalendar, { type CalDay } from "@/components/client/AlmanacCalendar";
 import { almanacDay } from "@/lib/almanac";
-import { khmerDay, toKhmerNum } from "@/lib/khmer";
+import { khmerDay } from "@/lib/khmer";
 import { fullDate, monthName } from "@/lib/dates";
 import { getLang } from "@/lib/langServer";
 import { defineMessages, num } from "@/lib/i18n";
@@ -78,7 +78,7 @@ export default async function Month({ params }: Params) {
     }
     if (wantKhmer) {
       const k = khmerDay(date);
-      d.khmer = { short: toKhmerNum(k.day), phase: k.phaseKm, labelKm: k.labelKm, labelEn: k.labelEn, labelKmShort: k.labelKmShort, sila: k.sila, festival: k.festival ? { km: k.festival.km, en: k.festival.en } : null };
+      d.khmer = { short: String(k.day), phase: k.phase === "waxing" ? " waxing" : " waning", labelKm: k.labelKm, labelEn: k.labelEn, labelKmShort: k.labelKmShort, sila: k.sila, festival: k.festival ? { km: k.festival.km, en: k.festival.en } : null };
     }
     return d;
   });

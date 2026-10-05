@@ -40,7 +40,7 @@ const T = defineMessages({
     chineseYear: (el: string, an: string) => `Chinese year of the ${el} ${an}`,
     lunarMonths: (a: number, b: number) => (a === b ? `Chinese lunar month ${a}` : `Chinese lunar months ${a}–${b}`),
     holy: "Buddhist holy day", good: "Good day (Chinese almanac)", quiet: "Quiet day (Chinese almanac)",
-    keyKhmer: "Khmer lunar day: កើត waxing, រោច waning.",
+    keyKhmer: "Khmer lunar day, counted 1–15 in the waxing and the waning half of each month.",
     keyChinese: (first: string) => `Chinese lunar day; ${first} marks the first day of lunar month 9.`,
     festivals: "Festivals",
     first: (m: number) => `M${m}`,
@@ -119,9 +119,9 @@ export default async function PrintMonth({ params }: Params) {
                   <td key={j} className={d.date === now ? "is-today" : undefined}>
                     <span className="print-num serif tabular">{num(d.n, lang)}</span>
                     {d.k && (
-                      <span className="print-line" lang="km">
+                      <span className="print-line">
                         {d.k.sila && <span className="cal-sila" aria-label={t.holy} role="img" />}
-                        {toKhmerNum(d.k.day)}{d.k.phaseKm}{d.k.day === 1 && d.k.phase === "waxing" ? ` ខែ${d.k.month.km}` : ""}
+                        {d.k.day} {d.k.phase}{d.k.day === 1 && d.k.phase === "waxing" ? ` · ${d.k.month.en}` : ""}
                       </span>
                     )}
                     {d.c && (

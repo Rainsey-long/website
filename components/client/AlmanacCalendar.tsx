@@ -92,7 +92,7 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
                     }}>
                     <span className="cal-num">{num(Number(d.date.slice(8)), lang)}</span>
                     <span className="cal-foot">
-                      <span className="text-small text-muted" lang={d.khmer ? "km" : undefined}>{d.khmer ? <>{d.khmer.short}<span className="max-sm:sr-only">{d.khmer.phase}</span></> : d.chinese ? num(d.chinese.lunarShort, lang) : null}</span>
+                      <span className="text-small text-muted">{d.khmer ? <>{d.khmer.short}<span className="max-sm:sr-only">{d.khmer.phase}</span></> : d.chinese ? num(d.chinese.lunarShort, lang) : null}</span>
                       <span className="cal-marks" aria-hidden="true">
                         {d.khmer?.sila && <span className="cal-sila" />}
                         {d.chinese?.quality === "good" && <Seal size="sm" />}

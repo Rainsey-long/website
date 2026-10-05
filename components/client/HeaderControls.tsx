@@ -105,7 +105,7 @@ export function TraditionsMenu({ initial }: { initial: Tradition[] }) {
 
   // Below sm the panel spans the page gutters (static wrapper, left-4/right-4):
   // anchored to the button's right edge it hung up to 142px off the left of a
-  // 360px screen, because the Khmer header labels push the button further left.
+  // 360px screen.
   return (
     <div className="relative max-sm:static" ref={wrap}>
       <button type="button" className="inline-flex min-h-tap items-center gap-2 rounded-sm px-2 text-small font-semibold" aria-expanded={open} aria-controls="traditions-pop" onClick={() => setOpen((o) => !o)}>
@@ -121,7 +121,7 @@ export function TraditionsMenu({ initial }: { initial: Tradition[] }) {
               {ALL_TRADITIONS.map((x) => (
                 <label key={x} className="flex min-h-tap items-center gap-3">
                   <input type="checkbox" className="size-5 shrink-0" checked={picked.includes(x)} onChange={() => toggle(x)} disabled={picked.length === 1 && picked.includes(x)} />
-                  <span>{TRADITION_LABEL[x].en} <span lang="km" className="text-muted">{TRADITION_LABEL[x].km}</span></span>
+                  <span>{TRADITION_LABEL[x].en}</span>
                 </label>
               ))}
             </div>

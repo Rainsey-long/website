@@ -357,6 +357,8 @@
   .prose li + li { margin-top: 8px; }
   .prose a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
   .prose a:hover { text-decoration-thickness: 2px; }
+  /* Storage and cookie names (privacy page): Figtree semibold, not a third (monospace) family; inherits the reading size. */
+  .prose code { font-family: var(--font-sans); font-weight: 600; }
 
   /* FAQ disclosure */
   .faq summary { list-style: none; }

@@ -64,7 +64,8 @@ const T = defineMessages({
     noLeap: (m: number) => (m ? `This lunar year's leap month is month ${m}, not the one you chose.` : "This lunar year has no leap month."),
     chineseResult: (y: number) => `Lunar year ${y}:`,
     how: "How the calendars line up",
-    how1: "The Khmer calendar counts each lunar month in two halves, waxing (កើត) and waning (រោច), up to 15 days each. The Buddhist Era year changes at Visak Bochea, and the animal year at the Khmer New Year moment in April.",
+    // Odd parts are Khmer script and render inside lang="km" spans.
+    how1: ["The Khmer calendar counts each lunar month in two halves, waxing (", "កើត", ") and waning (", "រោច", "), up to 15 days each. The Buddhist Era year changes at Visak Bochea, and the animal year at the Khmer New Year moment in April."],
     how2: "The Chinese lunar calendar numbers its months 1 to 12, adds a leap month about every three years, and starts the year at Lunar New Year in late January or February.",
     how3: "Both are calculated here by their published rules (the Chhankitek arithmetic and the Chinese calendar), so a printed calendar from your pagoda or temple is the final word if the two ever differ.",
   },
@@ -235,7 +236,7 @@ export default async function DateConverter({ searchParams }: Search) {
         <section className="mt-8 border-t border-rule pt-7" aria-labelledby="how-h">
           <h2 id="how-h" className="text-h3">{t.how}</h2>
           <div className="reading mt-3 text-body">
-            <p>{t.how1}</p>
+            <p>{t.how1.map((part, i) => (i % 2 ? <span key={i} lang="km">{part}</span> : part))}</p>
             <p>{t.how2}</p>
             <p className="text-small text-muted">{t.how3}</p>
           </div>

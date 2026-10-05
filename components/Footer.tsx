@@ -26,10 +26,10 @@ const SECTIONS: Array<{ title: string; links: Array<[string, string]> }> = [
     ["/tools/birth-chart", "Birth chart"],
     ["/tools/date-converter", "Date converter"],
     ["/tools/numerology", "Numerology"],
-    ["/search", "Search"],
     ["/tools/compatibility-checker", "Compatibility checker"],
     ["/compatibility", "Western compatibility"],
     ["/chinese-compatibility", "Chinese compatibility"],
+    ["/search", "Search"],
   ] },
   { title: "About", links: [
     ["/zodiac", "Western signs"],

@@ -33,6 +33,6 @@
 
 ## Headers (`next.config.ts`)
 
-CSP (`script-src` keeps `'unsafe-inline'`: the App Router streams inline scripts and removing it silently kills hydration; widen it only for Cloudflare Web Analytics), `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy`, `Permissions-Policy` (device and ad-interest APIs off), COOP, HSTS without `preload` (owner decision). `/api` and `/admin` carry `X-Robots-Tag: noindex`. Named AI-training crawlers get 403 from `proxy.ts` (`lib/aiBots.ts`, toggle `FEATURES.BLOCK_AI_CRAWLERS`), except on `/robots.txt`.
+CSP (`script-src` keeps `'unsafe-inline'`: the App Router streams inline scripts and removing it silently kills hydration; widened only for Cloudflare Web Analytics and, when `NEXT_PUBLIC_AD_CLIENT_ID` is set, AdSense's hosts from `lib/ads.ts`), `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy`, `Permissions-Policy` (device and ad-interest APIs off), COOP, HSTS without `preload` (owner decision). `/api` and `/admin` carry `X-Robots-Tag: noindex`. Named AI-training crawlers get 403 from `proxy.ts` (`lib/aiBots.ts`, toggle `FEATURES.BLOCK_AI_CRAWLERS`), except on `/robots.txt`.
 
 Mandatory: dispatch the `security-auditor` agent for any change to auth, input handling or a trust boundary (`role.md`).

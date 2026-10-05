@@ -1,22 +1,26 @@
 import type { NextConfig } from "next";
+import { AD_CSP_HOSTS, adsConfigured } from "./lib/ads";
 
 /**
  * Security headers on every route (CamboMath next.config.ts, adapted).
  * script-src keeps 'unsafe-inline': the App Router streams RSC payloads
  * through inline scripts, and removing it silently stops hydration.
- * Cloudflare Web Analytics is the only third-party script, and only when its
- * token is set.
+ * Third parties: Cloudflare Web Analytics (when its token is set) and Google
+ * AdSense with its consent message, whose hosts are added only when a
+ * publisher id is configured (lib/ads.ts, AD_CSP_HOSTS); NEXT_PUBLIC_* is
+ * read at build time, like the CSP itself.
  */
 const isDev = process.env.NODE_ENV !== "production";
 const cf = { script: " https://static.cloudflareinsights.com", connect: " https://cloudflareinsights.com" };
+const ads = (k: keyof typeof AD_CSP_HOSTS) => (adsConfigured() ? " " + AD_CSP_HOSTS[k].join(" ") : "");
 
 const csp = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${cf.script};
+  script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${cf.script}${ads("script")};
   style-src 'self' 'unsafe-inline';
-  img-src 'self' data: blob:;
+  img-src 'self' data: blob:${ads("img")};
   font-src 'self';
-  connect-src 'self'${cf.connect};
+  connect-src 'self'${cf.connect}${ads("connect")};${adsConfigured() ? ` frame-src${ads("frame")};` : ""}
   worker-src 'self';
   manifest-src 'self';
   object-src 'none';

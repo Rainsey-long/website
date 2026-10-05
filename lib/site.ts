@@ -19,10 +19,7 @@ export const CALENDAR_YEARS = { min: 1900, max: 2100 };
 
 /** Monetization and retention hooks: built now, switched on later (plan §11). */
 export const FEATURES = {
-  ADS_ENABLED: false,
-  AD_PROVIDER: "adsense" as const,
-  AD_CLIENT_ID: "",
-  AD_SLOTS: { afterReading: "", rail: "", inContent: "" },
+  // Ads: configured by environment variables, see lib/ads.ts.
   AFFILIATES_ENABLED: false,
   REPORT_CTA_ENABLED: false,
   REPORT_URL: "https://example.lemonsqueezy.com/",

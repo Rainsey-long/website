@@ -12,6 +12,7 @@
 | `TELEGRAM_CRON_SECRET` | optional (≥32) | bearer for `/api/cron/telegram`; unset = 503 |
 | `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` | optional, server-only | the bot and channel for the daily card |
 | `TELEGRAM_API_BASE` | tests only | always ignored in production |
+| `NEXT_PUBLIC_ADSENSE_ACCOUNT` · `NEXT_PUBLIC_AD_CLIENT_ID` · `NEXT_PUBLIC_AD_SLOT_*` | optional, **build-time** | AdSense: account id = ads.txt + verification only; client id = the tag and CSP hosts (`lib/ads.ts`, `docs/ADSENSE.md`) |
 | `BACKUP_RETAIN`, `DISK_BLOCK_PCT`, `DISK_WARN_PCT`, `MIN_FREE_MB` | optional | backup count and disk guard |
 | `PREFLIGHT_DATA_DIR` | scripts only | never set on a server |
 

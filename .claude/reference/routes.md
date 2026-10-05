@@ -45,3 +45,4 @@ English only (2026-10-05): every old `/km<path>` URL 308-redirects to `<path>` (
 | `/search?q=` | Static site search over pages, signs, animals, festivals, tools (`lib/searchIndex.ts`), q capped at 80, noindex with a query | static |
 | `/offline`, `/manifest.webmanifest`, `/sw.js` | Installable app; the service worker keeps the last 20 pages, never `/api`, `/admin`, `/og`, `/feeds` or non-GET | — |
 | `GET /api/cron/telegram` | `TELEGRAM_CRON_SECRET` bearer; posts the daily Khmer card to Telegram once per day (`lib/telegram.ts`, last date in `app_settings`) | DB |
+| `/ads.txt` | AdSense seller line from `NEXT_PUBLIC_ADSENSE_ACCOUNT`; 404 until set (`lib/ads.ts`) | env |

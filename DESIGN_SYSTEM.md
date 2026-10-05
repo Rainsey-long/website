@@ -220,6 +220,7 @@ Month grid, Monday-first, tabular numerals. Each day: Gregorian number large, lu
 - Tiny "Advertisement" label in `small`, `ink-muted`.
 - Allowed positions: after the reading, between profile sections (max one per 600 words), desktop right rail. **Never** above the reading, inside a topic, inside forms, or as popups, interstitials, or sticky overlays covering content.
 - Max 3 ad slots per page.
+- Implementation (2026-10-05): a responsive AdSense unit inside the reserved box (`components/client/AdUnit.tsx`); slots render only when their unit id is configured (`lib/ads.ts`). No Auto ads. The footer carries a "Privacy and cookie settings" text link (reopens Google's consent message) when ads are on.
 
 ### 6.12 AffiliateBox and offers
 Quiet bordered block, 1 image max (product photo from the affiliate program), short honest description, button "View on Etsy" / "View on Amazon", and a disclosure line. Max one per page. Paid report promos use the same pattern.
@@ -397,3 +398,4 @@ Week navigation (previous/next) → sign glyph + "Aries weekly horoscope" + the 
 | 2026-10-04 | Weekly horoscope template (§7.7) | FEATURES.md #46: weekly readings from the week's lunation, the Moon's path and planet events |
 | 2026-10-05 | PeoplePicker (§6.21), numerology result (§6.22), search (§6.23); the almanac day, solar terms and sky week pages reuse the dated-list row pattern (label column, hairline rows, prev/next nav) | Remaining features from FEATURES.md §7 |
 | 2026-10-05 | English only: the Khmer language version, the language switch and Khmer share images were removed; Khmer fonts remain for inline tradition terms. Supersedes the 2026-10-04 language-switch, Khmer-numeral and `:root:lang(km)` rows | Owner decision; Google's publisher products do not support Khmer, and one language halves the copy to maintain |
+| 2026-10-05 | AdSlot holds a real AdSense unit; footer "Privacy and cookie settings" link; no Auto ads | Google AdSense readiness (`docs/ADSENSE.md`) |

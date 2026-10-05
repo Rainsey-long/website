@@ -1,4 +1,5 @@
 /** Footer (§6.10): section links, legal pages, the disclaimer line. */
+import PrivacyChoices from "@/components/client/PrivacyChoices";
 import Link from "./client/LocaleLink";
 import { DISCLAIMER, SITE_NAME } from "@/lib/site";
 
@@ -57,6 +58,7 @@ export default function Footer() {
           ))}
         </div>
         <p className="mt-7 border-t border-rule pt-5 text-small text-muted">{DISCLAIMER}</p>
+        <PrivacyChoices className="text-small" />
         <p className="mt-2 text-small text-muted">© {new Date().getUTCFullYear()} {SITE_NAME}</p>
       </div>
     </footer>

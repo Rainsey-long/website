@@ -18,6 +18,8 @@ import { visitorZone } from "@/lib/today";
 import { getLang } from "@/lib/langServer";
 import { LANG_TAG } from "@/lib/i18n";
 import { LangProvider } from "@/components/client/LangProvider";
+import AdsScript from "@/components/client/AdsScript";
+import { ADSENSE_ACCOUNT_ID, adsenseAccountConfigured } from "@/lib/ads";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -29,6 +31,8 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
     other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } : undefined,
   },
+  // AdSense site verification (lib/ads.ts): a meta tag only, no script.
+  other: adsenseAccountConfigured() ? { "google-adsense-account": ADSENSE_ACCOUNT_ID } : undefined,
 };
 
 export const viewport: Viewport = {
@@ -61,6 +65,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <div id="toast" role="status" aria-live="polite" className="toast" hidden />
           <ZoneCookie serverZone={zone} />
           <ServiceWorkerRegister />
+          <AdsScript />
         </LangProvider>
         {FEATURES.CF_ANALYTICS_TOKEN && (
           <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: FEATURES.CF_ANALYTICS_TOKEN })} />

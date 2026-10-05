@@ -1,9 +1,12 @@
 /**
- * AdSlot (§6.11), AffiliateBox and ReportOffer (§6.12). All render nothing
- * while their flags are off in lib/site.ts. Ads: reserved fixed height, never
+ * AdSlot (§6.11), AffiliateBox and ReportOffer (§6.12). AdSlot renders nothing
+ * until its AdSense unit is configured (lib/ads.ts); the others while their
+ * flags are off in lib/site.ts. Ads: reserved fixed height, never
  * above the reading, inside a topic, inside forms, popups or sticky.
  */
 import { FEATURES } from "@/lib/site";
+import { AD_SLOTS, slotConfigured, type Placement } from "@/lib/ads";
+import AdUnit from "@/components/client/AdUnit";
 import { defineMessages } from "@/lib/i18n";
 import { getLang } from "@/lib/langServer";
 
@@ -15,14 +18,14 @@ const T = defineMessages({
   },
 });
 
-export async function AdSlot({ placement }: { placement: "afterReading" | "inContent" | "rail" }) {
-  if (!FEATURES.ADS_ENABLED) return null;
+export async function AdSlot({ placement }: { placement: Placement }) {
+  if (!slotConfigured(placement)) return null;
   const t = T[await getLang()];
   const h = placement === "rail" ? "h-ad-rail" : placement === "inContent" ? "h-ad-content" : "h-ad-mobile";
   return (
     <aside className={`my-7 flex flex-col ${h}`} aria-label={t.ad}>
       <span className="text-small text-muted">{t.ad}</span>
-      <div className="mt-1 flex-1 border border-rule" data-ad-slot={FEATURES.AD_SLOTS[placement]} />
+      <div className="mt-1 flex-1 overflow-hidden"><AdUnit slot={AD_SLOTS[placement]} /></div>
     </aside>
   );
 }

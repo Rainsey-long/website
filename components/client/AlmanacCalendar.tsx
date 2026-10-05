@@ -42,6 +42,7 @@ const T = defineMessages({
     avoid: "Avoid",
     clashA: "Clashes with the ",
     clashB: ". People born in that year may prefer a quieter day.",
+    dayPage: "The full almanac for this day",
   },
   km: {
     quality: { good: "ថ្ងៃល្អ", neutral: "ថ្ងៃធម្មតា", challenging: "ថ្ងៃគួរប្រុងប្រយ័ត្ន" },
@@ -54,6 +55,7 @@ const T = defineMessages({
     avoid: "គួរជៀសវាង",
     clashA: "ឆុងនឹងឆ្នាំ",
     clashB: "។ អ្នកកើតឆ្នាំនោះ ប្រហែលជាចូលចិត្តថ្ងៃដែលស្ងប់ស្ងាត់ជាង។",
+    dayPage: "ប្រតិទិនពេញលេញសម្រាប់ថ្ងៃនេះ",
   },
 });
 
@@ -149,6 +151,7 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
             <p className="mt-4">{t.clashA}<Link className="link" href={`/chinese-zodiac/${day.chinese.clash.slug}`}>{km ? animalName(day.chinese.clash.slug, lang) : day.chinese.clash.name}</Link>{t.clashB}</p>
           </div>
         )}
+        <p className="mt-4"><Link className="link inline-flex min-h-tap items-center" href={`/lucky-days/day/${day.date}`}>{t.dayPage}</Link></p>
       </section>
     </div>
   );

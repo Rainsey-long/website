@@ -88,6 +88,52 @@ const signOn = (p: Planet, day: string) => signIndexFromLongitude(planetLongitud
 const keyOf = (quarter: 0 | 1 | 2 | 3): PhaseKey => PHASE_KEYS[quarter];
 const dayOf = (iso: string) => iso.slice(0, 10);
 
+/** A sky event of the week, before it is placed in a sign's houses. */
+export type SkyWeekEvent = Omit<WeekEvent, "house">;
+
+/** The years whose retrogrades and eclipses weekSkyEvents reads (for the sky-year budget). */
+export function weekSkyYears(monday: string): number[] {
+  const y = Number(monday.slice(0, 4)), y2 = Number(addDays(monday, 7).slice(0, 4));
+  return [...new Set([y - 1, y, y2])];
+}
+
+/**
+ * Sign-independent planet events in the week starting `monday`: sign changes
+ * of Mercury to Saturn (by noon UTC each day), stations and eclipses, sorted
+ * by date. Shared by the weekly horoscopes and the /sky/week digest.
+ */
+export function weekSkyEvents(monday: string): SkyWeekEvent[] {
+  const days = Array.from({ length: 7 }, (_, i) => addDays(monday, i));
+  const next = addDays(monday, 7);
+  const from = `${monday}T00:00:00.000Z`, to = `${next}T00:00:00.000Z`;
+  const events: SkyWeekEvent[] = [];
+  PLANETS.forEach((p) => {
+    let prev = signOn(p, addDays(monday, -1));
+    days.forEach((day, i) => {
+      const cur = signOn(p, day);
+      if (cur !== prev) events.push({ date: days[i], kind: "ingress", body: p, signIndex: cur });
+      prev = cur;
+    });
+  });
+  const inWeek = (iso: string) => iso >= from && iso < to;
+  for (const y of weekSkyYears(monday)) {
+    for (const r of retrogradesForYear(y)) {
+      if (!PLANETS.includes(r.planet)) continue;
+      if (inWeek(r.stationRx.at)) events.push({ date: dayOf(r.stationRx.at), kind: "station-rx", body: r.planet, signIndex: r.stationRx.signIndex });
+      if (inWeek(r.stationD.at)) events.push({ date: dayOf(r.stationD.at), kind: "station-d", body: r.planet, signIndex: r.stationD.signIndex });
+    }
+  }
+  for (const y of [...new Set([Number(monday.slice(0, 4)), Number(next.slice(0, 4))])]) {
+    for (const e of eclipsesForYear(y)) {
+      if (inWeek(e.at)) events.push({ date: dayOf(e.at), kind: "eclipse", body: e.body, eclipseKind: e.kind, signIndex: e.signIndex });
+    }
+  }
+  // A station found in two overlapping years is listed once.
+  const seen = new Set<string>();
+  const unique = events.filter((e) => { const k = `${e.kind}|${e.body}|${e.date}`; if (seen.has(k)) return false; seen.add(k); return true; });
+  return unique.sort((a, b) => a.date.localeCompare(b.date));
+}
+
 export function weeklyReading(sign: WesternSign, monday: string, texts?: ReadonlyMap<string, string>, lang: Lang = "en"): WeeklyReading {
   const days = Array.from({ length: 7 }, (_, i) => addDays(monday, i));
   const next = addDays(monday, 7);
@@ -126,33 +172,7 @@ export function weeklyReading(sign: WesternSign, monday: string, texts?: Readonl
     return [topic, { date: days[at], energy: top }];
   })) as WeeklyReading["best"];
 
-  const events: WeekEvent[] = [];
-  PLANETS.forEach((p) => {
-    let prev = signOn(p, addDays(monday, -1));
-    days.forEach((day, i) => {
-      const cur = signOn(p, day);
-      if (cur !== prev) events.push({ date: days[i], kind: "ingress", body: p, signIndex: cur, house: house(cur) });
-      prev = cur;
-    });
-  });
-  const years = [...new Set([Number(monday.slice(0, 4)) - 1, Number(monday.slice(0, 4)), Number(next.slice(0, 4))])];
-  const inWeek = (iso: string) => iso >= from && iso < to;
-  for (const y of years) {
-    for (const r of retrogradesForYear(y)) {
-      if (!PLANETS.includes(r.planet)) continue;
-      if (inWeek(r.stationRx.at)) events.push({ date: dayOf(r.stationRx.at), kind: "station-rx", body: r.planet, signIndex: r.stationRx.signIndex, house: house(r.stationRx.signIndex) });
-      if (inWeek(r.stationD.at)) events.push({ date: dayOf(r.stationD.at), kind: "station-d", body: r.planet, signIndex: r.stationD.signIndex, house: house(r.stationD.signIndex) });
-    }
-  }
-  for (const y of [...new Set([Number(monday.slice(0, 4)), Number(next.slice(0, 4))])]) {
-    for (const e of eclipsesForYear(y)) {
-      if (inWeek(e.at)) events.push({ date: dayOf(e.at), kind: "eclipse", body: e.body, eclipseKind: e.kind, signIndex: e.signIndex, house: house(e.signIndex) });
-    }
-  }
-  // A station found in two overlapping years is listed once.
-  const seen = new Set<string>();
-  const unique = events.filter((e) => { const k = `${e.kind}|${e.body}|${e.date}`; if (seen.has(k)) return false; seen.add(k); return true; });
-  unique.sort((a, b) => a.date.localeCompare(b.date));
+  const events: WeekEvent[] = weekSkyEvents(monday).map((e) => ({ ...e, house: house(e.signIndex) }));
 
-  return { sign, monday, sunday: days[6], days, lunation, phases, overview, moonPath, best, events: unique };
+  return { sign, monday, sunday: days[6], days, lunation, phases, overview, moonPath, best, events };
 }

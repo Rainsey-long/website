@@ -39,6 +39,7 @@ const T = defineMessages({
     eclipseTail: (sign: string) => `, in ${sign}.`,
     rxCal: "Retrograde and eclipse calendar",
     feeds: "Add these dates to your calendar",
+    week: "This week in the sky", terms: "The 24 solar terms",
   },
   km: {
     title: "មេឃថ្ងៃនេះ៖ ព្រះចន្ទ ភព ភពដើរថយក្រោយ និងគ្រាស",
@@ -63,6 +64,7 @@ const T = defineMessages({
     eclipseTail: (sign: string) => ` ក្នុងរាសី${sign}។`,
     rxCal: "ប្រតិទិនភពដើរថយក្រោយ និងគ្រាស",
     feeds: "បន្ថែមកាលបរិច្ឆេទទាំងនេះទៅប្រតិទិនរបស់អ្នក",
+    week: "មេឃសប្ដាហ៍នេះ", terms: "រដូវកាលព្រះអាទិត្យទាំង ២៤",
   },
 });
 
@@ -128,7 +130,7 @@ export default async function SkyPage() {
             {nextRx.map((r) => <li key={r.planet + r.stationRx.at} className="border-b border-rule py-2">{t.nextRx(planetNameIn(r.planet, lang))}<span className="tabular">{dateTimeIn(r.stationRx.at, tz, lang)}</span>{t.nextRxTail(sign(r.stationRx.signIndex))}</li>)}
           </ul>
           {nextEclipse && <p className="mt-5">{t.eclipse(eclipseName(nextEclipse, lang))}<span className="tabular">{dateTimeIn(nextEclipse.at, tz, lang)}</span>{t.eclipseTail(sign(nextEclipse.signIndex))}</p>}
-          <p className="mt-3"><Link className="link" href="/sky/retrogrades">{t.rxCal}</Link> · <Link className="link" href="/feeds">{t.feeds}</Link></p>
+          <p className="mt-3"><Link className="link" href="/sky/retrogrades">{t.rxCal}</Link> · <Link className="link" href="/sky/week">{t.week}</Link> · <Link className="link" href="/sky/solar-terms">{t.terms}</Link> · <Link className="link" href="/feeds">{t.feeds}</Link></p>
         </section>
       </div>
     </>

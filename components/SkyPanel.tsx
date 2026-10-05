@@ -4,9 +4,9 @@
  */
 import { SIGNS } from "@/lib/western";
 import type { DailyReading } from "@/lib/reading-engine";
-import { defineMessages, khmerDigits } from "@/lib/i18n";
+import { defineMessages } from "@/lib/i18n";
 import { getLang } from "@/lib/langServer";
-import { moonPhaseName, planetName, signName } from "@/lib/names";
+import { moonPhaseName } from "@/lib/names";
 
 const ord = (n: number) => n + (["th", "st", "nd", "rd"][(n % 100 - 20) % 10] || ["th", "st", "nd", "rd"][n % 100] || "th");
 const deg = (lon: number) => `${Math.floor(lon % 30)}°`;
@@ -20,22 +20,15 @@ const T = defineMessages({
     retro: (names: string[]) => ` ${names.join(" and ")} ${names.length > 1 ? "are" : "is"} retrograde, which colours the notes.`,
     method: "Positions are calculated for 12:00 UTC with astronomy-engine, tropical zodiac. The meanings are traditional, for reflection and entertainment.",
   },
-  km: {
-    summary: "មេឃនៅពីក្រោយការអាននេះ", moon: "ព្រះចន្ទ", phase: "ដំណាក់កាល", sun: "ព្រះអាទិត្យ", retrograde: " ដើរថយក្រោយ",
-    lit: (pct: number) => `ភ្លឺ ${khmerDigits(pct)}%`,
-    house: (n: number, theme: string) => `ព្រះចន្ទស្ថិតនៅផ្ទះទី${khmerDigits(n)}នៃរាសីព្រះអាទិត្យរបស់អ្នក គឺផ្ទះនៃ${theme}។ នោះកំណត់ប្រធានបទថ្ងៃនេះ។`,
-    retro: (names: string[]) => ` ${names.join(" និង ")} កំពុងដើរថយក្រោយ ដែលផ្ដល់ពណ៌ដល់កំណត់ចំណាំ។`,
-    method: "ទីតាំងត្រូវបានគណនាសម្រាប់ម៉ោង ១២:០០ UTC ដោយប្រើ astronomy-engine និងរាសីត្រូពិក។ អត្ថន័យទាំងនេះជាប្រពៃណី សម្រាប់ការពិចារណា និងការកម្សាន្ត។",
-  },
 });
 
 export default async function SkyPanel({ reading }: { reading: DailyReading }) {
   const lang = await getLang();
   const t = T[lang];
   const { sky } = reading;
-  const sign = (i: number) => (lang === "km" ? signName(SIGNS[i].slug, "km") : SIGNS[i].name);
-  const d = (lon: number) => (lang === "km" ? khmerDigits(deg(lon)) : deg(lon));
-  const planet = (p: string) => (lang === "km" ? planetName(p, "km") : cap(p));
+  const sign = (i: number) => SIGNS[i].name;
+  const d = (lon: number) => deg(lon);
+  const planet = (p: string) => cap(p);
   const retro = (["mercury", "venus", "mars"] as const).filter((p) => sky.planets[p].retrograde);
   return (
     <details className="mt-6 border-y border-rule">

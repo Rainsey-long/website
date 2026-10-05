@@ -16,7 +16,7 @@ Every piece of copy, human- or machine-drafted, passes this checklist before it 
 - Text copied or closely paraphrased from any other site.
 
 ## Text blocks (`content/blocks/*.json`)
-- Every block has English `text` and a Khmer draft `text_km` (the generator keeps `text_km` when it regenerates). The owner edits both in `/admin/readings`.
+- Every block has English `text`; the owner edits it in `/admin/readings`.
 - The owner edits wording in `/admin/readings`. Edits and approvals live in the database and are never overwritten by a deploy.
 - Developers add or restructure blocks in `scripts/blocks-source.py` and re-run it. Untouched drafts follow code changes; owner-edited ones don't.
 - Each topic needs exactly 3 base blocks per house (the variety rotation relies on it).
@@ -24,13 +24,13 @@ Every piece of copy, human- or machine-drafted, passes this checklist before it 
 - Target for launch: grow to ≈ 6 variants per house. Changing the count means updating the rotation in `lib/reading-engine.ts` and its test.
 
 ## Long-form (`content/profiles`, `content/yearly`)
-- Khmer versions live at the same path under `content/km/`. The owner can also edit either language in `/admin/content`; those edits override the file until reset.
+- The owner can edit any profile or forecast in `/admin/content`; edits override the file until reset.
 - Frontmatter fields are read by the pages; keep `summary` ≤ 155 characters. `slug`, `animal`, `relation` and `outlook` are read by code: never change them in a translation.
 - Check every year/element against `zodiacYear()` before publishing.
 
 ## Review status
 - Profiles, forecasts and blocks are drafts awaiting owner review (`docs/OWNER-ACTIONS.md`).
-- Khmer strings await a native speaker (`docs/KHMER-REVIEW.md`).
+- Inline Khmer tradition terms await a native speaker's check (`docs/KHMER-REVIEW.md`).
 
 ## Khmer traditions
 - Present them as cultural tradition. Use the tables in `lib/khmer.ts`; note that almanacs vary.

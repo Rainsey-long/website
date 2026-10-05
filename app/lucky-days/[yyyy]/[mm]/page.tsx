@@ -6,9 +6,9 @@ import Glyph from "@/components/Glyph";
 import AlmanacCalendar, { type CalDay } from "@/components/client/AlmanacCalendar";
 import { almanacDay } from "@/lib/almanac";
 import { khmerDay, toKhmerNum } from "@/lib/khmer";
-import { fullDate, monthName, monthYear } from "@/lib/dates";
+import { fullDate, monthName } from "@/lib/dates";
 import { getLang } from "@/lib/langServer";
-import { defineMessages, khmerDigits, num, type Lang } from "@/lib/i18n";
+import { defineMessages, num } from "@/lib/i18n";
 import { chosenTraditions } from "@/lib/traditionsServer";
 import { pageMetadata } from "@/lib/seo";
 import { CALENDAR_YEARS } from "@/lib/site";
@@ -39,31 +39,16 @@ const T = defineMessages({
     howChinese: "The Chinese almanac, the tong shu, marks each day with a day spirit and a day officer. Favourable spirits get the seal; days where both lean unfavourable get a small dot. The clash animal is the zodiac animal opposite the day's branch.",
     note: "Traditions to enjoy and reflect on, not rules. Medical and catch-all almanac entries are left out. Choose which traditions you see in the header.",
   },
-  km: {
-    title: (l: string) => `ថ្ងៃល្អ និងថ្ងៃសីល ក្នុង${l}`,
-    description: (l: string) => `ថ្ងៃល្អតាមប្រតិទិនចិន និងថ្ងៃសីល ព្រមទាំងពិធីបុណ្យតាមប្រតិទិនខ្មែរ សម្រាប់${l}។`,
-    crumb: "ថ្ងៃល្អ", monthNav: "ខែ",
-    goodCount: (n: number) => `ថ្ងៃល្អ ${khmerDigits(n)} ថ្ងៃ តាមប្រតិទិនចិន`,
-    silaCount: (n: number) => `ថ្ងៃសីល ${khmerDigits(n)} ថ្ងៃ`,
-    end: "។", sep: "។ ",
-    festivals: "ពិធីបុណ្យខ្មែរក្នុងខែនេះ",
-    finder: "រកថ្ងៃល្អសម្រាប់កម្មវិធីណាមួយ",
-    hours: "ម៉ោងល្អថ្ងៃនេះ",
-    print: "បោះពុម្ពខែនេះ",
-    how: "របៀបដែលប្រតិទិនទាំងនេះដំណើរការ",
-    howChinese: "ប្រតិទិនចិន (តុងស៊ូ) កំណត់ថ្ងៃនីមួយៗដោយទេវតាប្រចាំថ្ងៃ និងមន្ត្រីប្រចាំថ្ងៃ។ ថ្ងៃដែលទេវតាល្អ ទទួលបានត្រា។ ថ្ងៃដែលទាំងពីរមិនសូវល្អ មានចំណុចតូចមួយ។ សត្វឆុង គឺជាសត្វដែលនៅទល់មុខនឹងសាខាដីរបស់ថ្ងៃនោះ។",
-    note: "ទាំងនេះជាប្រពៃណីសម្រាប់រីករាយ និងពិចារណា មិនមែនជាច្បាប់ទេ។ ព័ត៌មានទាក់ទងនឹងសុខភាព និងព័ត៌មានទូទៅពេក ត្រូវបានដកចេញ។ អ្នកអាចជ្រើសរើសប្រពៃណីដែលចង់មើលនៅផ្នែកខាងលើ។",
-  },
 });
 
-const label = (y: number, m: number, lang: Lang) => (lang === "km" ? monthYear(y, m, "km") : `${monthName(m)} ${y}`);
+const label = (y: number, m: number) => (`${monthName(m)} ${y}`);
 
 export async function generateMetadata({ params }: Params) {
   const { yyyy, mm } = await params;
   const p = parse(yyyy, mm);
   if (!p) return {};
   const lang = await getLang();
-  const l = label(p.year, p.month, lang);
+  const l = label(p.year, p.month);
   return pageMetadata({
     lang,
     title: T[lang].title(l),
@@ -80,7 +65,6 @@ export default async function Month({ params }: Params) {
   const { year, month } = p;
   const lang = await getLang();
   const t = T[lang];
-  const km = lang === "km";
   const traditions = await chosenTraditions();
   const wantChinese = traditions.includes("chinese") || !traditions.includes("khmer");
   const wantKhmer = traditions.includes("khmer");
@@ -90,7 +74,7 @@ export default async function Month({ params }: Params) {
     const d: CalDay = { date, full: fullDate(date, lang) };
     if (wantChinese) {
       const a = almanacDay(date);
-      d.chinese = { lunarShort: a.lunarDay === 1 ? (km ? `ខែ${a.lunarMonth}` : `M${a.lunarMonth}`) : String(a.lunarDay), lunarLabel: km ? a.lunarLabelKm : a.lunarLabel, pillar: a.dayPillar, quality: a.quality, good: km ? a.goodKm : a.good, avoid: km ? a.avoidKm : a.avoid, clash: { slug: a.clash.slug, name: a.clash.name } };
+      d.chinese = { lunarShort: a.lunarDay === 1 ? (`M${a.lunarMonth}`) : String(a.lunarDay), lunarLabel: a.lunarLabel, pillar: a.dayPillar, quality: a.quality, good: a.good, avoid: a.avoid, clash: { slug: a.clash.slug, name: a.clash.name } };
     }
     if (wantKhmer) {
       const k = khmerDay(date);
@@ -99,7 +83,7 @@ export default async function Month({ params }: Params) {
     return d;
   });
   const firstDow = (new Date(Date.UTC(year, month - 1, 1)).getUTCDay() + 6) % 7;
-  const title = label(year, month, lang);
+  const title = label(year, month);
   const prev = month === 1 ? { y: year - 1, m: 12 } : { y: year, m: month - 1 };
   const next = month === 12 ? { y: year + 1, m: 1 } : { y: year, m: month + 1 };
   const href = (x: { y: number; m: number }) => `/lucky-days/${x.y}/${String(x.m).padStart(2, "0")}`;
@@ -112,8 +96,8 @@ export default async function Month({ params }: Params) {
       <Breadcrumbs items={[{ name: t.crumb, href: "/lucky-days" }, { name: title, href: href({ y: year, m: month }) }]} />
       <div className="mx-auto max-w-page safe-x py-5">
         <nav aria-label={t.monthNav} className="flex justify-between text-small">
-          {prev.y >= CALENDAR_YEARS.min ? <Link className="link inline-flex min-h-tap items-center gap-1" href={href(prev)} rel="prev"><Glyph name="chevron-left" set="ui" className="size-4" />{label(prev.y, prev.m, lang)}</Link> : <span />}
-          {next.y <= CALENDAR_YEARS.max ? <Link className="link inline-flex min-h-tap items-center gap-1" href={href(next)} rel="next">{label(next.y, next.m, lang)}<Glyph name="chevron-right" set="ui" className="size-4" /></Link> : <span />}
+          {prev.y >= CALENDAR_YEARS.min ? <Link className="link inline-flex min-h-tap items-center gap-1" href={href(prev)} rel="prev"><Glyph name="chevron-left" set="ui" className="size-4" />{label(prev.y, prev.m)}</Link> : <span />}
+          {next.y <= CALENDAR_YEARS.max ? <Link className="link inline-flex min-h-tap items-center gap-1" href={href(next)} rel="next">{label(next.y, next.m)}<Glyph name="chevron-right" set="ui" className="size-4" /></Link> : <span />}
         </nav>
         <h1 id="month-h" className="mt-3 text-h1">{title}</h1>
         <p className="mt-2 text-muted">
@@ -125,15 +109,14 @@ export default async function Month({ params }: Params) {
             {festivals.length > 0 && (
               <section className="mb-6" aria-labelledby="fest-h">
                 <h2 id="fest-h" className="text-h3">{t.festivals}</h2>
-                <ul className="mt-2">{festivals.map((d) => <li key={d.date} className="border-b border-rule py-2"><span className="tabular">{num(Number(d.date.slice(8)), lang)}</span> · {km ? d.khmer!.festival!.km : d.khmer!.festival!.en}</li>)}</ul>
+                <ul className="mt-2">{festivals.map((d) => <li key={d.date} className="border-b border-rule py-2"><span className="tabular">{num(Number(d.date.slice(8)), lang)}</span> · {d.khmer!.festival!.en}</li>)}</ul>
               </section>
             )}
             <p className="mb-6"><Link className="link" href={`${href({ y: year, m: month })}/print`}>{t.print}</Link>{wantChinese && <> · <Link className="link" href="/lucky-days/finder">{t.finder}</Link> · <Link className="link" href="/good-hours">{t.hours}</Link></>}</p>
             <h2 className="text-h3">{t.how}</h2>
             <div className="reading mt-3 text-body">
               {wantChinese && <p>{t.howChinese}</p>}
-              {wantKhmer && km && <p>ប្រតិទិនខ្មែរដើរតាមព្រះចន្ទ។ ខែនីមួយៗមានថ្ងៃកើត និងថ្ងៃរោច។ ថ្ងៃ ៨ និង ១៥ នៃពាក់កណ្ដាលខែនីមួយៗ ជាថ្ងៃសីល ដែលមនុស្សជាច្រើនទៅវត្ត។</p>}
-              {wantKhmer && !km && <p>The Khmer calendar, Chhankitek, follows the Moon. Each month has waxing (<span lang="km">កើត</span>) and waning (<span lang="km">រោច</span>) days. The 8th and 15th of each half are Buddhist holy days, <span lang="km">ថ្ងៃសីល</span>, when many people visit the pagoda.</p>}
+              {wantKhmer && <p>The Khmer calendar, Chhankitek, follows the Moon. Each month has waxing (<span lang="km">កើត</span>) and waning (<span lang="km">រោច</span>) days. The 8th and 15th of each half are Buddhist holy days, <span lang="km">ថ្ងៃសីល</span>, when many people visit the pagoda.</p>}
               <p className="text-small text-muted">{t.note}</p>
             </div>
           </aside>

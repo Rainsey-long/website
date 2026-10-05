@@ -10,7 +10,6 @@ import { hourRange } from "@/lib/pages";
 
 const T = defineMessages({
   en: { heading: "Lucky today", colour: "Colour", number: "Number", hour: "Hour", goodFor: "Good day for", and: " and " },
-  km: { heading: "សំណាងថ្ងៃនេះ", colour: "ពណ៌", number: "លេខ", hour: "ម៉ោង", goodFor: "ថ្ងៃល្អសម្រាប់", and: " និង " },
 });
 
 export default async function LuckyRow({ color, number, hour, seal, heading, headingId = "lucky-h" }: {
@@ -52,10 +51,7 @@ export default async function LuckyRow({ color, number, hour, seal, heading, hea
       {seal && seal.length > 0 && (
         <p className="mt-5 flex items-center gap-3">
           <Seal />
-          {/* `seal` arrives in the page language (almanac goodKm on Khmer pages). */}
-          {lang === "km"
-            ? <span><span className="font-semibold">{t.goodFor}</span> {seal.join(t.and)}។</span>
-            : <span><span className="font-semibold">{t.goodFor}</span> {seal.map(lower).join(t.and)}.</span>}
+          <span><span className="font-semibold">{t.goodFor}</span> {seal.map(lower).join(t.and)}.</span>
         </p>
       )}
     </section>

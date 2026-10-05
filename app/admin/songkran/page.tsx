@@ -14,10 +14,6 @@ const T = defineMessages({
     title: "Khmer New Year",
     lead: "Each year the Ministry of Cults and Religion announces the exact minute of Moha Songkran. Enter it here; until then the site shows the calculated moment. Leave a field empty to go back to the calculation.",
   },
-  km: {
-    title: "ចូលឆ្នាំខ្មែរ",
-    lead: "ជារៀងរាល់ឆ្នាំ ក្រសួងធម្មការ និងសាសនា ប្រកាសនាទីពិតប្រាកដនៃមហាសង្ក្រាន្ត។ សូមបញ្ចូលវានៅទីនេះ។ មុនពេលនោះ គេហទំព័របង្ហាញពេលវេលាដែលគណនាបាន។ ទុកប្រអប់ទទេ ដើម្បីត្រឡប់ទៅការគណនាវិញ។",
-  },
 });
 
 export default async function SongkranAdmin() {

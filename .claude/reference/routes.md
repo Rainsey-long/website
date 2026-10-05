@@ -1,6 +1,6 @@
 # Routes
 
-Every page below also exists in Khmer at `/km<path>` (the admin at `/km/admin`), rewritten by `proxy.ts` to the same component (`docs/I18N.md`). Non-page URLs take `?lang=km` instead: `/feeds/<name>.ics?lang=km`, `/og/<slug>?lang=km`, and API routes for their messages.
+English only (2026-10-05): every old `/km<path>` URL 308-redirects to `<path>` (`proxy.ts`, `docs/I18N.md`).
 
 | Route | What | Data |
 |---|---|---|
@@ -26,11 +26,11 @@ Every page below also exists in Khmer at `/km<path>` (the admin at `/km/admin`),
 | `/tools/compatibility-checker` | Picks a pair page | — |
 | `/southeast-asian-zodiac[/khmer|/vietnamese]`, `/about`, `/contact`, `/privacy`, `/terms`, `/disclaimer`, `/styleguide` (noindex) | | |
 | `/admin/login` · `/admin` | Sign-in · overview of what needs attention | DB |
-| `/admin/readings` | Reading text in both languages: review, edit, approve; filters (draft, missing Khmer) and search | DB |
-| `/admin/content`, `/admin/content/edit?path=&lang=` | Profiles and 2027 forecasts: owner edits per language, stored in `content_overrides`, reset to the repository file | DB + `content/` |
+| `/admin/readings` | Reading text: review, edit, approve; filters (draft) and search | DB |
+| `/admin/content`, `/admin/content/edit?path=` | Profiles and 2027 forecasts: owner edits, stored in `content_overrides`, reset to the repository file | DB + `content/` |
 | `/admin/songkran` · `/admin/feedback` · `/admin/accounts` · `/admin/backups` | Official Khmer New Year moment · feedback triage, delete, CSV · add/remove admins, change password · list backups, back up now | DB / volume |
 | `/api/health`, `/api/feedback`, `/api/admin/login`, `/api/admin/blocks/[id]`, `/api/admin/songkran/[year]`, `/api/admin/content`, `/api/admin/feedback` (+ `/export` CSV), `/api/admin/users`, `/api/admin/password`, `/api/admin/backups`, `/api/cron/backup` | see `.claude/security.md` | DB |
-| `/og/[slug]` (`?lang=km`), `/sitemap.xml` (both languages with hreflang alternates), `/robots.txt` | share cards (Khmer shaped with HarfBuzz), sitemap, robots | |
+| `/og/[slug]`, `/sitemap.xml`, `/robots.txt` | share cards, sitemap, robots | |
 
 ## Added 2026-10-05
 

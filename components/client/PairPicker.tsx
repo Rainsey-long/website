@@ -4,13 +4,12 @@ import { defineMessages } from "@/lib/i18n";
 
 const T = defineMessages({
   en: { heading: "Try another pair", first: (n: string) => `First ${n}`, second: (n: string) => `Second ${n}`, check: "Check compatibility" },
-  km: { heading: "សាកល្បងគូផ្សេងទៀត", first: (n: string) => `${n}ទីមួយ`, second: (n: string) => `${n}ទីពីរ`, check: "ពិនិត្យភាពត្រូវគ្នា" },
 });
 /** "Try another pair" (wireframe §7.4): two selects → the canonical pair page. */
 import { useRouter } from "next/navigation";
 import { useId, useState } from "react";
 
-/** `noun` is in the page language ("sign" / "រាសី"). */
+/** `noun` is in the page language ("sign" or "animal"). */
 export default function PairPicker({ options, base, a, b, heading, noun }: {
   options: Array<{ slug: string; name: string }>; base: string; a?: string; b?: string; heading?: string; noun: string;
 }) {

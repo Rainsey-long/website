@@ -27,12 +27,8 @@ for (const file of readdirSync(dir).filter((f) => f.endsWith(".json"))) {
     if (typeof b.text !== "string" || b.text.length < 20 || b.text.length > 400) errors.push(`${where}: text length`);
     if (b.text && !/[.?]$/.test(b.text)) errors.push(`${where}: text must end with a full stop`);
     for (const re of BANNED) if (re.test(b.text ?? "")) errors.push(`${where}: banned wording ${re}`);
-    if (b.text_km !== undefined) {
-      // Khmer draft (lib/i18n.ts): ends with the Khmer full stop, no exclamation marks.
-      if (typeof b.text_km !== "string" || b.text_km.length < 10 || b.text_km.length > 800) errors.push(`${where}: text_km length`);
-      else if (!/[។?]$/.test(b.text_km)) errors.push(`${where}: text_km must end with ។`);
-      if (typeof b.text_km === "string" && b.text_km.includes("!")) errors.push(`${where}: text_km has an exclamation mark`);
-    }
+    // English only since 2026-10-05: a Khmer translation is no longer read anywhere.
+    if ("text_km" in b) errors.push(`${where}: text_km is not used any more (the site is English only)`);
     const c = b.conditions ?? {};
     const keys = Object.keys(c);
     if (b.kind === "base") {
@@ -61,7 +57,7 @@ for (const b of weekly) {
   else weekSeen.add(`${ph}-${hs[0]}`);
   if (typeof b.text !== "string" || b.text.length < 20 || b.text.length > 400 || !/[.?]$/.test(b.text)) errors.push(`${where}: text`);
   for (const re of BANNED) if (re.test(b.text ?? "")) errors.push(`${where}: banned wording ${re}`);
-  if (typeof b.text_km !== "string" || !/[។?]$/.test(b.text_km) || b.text_km.includes("!")) errors.push(`${where}: text_km`);
+  if ("text_km" in b) errors.push(`${where}: text_km is not used any more (the site is English only)`);
 }
 for (const ph of WEEK_PHASES) for (let h = 1; h <= 12; h++) if (!weekSeen.has(`${ph}-${h}`)) errors.push(`weekly: missing ${ph} moon in house ${h}`);
 

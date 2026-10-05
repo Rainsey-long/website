@@ -1,22 +1,19 @@
 "use client";
 /**
- * The page language for client components (lib/i18n.ts). The root layout
- * reads it on the server from the proxy's header and hands it down here, so
- * the first render is already in the right language (no flash, no mismatch).
+ * The page language for client components. The site is English only
+ * (2026-10-05), so this always answers "en"; the provider and hooks stay
+ * because many components still import them.
  */
-import { createContext, useContext } from "react";
-import { localePath, type Lang } from "@/lib/i18n";
+import type { Lang } from "@/lib/i18n";
 
-const LangContext = createContext<Lang>("en");
-
-export function LangProvider({ lang, children }: { lang: Lang; children: React.ReactNode }) {
-  return <LangContext.Provider value={lang}>{children}</LangContext.Provider>;
+/** Kept for the root layout; there is nothing to provide any more. */
+export function LangProvider({ children }: { lang?: Lang; children: React.ReactNode }) {
+  return <>{children}</>;
 }
 
-export const useLang = (): Lang => useContext(LangContext);
+export const useLang = (): Lang => "en";
 
-/** Turns an internal path into the current language's URL. */
+/** Kept for existing call sites: an internal path is its own URL. */
 export function useLocalePath(): (path: string) => string {
-  const lang = useLang();
-  return (path) => localePath(path, lang);
+  return (path) => path;
 }

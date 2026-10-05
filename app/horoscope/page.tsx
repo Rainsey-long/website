@@ -16,13 +16,6 @@ const T = defineMessages({
     notSure: "Not sure of your sign?", find: "Find my sign",
     weekly: "Weekly horoscopes", weeklyIntro: "The week ahead for each sign: the week's Moon, your best days and what the planets are doing.",
   },
-  km: {
-    title: "ហោរាសាស្ត្រប្រចាំថ្ងៃសម្រាប់រាសីទាំង ១២", description: "ហោរាសាស្ត្រថ្ងៃនេះសម្រាប់គ្រប់រាសី៖ ស្នេហា ការងារ ហិរញ្ញវត្ថុ និងអារម្មណ៍ សរសេរតាមទីតាំងពិតរបស់ព្រះចន្ទថ្ងៃនេះ។",
-    crumb: "ហោរាសាស្ត្រ", h1: "ហោរាសាស្ត្រប្រចាំថ្ងៃ",
-    intro: "ជ្រើសរើសរាសីរបស់អ្នក ដើម្បីអានសម្រាប់ថ្ងៃនេះ។ ការអាននីមួយៗដើរតាមទីតាំងពិតរបស់ព្រះចន្ទក្នុងរង្វង់រាសី ដូច្នេះវាប្រែប្រួលរៀងរាល់ថ្ងៃ។",
-    notSure: "មិនប្រាកដពីរាសីរបស់អ្នកទេ?", find: "ស្វែងរករាសីខ្ញុំ",
-    weekly: "ហោរាសាស្ត្រប្រចាំសប្ដាហ៍", weeklyIntro: "សប្ដាហ៍ខាងមុខសម្រាប់រាសីនីមួយៗ៖ ព្រះចន្ទប្រចាំសប្ដាហ៍ ថ្ងៃល្អបំផុតរបស់អ្នក និងដំណើររបស់ភពនានា។",
-  },
 });
 
 export async function generateMetadata() {

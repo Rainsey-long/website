@@ -6,6 +6,7 @@
  */
 import { ANIMALS, zodiacYearForDate, type Animal } from "./chinese";
 import { KHMER_ANIMALS, khmerAnimalAt, songkran } from "./khmer";
+import type { Lang } from "./i18n";
 
 export const KHMER_NAMES = KHMER_ANIMALS.map((a) => `${a.roman} (${a.km})`);
 
@@ -17,9 +18,8 @@ export const VIETNAMESE_NAMES = [
 /** The Vietnamese term alone (Tý, Sửu, …), for a lang="vi" span. */
 export const VIETNAMESE_TERMS = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
 /** The animal each Vietnamese year names, in plain words (Buffalo and Cat differ from the Chinese list). */
-export const VIETNAMESE_ANIMAL: Record<"en" | "km", string[]> = {
+export const VIETNAMESE_ANIMAL: Record<Lang, string[]> = {
   en: ["Rat", "Buffalo", "Tiger", "Cat", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig"],
-  km: ["កណ្ដុរ", "ក្របី", "ខ្លា", "ឆ្មា", "នាគ", "ពស់", "សេះ", "ពពែ", "ស្វា", "មាន់", "ឆ្កែ", "ជ្រូក"],
 };
 
 /** Khmer New Year (Moha Songkran) date for a year, Cambodian local time. */
@@ -31,8 +31,6 @@ export function khmerNewYear(year: number): { date: string; time: string } {
 export interface TraditionResult {
   tradition: "chinese" | "khmer" | "vietnamese";
   label: string;
-  /** Khmer label for the tradition (draft). */
-  labelKm: string;
   animal: Animal;
   animalName: string;
 }
@@ -44,9 +42,9 @@ export function traditions(y: number, m: number, d: number, time: string | null 
   const k = khmerAnimalAt(key, time);
   const khmer = ANIMALS.find((a) => a.slug === k.slug)!;
   return [
-    { tradition: "chinese", label: "Chinese", labelKm: "ចិន", animal: chinese.animal, animalName: chinese.animal.name },
-    { tradition: "khmer", label: "Khmer", labelKm: "ខ្មែរ", animal: khmer, animalName: `${khmer.name} (${k.km}, ${k.roman})` },
-    { tradition: "vietnamese", label: "Vietnamese", labelKm: "វៀតណាម", animal: chinese.animal, animalName: VIETNAMESE_NAMES[chinese.animal.index] },
+    { tradition: "chinese", label: "Chinese", animal: chinese.animal, animalName: chinese.animal.name },
+    { tradition: "khmer", label: "Khmer", animal: khmer, animalName: `${khmer.name} (${k.km}, ${k.roman})` },
+    { tradition: "vietnamese", label: "Vietnamese", animal: chinese.animal, animalName: VIETNAMESE_NAMES[chinese.animal.index] },
   ];
 }
 

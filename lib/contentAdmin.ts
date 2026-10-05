@@ -6,7 +6,7 @@
  */
 import matter from "gray-matter";
 import { GM_YAML_ONLY, repoSource } from "./content";
-import { defineMessages, khmerDigits, type Lang } from "./i18n";
+import { defineMessages, type Lang } from "./i18n";
 
 export const MAX_SOURCE_BYTES = 120_000;
 const BANNED = [/\bdiagnos/i, /\bmedication\b/i, /\bguarantee/i, /\bdestiny\b/i];
@@ -25,19 +25,6 @@ const T = defineMessages({
     months: "months must be a list of { label, text }.",
     keep: (k: string, v: string) => `${k} must stay ${v} (the site reads it).`,
     banned: "That wording breaks the content guidelines (no diagnoses, medication, guarantees or destiny).",
-  },
-  km: {
-    tooLong: `អត្ថបទនេះវែងពេក (យ៉ាងច្រើន ${khmerDigits(120)} KB)។`,
-    yaml: "ផ្នែកខាងលើ (ចន្លោះបន្ទាត់ ---) មិនមែនជា YAML ត្រឹមត្រូវទេ។ សូមពិនិត្យសញ្ញាសម្រង់ និងការចូលបន្ទាត់។",
-    body: "អត្ថបទខាងក្រោមផ្នែកខាងលើ បាត់ ឬខ្លីពេក។",
-    nameSummary: "ត្រូវតែមាន name និង summary។",
-    traits: "traits ត្រូវតែជាបញ្ជីពាក្យ។",
-    faq: "ធាតុ faq នីមួយៗត្រូវមាន q និង a។",
-    slug: (v: string) => `slug ត្រូវតែនៅដដែល "${v}"។`,
-    titleSummary: "ត្រូវតែមាន title និង summary។",
-    months: "months ត្រូវតែជាបញ្ជី { label, text }។",
-    keep: (k: string, v: string) => `${k} ត្រូវតែនៅដដែល ${v} (គេហទំព័រអានវា)។`,
-    banned: "ពាក្យពេចន៍នេះខុសគោលការណ៍ណែនាំខ្លឹមសារ (គ្មានការធ្វើរោគវិនិច្ឆ័យ ថ្នាំ ការធានា ឬវាសនា)។",
   },
 });
 

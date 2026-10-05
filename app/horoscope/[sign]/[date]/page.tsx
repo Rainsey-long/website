@@ -37,17 +37,6 @@ const T = defineMessages({
     profile: (s: string) => `${s} personality profile`, pair: (a: string, b: string) => `${a} and ${b} compatibility`,
     goat: "2027 Year of the Fire Goat forecast", week: (s: string) => `${s} weekly horoscope for that week`,
   },
-  km: {
-    crumb: "ហោរាសាស្ត្រ", today: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}`,
-    desc: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះសម្រាប់រាសី${s}៖ ស្នេហា ការងារ ហិរញ្ញវត្ថុ និងអារម្មណ៍ ព្រមទាំងពណ៌ លេខ និងម៉ោងសំណាងរបស់អ្នក។`,
-    short: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}។`,
-    forDate: (s: string, d: string) => `ហោរាសាស្ត្ររាសី${s} សម្រាប់${d}`,
-    descDate: (s: string, d: string) => `ហោរាសាស្ត្ររាសី${s} សម្រាប់${d}៖ ស្នេហា ការងារ ហិរញ្ញវត្ថុ និងអារម្មណ៍ ព្រមទាំងពណ៌ លេខ និងម៉ោងសំណាងរបស់អ្នក។`,
-    permalink: "តំណអចិន្ត្រៃយ៍ទៅការអាននេះ", day: "ថ្ងៃ", tomorrow: "អានថ្ងៃស្អែក",
-    myToday: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s} របស់ខ្ញុំ`, myDate: (s: string, d: string) => `ហោរាសាស្ត្ររាសី${s} របស់ខ្ញុំ សម្រាប់${d}`,
-    profile: (s: string) => `ប្រវត្តិរូបបុគ្គលិកលក្ខណៈរាសី${s}`, pair: (a: string, b: string) => `ភាពត្រូវគ្នារវាងរាសី${a} និងរាសី${b}`,
-    goat: "ការព្យាករឆ្នាំមមែ ធាតុភ្លើង ២០២៧", week: (s: string) => `ហោរាសាស្ត្រប្រចាំសប្ដាហ៍ រាសី${s} សម្រាប់សប្ដាហ៍នោះ`,
-  },
 });
 
 

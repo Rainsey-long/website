@@ -13,10 +13,6 @@ const T = defineMessages({
     title: (s: string, r: string) => `${s} weekly horoscope, ${r}`,
     desc: (s: string, r: string) => `${s} weekly horoscope for ${r}: the week's Moon, your best days for love, work, money and mood, and what the planets are doing.`,
   },
-  km: {
-    title: (s: string, r: string) => `ហោរាសាស្ត្រប្រចាំសប្ដាហ៍ រាសី${s} ${r}`,
-    desc: (s: string, r: string) => `ហោរាសាស្ត្រប្រចាំសប្ដាហ៍ រាសី${s} សម្រាប់${r}៖ ព្រះចន្ទប្រចាំសប្ដាហ៍ ថ្ងៃល្អបំផុតសម្រាប់ស្នេហា ការងារ ប្រាក់កាស និងអារម្មណ៍ និងដំណើររបស់ភពនានា។`,
-  },
 });
 
 /** A Monday whose whole week lies in the supported range. */

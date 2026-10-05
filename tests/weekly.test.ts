@@ -76,9 +76,7 @@ describe("weekly horoscope", () => {
     for (const ph of PHASE_KEYS) for (let h = 1; h <= 12; h++) expect(WEEKLY_BLOCKS.some((b) => b.conditions.phase === ph && b.conditions.house[0] === h)).toBe(true);
   });
 
-  it("uses the Khmer text on Khmer pages and owner edits over both", () => {
-    const km = weeklyReading(aries, "2026-10-05", undefined, "km");
-    expect(km.overview.text).toMatch(/។$/);
+  it("uses the owner's edit over the repository text", () => {
     const edited = weeklyReading(aries, "2026-10-05", new Map([["week-new-7", "Edited."]]), "en");
     expect(edited.overview.text).toBe("Edited.");
   });

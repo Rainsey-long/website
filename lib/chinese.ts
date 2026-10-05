@@ -131,27 +131,27 @@ export function elementRelation(a: FiveElement, b: FiveElement): ElementRelation
   return "controlled-by";
 }
 
-export const LUCKY_COLORS: Record<FiveElement, Array<{ name: string; nameKm: string; swatch: string }>> = {
+export const LUCKY_COLORS: Record<FiveElement, Array<{ name: string; swatch: string }>> = {
   wood: [
-    { name: "Green", nameKm: "បៃតង", swatch: "wood" },
-    { name: "Teal", nameKm: "ខៀវបៃតង", swatch: "wood" },
+    { name: "Green", swatch: "wood" },
+    { name: "Teal", swatch: "wood" },
   ],
   fire: [
-    { name: "Red", nameKm: "ក្រហម", swatch: "fire" },
-    { name: "Purple", nameKm: "ស្វាយ", swatch: "fire" },
+    { name: "Red", swatch: "fire" },
+    { name: "Purple", swatch: "fire" },
   ],
   earth: [
-    { name: "Yellow", nameKm: "លឿង", swatch: "earth" },
-    { name: "Brown", nameKm: "ត្នោត", swatch: "earth" },
+    { name: "Yellow", swatch: "earth" },
+    { name: "Brown", swatch: "earth" },
   ],
   metal: [
-    { name: "White", nameKm: "ស", swatch: "air" },
-    { name: "Gold", nameKm: "មាស", swatch: "air" },
-    { name: "Silver", nameKm: "ប្រាក់", swatch: "air" },
+    { name: "White", swatch: "air" },
+    { name: "Gold", swatch: "air" },
+    { name: "Silver", swatch: "air" },
   ],
   water: [
-    { name: "Black", nameKm: "ខ្មៅ", swatch: "water" },
-    { name: "Blue", nameKm: "ខៀវ", swatch: "water" },
+    { name: "Black", swatch: "water" },
+    { name: "Blue", swatch: "water" },
   ],
 };
 

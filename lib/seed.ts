@@ -4,8 +4,8 @@
  *    the weekly overviews in content/weekly/lunations.json (topic "week").
  *    A block the owner has not touched (still draft, text == source_text)
  *    follows code edits; an edited or approved block is never overwritten.
- *    The Khmer text (text_km) follows its own source the same way, while the
- *    owner has not edited it.
+ *    The site is English only since 2026-10-05: the seed no longer touches
+ *    text_km / source_text_km (the columns stay, additive-only rule).
  *  - users: the first admin from ADMIN_PASSWORD on an EMPTY table only.
  * Contains no DELETE. Removing a block from the JSON leaves its row in place.
  */
@@ -28,9 +28,6 @@ export function seedIfEmpty(): void {
   const follow = db.prepare(
     "UPDATE text_blocks SET text = ?, source_text = ?, conditions = ?, updated_at = datetime('now') WHERE id = ? AND review = 'draft' AND text = source_text AND source_text <> ?",
   );
-  const followKm = db.prepare(
-    "UPDATE text_blocks SET text_km = ?, source_text_km = ?, updated_at = datetime('now') WHERE id = ? AND text_km = source_text_km AND source_text_km <> ?",
-  );
   let wrote = 0;
   db.transaction(() => {
     for (const list of [...TOPICS.map((t) => BLOCKS[t]), WEEKLY_BLOCKS]) {
@@ -38,8 +35,6 @@ export function seedIfEmpty(): void {
         const cond = JSON.stringify(b.conditions);
         wrote += insert.run(b.id, b.topic, b.kind, cond, b.text, b.text).changes;
         wrote += follow.run(b.text, b.text, cond, b.id, b.text).changes;
-        const km = b.text_km ?? "";
-        wrote += followKm.run(km, km, b.id, km).changes;
       }
     }
   })();

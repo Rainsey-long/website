@@ -11,7 +11,6 @@ import { getLang } from "@/lib/langServer";
 
 const T = defineMessages({
   en: { match: "match", love: "Love", friendship: "Friendship", work: "Work" },
-  km: { match: "ត្រូវគ្នា", love: "ស្នេហា", friendship: "មិត្តភាព", work: "ការងារ" },
 });
 
 type Side = { slug: string; name: string };

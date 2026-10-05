@@ -12,7 +12,7 @@ import { houseLabel, natalCopy } from "@/lib/natalCopy";
 import { useLang } from "./LangProvider";
 import PeoplePicker from "./PeoplePicker";
 import { cityTextForSlug, slugForCityText } from "@/lib/people";
-import { defineMessages, khmerDigits } from "@/lib/i18n";
+import { defineMessages } from "@/lib/i18n";
 import { signName } from "@/lib/names";
 import { localToday } from "@/lib/client";
 import BirthChartWheel from "@/components/BirthChartWheel";
@@ -48,29 +48,6 @@ const T = defineMessages({
     p3: "Aspects allow 8° for conjunctions and oppositions, 7° for trines and squares and 5° for sextiles, 2° more when the Sun or Moon is involved. Aspects between Uranus, Neptune and Pluto are left out because whole generations share them.",
     p4: "Your birth details were used only in this browser and were not sent anywhere.",
   },
-  km: {
-    dateErr: "សូមបញ្ចូលកាលបរិច្ឆេទចន្លោះឆ្នាំ ១៩០០ និងថ្ងៃនេះ។", cityErr: "សូមជ្រើសរើសទីក្រុងពីបញ្ជី ឬទុកចន្លោះនេះឱ្យទទេ។",
-    birthDate: "ថ្ងៃខែឆ្នាំកំណើត", birthTime: "ម៉ោងកំណើត", optional: "(មិនចាំបាច់)", noTime: "ខ្ញុំមិនដឹងម៉ោងកំណើតរបស់ខ្ញុំទេ",
-    birthCity: "ទីក្រុងកំណើត", cityHint: "ម៉ោង និងទីក្រុងកំណើត បន្ថែមរាសីឡើង និងផ្ទះរបស់អ្នក។ បើរកមិនឃើញទីក្រុងរបស់អ្នក សូមជ្រើសទីក្រុងធំដែលនៅជិតបំផុត។",
-    submit: "គូរតារាងរបស់ខ្ញុំ", yourChart: "តារាងកំណើតរបស់អ្នក",
-    risingLeft: "រាសីឡើងរបស់អ្នកនៅខាងឆ្វេង លើបន្ទាត់ផ្ដេក។",
-    noTimeWheel: "បើគ្មានម៉ោងកំណើត កង់នេះចាប់ផ្ដើមពី ០° រាសីមេស នៅខាងឆ្វេង ហើយមិនបង្ហាញផ្ទះទេ។",
-    sun: "ព្រះអាទិត្យ", moon: "ព្រះចន្ទ", rising: "រាសីឡើង",
-    moonChanged: "ព្រះចន្ទបានប្ដូររាសីនៅថ្ងៃនោះ។ សូមបន្ថែមម៉ោងកំណើត ដើម្បីឱ្យប្រាកដ។", midday: "គណនាសម្រាប់ពេលថ្ងៃត្រង់។",
-    notKnown: "មិនទាន់ដឹង", mc: (s: string) => `កំពូលមេឃនៅរាសី${s}`, needsTime: "ត្រូវការម៉ោង និងទីក្រុងកំណើតរបស់អ្នក។",
-    planets: "ភព", inSign: (b: string, s: string) => `${b}នៅរាសី${s}`, retrograde: " ដើរថយក្រោយ",
-    same: (topic: string, house: boolean, first: string) => `${topic}។ រាសី${house ? " និងផ្ទះ" : ""}ដូចគ្នានឹង${first}របស់អ្នក ដូច្នេះរចនាបថ អំណោយ និងការលូតលាស់ដូចគ្នា។`,
-    changed: " វាបានប្ដូររាសីនៅថ្ងៃនោះ ដូច្នេះម៉ោងកំណើតនឹងបញ្ជាក់វា។",
-    topicStyle: (topic: string, style: string) => `${topic}៖ ${style}។`,
-    giftGrowth: (gift: string, growth: string) => `អំណោយ៖ ${gift}។ ការលូតលាស់៖ ${growth}។`, showsIn: (h: string) => ` បង្ហាញខ្លួនក្នុង${h}។`,
-    aspects: "មុំរវាងភព", aspectsNote: "មុំរវាងភពនានា ពីជិតបំផុតមុន។", meaning: (m: string) => `${m}។`,
-    aspectLine: (a: string, k: string, b: string) => `${a} ${k} ${b}`, orb: (o: number) => ` · ឃ្លាតពីមុំពិត ${khmerDigits(o)}°`,
-    how: "របៀបដែលតារាងនេះត្រូវបានគណនា",
-    p1: (timeKnown: boolean, utc: string) => `ទីតាំងភពមកពីបណ្ណាល័យកូដចំហ astronomy-engine៖ គិតពីផែនដី រាសីត្រូពិក សម្រាប់ពេលដែលអ្នកកើត${timeKnown ? "" : " (ថ្ងៃត្រង់ ព្រោះមិនបានផ្ដល់ម៉ោង)"} គឺ UTC ${khmerDigits(utc)}។`,
-    p2: "ផ្ទះប្រើប្រព័ន្ធមួយរាសីមួយផ្ទះ៖ រាសីឡើងរបស់អ្នកជាផ្ទះទី១ រាសីបន្ទាប់ជាផ្ទះទី២ ហើយបន្តបែបនេះ។ វាប្រើបាននៅគ្រប់រយៈទទឹង។",
-    p3: "មុំរវាងភពអនុញ្ញាត ៨° សម្រាប់ការរួមគ្នា និងការទល់មុខគ្នា ៧° សម្រាប់មុំ ១២០ ដឺក្រេ និងមុំកែង និង ៥° សម្រាប់មុំ ៦០ ដឺក្រេ ហើយបន្ថែម ២° ពេលមានព្រះអាទិត្យ ឬព្រះចន្ទពាក់ព័ន្ធ។ មុំរវាងអ៊ុយរ៉ានុស ណិបទូន និងភ្លុយតូ មិនត្រូវបានរាប់ទេ ព្រោះមនុស្សមួយជំនាន់ទាំងមូលមានដូចគ្នា។",
-    p4: "ព័ត៌មានកំណើតរបស់អ្នកត្រូវបានប្រើតែក្នុងកម្មវិធីរុករកនេះប៉ុណ្ណោះ ហើយមិនត្រូវបានផ្ញើទៅកន្លែងណាទេ។",
-  },
 });
 
 export default function BirthChart({ cities }: { cities: City[] }) {
@@ -79,7 +56,7 @@ export default function BirthChart({ cities }: { cities: City[] }) {
   const m = T[lang];
   const { body: BODY_COPY, sign: SIGN_COPY, house: HOUSE_TOPIC, aspect: ASPECT_COPY } = natalCopy(lang);
   const sn = (lon: number) => signName(signOf(lon).slug, lang);
-  const dg = (d: number) => (lang === "km" ? khmerDigits(deg(d)) : deg(d));
+  const dg = (d: number) => deg(d);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [unknown, setUnknown] = useState(false);
@@ -169,7 +146,7 @@ export default function BirthChart({ cities }: { cities: City[] }) {
                   <p className="flex items-center gap-3 font-semibold">
                     <Glyph name={p.body} set="planet" className="size-5 shrink-0" />
                     <span>{m.inSign(BODY_COPY[p.body].name, signName(SIGNS[p.signIndex].slug, lang))} <span className="tabular font-normal text-muted">{dg(p.degree)}</span>
-                      {p.house !== null && <span className="font-normal text-muted">{lang === "km" ? " " : ", "}{houseLabel(p.house, lang)}</span>}
+                      {p.house !== null && <span className="font-normal text-muted">{", "}{houseLabel(p.house, lang)}</span>}
                       {p.retrograde && <span className="font-normal text-muted">{m.retrograde}</span>}
                     </span>
                   </p>

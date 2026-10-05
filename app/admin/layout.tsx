@@ -5,7 +5,7 @@ import { defineMessages } from "@/lib/i18n";
 import { getLang } from "@/lib/langServer";
 import { SignOut } from "@/components/client/AdminForms";
 
-/** Admin is never indexed (robots.ts disallows it too). Bilingual: /km/admin is the Khmer twin (docs/I18N.md). */
+/** Admin is never indexed (robots.ts disallows it too). English only. */
 const T = defineMessages({
   en: {
     title: "Admin",
@@ -18,18 +18,6 @@ const T = defineMessages({
     feedback: "Feedback",
     accounts: "Admins",
     backups: "Backups",
-  },
-  km: {
-    title: "អ្នកគ្រប់គ្រង",
-    signedInAs: "បានចូលជា",
-    sections: "ផ្នែកនៃទំព័រអ្នកគ្រប់គ្រង",
-    overview: "ទិដ្ឋភាពទូទៅ",
-    readings: "ការទស្សន៍ទាយប្រចាំថ្ងៃ",
-    content: "ប្រវត្តិរូប និងការព្យាករណ៍",
-    songkran: "ចូលឆ្នាំខ្មែរ",
-    feedback: "មតិយោបល់",
-    accounts: "អ្នកគ្រប់គ្រង",
-    backups: "ការបម្រុងទុក",
   },
 });
 

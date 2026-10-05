@@ -1,8 +1,8 @@
 /**
- * Server-only: the owner-reviewed text for each reading block, per language,
+ * Server-only: the owner-reviewed text for each reading block (English only
+ * since 2026-10-05; the `text_km` column stays in the table, unused),
  * memoised per process and invalidated whenever the admin saves an edit. One
  * process, one replica (railway.json), so an in-memory memo is coherent.
- * A block with no Khmer text yet falls back to its English text.
  */
 import { getDb } from "./db";
 import { seedIfEmpty } from "./seed";
@@ -13,18 +13,16 @@ import type { Lang } from "./i18n";
  * module-level variable would give the admin API and the pages two different
  * memos, and an edit would never reach the pages (found by test, 2026-10-04).
  */
-const store = globalThis as unknown as { __alBlockTexts?: Record<Lang, Map<string, string>> | null };
+const store = globalThis as unknown as { __alBlockTexts?: Map<string, string> | null };
 
-export function blockTexts(lang: Lang = "en"): ReadonlyMap<string, string> {
+// `...[]: [lang?: Lang]` keeps the old language argument for existing callers and ignores it (English only since 2026-10-05).
+export function blockTexts(...[]: [lang?: Lang]): ReadonlyMap<string, string> {
   if (!store.__alBlockTexts) {
     seedIfEmpty();
-    const rows = getDb().prepare("SELECT id, text, text_km FROM text_blocks").all() as Array<{ id: string; text: string; text_km: string }>;
-    store.__alBlockTexts = {
-      en: new Map(rows.map((r) => [r.id, r.text])),
-      km: new Map(rows.map((r) => [r.id, r.text_km || r.text])),
-    };
+    const rows = getDb().prepare("SELECT id, text FROM text_blocks").all() as Array<{ id: string; text: string }>;
+    store.__alBlockTexts = new Map(rows.map((r) => [r.id, r.text]));
   }
-  return store.__alBlockTexts[lang];
+  return store.__alBlockTexts;
 }
 
 export function invalidateBlockTexts(): void {

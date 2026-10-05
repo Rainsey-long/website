@@ -25,15 +25,6 @@ const T = defineMessages({
     gifts: (s: string) => `${s} gifts`, giftText: (s: string) => `Thoughtful, small gifts inspired by ${s}.`,
     today: (s: string) => `${s} horoscope today`, every: "Compatibility for every pair", moonRising: "Find your moon and rising signs",
   },
-  km: {
-    title: (s: string) => `រាសី${s}៖ លក្ខណៈ ស្នេហា និងអាជីព`, fallback: (s: string) => `ប្រវត្តិរូបបុគ្គលិកលក្ខណៈរាសី${s}។`,
-    crumb: "រាសី", headline: (s: string) => `រាសី${s}`,
-    element: "ធាតុ", quality: "ប្រភេទ", ruler: "ភពគ្រប់គ្រង", luckyDay: "ថ្ងៃសំណាង",
-    read: (s: string) => `អានហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}`, soon: (s: string) => `ប្រវត្តិរូបរាសី${s} នឹងមានឆាប់ៗនេះ។`,
-    notTranslated: "អត្ថបទនេះមានជាភាសាអង់គ្លេសនៅឡើយ។", best: (s: string) => `គូដែលត្រូវគ្នាបំផុតសម្រាប់រាសី${s}`, pair: (a: string, b: string) => `រាសី${a} និងរាសី${b}`,
-    gifts: (s: string) => `កាដូសម្រាប់រាសី${s}`, giftText: (s: string) => `កាដូតូចៗ ដែលគិតគូរយ៉ាងល្អ បំផុសគំនិតដោយរាសី${s}។`,
-    today: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}`, every: "ភាពត្រូវគ្នាសម្រាប់គ្រប់គូ", moonRising: "ស្វែងរករាសីព្រះចន្ទ និងរាសីឡើងរបស់អ្នក",
-  },
 });
 
 type Params = { params: Promise<{ sign: string }> };
@@ -58,9 +49,7 @@ export default async function SignProfile({ params }: Params) {
   const name = signName(sign.slug, lang);
   const profile = westernProfile(sign.slug, lang);
   const fm = profile?.fm;
-  // A Khmer page whose profile is not translated yet shows the English text, marked as English.
-  const english = lang === "km" && profile ? !profile.translated : false;
-  const enLang = english ? "en" : undefined;
+  const enLang = undefined;
   const best = SIGNS.filter((s) => s.slug !== sign.slug).map((s) => ({ s, score: westernScore(sign, s).score })).sort((a, b) => b.score - a.score).slice(0, 3);
   return (
     <>
@@ -79,8 +68,8 @@ export default async function SignProfile({ params }: Params) {
           {fm?.traits && <p className="mt-4 text-muted" lang={enLang}>{fm.traits.join(" · ")}</p>}
           <p className="mt-5"><Link className="btn-primary" href={`/horoscope/${sign.slug}`}>{t.read(name)}</Link></p>
           <div className="mt-7">
-            {english && <p className="mb-4 text-small text-muted">{t.notTranslated}</p>}
-            {profile ? (english ? <div lang="en"><Prose html={profile.html} /></div> : <Prose html={profile.html} />) : <p className="reading">{t.soon(name)}</p>}
+            
+            {profile ? (<Prose html={profile.html} />) : <p className="reading">{t.soon(name)}</p>}
           </div>
           <AdSlot placement="inContent" />
           <section className="mt-7 border-t border-rule pt-5" aria-labelledby="best-h">

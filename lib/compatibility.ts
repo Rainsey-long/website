@@ -31,16 +31,8 @@ export const RELATION_NAME: Record<ChineseRelation, string> = {
   clash: "Six Clashes",
 };
 
-/** Khmer names for the Chinese relations (drafts for native review). */
-export const RELATION_NAME_KM: Record<ChineseRelation, string> = {
-  "three-harmonies": "ត្រីសុខដុម",
-  "six-harmonies": "ឆសុខដុម",
-  same: "សត្វដូចគ្នា",
-  neutral: "គូអព្យាក្រឹត",
-  harm: "ឆគ្រោះ",
-  clash: "ឆប៉ះទង្គិច",
-};
-export const relationName = (r: ChineseRelation, lang: Lang = "en") => (lang === "km" ? RELATION_NAME_KM : RELATION_NAME)[r];
+// `...[]: [lang?: Lang]` keeps the old language argument for existing callers and ignores it (English only since 2026-10-05).
+export const relationName = (r: ChineseRelation, ...[]: [lang?: Lang]) => RELATION_NAME[r];
 
 export function chineseRelation(a: Animal, b: Animal): ChineseRelation {
   if (a.slug === b.slug) return "same";
@@ -116,16 +108,7 @@ export const WESTERN_RELATION_NAME: Record<WesternRelation, string> = {
   neutral: "Easy neighbours",
 };
 
-export const WESTERN_RELATION_NAME_KM: Record<WesternRelation, string> = {
-  "same-sign": "គូកញ្ចក់",
-  "same-element": "ធាតុដូចគ្នា",
-  complementary: "ធាតុបំពេញគ្នា",
-  opposites: "ផ្ទុយគ្នាតែទាក់ទាញគ្នា",
-  square: "ភាពតានតឹងដែលជំរុញការច្នៃប្រឌិត",
-  mismatch: "ភាសាខុសគ្នា",
-  neutral: "អ្នកជិតខាងងាយស្រួល",
-};
-export const westernRelationName = (r: WesternRelation, lang: Lang = "en") => (lang === "km" ? WESTERN_RELATION_NAME_KM : WESTERN_RELATION_NAME)[r];
+export const westernRelationName = (r: WesternRelation, ...[]: [lang?: Lang]) => WESTERN_RELATION_NAME[r];
 
 export function westernRelation(a: WesternSign, b: WesternSign): WesternRelation {
   if (a.index === b.index) return "same-sign";
@@ -181,11 +164,10 @@ export function parsePairSlug(slug: string): [string, string] | null {
 }
 
 /** Score band label in words, so colour is never the only signal. */
-export function scoreBand(score: number, lang: Lang = "en"): { label: string; tone: "high" | "mid" | "low" } {
-  const km = lang === "km";
-  if (score >= 80) return { label: km ? "ត្រូវគ្នាខ្លាំង" : "Strong match", tone: "high" };
-  if (score >= 55) return { label: km ? "អាចត្រូវគ្នាបាន" : "Workable match", tone: "mid" };
-  return { label: km ? "ត្រូវការការខិតខំ" : "Needs effort", tone: "low" };
+export function scoreBand(score: number, ...[]: [lang?: Lang]): { label: string; tone: "high" | "mid" | "low" } {
+  if (score >= 80) return { label: "Strong match", tone: "high" };
+  if (score >= 55) return { label: "Workable match", tone: "mid" };
+  return { label: "Needs effort", tone: "low" };
 }
 
 export { ANIMALS, SIGNS };

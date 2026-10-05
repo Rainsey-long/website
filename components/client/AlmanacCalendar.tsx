@@ -12,7 +12,6 @@ import Seal from "../Seal";
 import { localToday } from "@/lib/client";
 import { useLang } from "./LangProvider";
 import { defineMessages, num } from "@/lib/i18n";
-import { animalName } from "@/lib/names";
 
 /**
  * `full`, `chinese.lunarLabel`, `chinese.good` and `chinese.avoid` arrive
@@ -44,25 +43,11 @@ const T = defineMessages({
     clashB: ". People born in that year may prefer a quieter day.",
     dayPage: "The full almanac for this day",
   },
-  km: {
-    quality: { good: "ថ្ងៃល្អ", neutral: "ថ្ងៃធម្មតា", challenging: "ថ្ងៃគួរប្រុងប្រយ័ត្ន" },
-    dow: [["ច", "ថ្ងៃច័ន្ទ"], ["អ", "ថ្ងៃអង្គារ"], ["ពុ", "ថ្ងៃពុធ"], ["ព្រ", "ថ្ងៃព្រហស្បតិ៍"], ["សុ", "ថ្ងៃសុក្រ"], ["ស", "ថ្ងៃសៅរ៍"], ["អា", "ថ្ងៃអាទិត្យ"]].map(([a, b]) => `${a}|${b}`).join(","),
-    nothing: "គ្មានអ្វីពិសេស",
-    holy: "ថ្ងៃសីល",
-    today: "ថ្ងៃនេះ",
-    chineseLine: (lunar: string, pillar: string, q: string) => `ប្រតិទិនចិន៖ ចន្ទគតិ ${lunar}។ ថ្ងៃ ${pillar}។ ${q}។`,
-    goodFor: "ល្អសម្រាប់",
-    avoid: "គួរជៀសវាង",
-    clashA: "ឆុងនឹងឆ្នាំ",
-    clashB: "។ អ្នកកើតឆ្នាំនោះ ប្រហែលជាចូលចិត្តថ្ងៃដែលស្ងប់ស្ងាត់ជាង។",
-    dayPage: "ប្រតិទិនពេញលេញសម្រាប់ថ្ងៃនេះ",
-  },
 });
 
 export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; days: CalDay[] }) {
   const lang = useLang();
   const t = T[lang];
-  const km = lang === "km";
   const QUALITY = t.quality;
   const today = useSyncExternalStore(() => () => {}, localToday, () => "");
   const hash = useSyncExternalStore(subscribeHash, () => location.hash.slice(1), () => "");
@@ -82,7 +67,7 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
   while (cells.length % 7) cells.push(null);
   const weeks = Array.from({ length: cells.length / 7 }, (_, i) => cells.slice(i * 7, i * 7 + 7));
   const DOW = t.dow.split(",").map((x) => x.split("|") as [string, string]);
-  const list = (x: string[]) => (x.length ? x.join(km ? " · " : ", ") : t.nothing);
+  const list = (x: string[]) => (x.length ? x.join(", ") : t.nothing);
 
   return (
     <div>
@@ -96,7 +81,7 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
                   <button type="button" ref={(el) => { refs.current[d.date] = el; }}
                     className={`cal-day${d.date === today ? " is-today" : ""}${d.date === current ? " is-selected" : ""}`} aria-current={d.date === today ? "date" : undefined}
                     tabIndex={d.date === current ? 0 : -1}
-                    aria-label={[d.full, km ? d.khmer?.labelKmShort : d.khmer?.labelEn, d.khmer?.sila ? t.holy : "", km ? d.khmer?.festival?.km : d.khmer?.festival?.en, d.chinese ? QUALITY[d.chinese.quality] : ""].filter(Boolean).join(km ? "។ " : ". ")}
+                    aria-label={[d.full, d.khmer?.labelEn, d.khmer?.sila ? t.holy : "", d.khmer?.festival?.en, d.chinese ? QUALITY[d.chinese.quality] : ""].filter(Boolean).join(". ")}
                     onClick={() => choose(d.date)}
                     onKeyDown={(e) => {
                       const i = days.findIndex((x) => x.date === d.date);
@@ -133,12 +118,8 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
         {day.khmer && (
           <div className="mt-3">
             <p lang="km" className="serif">{day.khmer.labelKm}</p>
-            {km
-              ? (day.khmer.sila && <p className="text-small text-muted">{t.holy}។</p>)
-              : <p className="text-small text-muted">The {day.khmer.labelEn}.{day.khmer.sila ? <> A Buddhist holy day (<span lang="km">ថ្ងៃសីល</span>).</> : ""}</p>}
-            {day.khmer.festival && (km
-              ? <p className="mt-2 font-semibold">{day.khmer.festival.km}</p>
-              : <p className="mt-2 font-semibold">{day.khmer.festival.en} <span lang="km" className="font-normal">{day.khmer.festival.km}</span></p>)}
+            <p className="text-small text-muted">The {day.khmer.labelEn}.{day.khmer.sila ? <> A Buddhist holy day (<span lang="km">ថ្ងៃសីល</span>).</> : ""}</p>
+            {day.khmer.festival && <p className="mt-2 font-semibold">{day.khmer.festival.en} <span lang="km" className="font-normal">{day.khmer.festival.km}</span></p>}
           </div>
         )}
         {day.chinese && (
@@ -148,7 +129,7 @@ export default function AlmanacCalendar({ firstDow, days }: { firstDow: number; 
               <div><dt className="font-semibold">{t.goodFor}</dt><dd className="mt-1">{list(day.chinese.good)}</dd></div>
               <div><dt className="font-semibold">{t.avoid}</dt><dd className="mt-1">{list(day.chinese.avoid)}</dd></div>
             </dl>
-            <p className="mt-4">{t.clashA}<Link className="link" href={`/chinese-zodiac/${day.chinese.clash.slug}`}>{km ? animalName(day.chinese.clash.slug, lang) : day.chinese.clash.name}</Link>{t.clashB}</p>
+            <p className="mt-4">{t.clashA}<Link className="link" href={`/chinese-zodiac/${day.chinese.clash.slug}`}>{day.chinese.clash.name}</Link>{t.clashB}</p>
           </div>
         )}
         <p className="mt-4"><Link className="link inline-flex min-h-tap items-center" href={`/lucky-days/day/${day.date}`}>{t.dayPage}</Link></p>

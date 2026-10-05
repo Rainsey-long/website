@@ -4,7 +4,7 @@ import { BackupNow } from "@/components/client/AdminForms";
 import { getSession } from "@/lib/auth";
 import { fileSize, listBackups } from "@/lib/backup";
 import { diskStatus } from "@/lib/volumeHeadroom";
-import { defineMessages, khmerDigits, localePath } from "@/lib/i18n";
+import { defineMessages, localePath } from "@/lib/i18n";
 import { getLang } from "@/lib/langServer";
 
 export const dynamic = "force-dynamic";
@@ -18,14 +18,6 @@ const T = defineMessages({
     none: "No backups yet.",
     // English shows the level name as lib/volumeHeadroom.ts spells it.
     levels: {} as Record<string, string>,
-  },
-  km: {
-    title: "ការបម្រុងទុក",
-    lead1: (n: string) => `ការបម្រុងទុកនីមួយៗ គឺជាច្បាប់ចម្លងមូលដ្ឋានទិន្នន័យដែលបានផ្ទៀងផ្ទាត់ និងបង្រួម (អត្ថបទទស្សន៍ទាយ ការកែរបស់អ្នក ការបញ្ចូលចូលឆ្នាំខ្មែរ មតិយោបល់ និងអ្នកគ្រប់គ្រង)។ ការបម្រុងទុកថ្មីបំផុត ${khmerDigits(n)} ត្រូវបានរក្សាទុកនៅលើថាសផ្ទុក។`,
-    lead2: "ការបម្រុងទុកប្រចាំថ្ងៃដំណើរការពីសេវា cron របស់ Railway (docs/RAILWAY.md)។ ការស្ដារឡើងវិញធ្វើនៅលើម៉ាស៊ីនមេ មិនមែននៅទីនេះទេ។",
-    volume: (pct: number, free: string | null, level: string | null) => `ថាសផ្ទុកប្រើអស់ ${khmerDigits(pct)}%${free !== null ? ` នៅសល់ ${khmerDigits(free)}` : ""}${level ? ` (${level})` : ""}។`,
-    none: "មិនទាន់មានការបម្រុងទុកទេ។",
-    levels: { warn: "ជិតពេញ", blocked: "ពេញ មិនអាចសរសេរថ្មីបានទេ", unknown: "មិនដឹង" } as Record<string, string>,
   },
 });
 
@@ -46,7 +38,7 @@ export default async function Backups() {
       <div className="mt-4"><BackupNow /></div>
       {list.length === 0 ? <p className="mt-5">{t.none}</p> : (
         <ul className="mt-5 text-small tabular">
-          {list.map((b) => <li key={b.file} className="flex justify-between gap-3 border-b border-rule py-2"><span lang="en">{b.file}</span><span className="text-muted">{lang === "km" ? khmerDigits(fileSize(b.bytes)) : fileSize(b.bytes)}</span></li>)}
+          {list.map((b) => <li key={b.file} className="flex justify-between gap-3 border-b border-rule py-2"><span lang="en">{b.file}</span><span className="text-muted">{fileSize(b.bytes)}</span></li>)}
         </ul>
       )}
     </section>

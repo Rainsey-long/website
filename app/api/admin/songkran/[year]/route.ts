@@ -1,10 +1,9 @@
 /** PUT the official Moha Songkran moment and the year's saying (from the Ministry's announcement). Admin only. */
 import { getDb } from "@/lib/db";
 import { getSession } from "@/lib/auth";
-import { json, readJsonCapped, requestLang, sameOrigin } from "@/lib/http";
-import { defineMessages, khmerDigits } from "@/lib/i18n";
+import { json, readJsonCapped, sameOrigin } from "@/lib/http";
+import { defineMessages } from "@/lib/i18n";
 
-/** Wording only; the caller's language comes from `?lang=` (lib/http.ts requestLang). */
 const T = defineMessages({
   en: {
     unauthorized: "Unauthorized",
@@ -12,17 +11,10 @@ const T = defineMessages({
     notFound: "Not found",
     format: (y: number) => `Use the form ${y}-04-14 10:48 (Cambodian time, 10–18 April).`,
   },
-  km: {
-    unauthorized: "សូមចូលជាអ្នកគ្រប់គ្រងសិន។",
-    forbidden: "មិនអនុញ្ញាតទេ។",
-    notFound: "រកមិនឃើញទេ។",
-    // The example is typed exactly as the field expects it: Western digits.
-    format: (y: number) => `សូមសរសេរតាមទម្រង់ ${y}-04-14 10:48 (ម៉ោងកម្ពុជា ចន្លោះថ្ងៃទី${khmerDigits(10)} ដល់ទី${khmerDigits(18)} ខែមេសា)។`,
-  },
 });
 
 export async function PUT(req: Request, { params }: { params: Promise<{ year: string }> }) {
-  const msg = T[requestLang(req)];
+  const msg = T.en;
   if (!(await getSession())) return json({ error: msg.unauthorized }, 401);
   if (!sameOrigin(req)) return json({ error: msg.forbidden }, 403);
   // Canonical four digits only: Number() also accepts "2.0e3", " 2000", "0x7d0".

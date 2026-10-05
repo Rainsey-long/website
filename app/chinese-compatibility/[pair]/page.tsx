@@ -4,7 +4,7 @@ import { ANIMALS, animalBySlug, elementRelation } from "@/lib/chinese";
 import { chineseScore, pairSlug, parsePairSlug, relationName } from "@/lib/compatibility";
 import { chineseCopy } from "@/lib/compat-copy";
 import { pageMetadata } from "@/lib/seo";
-import { defineMessages, localePath, num } from "@/lib/i18n";
+import { defineMessages } from "@/lib/i18n";
 import { getLang } from "@/lib/langServer";
 import { animalName } from "@/lib/names";
 
@@ -15,13 +15,6 @@ const T = defineMessages({
     short: (a: string, b: string, n: number) => `${a} and ${b}: ${n}% match.`,
     crumb: "Chinese compatibility", noun: "animal", giftTitle: "Zodiac animal gifts", giftText: "Small, well-made gifts for the animals in your life.",
     pair: (a: string, b: string) => `${a} and ${b}`, in2027: (a: string) => `${a} in 2027`, profile: (a: string) => `${a} profile`,
-  },
-  km: {
-    title: (a: string, b: string) => `ភាពត្រូវគ្នារវាងឆ្នាំ${a} និងឆ្នាំ${b} តាមរាសីចិន`,
-    description: (a: string, b: string, rel: string, n: number) => `ឆ្នាំ${a} និងឆ្នាំ${b}៖ ${rel} ត្រូវគ្នា ${num(n, "km")}%។ របៀបដែលសត្វរាសីទាំងពីរនេះភ្ជាប់គ្នាក្នុងស្នេហា មិត្តភាព និងការងារ។`,
-    short: (a: string, b: string, n: number) => `ឆ្នាំ${a} និងឆ្នាំ${b}៖ ត្រូវគ្នា ${num(n, "km")}%។`,
-    crumb: "ភាពត្រូវគ្នាតាមរាសីចិន", noun: "សត្វរាសី", giftTitle: "កាដូតាមសត្វរាសី", giftText: "កាដូតូចៗ ដែលធ្វើយ៉ាងល្អ សម្រាប់មនុស្សជាទីស្រឡាញ់របស់អ្នក។",
-    pair: (a: string, b: string) => `ឆ្នាំ${a} និងឆ្នាំ${b}`, in2027: (a: string) => `ឆ្នាំ${a} ក្នុងឆ្នាំ ២០២៧`, profile: (a: string) => `ប្រវត្តិរូបឆ្នាំ${a}`,
   },
 });
 
@@ -53,7 +46,7 @@ export default async function ChinesePair({ params }: Params) {
   if (!r) notFound();
   const lang = await getLang();
   const t = T[lang];
-  if (slug !== r.canonical) permanentRedirect(localePath(`/chinese-compatibility/${r.canonical}`, lang));
+  if (slug !== r.canonical) permanentRedirect(`/chinese-compatibility/${r.canonical}`);
   const [a, b] = [r.a, r.b].sort((x, y) => x.slug.localeCompare(y.slug));
   const s = chineseScore(a, b);
   const n = (x: { slug: string }) => animalName(x.slug, lang);

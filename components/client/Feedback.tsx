@@ -14,10 +14,6 @@ const T = defineMessages({
     thanks: "Thanks. Your note helps us improve the readings.", helpful: "Was this reading helpful?", yes: "Yes", notReally: "Not really",
     better: "What could be better?", optional: "(optional)", send: "Send", error: "That didn't send. Try again in a minute.",
   },
-  km: {
-    thanks: "សូមអរគុណ។ មតិរបស់អ្នកជួយយើងកែលម្អការអាន។", helpful: "តើការអាននេះមានប្រយោជន៍ទេ?", yes: "បាទ/ចាស", notReally: "មិនសូវទេ",
-    better: "តើអ្វីអាចល្អជាងនេះ?", optional: "(មិនចាំបាច់)", send: "ផ្ញើ", error: "ផ្ញើមិនបានទេ។ សូមព្យាយាមម្ដងទៀតក្នុងមួយនាទីទៀត។",
-  },
 });
 
 export default function Feedback({ path, blockIds }: { path: string; blockIds: string[] }) {

@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 import { FeedbackActions } from "@/components/client/AdminForms";
 import { getSession } from "@/lib/auth";
 import { getDb, type FeedbackRow } from "@/lib/db";
-import { defineMessages, khmerDigits, localePath } from "@/lib/i18n";
+import { defineMessages, localePath } from "@/lib/i18n";
 import { getLang } from "@/lib/langServer";
 
 export const dynamic = "force-dynamic";
@@ -35,20 +35,6 @@ const T = defineMessages({
     worstTitle: "Blocks people found least helpful",
     worstLead: "At least 3 votes. Edit these first.",
     of: (bad: number, total: number) => `${bad} of ${total}`,
-  },
-  km: {
-    title: "មតិយោបល់",
-    csv: "ទាញយកទាំងអស់ជា CSV",
-    filters: { unread: "មិនទាន់អាន", comments: "មានមតិ", not_helpful: "គ្មានប្រយោជន៍", all: "ទាំងអស់" },
-    count: (n: number) => `${khmerDigits(n)} ធាតុ`,
-    pageOf: (p: number, n: number) => ` ទំព័រទី ${khmerDigits(p)} នៃ ${khmerDigits(n)}`,
-    empty: "គ្មានអ្វីនៅទីនេះទេ។",
-    pages: "ទំព័រ",
-    newer: "ថ្មីជាង",
-    older: "ចាស់ជាង",
-    worstTitle: "ប្លុកដែលគេយល់ថាមានប្រយោជន៍តិចបំផុត",
-    worstLead: "យ៉ាងតិច ៣ សំឡេង។ សូមកែប្លុកទាំងនេះមុនគេ។",
-    of: (bad: number, total: number) => `${khmerDigits(bad)} ក្នុងចំណោម ${khmerDigits(total)}`,
   },
 });
 
@@ -78,8 +64,8 @@ export default async function FeedbackAdmin({ searchParams }: Search) {
       <div>
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <h1 className="text-h1">{t.title}</h1>
-          {/* An API URL: never /km-prefixed. The CSV itself stays English (column names, UTC times). */}
-          <a className="link text-small" href={`/api/admin/feedback/export${lang === "km" ? "?lang=km" : ""}`}>{t.csv}</a>
+          {/* The CSV has English column names and UTC times. */}
+          <a className="link text-small" href={`/api/admin/feedback/export`}>{t.csv}</a>
         </div>
         <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-small">
           {FILTERS.map(([k]) => <Link key={k} className={`link ${k === filter[0] ? "font-semibold" : ""}`} aria-current={k === filter[0] ? "true" : undefined} href={href(k)}>{t.filters[k]}</Link>)}

@@ -17,7 +17,7 @@ const perCaller = createRateLimiter(10 * 60_000, 20);
 const rotationBudget = createRateLimiter(24 * 3600_000, 500);
 const MAX_ROWS = 20_000;
 // Only the twelve sign slugs, a daily date or a weekly Monday path.
-const FEEDBACK_PATH = new RegExp(`^(/km)?/horoscope/(${SIGNS.map((x) => x.slug).join("|")})/(week/)?\\d{4}-\\d{2}-\\d{2}$`);
+const FEEDBACK_PATH = new RegExp(`^/horoscope/(${SIGNS.map((x) => x.slug).join("|")})/(week/)?\\d{4}-\\d{2}-\\d{2}$`);
 const BLOCK_IDS = new Set([...TOPICS.flatMap((t) => BLOCKS[t].map((b) => b.id)), ...WEEKLY_BLOCKS.map((b) => b.id)]);
 
 export async function POST(req: Request) {

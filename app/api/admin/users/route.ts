@@ -8,12 +8,11 @@
  */
 import { getDb } from "@/lib/db";
 import { ADMIN_PASSWORD_MIN, getSession, hashPassword } from "@/lib/auth";
-import { json, readJsonCapped, requestLang, sameOrigin } from "@/lib/http";
-import { defineMessages, khmerDigits } from "@/lib/i18n";
+import { json, readJsonCapped, sameOrigin } from "@/lib/http";
+import { defineMessages } from "@/lib/i18n";
 
 const USERNAME = /^[A-Za-z0-9_.-]{3,32}$/;
 
-/** Wording only; the caller's language comes from `?lang=` (lib/http.ts requestLang). */
 const T = defineMessages({
   en: {
     unauthorized: "Unauthorized",
@@ -26,21 +25,10 @@ const T = defineMessages({
     self: "You cannot remove your own account.",
     last: "The last admin cannot be removed.",
   },
-  km: {
-    unauthorized: "សូមចូលជាអ្នកគ្រប់គ្រងសិន។",
-    forbidden: "មិនអនុញ្ញាតទេ។",
-    badRequest: "សំណើមិនត្រឹមត្រូវ។",
-    notFound: "រកមិនឃើញទេ។",
-    username: "ឈ្មោះអ្នកប្រើ៖ ពី ៣ ដល់ ៣២ តួ ដែលជាអក្សរឡាតាំង លេខ ចំណុច សញ្ញាដក ឬសញ្ញាគូសក្រោម។",
-    password: (n: number) => `ពាក្យសម្ងាត់៖ យ៉ាងតិច ${khmerDigits(n)} តួអក្សរ។`,
-    taken: "ឈ្មោះអ្នកប្រើនេះមានគេប្រើរួចហើយ។",
-    self: "អ្នកមិនអាចដកគណនីរបស់ខ្លួនឯងចេញបានទេ។",
-    last: "មិនអាចដកអ្នកគ្រប់គ្រងចុងក្រោយចេញបានទេ។",
-  },
 });
 
 export async function POST(req: Request) {
-  const t = T[requestLang(req)];
+  const t = T.en;
   const s = await getSession();
   if (!s) return json({ error: t.unauthorized }, 401);
   if (!sameOrigin(req)) return json({ error: t.forbidden }, 403);
@@ -56,7 +44,7 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const t = T[requestLang(req)];
+  const t = T.en;
   const s = await getSession();
   if (!s) return json({ error: t.unauthorized }, 401);
   if (!sameOrigin(req)) return json({ error: t.forbidden }, 403);

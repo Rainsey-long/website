@@ -12,12 +12,6 @@ const T = defineMessages({
     h1: "Birth chart",
     intro: "See where the Sun, Moon and planets were when you were born. Add a time and city for your rising sign and houses. Your details stay on this device.",
   },
-  km: {
-    title: "តារាងកំណើតឥតគិតថ្លៃ៖ ភព ផ្ទះ និងមុំរវាងភព",
-    description: "គូរតារាងកំណើតរបស់អ្នក ជាមួយព្រះអាទិត្យ ព្រះចន្ទ រាសីឡើង ភពទាំងដប់ ផ្ទះ និងមុំរវាងភព ព្រមទាំងការពន្យល់ងាយយល់។ ឯកជន៖ វាដំណើរការក្នុងកម្មវិធីរុករករបស់អ្នក។",
-    h1: "តារាងកំណើត",
-    intro: "មើលថាព្រះអាទិត្យ ព្រះចន្ទ និងភពនានានៅទីណា ពេលអ្នកកើត។ បន្ថែមម៉ោង និងទីក្រុង ដើម្បីដឹងរាសីឡើង និងផ្ទះរបស់អ្នក។ ព័ត៌មានរបស់អ្នកនៅតែលើឧបករណ៍នេះ។",
-  },
 });
 export async function generateMetadata() {
   const lang = await getLang();

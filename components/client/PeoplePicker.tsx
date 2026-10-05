@@ -15,7 +15,7 @@
 import { useId, useMemo, useState, useSyncExternalStore, type KeyboardEvent } from "react";
 import Glyph from "@/components/Glyph";
 import { readStore, writeStore } from "@/lib/client";
-import { defineMessages, khmerDigits } from "@/lib/i18n";
+import { defineMessages } from "@/lib/i18n";
 import { MAX_LABEL, MAX_PEOPLE, PEOPLE_KEY, cleanLabel, forgetPerson, parsePeople, savePerson, serializePeople, type Person } from "@/lib/people";
 import { useLang } from "./LangProvider";
 
@@ -36,23 +36,6 @@ const T = defineMessages({
     needName: "Give this person a name first.",
     full: (max: number) => `You can save up to ${max} people. Forget one first.`,
     blocked: "This browser is not letting the site store anything, so the person was not saved.",
-  },
-  km: {
-    saved: "មនុស្សដែលបានរក្សាទុក",
-    fill: (n: string) => `បំពេញព័ត៌មានរបស់ ${n}`,
-    forget: (n: string) => `លុប ${n}`,
-    save: "រក្សាទុកមនុស្សនេះ",
-    name: "ឈ្មោះសម្រាប់រក្សាទុក",
-    nameHint: "ឧទាហរណ៍ ខ្ញុំ ម្ដាយ ឬឈ្មោះមិត្តភក្ដិ។",
-    saveBtn: "រក្សាទុក",
-    note: (max: number) => `រហូតដល់ ${khmerDigits(max)} នាក់ រក្សាទុកតែក្នុងកម្មវិធីរុករកនេះប៉ុណ្ណោះ។ គ្មានអ្វីត្រូវបានផ្ញើមកយើងទេ។`,
-    filled: (n: string) => `បានបំពេញព័ត៌មានរបស់ ${n}។`,
-    forgot: (n: string) => `បានលុប ${n}។`,
-    didSave: (n: string) => `បានរក្សាទុក ${n} ក្នុងកម្មវិធីរុករកនេះ។`,
-    needDate: "សូមបញ្ចូលថ្ងៃខែឆ្នាំកំណើតជាមុនសិន រួចរក្សាទុក។",
-    needName: "សូមដាក់ឈ្មោះឱ្យមនុស្សនេះជាមុនសិន។",
-    full: (max: number) => `អ្នកអាចរក្សាទុកបានរហូតដល់ ${khmerDigits(max)} នាក់។ សូមលុបម្នាក់ជាមុនសិន។`,
-    blocked: "កម្មវិធីរុករកនេះមិនអនុញ្ញាតឱ្យគេហទំព័ររក្សាទុកអ្វីទេ ដូច្នេះមនុស្សនេះមិនត្រូវបានរក្សាទុកទេ។",
   },
 });
 

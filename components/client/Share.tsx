@@ -7,7 +7,6 @@ import { defineMessages } from "@/lib/i18n";
 
 const T = defineMessages({
   en: { share: "Share", copied: "Link copied", failed: "Copy failed. Select the address bar to copy the link.", copy: "Copy link", on: (n: string) => `Share on ${n}` },
-  km: { share: "ចែករំលែក", copied: "បានចម្លងតំណ", failed: "ចម្លងមិនបាន។ សូមជ្រើសរើសរបារអាសយដ្ឋាន ដើម្បីចម្លងតំណ។", copy: "ចម្លងតំណ", on: (n: string) => `ចែករំលែកនៅ ${n}` },
 });
 
 const canNative = () => typeof navigator.share === "function" && matchMedia("(pointer: coarse)").matches;

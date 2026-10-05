@@ -20,14 +20,9 @@ export function cityForZone(tz: string): CityEntry {
   return CITIES.find((c) => c.tz === tz) ?? CITIES[0];
 }
 
-// Khmer names for the Cambodian cities (other cities keep their international
-// names on Khmer pages, as Khmer media usually does).
-const KM_CITY: Record<string, string> = {
-  "Phnom Penh": "ភ្នំពេញ", "Siem Reap": "សៀមរាប", Battambang: "បាត់ដំបង", Sihanoukville: "ព្រះសីហនុ", Kampot: "កំពត",
-};
-/** "Phnom Penh, Cambodia" / "ភ្នំពេញ កម្ពុជា". */
-export function cityLabel(c: City, lang: Lang): string {
-  if (lang === "km" && c.country === "Cambodia") return `${KM_CITY[c.name] ?? c.name} កម្ពុជា`;
+// `...[]: [lang?: Lang]` keeps the old language argument for existing callers and ignores it (English only since 2026-10-05).
+/** "Phnom Penh, Cambodia". */
+export function cityLabel(c: City, ...[]: [lang?: Lang]): string {
   return `${c.name}, ${c.country}`;
 }
-export const cityName = (c: City, lang: Lang) => (lang === "km" ? KM_CITY[c.name] ?? c.name : c.name);
+export const cityName = (c: City, ...[]: [lang?: Lang]) => c.name;

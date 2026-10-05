@@ -16,12 +16,6 @@ const T = defineMessages({
     intro: "Pick two signs to see how they connect. Scores come from elements and the angle between signs on the wheel. For the animals, see", chineseLink: "Chinese compatibility",
     noun: "sign", check: "Check two signs",
   },
-  km: {
-    title: "ភាពត្រូវគ្នានៃរាសីសម្រាប់គ្រប់គូ", description: "ភាពត្រូវគ្នាសម្រាប់គូរាសីលោកខាងលិចទាំង ៧៨៖ ស្នេហា មិត្តភាព និងការងារ ពន្យល់តាមធាតុ និងមុំរវាងរាសី។",
-    crumb: "ភាពត្រូវគ្នា", h1: "ភាពត្រូវគ្នានៃរាសី",
-    intro: "ជ្រើសរើសរាសីពីរ ដើម្បីមើលថាពួកវាភ្ជាប់គ្នាយ៉ាងណា។ ពិន្ទុមកពីធាតុ និងមុំរវាងរាសីនៅលើកង់រាសី។ សម្រាប់សត្វរាសី សូមមើល", chineseLink: "ភាពត្រូវគ្នាតាមរាសីចិន",
-    noun: "រាសី", check: "ពិនិត្យរាសីពីរ",
-  },
 });
 export async function generateMetadata() {
   const lang = await getLang();
@@ -37,7 +31,7 @@ export default async function CompatIndex() {
       <Breadcrumbs items={[{ name: t.crumb, href: "/compatibility" }]} />
       <div className="mx-auto max-w-page safe-x py-6">
         <h1 className="text-h1">{t.h1}</h1>
-        <p className="reading mt-3 text-muted">{t.intro} <Link className="link text-ink" href="/chinese-compatibility">{t.chineseLink}</Link>{lang === "km" ? "។" : "."}</p>
+        <p className="reading mt-3 text-muted">{t.intro} <Link className="link text-ink" href="/chinese-compatibility">{t.chineseLink}</Link>{"."}</p>
         <PairPicker options={signs} base="/compatibility/" noun={t.noun} heading={t.check} a="aries" b="leo" />
         <PairIndex items={signs} set="western" base="/compatibility/" score={(a, b) => westernScore(a, b).score} />
       </div>

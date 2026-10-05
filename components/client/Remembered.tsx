@@ -3,7 +3,6 @@
 import { useSyncExternalStore } from "react";
 import { MY_SIGN_EVENT, MY_SIGN_KEY, readStore, toast, writeStore } from "@/lib/client";
 import { useMySign } from "./HeaderControls";
-import { useLang } from "./LangProvider";
 
 /** Rings the remembered sign's chip (§6.2). Renders nothing itself. */
 export function RememberedChipStyle() {
@@ -19,14 +18,13 @@ function subscribe(cb: () => void) {
 
 /** "Make Scorpio my sign" (§8.1). `name` arrives in the page language. */
 export function SaveSign({ slug, name }: { slug: string; name: string }) {
-  const km = useLang() === "km";
   const mine = useSyncExternalStore(subscribe, () => readStore(MY_SIGN_KEY) === slug, () => false);
   if (mine) return null;
   return (
     <button type="button" className="btn-secondary" onClick={() => {
       writeStore(MY_SIGN_KEY, slug);
       window.dispatchEvent(new Event(MY_SIGN_EVENT));
-      toast(km ? `បានរក្សាទុករាសី៖ ${name}` : `Sign saved: ${name}`);
-    }}>{km ? `កំណត់${name}ជារាសីរបស់ខ្ញុំ` : `Make ${name} my sign`}</button>
+      toast(`Sign saved: ${name}`);
+    }}>{`Make ${name} my sign`}</button>
   );
 }

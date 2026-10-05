@@ -14,11 +14,6 @@ const T = defineMessages({
     crumb: "Zodiac signs", intro: "Your sun sign is where the Sun was on the day you were born. Pick a sign to read its profile.",
     group: (el: string) => `${el} signs`,
   },
-  km: {
-    title: "រាសីទាំង ១២", description: "ប្រវត្តិរូបបុគ្គលិកលក្ខណៈនៃរាសីលោកខាងលិចទាំង ១២៖ ចំណុចខ្លាំង បញ្ហាប្រឈម ស្នេហា និងការងារ ដាក់ជាក្រុមតាមធាតុ។",
-    crumb: "រាសី", intro: "រាសីព្រះអាទិត្យរបស់អ្នក គឺកន្លែងដែលព្រះអាទិត្យស្ថិតនៅថ្ងៃដែលអ្នកកើត។ ជ្រើសរើសរាសីមួយ ដើម្បីអានប្រវត្តិរូបរបស់វា។",
-    group: (el: string) => `រាសីធាតុ${el}`,
-  },
 });
 
 export async function generateMetadata() {

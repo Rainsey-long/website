@@ -5,7 +5,6 @@ import { defineMessages } from "@/lib/i18n";
 
 const T = defineMessages({
   en: { title: "This page didn't load.", body: "Something went wrong on our side. Try again, or go back to the homepage.", retry: "Try again", home: "Homepage" },
-  km: { title: "ទំព័រនេះមិនបានបើកទេ។", body: "មានបញ្ហាពីខាងយើង។ សូមព្យាយាមម្ដងទៀត ឬត្រឡប់ទៅទំព័រដើមវិញ។", retry: "ព្យាយាមម្ដងទៀត", home: "ទំព័រដើម" },
 });
 
 /** Page-level error boundary (CamboMath pattern). Says what happened and what to do; never apologises (§6.14). */

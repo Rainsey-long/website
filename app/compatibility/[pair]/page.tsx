@@ -4,7 +4,7 @@ import { SIGNS, signBySlug } from "@/lib/western";
 import { pairSlug, parsePairSlug, westernRelationName, westernScore } from "@/lib/compatibility";
 import { westernCopy } from "@/lib/compat-copy";
 import { pageMetadata } from "@/lib/seo";
-import { defineMessages, localePath, num } from "@/lib/i18n";
+import { defineMessages } from "@/lib/i18n";
 import { getLang } from "@/lib/langServer";
 import { signName } from "@/lib/names";
 
@@ -15,13 +15,6 @@ const T = defineMessages({
     short: (a: string, b: string, n: number) => `${a} and ${b}: ${n}% match.`,
     crumb: "Compatibility", noun: "sign", giftTitle: "Zodiac gifts", giftText: "Small, well-made gifts for the signs in your life.",
     pair: (a: string, b: string) => `${a} and ${b}`, today: (s: string) => `${s} horoscope today`, profile: (s: string) => `${s} profile`,
-  },
-  km: {
-    title: (a: string, b: string) => `ភាពត្រូវគ្នារវាងរាសី${a} និងរាសី${b}`,
-    description: (a: string, b: string, rel: string, n: number) => `រាសី${a} និងរាសី${b}៖ ${rel} ត្រូវគ្នា ${num(n, "km")}%។ របៀបដែលរាសីទាំងពីរនេះភ្ជាប់គ្នាក្នុងស្នេហា មិត្តភាព និងការងារ។`,
-    short: (a: string, b: string, n: number) => `រាសី${a} និងរាសី${b}៖ ត្រូវគ្នា ${num(n, "km")}%។`,
-    crumb: "ភាពត្រូវគ្នា", noun: "រាសី", giftTitle: "កាដូតាមរាសី", giftText: "កាដូតូចៗ ដែលធ្វើយ៉ាងល្អ សម្រាប់មនុស្សជាទីស្រឡាញ់របស់អ្នក។",
-    pair: (a: string, b: string) => `រាសី${a} និងរាសី${b}`, today: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}`, profile: (s: string) => `ប្រវត្តិរូបរាសី${s}`,
   },
 });
 
@@ -53,7 +46,7 @@ export default async function WesternPair({ params }: Params) {
   if (!r) notFound();
   const lang = await getLang();
   const t = T[lang];
-  if (slug !== r.canonical) permanentRedirect(localePath(`/compatibility/${r.canonical}`, lang));
+  if (slug !== r.canonical) permanentRedirect(`/compatibility/${r.canonical}`);
   const [a, b] = [r.a, r.b].sort((x, y) => x.slug.localeCompare(y.slug));
   const s = westernScore(a, b);
   const n = (x: { slug: string }) => signName(x.slug, lang);

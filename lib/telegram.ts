@@ -2,8 +2,8 @@
  * Telegram daily card (FEATURES.md #47): one post a day to the owner's
  * channel through the free Bot API's sendPhoto, called by
  * GET /api/cron/telegram. No paid API, no runtime AI: the photo is this
- * site's own share card (app/og) and the caption is built from the Khmer
- * calendar engine.
+ * site's own (English) share card (app/og) and the English caption is built
+ * from the Khmer calendar engine, with Khmer tradition names inline.
  *
  * Secrets: TELEGRAM_BOT_TOKEN goes into the request URL (that is how the Bot
  * API works), so the URL is never logged and errors are logged by status or
@@ -20,7 +20,6 @@ import { khmerDay } from "./khmer";
 import { fullDate } from "./dates";
 import { dateInZone } from "./today";
 import { DEFAULT_TZ, SITE_NAME, SITE_URL } from "./site";
-import { localePath } from "./i18n";
 
 const DEFAULT_API = "https://api.telegram.org";
 const LAST_POSTED_KEY = "telegram_last_posted";
@@ -54,22 +53,18 @@ export function telegramConfig(): TelegramConfig | null {
   return { token, chatId, api: apiBase() };
 }
 
-/** Today's post: the Khmer share card and a short caption in both languages. */
+/** Today's post: the share card and a short English caption. */
 export function dailyPost(date: string): { photo: string; caption: string } {
   const kd = khmerDay(date);
-  const km = [`${fullDate(date, "km")}`, kd.labelKmShort, kd.festival ? kd.festival.km : kd.sila ? "ថ្ងៃសីល" : ""].filter(Boolean).join(" · ");
-  const en = [fullDate(date, "en"), kd.labelEn, kd.festival ? kd.festival.en : kd.sila ? "Buddhist holy day" : ""].filter(Boolean).join(" · ");
+  const en = [fullDate(date), kd.labelEn, kd.festival ? `${kd.festival.en} (${kd.festival.km})` : kd.sila ? "Buddhist holy day (ថ្ងៃសីល)" : ""].filter(Boolean).join(" · ");
   const caption = [
-    km,
-    `ហោរាសាស្ត្រ ថ្ងៃល្អ និងប្រតិទិនខ្មែរថ្ងៃនេះ៖ ${SITE_URL}${localePath("/khmer", "km")}`,
-    "",
     en,
     `Today's horoscopes, lucky days and the Khmer calendar: ${SITE_URL}/khmer`,
     "",
     `${SITE_NAME} · For entertainment and reflection.`,
   ].join("\n");
   // The date in the URL makes each day's card a new URL, so Telegram does not reuse yesterday's.
-  return { photo: `${SITE_URL}/og/default?lang=km&d=${date}`, caption };
+  return { photo: `${SITE_URL}/og/default?d=${date}`, caption };
 }
 
 export const today = () => dateInZone(DEFAULT_TZ);

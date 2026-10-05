@@ -14,7 +14,7 @@ You are a UI/UX specialist working on a calm, minimalist horoscope and almanac s
 - **The tradition switch is the visitor's choice.** A page must make sense with any combination of Western / Chinese / Khmer switched on, including only one.
 - **Motion**: none except the Moon's 600ms ease and responses to user action; everything off under reduced motion.
 - **Admin** (`/admin`) shares the language but stays dense and practical.
-- **Every page exists in English and Khmer** (`/x` and `/km/x`, `docs/I18N.md`). Check both: no stray English UI text on Khmer pages, Khmer fits buttons, chips and table cells at 360px, Khmer line height (the `--lh-*` tokens are redefined under `:root:lang(km)`), the language switch keeps the page.
+- **English only** (2026-10-05): Khmer tradition terms appear inline as `<span lang="km">`; check they fit at 360px.
 
 ## Working method
 

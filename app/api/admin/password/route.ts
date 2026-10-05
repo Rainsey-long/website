@@ -7,12 +7,11 @@
 import { getDb } from "@/lib/db";
 import { ADMIN_PASSWORD_MIN, bumpSessionEpoch, getSession, hashPassword, verifyPassword } from "@/lib/auth";
 import { createRateLimiter } from "@/lib/rateLimit";
-import { json, readJsonCapped, requestLang, sameOrigin } from "@/lib/http";
-import { defineMessages, khmerDigits } from "@/lib/i18n";
+import { json, readJsonCapped, sameOrigin } from "@/lib/http";
+import { defineMessages } from "@/lib/i18n";
 
 const perAccount = createRateLimiter(10 * 60_000, 10);
 
-/** Wording only; the caller's language comes from `?lang=` (lib/http.ts requestLang). */
 const T = defineMessages({
   en: {
     unauthorized: "Unauthorized",
@@ -22,18 +21,10 @@ const T = defineMessages({
     short: (n: number) => `New password: at least ${n} characters.`,
     wrong: "The current password is not right.",
   },
-  km: {
-    unauthorized: "សូមចូលជាអ្នកគ្រប់គ្រងសិន។",
-    forbidden: "មិនអនុញ្ញាតទេ។",
-    badRequest: "សំណើមិនត្រឹមត្រូវ។",
-    tooMany: "ព្យាយាមច្រើនដងពេក។ សូមរង់ចាំដប់នាទី។",
-    short: (n: number) => `ពាក្យសម្ងាត់ថ្មី៖ យ៉ាងតិច ${khmerDigits(n)} តួអក្សរ។`,
-    wrong: "ពាក្យសម្ងាត់បច្ចុប្បន្នមិនត្រឹមត្រូវទេ។",
-  },
 });
 
 export async function POST(req: Request) {
-  const t = T[requestLang(req)];
+  const t = T.en;
   const s = await getSession();
   if (!s) return json({ error: t.unauthorized }, 401);
   if (!sameOrigin(req)) return json({ error: t.forbidden }, 403);

@@ -141,8 +141,8 @@ function migrate(d: Database.Database): void {
     CREATE INDEX IF NOT EXISTS idx_feedback_created ON feedback(created_at);
   `);
   addColumnIfMissing(d, "users", "session_epoch", "session_epoch INTEGER NOT NULL DEFAULT 0");
-  // Khmer reading text (lib/i18n.ts). Same rule as the English pair: the seed
-  // follows source_text_km only while the owner has not edited text_km.
+  // Khmer reading text. Unused since the site became English only (2026-10-05);
+  // the columns stay because the schema is additive only (.claude/database.md).
   addColumnIfMissing(d, "text_blocks", "text_km", "text_km TEXT NOT NULL DEFAULT ''");
   addColumnIfMissing(d, "text_blocks", "source_text_km", "source_text_km TEXT NOT NULL DEFAULT ''");
   // Admin triage: when the owner marked a feedback row as read (NULL = unread).

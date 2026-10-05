@@ -21,12 +21,12 @@ import { addDays, fromKey } from "./dates";
 import { signIndexFromLongitude } from "./western";
 import { almanacDay, type AlmanacDay } from "./almanac";
 import type { Lang } from "./i18n";
-import { colourName } from "./names";
 
 export type Topic = "love" | "career" | "money" | "mood";
 export const TOPICS: Topic[] = ["love", "career", "money", "mood"];
 export const TOPIC_LABEL: Record<Topic, string> = { love: "Love", career: "Career", money: "Money", mood: "Mood" };
-export const TOPIC_LABEL_KM: Record<Topic, string> = { love: "ស្នេហា", career: "ការងារ", money: "ហិរញ្ញវត្ថុ", mood: "អារម្មណ៍" };
+/** @deprecated English only since 2026-10-05; an alias kept until the last caller is gone. */
+export const TOPIC_LABEL_KM = TOPIC_LABEL;
 
 export interface Block {
   id: string;
@@ -39,8 +39,6 @@ export interface Block {
     moonElement?: Array<"fire" | "earth" | "air" | "water">;
   };
   tone: string;
-  /** Khmer draft (docs/KHMER-REVIEW.md); empty or absent falls back to `text`. */
-  text_km?: string;
   text: string;
 }
 
@@ -56,12 +54,8 @@ export const HOUSE_THEME = [
   "partnerships", "shared resources and change", "travel and learning", "career",
   "friends and goals", "rest and reflection",
 ];
-/** Khmer house themes (drafts for native review). */
-export const HOUSE_THEME_KM = [
-  "", "ខ្លួនឯង", "ប្រាក់កាស", "ការទំនាក់ទំនង", "ផ្ទះ", "ស្នេហា និងការកម្សាន្ត", "ការងារ និងទម្លាប់",
-  "ដៃគូ", "ធនធានរួម និងការផ្លាស់ប្ដូរ", "ការធ្វើដំណើរ និងការសិក្សា", "អាជីព",
-  "មិត្តភក្ដិ និងគោលដៅ", "ការសម្រាក និងការឆ្លុះបញ្ចាំង",
-];
+/** @deprecated English only since 2026-10-05; an alias kept until the last caller is gone. */
+export const HOUSE_THEME_KM = HOUSE_THEME;
 
 /** Solar-sign house: ((moonSign − sunSign + 12) mod 12) + 1. */
 export function solarHouse(moonSignIndex: number, sunSignIndex: number): number {
@@ -143,13 +137,9 @@ const LUCKY_COLORS: Record<"fire" | "earth" | "air" | "water", string[]> = {
   water: ["Sea green", "Indigo", "Pearl white", "Deep blue"],
 };
 
-const LUCKY_COLOR_KM: Record<string, string> = {
-  Scarlet: "ក្រហមឆ្អៅ", Amber: "លឿងទុំ", Olive: "បៃតងអូលីវ", Terracotta: "ក្រហមដីឥដ្ឋ", Sand: "ពណ៌ខ្សាច់",
-  "Forest green": "បៃតងចាស់", "Sky blue": "ខៀវមេឃ", "Pale yellow": "លឿងស្រាល", "Sea green": "បៃតងសមុទ្រ",
-  "Pearl white": "សគុជ", "Deep blue": "ខៀវចាស់",
-};
+// `...[]: [lang?: Lang]` keeps the old language argument for existing callers and ignores it (English only since 2026-10-05).
 /** A lucky colour name from the reading engine in the page language. */
-export const luckyColourName = (english: string, lang: Lang) => (lang === "km" ? (LUCKY_COLOR_KM[english] ?? colourName(english, "km")) : english);
+export const luckyColourName = (english: string, ...[]: [lang?: Lang]) => english;
 
 /** The twelve Chinese double hours, as clock ranges. */
 const DOUBLE_HOURS = [
@@ -177,7 +167,7 @@ function modifiersFor(topic: Topic, sky: SkyDay): Block[] {
  * selection never depends on it, only the words shown, so the 30-day variety
  * guarantee holds whatever the owner edits.
  */
-export function dailyReading(sign: WesternSign, date: string, skyIn?: SkyDay, texts?: ReadonlyMap<string, string>, lang: Lang = "en"): DailyReading {
+export function dailyReading(sign: WesternSign, date: string, skyIn?: SkyDay, texts?: ReadonlyMap<string, string>, ...[]: [lang?: Lang]): DailyReading {
   const sky = skyIn ?? skyForDay(date);
   const house = solarHouse(sky.moon.signIndex, sign.index);
   const lap = lunarLap(date, sky.moon.longitude);
@@ -213,7 +203,7 @@ export function dailyReading(sign: WesternSign, date: string, skyIn?: SkyDay, te
 
     return {
       topic,
-      label: (lang === "km" ? TOPIC_LABEL_KM : TOPIC_LABEL)[topic],
+      label: TOPIC_LABEL[topic],
       energy,
       text: [base, mod].filter((b): b is Block => !!b).map((b) => texts?.get(b.id) ?? b.text).join(" "),
       blockIds: mod ? [base.id, mod.id] : [base.id],
@@ -226,10 +216,10 @@ export function dailyReading(sign: WesternSign, date: string, skyIn?: SkyDay, te
     color: { name: pick(LUCKY_COLORS[el], random), element: el },
     number: int(1, 9, random) + (random() < 0.5 ? 0 : 10 * int(1, 4, random)),
     hour: pick(DOUBLE_HOURS, random),
-    seal: almanac.quality === "good" ? (lang === "km" ? almanac.goodKm : almanac.good).slice(0, 2) : null,
+    seal: almanac.quality === "good" ? almanac.good.slice(0, 2) : null,
   };
 
-  return { sign, date, house, theme: (lang === "km" ? HOUSE_THEME_KM : HOUSE_THEME)[house], sky, topics, lucky, almanac };
+  return { sign, date, house, theme: HOUSE_THEME[house], sky, topics, lucky, almanac };
 }
 
 export function readingsForDay(date: string, texts?: ReadonlyMap<string, string>, lang: Lang = "en"): DailyReading[] {

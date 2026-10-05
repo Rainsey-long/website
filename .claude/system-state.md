@@ -26,9 +26,9 @@
 
 ## Open items
 
-- Owner: brand name and domain; review of all text; native-speaker review of Khmer text (`docs/KHMER-REVIEW.md`); Railway + Cloudflare setup (`docs/OWNER-ACTIONS.md`).
+- Owner: brand name and domain; review of all text; native-speaker check of the inline Khmer tradition terms (`docs/KHMER-REVIEW.md`); Railway + Cloudflare setup (`docs/OWNER-ACTIONS.md`).
 - Khmer calendar validated against the cases in tests and the research table; validation against Roath Kim Soeun's tables for 200+ dates (research §1.3) not yet done.
-- English and Khmer (2026-10-04): every page has a `/km` twin (`docs/I18N.md`). All Khmer text is a draft awaiting a native reader (`docs/KHMER-REVIEW.md`). Everything is bilingual, including the admin (`/km/admin`), the .ics feeds (`?lang=km`) and share images (`/og/<slug>?lang=km`, HarfBuzz-shaped).
+- English only since 2026-10-05: the Khmer language version was removed (owner decision); every `/km` URL 308-redirects to English. Khmer traditions stay, in English. AdSense readiness, privacy and a full security audit are in progress.
 - Reading block library is 196 of the ~360 the plan targets.
 - Built 2026-10-04 (second pass): birth chart (`/tools/birth-chart`), good hours (`/good-hours`), lucky-date finder (`/lucky-days/finder`). Their wording (`lib/natalCopy.ts`, `PLANET_HOUR` in `lib/goodHours.ts`) is draft.
 - FEATURES.md §7 list built through 2026-10-05 except: personal transits (#4, ~600 text blocks first), BaZi (#6, would put lunar-javascript in the browser), owner analytics (#52, needs a Cloudflare token), gardening by the Moon (#53).

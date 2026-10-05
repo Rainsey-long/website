@@ -1,10 +1,10 @@
 /**
  * Server-only loader for long-form Markdown (profiles, yearly forecasts).
  *
- * Sources, in order: an owner edit saved in the admin (content_overrides, per
- * language), then the repository file. Khmer lives at content/km/<same path>;
- * when no Khmer version exists the English one is served and `translated` is
- * false, so the page can say the text is in English for now.
+ * Sources, in order: an owner edit saved in the admin (content_overrides, keyed
+ * by path and language; only "en" since the site became English only on
+ * 2026-10-05), then the repository file. `translated` is always true now and
+ * is kept for existing callers.
  *
  * Because owner-edited Markdown now reaches public pages, the renderer is
  * locked down: raw HTML in the Markdown is shown as text, never parsed, and
@@ -68,7 +68,8 @@ export const isContentPath = (p: string) => KNOWN.has(p);
 /** The repository text for a path and language, or null. */
 export function repoSource(rel: string, lang: Lang): string | null {
   if (!KNOWN.has(rel)) return null;
-  const file = path.join(ROOT, lang === "km" ? "km" : "", rel);
+  void lang; // English only since 2026-10-05; content/km/ was removed
+  const file = path.join(ROOT, rel);
   return fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
 }
 
@@ -105,16 +106,13 @@ function load<T>(rel: string, lang: Lang): { fm: T; html: string } | null {
   return out;
 }
 
-function localised<T>(rel: string, lang: Lang): Loaded<T> | null {
-  if (lang === "km") {
-    const km = load<T>(rel, "km");
-    if (km) return { ...km, translated: true };
-  }
+function localised<T>(rel: string): Loaded<T> | null {
   const en = load<T>(rel, "en");
-  return en ? { ...en, translated: lang === "en" } : null;
+  return en ? { ...en, translated: true } : null;
 }
 
 const SLUG = /^[a-z]+$/;
-export const westernProfile = (slug: string, lang: Lang = "en") => (SLUG.test(slug) ? localised<WesternProfileFm>(`profiles/western/${slug}.md`, lang) : null);
-export const animalProfile = (slug: string, lang: Lang = "en") => (SLUG.test(slug) ? localised<AnimalProfileFm>(`profiles/chinese/${slug}.md`, lang) : null);
-export const yearlyForecast = (slug: string, lang: Lang = "en") => (SLUG.test(slug) ? localised<YearlyFm>(`yearly/2027/${slug}.md`, lang) : null);
+// `...[]: [lang?: Lang]` keeps the old language argument for existing callers and ignores it (English only since 2026-10-05).
+export const westernProfile = (slug: string, ...[]: [lang?: Lang]) => (SLUG.test(slug) ? localised<WesternProfileFm>(`profiles/western/${slug}.md`) : null);
+export const animalProfile = (slug: string, ...[]: [lang?: Lang]) => (SLUG.test(slug) ? localised<AnimalProfileFm>(`profiles/chinese/${slug}.md`) : null);
+export const yearlyForecast = (slug: string, ...[]: [lang?: Lang]) => (SLUG.test(slug) ? localised<YearlyFm>(`yearly/2027/${slug}.md`) : null);

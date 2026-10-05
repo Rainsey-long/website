@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { AddAdminForm, ChangePasswordForm, RemoveAdminButton } from "@/components/client/AdminForms";
 import { ADMIN_PASSWORD_MIN, getSession } from "@/lib/auth";
 import { getDb } from "@/lib/db";
-import { longDate } from "@/lib/dates";
 import { defineMessages, localePath } from "@/lib/i18n";
 import { getLang } from "@/lib/langServer";
 
@@ -17,14 +16,6 @@ const T = defineMessages({
     add: "Add an admin",
     change: "Change your password",
     changeLead: "You will be signed out everywhere and sign in again with the new password.",
-  },
-  km: {
-    title: "អ្នកគ្រប់គ្រង",
-    you: " (អ្នក)",
-    since: (d: string) => `តាំងពី ${d}`,
-    add: "បន្ថែមអ្នកគ្រប់គ្រង",
-    change: "ប្ដូរពាក្យសម្ងាត់របស់អ្នក",
-    changeLead: "អ្នកនឹងត្រូវចាកចេញពីគ្រប់ឧបករណ៍ ហើយចូលម្ដងទៀតដោយប្រើពាក្យសម្ងាត់ថ្មី។",
   },
 });
 
@@ -41,7 +32,7 @@ export default async function Accounts() {
         <ul className="mt-4">
           {users.map((u) => (
             <li key={u.id} className="flex min-h-tap items-center justify-between gap-3 border-b border-rule py-2">
-              <span><span lang="en">{u.username}</span>{u.id === s.uid && <span className="text-small text-muted">{t.you}</span>}<span className="block text-small text-muted tabular">{t.since(lang === "km" ? longDate(u.created_at.slice(0, 10), "km") : u.created_at.slice(0, 10))}</span></span>
+              <span><span lang="en">{u.username}</span>{u.id === s.uid && <span className="text-small text-muted">{t.you}</span>}<span className="block text-small text-muted tabular">{t.since(u.created_at.slice(0, 10))}</span></span>
               {u.id !== s.uid && users.length > 1 && <RemoveAdminButton id={u.id} username={u.username} />}
             </li>
           ))}

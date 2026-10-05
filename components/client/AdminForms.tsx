@@ -1,14 +1,12 @@
 "use client";
 /**
  * Admin client forms: sign-in, sign-out, readings, content, Songkran, feedback,
- * admins, backups. Same-origin JSON fetches. Bilingual like the rest of the
- * site (docs/I18N.md): the page language comes from useLang(), and every API
- * call carries `?lang=` so the server's messages come back in that language
- * (lib/http.ts requestLang).
+ * admins, backups. Same-origin JSON fetches. English only (the site is
+ * English only since 2026-10-05).
  */
 import { useRouter } from "next/navigation";
 import { useId, useState } from "react";
-import { defineMessages, khmerDigits, type Lang } from "@/lib/i18n";
+import { defineMessages } from "@/lib/i18n";
 import { useLang, useLocalePath } from "./LangProvider";
 
 const T = defineMessages({
@@ -23,8 +21,6 @@ const T = defineMessages({
     saved: "Saved",
     saveFailed: "Save failed",
     textFor: (id: string) => `Text for ${id}`,
-    khmer: "Khmer",
-    khmerHint: "(empty shows the English text on Khmer pages)",
     save: "Save",
     saveApprove: "Save and approve",
     backToDraft: "Back to draft",
@@ -66,74 +62,15 @@ const T = defineMessages({
     backupFailed: "Backup failed",
     backUpNow: "Back up now",
   },
-  km: {
-    network: "បណ្ដាញមានបញ្ហា។ សូមព្យាយាមម្ដងទៀត។",
-    signInFailed: "ចូលមិនបានសម្រេច។",
-    username: "ឈ្មោះអ្នកប្រើ",
-    password: "ពាក្យសម្ងាត់",
-    signIn: "ចូល",
-    signOut: "ចាកចេញ",
-    approved: "បានអនុម័ត។",
-    saved: "បានរក្សាទុក។",
-    saveFailed: "រក្សាទុកមិនបានសម្រេច។",
-    textFor: (id: string) => `អត្ថបទសម្រាប់ ${id}`,
-    khmer: "ភាសាខ្មែរ",
-    khmerHint: "(ទុកទទេ ទំព័រខ្មែរនឹងបង្ហាញអត្ថបទអង់គ្លេស)",
-    save: "រក្សាទុក",
-    saveApprove: "រក្សាទុក និងអនុម័ត",
-    backToDraft: "ត្រឡប់ទៅសេចក្ដីព្រាងវិញ",
-    saveDraft: "រក្សាទុកជាសេចក្ដីព្រាង",
-    officialMoment: "ពេលវេលាមហាសង្ក្រាន្តផ្លូវការ តាមម៉ោងកម្ពុជា",
-    calculated: (c: string) => `ពេលដែលគណនាបាន៖ ${khmerDigits(c)}។ ទុកទទេ ដើម្បីប្រើពេលដែលគណនាបាន។`,
-    saying: "ទំនាយប្រចាំឆ្នាំ (សូមដាក់តែចំណុចអព្យាក្រឹត ឬវិជ្ជមាន)",
-    source: "ប្រភព",
-    sourcePlaceholder: "ក្រសួងធម្មការ និងសាសនា សៀវភៅមហាសង្ក្រាន្តឆ្នាំ២០២៧",
-    confirmReset: "ត្រឡប់ទៅឯកសារដើមវិញឬ? ការកែសម្រួលរបស់អ្នកនឹងត្រូវលុប។",
-    savedLive: "បានរក្សាទុក។ ទំព័របង្ហាញវាឥឡូវនេះ។",
-    resetDone: "បានត្រឡប់ទៅឯកសារដើមវិញ។",
-    markdown: "អត្ថបទ (Markdown)",
-    resetOriginal: "ត្រឡប់ទៅឯកសារដើម",
-    confirmDelete: (n: number) => `លុបមតិយោបល់ចំនួន ${khmerDigits(n)}? សកម្មភាពនេះមិនអាចត្រឡប់វិញបានទេ។`,
-    done: "រួចរាល់។",
-    failed: "មិនបានសម្រេច។",
-    selectAll: "ជ្រើសរើសទាំងអស់",
-    markRead: "សម្គាល់ថាបានអាន",
-    markUnread: "សម្គាល់ថាមិនទាន់អាន",
-    delete: "លុប",
-    selectFeedback: (id: number) => `ជ្រើសរើសមតិយោបល់ ${id}`,
-    helpful: "មានប្រយោជន៍",
-    notHelpful: "គ្មានប្រយោជន៍",
-    isNew: " · ថ្មី",
-    utc: (at: string) => `${khmerDigits(at)} UTC`,
-    adminAdded: "បានបន្ថែមអ្នកគ្រប់គ្រង។",
-    atLeast: (n: number) => `(យ៉ាងតិច ${khmerDigits(n)} តួអក្សរ)`,
-    addAdmin: "បន្ថែមអ្នកគ្រប់គ្រង",
-    confirmRemove: (u: string) => `ដក ${u} ចេញឬ? គណនីនេះនឹងត្រូវចាកចេញភ្លាមៗ។`,
-    remove: "ដកចេញ",
-    noMatch: "ពាក្យសម្ងាត់ថ្មីទាំងពីរមិនដូចគ្នាទេ។",
-    currentPassword: "ពាក្យសម្ងាត់បច្ចុប្បន្ន",
-    newPassword: "ពាក្យសម្ងាត់ថ្មី",
-    newAgain: "ពាក្យសម្ងាត់ថ្មីម្ដងទៀត",
-    changePassword: "ប្ដូរពាក្យសម្ងាត់",
-    backingUp: "កំពុងបម្រុងទុក និងផ្ទៀងផ្ទាត់…",
-    backupSaved: "ការបម្រុងទុកត្រូវបានរក្សាទុក និងផ្ទៀងផ្ទាត់រួចហើយ។",
-    backupFailed: "ការបម្រុងទុកមិនបានសម្រេច។",
-    backUpNow: "បម្រុងទុកឥឡូវនេះ",
-  },
 });
 
-/** API URLs stay unprefixed; the language travels as `?lang=` (or `&lang=`). */
-function withLang(url: string, lang: Lang): string {
-  return `${url}${url.includes("?") ? "&" : "?"}lang=${lang}`;
-}
-
-async function send(url: string, method: string, lang: Lang, body?: unknown): Promise<{ ok: boolean; error?: string }> {
+async function send(url: string, method: string, body?: unknown): Promise<{ ok: boolean; error?: string }> {
   try {
-    const res = await fetch(withLang(url, lang), { method, headers: { "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined });
+    const res = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined });
     const data = (await res.json().catch(() => ({}))) as { error?: string };
     return { ok: res.ok, error: data.error };
   } catch {
-    return { ok: false, error: T[lang].network };
+    return { ok: false, error: T.en.network };
   }
 }
 
@@ -150,7 +87,7 @@ export function LoginForm() {
       e.preventDefault();
       setBusy(true);
       const fd = new FormData(e.currentTarget);
-      const r = await send("/api/admin/login", "POST", lang, { username: fd.get("username"), password: fd.get("password") });
+      const r = await send("/api/admin/login", "POST", { username: fd.get("username"), password: fd.get("password") });
       setBusy(false);
       if (r.ok) router.replace(lp("/admin")); else setError(r.error ?? t.signInFailed);
     }}>
@@ -166,18 +103,17 @@ export function SignOut() {
   const router = useRouter();
   const lang = useLang();
   const lp = useLocalePath();
-  return <button type="button" className="btn-secondary" onClick={async () => { await send("/api/admin/login", "DELETE", lang); router.replace(lp("/admin/login")); }}>{T[lang].signOut}</button>;
+  return <button type="button" className="btn-secondary" onClick={async () => { await send("/api/admin/login", "DELETE"); router.replace(lp("/admin/login")); }}>{T[lang].signOut}</button>;
 }
 
-export function BlockEditor({ id, text, textKm, review }: { id: string; text: string; textKm: string; review: "draft" | "approved" }) {
+export function BlockEditor({ id, text, review }: { id: string; text: string; review: "draft" | "approved" }) {
   const router = useRouter();
   const lang = useLang();
   const t = T[lang];
   const [value, setValue] = useState(text);
-  const [valueKm, setValueKm] = useState(textKm);
   const [msg, setMsg] = useState<string | null>(null);
   const save = async (nextReview: "draft" | "approved") => {
-    const r = await send(`/api/admin/blocks/${id}`, "PATCH", lang, { text: value, text_km: valueKm, review: nextReview });
+    const r = await send(`/api/admin/blocks/${id}`, "PATCH", { text: value, review: nextReview });
     setMsg(r.ok ? (nextReview === "approved" ? t.approved : t.saved) : r.error ?? t.saveFailed);
     if (r.ok) router.refresh();
   };
@@ -185,12 +121,10 @@ export function BlockEditor({ id, text, textKm, review }: { id: string; text: st
     <div className="mt-2">
       <label className="sr-only" htmlFor={`b-${id}`}>{t.textFor(id)}</label>
       <textarea id={`b-${id}`} lang="en" className="field py-2 reading" rows={3} value={value} onChange={(e) => setValue(e.target.value)} />
-      <label className="mt-2 block text-small text-muted" htmlFor={`bk-${id}`}>{t.khmer} <span className="font-normal">{t.khmerHint}</span></label>
-      <textarea id={`bk-${id}`} lang="km" className="field py-2 reading" rows={3} value={valueKm} onChange={(e) => setValueKm(e.target.value)} />
       <div className="mt-2 flex flex-wrap items-center gap-3">
         <button type="button" className="btn-primary" onClick={() => save("approved")}>{review === "approved" ? t.save : t.saveApprove}</button>
         {review === "approved" && <button type="button" className="btn-secondary" onClick={() => save("draft")}>{t.backToDraft}</button>}
-        {review === "draft" && (value !== text || valueKm !== textKm) && <button type="button" className="btn-secondary" onClick={() => save("draft")}>{t.saveDraft}</button>}
+        {review === "draft" && value !== text && <button type="button" className="btn-secondary" onClick={() => save("draft")}>{t.saveDraft}</button>}
         {msg && <span className="text-small text-muted" role="status">{msg}</span>}
       </div>
     </div>
@@ -207,7 +141,7 @@ export function SongkranForm({ year, officialAt, tumneay, source, calculated }: 
     <form className="mt-4 flex flex-col gap-4" onSubmit={async (e) => {
       e.preventDefault();
       const fd = new FormData(e.currentTarget);
-      const r = await send(`/api/admin/songkran/${year}`, "PUT", lang, { officialAt: fd.get("officialAt"), tumneay: fd.get("tumneay"), source: fd.get("source") });
+      const r = await send(`/api/admin/songkran/${year}`, "PUT", { officialAt: fd.get("officialAt"), tumneay: fd.get("tumneay"), source: fd.get("source") });
       setMsg(r.ok ? t.saved : r.error ?? t.saveFailed);
       if (r.ok) router.refresh();
     }}>
@@ -231,7 +165,7 @@ export function SongkranForm({ year, officialAt, tumneay, source, calculated }: 
 }
 
 /** Edit one long-form page (Markdown with front matter); save or reset to the original file. */
-export function ContentEditor({ path, lang: textLang, initial, edited }: { path: string; lang: "en" | "km"; initial: string; edited: boolean }) {
+export function ContentEditor({ path, initial, edited }: { path: string; initial: string; edited: boolean }) {
   const router = useRouter();
   const lang = useLang();
   const t = T[lang];
@@ -242,8 +176,7 @@ export function ContentEditor({ path, lang: textLang, initial, edited }: { path:
   const run = async (method: "PUT" | "DELETE") => {
     if (method === "DELETE" && !confirm(t.confirmReset)) return;
     setBusy(true);
-    // `lang` in the body is the language of the TEXT being edited; `?lang=` is the page's.
-    const r = await send("/api/admin/content", method, lang, method === "PUT" ? { path, lang: textLang, source: value } : { path, lang: textLang });
+    const r = await send("/api/admin/content", method, method === "PUT" ? { path, source: value } : { path });
     setBusy(false);
     setMsg(r.ok ? (method === "PUT" ? t.savedLive : t.resetDone) : r.error ?? t.saveFailed);
     if (r.ok) router.refresh();
@@ -251,7 +184,7 @@ export function ContentEditor({ path, lang: textLang, initial, edited }: { path:
   return (
     <div className="mt-5">
       <label className="label" htmlFor={id}>{t.markdown}</label>
-      <textarea id={id} lang={textLang} className="field py-2 text-small" rows={28} value={value} spellCheck={textLang === "en"} onChange={(e) => setValue(e.target.value)} />
+      <textarea id={id} lang="en" className="field py-2 text-small" rows={28} value={value} spellCheck onChange={(e) => setValue(e.target.value)} />
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <button type="button" className="btn-primary" disabled={busy} onClick={() => run("PUT")}>{t.save}</button>
         {edited && <button type="button" className="btn-secondary" disabled={busy} onClick={() => run("DELETE")}>{t.resetOriginal}</button>}
@@ -273,7 +206,7 @@ export function FeedbackActions({ rows }: { rows: FeedbackItem[] }) {
   const all = picked.length === rows.length;
   const act = async (method: "PATCH" | "DELETE", read?: boolean) => {
     if (method === "DELETE" && !confirm(t.confirmDelete(picked.length))) return;
-    const r = await send("/api/admin/feedback", method, lang, method === "PATCH" ? { ids: picked, read } : { ids: picked });
+    const r = await send("/api/admin/feedback", method, method === "PATCH" ? { ids: picked, read } : { ids: picked });
     setMsg(r.ok ? t.done : r.error ?? t.failed);
     if (r.ok) { setPicked([]); router.refresh(); }
   };
@@ -315,7 +248,7 @@ export function AddAdminForm({ min }: { min: number }) {
       e.preventDefault();
       const form = e.currentTarget;
       const fd = new FormData(form);
-      const r = await send("/api/admin/users", "POST", lang, { username: fd.get("username"), password: fd.get("password") });
+      const r = await send("/api/admin/users", "POST", { username: fd.get("username"), password: fd.get("password") });
       setMsg(r.ok ? t.adminAdded : r.error ?? t.failed);
       if (r.ok) { form.reset(); router.refresh(); }
     }}>
@@ -336,7 +269,7 @@ export function RemoveAdminButton({ id, username }: { id: number; username: stri
       {msg && <span className="text-small text-muted" role="status">{msg}</span>}
       <button type="button" className="btn-secondary" onClick={async () => {
         if (!confirm(t.confirmRemove(username))) return;
-        const r = await send("/api/admin/users", "DELETE", lang, { id });
+        const r = await send("/api/admin/users", "DELETE", { id });
         if (r.ok) router.refresh(); else setMsg(r.error ?? t.failed);
       }}>{t.remove}</button>
     </span>
@@ -355,7 +288,7 @@ export function ChangePasswordForm({ min }: { min: number }) {
       e.preventDefault();
       const fd = new FormData(e.currentTarget);
       if (fd.get("next") !== fd.get("again")) { setMsg(t.noMatch); return; }
-      const r = await send("/api/admin/password", "POST", lang, { current: fd.get("current"), next: fd.get("next") });
+      const r = await send("/api/admin/password", "POST", { current: fd.get("current"), next: fd.get("next") });
       if (r.ok) router.replace(lp("/admin/login")); else setMsg(r.error ?? t.failed);
     }}>
       <div><label className="label" htmlFor={`${id}-c`}>{t.currentPassword}</label><input className="field" id={`${id}-c`} name="current" type="password" autoComplete="current-password" required /></div>
@@ -376,7 +309,7 @@ export function BackupNow() {
     <span className="flex flex-wrap items-center gap-3">
       <button type="button" className="btn-primary" disabled={busy} onClick={async () => {
         setBusy(true); setMsg(t.backingUp);
-        const r = await send("/api/admin/backups", "POST", lang);
+        const r = await send("/api/admin/backups", "POST");
         setBusy(false); setMsg(r.ok ? t.backupSaved : r.error ?? t.backupFailed);
         if (r.ok) router.refresh();
       }}>{t.backUpNow}</button>

@@ -24,6 +24,7 @@ Built on the same stack and production shape as the owner's other site, CamboMat
 - **No runtime AI and no paid APIs.** Readings are deterministic: real astronomy plus pre-written text blocks.
 - **Entertainment framing.** No health, legal or financial advice, no fear, no doom, no certainty. No dark patterns.
 - **Visitors never sign in, and their birth details never leave their browser.**
+- **English only** (2026-10-05): no Khmer language version; Khmer traditions are written in English with Khmer terms inline.
 - **Khmer traditions**: compute only what tradition fixes by rule (research: `docs/research/KHMER-TRADITIONS.md`). Never build wedding/house "good day" picking, illness/war/accident omens, or anything that sells a ritual.
 
 ## How this doc set is organised
@@ -54,8 +55,8 @@ Built on the same stack and production shape as the owner's other site, CamboMat
 | `docs/research/FEATURES.md` | Choosing the next feature: competitor research and the scored brainstorm |
 | `CONTENT_GUIDELINES.md` | Writing or editing any reading text |
 | `DECISIONS.md` · `CREDITS.md` | Why a convention was chosen · licences |
-| `docs/OWNER-ACTIONS.md` · `docs/KHMER-REVIEW.md` | What waits on the owner · Khmer text needing a native read |
+| `docs/OWNER-ACTIONS.md` · `docs/KHMER-REVIEW.md` | What waits on the owner · Khmer tradition terms needing a native read |
 | `.claude/reference/agent-budget.md` · `agent-runs.md` | Before dispatching a subagent · what agents have cost (`npm run agents:report`) |
 | `.claude/reference/routes.md` | What each route does |
 | `.claude/reference/memory.md` · `.claude/memory/sessions.md` | How memory works here · what each past session did |
-| `docs/I18N.md` | **Any visible text**: how English/Khmer works, the helpers, and how to write Khmer |
+| `docs/I18N.md` | English only: why, the redirects, and how to show a Khmer tradition term inline |

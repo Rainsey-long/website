@@ -14,7 +14,6 @@ import { signName } from "@/lib/names";
 
 const T = defineMessages({
   en: { day: "Day", prev: "Previous day", next: "Next day" },
-  km: { day: "ថ្ងៃ", prev: "ថ្ងៃមុន", next: "ថ្ងៃបន្ទាប់" },
 });
 
 export default async function ReadingSection({ reading, prevHref, nextHref, showHeader = true }: {

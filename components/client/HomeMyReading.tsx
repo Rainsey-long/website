@@ -9,19 +9,14 @@ import { useMySign } from "./HeaderControls";
 import { useSyncExternalStore } from "react";
 import { useLang } from "./LangProvider";
 import { defineMessages } from "@/lib/i18n";
-import { signName } from "@/lib/names";
 
 const T = defineMessages({
   en: {
     heading: "Your reading today", change: "Change sign", energy: (t: string) => `${t} energy`,
     read: (s: string) => `Read today's ${s} horoscope`,
   },
-  km: {
-    heading: "ការអានរបស់អ្នកថ្ងៃនេះ", change: "ប្ដូររាសី", energy: (t: string) => `ថាមពល${t}`,
-    read: (s: string) => `អានហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}`,
-  },
 });
-const TOPICS = { en: ["Love", "Career", "Money", "Mood"], km: ["ស្នេហា", "ការងារ", "ហិរញ្ញវត្ថុ", "អារម្មណ៍"] };
+const TOPICS = { en: ["Love", "Career", "Money", "Mood"] };
 
 /* `summaries` (line and date) arrive from the server already in the page language. */
 
@@ -48,7 +43,7 @@ export default function HomeMyReading({ summaries, today }: { summaries: Record<
           <div className="flex items-center gap-4">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="size-glyph-lg" aria-hidden="true"><GlyphParts parts={WESTERN_GLYPHS[sign]} /></svg>
             <div>
-              <p className="serif text-h3">{lang === "km" ? signName(sign, "km") : SIGN_NAMES[sign]}</p>
+              <p className="serif text-h3">{SIGN_NAMES[sign]}</p>
               <p className="text-small text-muted">{s.date}</p>
             </div>
           </div>
@@ -57,7 +52,7 @@ export default function HomeMyReading({ summaries, today }: { summaries: Record<
           </dl>
         </div>
         <p className="reading mt-4">{s.line}</p>
-        <Link className="btn-primary mt-4" href={`/horoscope/${sign}`}>{m.read(lang === "km" ? signName(sign, "km") : SIGN_NAMES[sign])}</Link>
+        <Link className="btn-primary mt-4" href={`/horoscope/${sign}`}>{m.read(SIGN_NAMES[sign])}</Link>
       </div>
     </section>
   );

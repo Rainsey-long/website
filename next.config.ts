@@ -36,7 +36,7 @@ const nextConfig: NextConfig = {
   /** The image optimiser is an unauthenticated CPU sink and nothing here uses it. */
   images: { unoptimized: true },
   poweredByHeader: false,
-  serverExternalPackages: ["better-sqlite3", "harfbuzzjs"],
+  serverExternalPackages: ["better-sqlite3"],
   async headers() {
     return [
       {
@@ -56,7 +56,6 @@ const nextConfig: NextConfig = {
       { source: "/sw.js", headers: [{ key: "Cache-Control", value: "no-cache" }, { key: "Content-Type", value: "application/javascript; charset=utf-8" }] },
       { source: "/api/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
       { source: "/admin/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }, { key: "Cache-Control", value: "no-store" }] },
-      { source: "/km/admin/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }, { key: "Cache-Control", value: "no-store" }] },
     ];
   },
 };

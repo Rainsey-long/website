@@ -7,13 +7,12 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import { getDb } from "@/lib/db";
 import { seedIfEmpty } from "@/lib/seed";
-import { CONTENT_PATHS, repoSource } from "@/lib/content";
+import { CONTENT_PATHS } from "@/lib/content";
 import { fileSize as size, listBackups } from "@/lib/backup";
 import { songkran } from "@/lib/khmer";
 import { songkranOverride } from "@/lib/songkranStore";
 import { diskStatus } from "@/lib/volumeHeadroom";
-import { longDate } from "@/lib/dates";
-import { defineMessages, khmerDigits, localePath, type Lang } from "@/lib/i18n";
+import { defineMessages, localePath } from "@/lib/i18n";
 import { getLang } from "@/lib/langServer";
 
 export const dynamic = "force-dynamic";
@@ -27,14 +26,9 @@ const T = defineMessages({
     approvedOf: (a: number, n: number) => `${a} of ${n} approved`,
     drafts: (n: number) => `${n} drafts to review`,
     allApproved: "All approved",
-    kmTitle: "Khmer reading text",
-    translatedOf: (a: number, n: number) => `${a} of ${n} translated`,
-    noKm: (n: number) => `${n} show English on Khmer pages`,
-    allKm: "Every block has Khmer",
     contentTitle: "Profiles and forecasts",
     pages: (n: number, e: number) => `${n} pages, ${e} edited here`,
-    kmMissing: (n: number) => `${n} have no Khmer version yet`,
-    allKmPages: "All have a Khmer version",
+    editAny: "Edit the text of any page",
     feedbackTitle: "Feedback",
     unread: (n: number) => `${n} unread`,
     helpfulWeek: (g: number, n: number) => `${g} of ${n} helpful in the last 7 days`,
@@ -51,43 +45,11 @@ const T = defineMessages({
     volume: (p: number) => ` · volume ${p}% used`,
     latest: (file: string, s: string) => `Latest backup ${file}, ${s}.`,
   },
-  km: {
-    title: "ទិដ្ឋភាពទូទៅ",
-    lead: "អ្វីដែលត្រូវយកចិត្តទុកដាក់។ ធាតុនីមួយៗមានតំណទៅកន្លែងដែលត្រូវកែ។",
-    open: "បើក",
-    readingTitle: "អត្ថបទទស្សន៍ទាយ",
-    approvedOf: (a: number, n: number) => `បានអនុម័ត ${khmerDigits(a)} ក្នុងចំណោម ${khmerDigits(n)}`,
-    drafts: (n: number) => `សេចក្ដីព្រាង ${khmerDigits(n)} ត្រូវពិនិត្យ`,
-    allApproved: "បានអនុម័តទាំងអស់",
-    kmTitle: "អត្ថបទទស្សន៍ទាយជាភាសាខ្មែរ",
-    translatedOf: (a: number, n: number) => `បានបកប្រែ ${khmerDigits(a)} ក្នុងចំណោម ${khmerDigits(n)}`,
-    noKm: (n: number) => `${khmerDigits(n)} បង្ហាញភាសាអង់គ្លេសនៅលើទំព័រខ្មែរ`,
-    allKm: "គ្រប់ប្លុកមានភាសាខ្មែរ",
-    contentTitle: "ប្រវត្តិរូប និងការព្យាករណ៍",
-    pages: (n: number, e: number) => `${khmerDigits(n)} ទំព័រ កែនៅទីនេះ ${khmerDigits(e)}`,
-    kmMissing: (n: number) => `${khmerDigits(n)} មិនទាន់មានភាសាខ្មែរ`,
-    allKmPages: "ទាំងអស់មានភាសាខ្មែររួចហើយ",
-    feedbackTitle: "មតិយោបល់",
-    unread: (n: number) => `មិនទាន់អាន ${khmerDigits(n)}`,
-    helpfulWeek: (g: number, n: number) => `មានប្រយោជន៍ ${khmerDigits(g)} ក្នុងចំណោម ${khmerDigits(n)} ក្នុងរយៈពេល ៧ ថ្ងៃចុងក្រោយ`,
-    noneWeek: "គ្មានក្នុងរយៈពេល ៧ ថ្ងៃចុងក្រោយ",
-    nyTitle: (y: number) => `ចូលឆ្នាំខ្មែរ ${khmerDigits(y)}`,
-    official: (v: string) => `ផ្លូវការ៖ ${v}`,
-    calculated: (v: string) => `គណនា៖ ${v}`,
-    officialIn: "បានបញ្ចូលពេលវេលាផ្លូវការហើយ",
-    enterOfficial: "សូមបញ្ចូលនាទីរបស់ក្រសួង នៅពេលប្រកាស",
-    backupsTitle: "ការបម្រុងទុក",
-    last: (v: string) => `ចុងក្រោយ៖ ${v} UTC`,
-    noBackup: "មិនទាន់មានការបម្រុងទុក",
-    kept: (n: number) => `រក្សាទុក ${khmerDigits(n)}`,
-    volume: (p: number) => ` · ថាសផ្ទុកប្រើអស់ ${khmerDigits(p)}%`,
-    latest: (file: string, s: string) => `ការបម្រុងទុកចុងក្រោយ ${file} ${khmerDigits(s)}។`,
-  },
 });
 
-/** "2027-04-14 10:48" → itself in English, "ទី១៤ ខែមេសា ឆ្នាំ២០២៧ ម៉ោង ១០:៤៨" in Khmer. */
-function moment(date: string, time: string, lang: Lang): string {
-  return lang === "km" ? `${longDate(date, "km")} ម៉ោង ${khmerDigits(time)}` : `${date} ${time}`;
+/** "2027-04-14" + "10:48" → "2027-04-14 10:48". */
+function moment(date: string, time: string): string {
+  return `${date} ${time}`;
 }
 
 export default async function AdminOverview() {
@@ -99,11 +61,9 @@ export default async function AdminOverview() {
   const one = (sql: string) => (db.prepare(sql).get() as { n: number }).n;
   const drafts = one("SELECT COUNT(*) AS n FROM text_blocks WHERE review = 'draft'");
   const blocks = one("SELECT COUNT(*) AS n FROM text_blocks");
-  const noKm = one("SELECT COUNT(*) AS n FROM text_blocks WHERE text_km = ''");
   const unread = one("SELECT COUNT(*) AS n FROM feedback WHERE read_at IS NULL");
   const week = db.prepare("SELECT SUM(verdict = 'helpful') AS good, COUNT(*) AS n FROM feedback WHERE created_at >= datetime('now', '-7 days')").get() as { good: number | null; n: number };
-  const overrides = one("SELECT COUNT(*) AS n FROM content_overrides");
-  const kmMissing = CONTENT_PATHS.filter((p) => !repoSource(p, "km") && !db.prepare("SELECT 1 FROM content_overrides WHERE path = ? AND lang = 'km'").get(p)).length;
+  const overrides = one("SELECT COUNT(*) AS n FROM content_overrides WHERE lang = 'en'");
   const now = new Date();
   const nyYear = now.getUTCFullYear() + (now.getUTCMonth() >= 4 ? 1 : 0);
   const ny = songkran(nyYear);
@@ -111,15 +71,14 @@ export default async function AdminOverview() {
   const disk = diskStatus();
   const backups = listBackups();
   const lastBackup = backups[0];
-  const officialShown = official ? moment(official.slice(0, 10), official.slice(11), lang) : "";
-  const lastShown = lastBackup ? moment(lastBackup.at.slice(0, 10), lastBackup.at.slice(11, 16), lang) : "";
+  const officialShown = official ? moment(official.slice(0, 10), official.slice(11)) : "";
+  const lastShown = lastBackup ? moment(lastBackup.at.slice(0, 10), lastBackup.at.slice(11, 16)) : "";
 
   const cards: Array<{ title: string; value: string; note: string; href: string; attention: boolean }> = [
     { title: t.readingTitle, value: t.approvedOf(blocks - drafts, blocks), note: drafts ? t.drafts(drafts) : t.allApproved, href: "/admin/readings?show=draft", attention: drafts > 0 },
-    { title: t.kmTitle, value: t.translatedOf(blocks - noKm, blocks), note: noKm ? t.noKm(noKm) : t.allKm, href: "/admin/readings?show=nokm", attention: noKm > 0 },
-    { title: t.contentTitle, value: t.pages(CONTENT_PATHS.length, overrides), note: kmMissing ? t.kmMissing(kmMissing) : t.allKmPages, href: "/admin/content", attention: kmMissing > 0 },
+    { title: t.contentTitle, value: t.pages(CONTENT_PATHS.length, overrides), note: t.editAny, href: "/admin/content", attention: false },
     { title: t.feedbackTitle, value: t.unread(unread), note: week.n ? t.helpfulWeek(week.good ?? 0, week.n) : t.noneWeek, href: "/admin/feedback", attention: unread > 0 },
-    { title: t.nyTitle(nyYear), value: official ? t.official(officialShown) : t.calculated(moment(ny.date, ny.time, lang)), note: official ? t.officialIn : t.enterOfficial, href: "/admin/songkran", attention: !official },
+    { title: t.nyTitle(nyYear), value: official ? t.official(officialShown) : t.calculated(moment(ny.date, ny.time)), note: official ? t.officialIn : t.enterOfficial, href: "/admin/songkran", attention: !official },
     { title: t.backupsTitle, value: lastBackup ? t.last(lastShown) : t.noBackup, note: `${t.kept(backups.length)}${disk.usedPct !== null ? t.volume(disk.usedPct) : ""}`, href: "/admin/backups", attention: !lastBackup || disk.level !== "ok" },
   ];
 

@@ -1,7 +1,9 @@
 /**
  * Site search (FEATURES.md #49). A static index over the site's pages, built
  * once per process from the same name tables the pages use (lib/names.ts,
- * lib/khmer.ts), in English and Khmer. No database, no network, no runtime AI.
+ * lib/khmer.ts), in English; Khmer-script tradition names (festivals, the
+ * Khmer animals and weekdays) stay searchable as keywords. No database, no
+ * network, no runtime AI.
  *
  * Matching: both the query and every entry are normalised the same way —
  * lower-cased, Latin diacritics removed (NFD, then the combining-mark block
@@ -32,7 +34,7 @@ export interface SearchEntry {
 export const MAX_QUERY = 80;
 const MAX_RESULTS = 40;
 
-const e = (href: string, kind: SearchKind, en: string, km: string, keywords = ""): SearchEntry => ({ href, kind, title: { en, km }, keywords });
+const e = (href: string, kind: SearchKind, en: string, keywords = ""): SearchEntry => ({ href, kind, title: { en }, keywords });
 
 /** Festivals from lib/khmer.ts festivalFor(); their calendar lives on /khmer. */
 const FESTIVALS: Array<[string, string, string]> = [
@@ -48,58 +50,57 @@ const FESTIVALS: Array<[string, string, string]> = [
 
 function build(): SearchEntry[] {
   const out: SearchEntry[] = [
-    e("/horoscope", "sign", "Daily horoscopes", "ហោរាសាស្ត្រប្រចាំថ្ងៃ", "today astrology zodiac signs daily"),
-    e("/zodiac", "sign", "The twelve zodiac signs", "រាសីទាំងដប់ពីរ", "western astrology signs traits"),
-    e("/chinese-zodiac", "animal", "Chinese zodiac", "ឆ្នាំចិន", "chinese horoscope animals year"),
-    e("/chinese-zodiac/2027", "animal", "2027: Year of the Fire Goat", "ឆ្នាំ២០២៧៖ ឆ្នាំមមែភ្លើង", "2027 forecast fire goat sheep"),
-    e("/compatibility", "compatibility", "Zodiac compatibility", "ភាពត្រូវគ្នានៃរាសី", "love match pairs"),
-    e("/chinese-compatibility", "compatibility", "Chinese zodiac compatibility", "ភាពត្រូវគ្នានៃឆ្នាំចិន", "love match animals pairs"),
-    e("/tools/compatibility-checker", "compatibility", "Compatibility checker", "ឧបករណ៍ពិនិត្យភាពត្រូវគ្នា", "love match tool"),
-    { ...e("/khmer", "khmer", "Khmer calendar and traditions", "ប្រតិទិនខ្មែរ និងប្រពៃណី", "khmer lunar calendar holy days sila cambodia buddhist"), boost: 3 },
-    e("/khmer/new-year", "khmer", "Khmer New Year (Moha Songkran)", "បុណ្យចូលឆ្នាំខ្មែរ (មហាសង្ក្រាន្ត)", "songkran chaul chnam thmey new year angel tevy"),
-    e("/khmer/colours", "khmer", "Colour of the day", "ពណ៌ប្រចាំថ្ងៃ", "color clothes wear weekday colour"),
-    e("/southeast-asian-zodiac", "khmer", "Southeast Asian zodiac", "ឆ្នាំអាស៊ីអាគ្នេយ៍", "khmer vietnamese thai zodiac cat buffalo"),
-    e("/southeast-asian-zodiac/khmer", "khmer", "Khmer zodiac", "ឆ្នាំខ្មែរ", "khmer animals sak"),
-    e("/southeast-asian-zodiac/vietnamese", "khmer", "Vietnamese zodiac", "ឆ្នាំវៀតណាម", "vietnamese tet cat"),
-    e("/tools/zodiac-calculator", "tool", "Zodiac sign calculator", "ឧបករណ៍ស្វែងរករាសី", "find my sign rising moon sign birthday"),
-    e("/tools/birth-chart", "tool", "Birth chart", "ផែនទីកំណើត", "natal chart planets houses"),
-    e("/tools/date-converter", "tool", "Date converter", "ឧបករណ៍បម្លែងកាលបរិច្ឆេទ", "lunar khmer chinese calendar convert age"),
-    e("/lucky-days", "tool", "Lucky days calendar", "ប្រតិទិនថ្ងៃល្អ", "almanac tong shu good days"),
-    e("/lucky-days/finder", "tool", "Lucky date finder", "ឧបករណ៍ស្វែងរកថ្ងៃល្អ", "lucky dates finder"),
-    e("/good-hours", "tool", "Good hours", "ម៉ោងល្អ", "lucky hours planetary hours chinese hours"),
-    e("/sky", "sky", "Today's sky", "មេឃថ្ងៃនេះ", "planets moon phase astronomy"),
-    e("/sky/moon", "sky", "Moon calendar", "ប្រតិទិនព្រះចន្ទ", "moon phases full moon new moon"),
-    e("/sky/retrogrades", "sky", "Retrogrades", "ភពដើរថយក្រោយ", "mercury retrograde shadow station eclipses"),
-    e("/feeds", "sky", "Calendar feeds", "ប្រតិទិនសម្រាប់ទូរស័ព្ទ", "ics subscribe calendar google apple"),
-    e("/about", "page", "About", "អំពីយើង", ""),
-    e("/contact", "page", "Contact", "ទំនាក់ទំនង", "email"),
-    e("/privacy", "page", "Privacy", "ឯកជនភាព", "cookies data"),
-    e("/terms", "page", "Terms", "លក្ខខណ្ឌ", ""),
-    e("/disclaimer", "page", "Disclaimer", "សេចក្ដីប្រកាសបដិសេធ", ""),
+    e("/horoscope", "sign", "Daily horoscopes", "today astrology zodiac signs daily"),
+    e("/zodiac", "sign", "The twelve zodiac signs", "western astrology signs traits"),
+    e("/chinese-zodiac", "animal", "Chinese zodiac", "chinese horoscope animals year"),
+    e("/chinese-zodiac/2027", "animal", "2027: Year of the Fire Goat", "2027 forecast fire goat sheep"),
+    e("/compatibility", "compatibility", "Zodiac compatibility", "love match pairs"),
+    e("/chinese-compatibility", "compatibility", "Chinese zodiac compatibility", "love match animals pairs"),
+    e("/tools/compatibility-checker", "compatibility", "Compatibility checker", "love match tool"),
+    { ...e("/khmer", "khmer", "Khmer calendar and traditions", "khmer lunar calendar holy days sila cambodia buddhist"), boost: 3 },
+    e("/khmer/new-year", "khmer", "Khmer New Year (Moha Songkran)", "songkran chaul chnam thmey new year angel tevy"),
+    e("/khmer/colours", "khmer", "Colour of the day", "color clothes wear weekday colour"),
+    e("/southeast-asian-zodiac", "khmer", "Southeast Asian zodiac", "khmer vietnamese thai zodiac cat buffalo"),
+    e("/southeast-asian-zodiac/khmer", "khmer", "Khmer zodiac", "khmer animals sak"),
+    e("/southeast-asian-zodiac/vietnamese", "khmer", "Vietnamese zodiac", "vietnamese tet cat"),
+    e("/tools/zodiac-calculator", "tool", "Zodiac sign calculator", "find my sign rising moon sign birthday"),
+    e("/tools/birth-chart", "tool", "Birth chart", "natal chart planets houses"),
+    e("/tools/date-converter", "tool", "Date converter", "lunar khmer chinese calendar convert age"),
+    e("/lucky-days", "tool", "Lucky days calendar", "almanac tong shu good days"),
+    e("/lucky-days/finder", "tool", "Lucky date finder", "lucky dates finder"),
+    e("/good-hours", "tool", "Good hours", "lucky hours planetary hours chinese hours"),
+    e("/sky", "sky", "Today's sky", "planets moon phase astronomy"),
+    e("/sky/moon", "sky", "Moon calendar", "moon phases full moon new moon"),
+    e("/sky/retrogrades", "sky", "Retrogrades", "mercury retrograde shadow station eclipses"),
+    e("/feeds", "sky", "Calendar feeds", "ics subscribe calendar google apple"),
+    e("/about", "page", "About", ""),
+    e("/contact", "page", "Contact", "email"),
+    e("/privacy", "page", "Privacy", "cookies data"),
+    e("/terms", "page", "Terms", ""),
+    e("/disclaimer", "page", "Disclaimer", ""),
   ];
   for (const s of SIGNS) {
     const en = signName(s.slug, "en");
-    const km = signName(s.slug, "km");
     out.push(
-      { ...e(`/horoscope/${s.slug}`, "sign", `${en} horoscope today`, `ហោរាសាស្ត្រ${km}ថ្ងៃនេះ`, `${en} ${km} daily`), boost: 3 },
-      e(`/horoscope/${s.slug}/week`, "sign", `${en} weekly horoscope`, `ហោរាសាស្ត្រ${km}ប្រចាំសប្តាហ៍`, `${en} ${km} week`),
-      e(`/zodiac/${s.slug}`, "sign", `${en}: traits and profile`, `រាសី${km}៖ លក្ខណៈ`, `${en} ${km} personality profile`),
+      { ...e(`/horoscope/${s.slug}`, "sign", `${en} horoscope today`, `${en} daily`), boost: 3 },
+      e(`/horoscope/${s.slug}/week`, "sign", `${en} weekly horoscope`, `${en} week`),
+      e(`/zodiac/${s.slug}`, "sign", `${en}: traits and profile`, `${en} personality profile`),
     );
   }
   for (const a of ANIMALS) {
     const en = animalName(a.slug, "en");
-    const km = animalName(a.slug, "km");
     const kh = KHMER_ANIMALS.find((k) => k.slug === a.slug);
     const extra = kh ? `${kh.km} ${kh.roman}` : "";
     out.push(
-      { ...e(`/chinese-zodiac/${a.slug}`, "animal", `Year of the ${en}`, `ឆ្នាំ${km}`, `${en} ${km} ${extra} chinese zodiac`), boost: 3 },
-      e(`/chinese-zodiac/${a.slug}/2027`, "animal", `${en} in 2027`, `ឆ្នាំ${km} ក្នុងឆ្នាំ២០២៧`, `${en} ${km} 2027 forecast`),
+      { ...e(`/chinese-zodiac/${a.slug}`, "animal", `Year of the ${en}`, `${en} ${extra} chinese zodiac`), boost: 3 },
+      e(`/chinese-zodiac/${a.slug}/2027`, "animal", `${en} in 2027`, `${en} 2027 forecast`),
     );
   }
   for (const w of WEEKDAYS) {
-    out.push(e(`/khmer/born-on/${w.en.toLowerCase()}`, "khmer", `Born on a ${w.en}`, `កើតថ្ងៃ${w.km}`, `${w.en} ${w.km} ${w.colourEn} ${w.colourKm} birth weekday`));
+    out.push(e(`/khmer/born-on/${w.en.toLowerCase()}`, "khmer", `Born on a ${w.en}`, `${w.en} ${w.km} ${w.colourEn} ${w.colourKm} birth weekday`));
   }
-  for (const [en, km, kw] of FESTIVALS) out.push(e("/khmer", "festival", en, km, kw));
+  // The Khmer-script name stays searchable: English pages show it inline.
+  for (const [en, km, kw] of FESTIVALS) out.push(e("/khmer", "festival", en, `${km} ${kw}`));
   return out;
 }
 
@@ -114,7 +115,7 @@ const store = globalThis as unknown as { __alSearchIndex?: Indexed[] };
 function index(): Indexed[] {
   if (!store.__alSearchIndex) {
     store.__alSearchIndex = build().map((x) => {
-      const titles = normalise(`${x.title.en} ${x.title.km}`);
+      const titles = normalise(x.title.en);
       return { ...x, titles, hay: `${titles} ${normalise(x.keywords ?? "")} ${x.kind === "festival" ? "" : normalise(x.href.replace(/[/-]/g, " "))}` };
     });
   }

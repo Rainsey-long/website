@@ -8,7 +8,7 @@
 import { cookies } from "next/headers";
 import { authenticate, bumpSessionEpoch, createSessionToken, getSession, SESSION_MAX_AGE, sessionCookieName } from "@/lib/auth";
 import { GLOBAL_LIMIT_KEY, clientIp, createRateLimiter } from "@/lib/rateLimit";
-import { json, readJsonCapped, requestLang, sameOrigin } from "@/lib/http";
+import { json, readJsonCapped, sameOrigin } from "@/lib/http";
 import { defineMessages } from "@/lib/i18n";
 import { seedIfEmpty } from "@/lib/seed";
 
@@ -16,7 +16,6 @@ const globalLimit = createRateLimiter(10 * 60_000, 200);
 const ipLimit = createRateLimiter(10 * 60_000, 10);
 const userLimit = createRateLimiter(10 * 60_000, 10);
 
-/** Wording only; the caller's language comes from `?lang=` (lib/http.ts requestLang). */
 const T = defineMessages({
   en: {
     forbidden: "Forbidden",
@@ -24,16 +23,10 @@ const T = defineMessages({
     enterBoth: "Enter your username and password.",
     noMatch: "That username and password don't match.",
   },
-  km: {
-    forbidden: "មិនអនុញ្ញាតទេ។",
-    tooMany: "ព្យាយាមច្រើនដងពេក។ សូមព្យាយាមម្ដងទៀតនៅពេលក្រោយ។",
-    enterBoth: "សូមបញ្ចូលឈ្មោះអ្នកប្រើ និងពាក្យសម្ងាត់។",
-    noMatch: "ឈ្មោះអ្នកប្រើ និងពាក្យសម្ងាត់មិនត្រូវគ្នាទេ។",
-  },
 });
 
 export async function POST(req: Request) {
-  const t = T[requestLang(req)];
+  const t = T.en;
   if (!sameOrigin(req)) return json({ error: t.forbidden }, 403);
   if (globalLimit(GLOBAL_LIMIT_KEY)) return json({ error: t.tooMany }, 429);
   const body = await readJsonCapped<{ username?: unknown; password?: unknown }>(req, 2048);
@@ -62,7 +55,7 @@ export async function POST(req: Request) {
 
 /** Sign-out revokes, it does not only clear: every copy of the token stops working. */
 export async function DELETE(req: Request) {
-  if (!sameOrigin(req)) return json({ error: T[requestLang(req)].forbidden }, 403);
+  if (!sameOrigin(req)) return json({ error: T.en.forbidden }, 403);
   const s = await getSession();
   if (s) bumpSessionEpoch(s.uid);
   (await cookies()).set(sessionCookieName(), "", { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict", path: "/", maxAge: 0 });

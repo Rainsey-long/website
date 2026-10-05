@@ -10,11 +10,9 @@ components/          server components (presentational)
   client/            "use client" islands
   khmer/             Khmer tradition cards
 lib/                 engines and server logic (no "use client" directives)
-  i18n.ts, names.ts  English/Khmer: locale helpers, defineMessages, names (docs/I18N.md)
-  khmerShape.ts      HarfBuzz shaping for Khmer inside share images
+  i18n.ts, names.ts  defineMessages and display names (English only, docs/I18N.md)
   data/              generated/static data (lny.json, cities.json)
-content/             reading blocks (JSON, `text` + `text_km`), profiles and forecasts (Markdown), almanac terms
-  km/                Khmer versions of the Markdown, same paths
+content/             reading blocks (JSON), profiles and forecasts (Markdown), almanac terms
 migrations/          numbered .sql for changes addColumnIfMissing can't express
 scripts/             gates and generators (not in the Docker image)
 tests/               Vitest engine tests
@@ -25,11 +23,11 @@ docs/                RAILWAY runbook, research, owner action lists
 
 | Kind of file | Location |
 |---|---|
-| A page | `app/**/page.tsx` with `generateMetadata` → `pageMetadata({ lang })`, `Breadcrumbs`, and `defineMessages` for every string (it gets its `/km` twin automatically) |
+| A page | `app/**/page.tsx` with `generateMetadata` → `pageMetadata({ lang })`, `Breadcrumbs`, and `defineMessages` for its strings |
 | An API route | `app/api/**/route.ts` — only HTTP handlers exported; helpers in `lib/` |
 | Interactive component | `components/client/` |
 | Calculation | `lib/<engine>.ts` + a test in `tests/` pinned to a published value |
 | Reading text | `content/blocks/*.json` via `scripts/blocks-source.py`, or the admin |
-| Long-form copy | `content/profiles/**`, `content/yearly/**`, Khmer under `content/km/**` |
+| Long-form copy | `content/profiles/**`, `content/yearly/**` |
 | Schema | `lib/db.ts` (additive) or `migrations/` |
 | Anything written at runtime | under `data/` only — nothing else survives a deploy |

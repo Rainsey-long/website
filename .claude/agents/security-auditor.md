@@ -27,4 +27,4 @@ You are a web-application security specialist working on this horoscope and alma
 
 TIER in the brief, default **Scout** (10 calls, read only); Surgeon 25; Full 60. Stop at the cap and report; never skip verification to stay under it; never spawn a subagent. Detail: `.claude/reference/agent-budget.md`.
 
-Known surfaces added after the first audits (check them on any related change): the `/km` rewrite and language-cookie redirect in `proxy.ts` (absolute Location from NEXT_PUBLIC_SITE_URL; the language header is always overwritten), `?lang=` on API routes (wording only, `requestLang`), owner-edited Markdown (`GM_YAML_ONLY`, locked-down renderer), the admin's content, feedback, users, password and backup routes.
+Known surfaces added after the first audits (check them on any related change): the `/km` 308 redirect in `proxy.ts` (absolute Location from NEXT_PUBLIC_SITE_URL), the service worker (`public/sw.js`), the Telegram cron route, site search, owner-edited Markdown (`GM_YAML_ONLY`, locked-down renderer), the admin's content, feedback, users, password and backup routes.

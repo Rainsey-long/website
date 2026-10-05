@@ -36,13 +36,6 @@ const T = defineMessages({
     seal: ["Travel", "Signing contracts"], spacing: "Spacing and radius", dialNight: "DayDial on night", dialSmall: "DayDial small on paper",
     samples: { display: "Scorpio", h1: "Page title", h2: "Section title", h3: "Topic title", reading: "Reading text sits in Newsreader with generous leading.", body: "UI copy in Figtree.", small: "Captions and metadata." },
   },
-  km: {
-    title: "មគ្គុទ្ទេសក៍រចនា", description: "តម្លៃរចនា និងសមាសភាគ។", intro: "ប្រភពផ្លូវការ៖ DESIGN_SYSTEM.md។ ខាងឆ្វេងពណ៌ភ្លឺ ខាងស្ដាំពណ៌ងងឹត។",
-    light: "ពណ៌ភ្លឺ", dark: "ពណ៌ងងឹត", colours: "ពណ៌", type: "ទំហំអក្សរ", buttons: "ប៊ូតុង តំណ និងប្រអប់បំពេញ", primary: "បង្ហាញរាសីរបស់ខ្ញុំ", secondary: "អានថ្ងៃស្អែក", link: "តំណអត្ថបទ",
-    field: "ថ្ងៃខែឆ្នាំកំណើត", fieldError: "មានកំហុស", error: "សូមបញ្ចូលកាលបរិច្ឆេទចន្លោះឆ្នាំ ១៩០០ និងថ្ងៃនេះ។", meter: "រង្វាស់ ត្រា និងព្រះចន្ទ", glyphs: "និមិត្តសញ្ញា",
-    seal: ["ធ្វើដំណើរ", "ចុះហត្ថលេខាលើកិច្ចសន្យា"], spacing: "គម្លាត និងជ្រុងមូល", dialNight: "DayDial លើផ្ទៃងងឹត", dialSmall: "DayDial តូច លើផ្ទៃក្រដាស",
-    samples: { display: "វិច្ឆិក", h1: "ចំណងជើងទំព័រ", h2: "ចំណងជើងផ្នែក", h3: "ចំណងជើងប្រធានបទ", reading: "អត្ថបទអាន ប្រើពុម្ពអក្សរ Noto Serif Khmer ដែលមានគម្លាតបន្ទាត់ទូលាយ។", body: "អក្សរចំណុចប្រទាក់ ប្រើ Kantumruy Pro។", small: "ចំណងជើងរូប និងព័ត៌មានបន្ថែម។" },
-  },
 });
 
 export async function generateMetadata() {
@@ -78,7 +71,7 @@ export default async function Styleguide() {
                 <span className="block text-small text-muted" style={{ fontFamily: "var(--font-sans)" }} lang="en">{k}</span>{t.samples[k]}
               </p>
             ))}
-            {lang === "en" && <p lang="km" className="mt-3 reading">ថ្ងៃអាទិត្យ ៨រោច ខែភទ្របទ ឆ្នាំមមី អដ្ឋស័ក</p>}
+            <p lang="km" className="mt-3 reading">ថ្ងៃអាទិត្យ ៨រោច ខែភទ្របទ ឆ្នាំមមី អដ្ឋស័ក</p>
             <h3 className="mt-6 text-h3">{t.buttons}</h3>
             <div className="mt-3 flex flex-wrap items-center gap-3"><button className="btn-primary" type="button">{t.primary}</button><button className="btn-secondary" type="button">{t.secondary}</button><a className="link" href="#">{t.link}</a></div>
             <label className="label mt-4" htmlFor={`f-${theme}`}>{t.field}</label>

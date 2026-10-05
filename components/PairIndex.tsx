@@ -17,7 +17,7 @@ export default async function PairIndex<T extends { slug: string; name: string }
           <ul className="mt-2">
             {items.map((o) => (
               <li key={o.slug} className="flex justify-between gap-3 border-b border-rule py-1">
-                <Link className="link inline-flex min-h-tap items-center" href={`${base}${pairSlug(s.slug, o.slug)}`}>{lang === "km" ? `${s.name} និង ${o.name}` : `${s.name} and ${o.name}`}</Link>
+                <Link className="link inline-flex min-h-tap items-center" href={`${base}${pairSlug(s.slug, o.slug)}`}>{`${s.name} and ${o.name}`}</Link>
                 <span className="self-center text-small text-muted">{label && <span className="sr-only">{label(s, o)}, </span>}<span className="tabular">{num(score(s, o), lang)}</span></span>
               </li>
             ))}

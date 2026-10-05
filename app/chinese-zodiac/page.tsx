@@ -7,7 +7,6 @@ import { longDate } from "@/lib/dates";
 import { pageMetadata } from "@/lib/seo";
 import { getLang } from "@/lib/langServer";
 import { defineMessages, num } from "@/lib/i18n";
-import { animalName, elementName } from "@/lib/names";
 
 const T = defineMessages({
   en: {
@@ -19,16 +18,6 @@ const T = defineMessages({
     find: "Find your animal",
     recent: "Recent zodiac years",
     year: "Year", animal: "Animal", starts: "Starts",
-  },
-  km: {
-    title: "ឆ្នាំសត្វចិន៖ សត្វទាំងដប់ពីរ និងឆ្នាំរបស់វា",
-    description: "សត្វទាំង ១២ ក្នុងឆ្នាំចិន៖ លក្ខណៈបុគ្គល ឆ្នាំនៃសត្វនីមួយៗ ធាតុទាំងប្រាំ និងពេលដែលឆ្នាំនីមួយៗចាប់ផ្ដើម។",
-    h1: "ឆ្នាំសត្វចិន",
-    intro: "សត្វទាំងដប់ពីរផ្លាស់វេនគ្នាគ្រប់គ្រងឆ្នាំនីមួយៗ ហើយសត្វនីមួយៗផ្គូនឹងធាតុមួយក្នុងចំណោមធាតុទាំងប្រាំ។ ឆ្នាំសត្វចាប់ផ្ដើមនៅបុណ្យចូលឆ្នាំចិន ដូច្នេះអ្នកដែលកើតក្នុងខែមករា និងដើមខែកុម្ភៈ ច្រើនតែជាឆ្នាំមុន។",
-    forecasts: "ការព្យាករណ៍ឆ្នាំ២០២៧ ឆ្នាំមមែធាតុភ្លើង",
-    find: "រកសត្វប្រចាំឆ្នាំរបស់អ្នក",
-    recent: "ឆ្នាំសត្វថ្មីៗ",
-    year: "ឆ្នាំ", animal: "សត្វ", starts: "ចាប់ផ្ដើម",
   },
 });
 
@@ -58,7 +47,7 @@ export default async function ChineseIndex() {
                 {years.map(({ y, z, lny }) => (
                   <tr key={y} className="border-t border-rule">
                     <td className="py-3 pr-4">{num(y, lang)}</td>
-                    <td className="py-1 pr-4"><Link className="link inline-flex min-h-tap items-center" href={`/chinese-zodiac/${z.animal.slug}`}>{lang === "km" ? `${animalName(z.animal.slug, lang)} ធាតុ${elementName(z.element, lang)}` : `${ELEMENT_NAME[z.element]} ${z.animal.name}`}</Link></td>
+                    <td className="py-1 pr-4"><Link className="link inline-flex min-h-tap items-center" href={`/chinese-zodiac/${z.animal.slug}`}>{`${ELEMENT_NAME[z.element]} ${z.animal.name}`}</Link></td>
                     <td className="py-3">{longDate(lny, lang)}</td>
                   </tr>
                 ))}

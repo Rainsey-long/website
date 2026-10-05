@@ -25,9 +25,9 @@ npm run release:check  # all gates, GO / NO-GO (add -- --build before a deploy)
 | Chinese | `chinese.ts`, `almanac.ts`, `data/lny.json` | Animal at Lunar New Year, BaZi year at Lichun, tong shu day |
 | Khmer | `khmer.ts`, `sea-variants.ts`, `khmerWeekdayCopy.ts`, `songkranStore.ts` | Chhankitek lunar date, sila days, festivals, Moha Songkran + angel, birth weekday |
 | Sky events | `skyEvents.ts`, `ics.ts` | Exact phases, Moon ingresses, stations + shadows, eclipses, .ics feeds |
-| Compatibility | `compatibility.ts`, `compat-copy.ts` | Rule tables → scores and varied copy (same random choices in both languages) |
+| Compatibility | `compatibility.ts`, `compat-copy.ts` | Rule tables → scores and varied copy |
 | Personal tools | `natal.ts` + `natalCopy.ts` (browser), `goodHours.ts`, `luckyFinder.ts` | Birth chart, Chinese + planetary hours, lucky-date finder |
-| Languages | `i18n.ts`, `names.ts`, `langServer.ts`, `khmerShape.ts` | `/km` routing helpers, bilingual strings and names, Khmer shaping for images |
+| Strings | `i18n.ts`, `names.ts` | `defineMessages({ en })`, display names; English only, `/km` URLs redirect (proxy.ts) |
 
 ### Engine invariants
 
@@ -44,8 +44,8 @@ npm run release:check  # all gates, GO / NO-GO (add -- --build before a deploy)
 - Every page exports metadata via `lib/seo.ts` `pageMetadata()` and renders `Breadcrumbs` (which emits BreadcrumbList JSON-LD).
 - The tradition preference is read on the server (`lib/traditionsServer.ts`); a page must render sensibly for any non-empty combination.
 - Server-shared state (DB connection, caches, seed flag) lives on `globalThis`: Next bundles routes separately, and a module-level variable is a different copy per route (measured: an admin edit never reached the pages until this was fixed).
-- **Bilingual (English/Khmer)**: no hard-coded visible English. Strings via `defineMessages`, language via `getLang()`/`useLang()`, links via `LocaleLink`, metadata via `pageMetadata({ lang })`. Full rules: `docs/I18N.md`.
-- Khmer script inside English text: wrap in `lang="km"`; numerals via `num()`/`khmerDigits()` on Khmer pages.
+- **English only**: strings via `defineMessages({ en })`; no Khmer language version (every `/km` URL 308-redirects). Rules: `docs/I18N.md`.
+- Khmer tradition terms inside English text: wrap in `<span lang="km">` (Khmer fonts load only for those spans).
 
 ## Where to look next
 

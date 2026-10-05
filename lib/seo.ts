@@ -12,9 +12,8 @@ export function absolute(path: string): string {
 }
 
 /**
- * `path` is the English (unprefixed) path; with `lang: "km"` the canonical is
- * the /km twin. Both versions always list each other plus x-default (English)
- * as hreflang alternates, as Google asks of language versions.
+ * `path` is the page's path. The site is English only (2026-10-05): one
+ * canonical per page, no hreflang alternates (old /km URLs 308 to English).
  */
 export function pageMetadata(opts: {
   title: string;
@@ -26,16 +25,12 @@ export function pageMetadata(opts: {
   noindex?: boolean;
 }): Metadata {
   const lang = opts.lang ?? "en";
-  // Khmer pages share the Khmer card (app/og, ?lang=km).
-  const image = absolute((opts.ogImage ?? "/og/default") + (lang === "km" ? "?lang=km" : ""));
+  const image = absolute(opts.ogImage ?? "/og/default");
   const url = absolute(localePath(opts.path, lang));
   return {
     title: opts.title,
     description: opts.description,
-    alternates: {
-      canonical: url,
-      languages: { en: absolute(opts.path), km: absolute(localePath(opts.path, "km")), "x-default": absolute(opts.path) },
-    },
+    alternates: { canonical: url },
     robots: opts.noindex ? { index: false, follow: false } : undefined,
     openGraph: {
       title: opts.title,
@@ -43,7 +38,6 @@ export function pageMetadata(opts: {
       url,
       siteName: SITE_NAME,
       locale: OG_LOCALE[lang],
-      alternateLocale: [OG_LOCALE[lang === "en" ? "km" : "en"]],
       type: opts.type ?? "website",
       images: [{ url: image, width: 1200, height: 630 }],
     },
@@ -55,7 +49,7 @@ export function breadcrumbLd(items: Array<{ name: string; href: string }>, lang:
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [{ name: lang === "km" ? "ទំព័រដើម" : "Home", href: "/" }, ...items].map((c, i) => ({
+    itemListElement: [{ name: "Home", href: "/" }, ...items].map((c, i) => ({
       "@type": "ListItem",
       position: i + 1,
       name: c.name,

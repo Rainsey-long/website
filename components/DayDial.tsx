@@ -9,9 +9,6 @@ import type { SkyDay } from "@/lib/sky";
 import { WESTERN_GLYPHS } from "@/lib/glyphs";
 import { GlyphParts } from "./Glyph";
 import type { CSSProperties } from "react";
-import type { Lang } from "@/lib/i18n";
-import { getLang } from "@/lib/langServer";
-import { moonPhaseName, signName } from "@/lib/names";
 
 const C = 200, R_OUT = 190, R_SIGN_OUT = 186, R_SIGN_IN = 142, R_GLYPH = 164, R_TICK_IN = 132, R_MOON = 112, R_SUN = 82, MR = 13;
 const D = Math.PI / 180;
@@ -25,16 +22,9 @@ function wedge(i: number) {
   return `M${f(p1.x)} ${f(p1.y)}L${f(p2.x)} ${f(p2.y)}A${R_SIGN_OUT} ${R_SIGN_OUT} 0 0 0 ${f(p3.x)} ${f(p3.y)}L${f(p4.x)} ${f(p4.y)}A${R_SIGN_IN} ${R_SIGN_IN} 0 0 1 ${f(p1.x)} ${f(p1.y)}Z`;
 }
 
-/**
- * "The Moon is in Leo today, a full moon." On a Khmer page `when` should be
- * Khmer ("today" is translated here; other callers pass their own Khmer word).
- */
-export function moonSentence(sky: SkyDay, when = "today", lang: Lang = "en"): string {
+/** "The Moon is in Leo today, a full moon." */
+export function moonSentence(sky: SkyDay, when = "today"): string {
   const name = sky.moon.phaseName;
-  if (lang === "km") {
-    const w = when === "today" ? "ថ្ងៃនេះ" : when;
-    return `${w} ព្រះចន្ទស្ថិតនៅរាសី${signName(SIGNS[sky.moon.signIndex].slug, "km")} (${moonPhaseName(name, "km")})។`;
-  }
   const phase = name === "full moon" || name === "new moon" ? `a ${name}` : name;
   return `The Moon is in ${SIGNS[sky.moon.signIndex].name} ${when}, ${phase}.`;
 }
@@ -42,7 +32,6 @@ export function moonSentence(sky: SkyDay, when = "today", lang: Lang = "en"): st
 export default async function DayDial({ sky, selected, tone = "paper", size = "large", caption = true, linkSigns = true, id = "daydial" }: {
   sky: SkyDay; selected?: string; tone?: "night" | "paper"; size?: "large" | "small"; caption?: boolean; linkSigns?: boolean; id?: string;
 }) {
-  const lang = await getLang();
   const ticks = Array.from({ length: 72 }, (_, i) => {
     const lon = i * 5, major = lon % 30 === 0;
     return { a: pt(lon, R_TICK_IN), b: pt(lon, major ? R_SIGN_OUT : R_TICK_IN + 6), major };
@@ -58,10 +47,8 @@ export default async function DayDial({ sky, selected, tone = "paper", size = "l
     ? `M${top}A${MR} ${MR} 0 0 1 ${bottom}A${rx} ${MR} 0 0 ${gibbous ? 1 : 0} ${top}Z`
     : `M${top}A${MR} ${MR} 0 0 0 ${bottom}A${rx} ${MR} 0 0 ${gibbous ? 0 : 1} ${top}Z`;
   const sun = pt(sky.sunLongitude, R_SUN);
-  const sentence = moonSentence(sky, "today", lang);
-  const describe = lang === "km"
-    ? `${sentence} ព្រះអាទិត្យស្ថិតនៅរាសី${signName(SIGNS[sky.sunSignIndex].slug, "km")}។`
-    : `${sentence} The Sun is in ${SIGNS[sky.sunSignIndex].name}.`;
+  const sentence = moonSentence(sky, "today");
+  const describe = `${sentence} The Sun is in ${SIGNS[sky.sunSignIndex].name}.`;
 
   return (
     <figure className={`daydial tone-${tone} flex flex-col items-center`}>
@@ -82,7 +69,7 @@ export default async function DayDial({ sky, selected, tone = "paper", size = "l
             </>
           );
           return linkSigns
-            ? <Link key={s.slug} href={`/horoscope/${s.slug}`} aria-label={lang === "km" ? `ហោរាសាស្ត្រប្រចាំថ្ងៃ រាសី${signName(s.slug, "km")}` : `${s.name} daily horoscope`} className="sign-link">{body}</Link>
+            ? <Link key={s.slug} href={`/horoscope/${s.slug}`} aria-label={`${s.name} daily horoscope`} className="sign-link">{body}</Link>
             : <g key={s.slug}>{body}</g>;
         })}
         <g aria-hidden="true">

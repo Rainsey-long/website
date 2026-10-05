@@ -102,7 +102,7 @@ All from Google Fonts (SIL Open Font License), **self-hosted** via `@fontsource`
 |---|---|---|
 | Display + reading text | **Newsreader** (variable, optical size axis) | Headings, readings, profiles. Book-like and warm |
 | UI text | **Figtree** | Buttons, labels, navigation, form fields, small data |
-| Khmer | **Noto Serif Khmer** (reading), **Kantumruy Pro** (UI) | Loaded only on `/km/` pages |
+| Khmer | **Noto Serif Khmer** (reading), **Kantumruy Pro** (UI) | Only for inline Khmer tradition terms (`lang="km"`), limited to the Khmer unicode-range |
 | Thai | **Noto Serif Thai** / **Noto Sans Thai** | Loaded only on `/th/` |
 | Chinese | System stack: `"PingFang SC", "Noto Serif SC", "Source Han Serif SC", serif` | Do not ship CJK webfonts (too heavy) |
 
@@ -124,7 +124,7 @@ All from Google Fonts (SIL Open Font License), **self-hosted** via `@fontsource`
 
 - Reading text line length: **max 66ch**, left aligned, never justified.
 - Headings use sentence case. Never all caps.
-- Khmer text gets +0.15 extra line-height (taller script).
+- Inline Khmer terms get +0.15 extra line-height (taller script).
 - Numbers in data (scores, dates, degrees) use `font-variant-numeric: tabular-nums`.
 
 ---
@@ -213,7 +213,7 @@ Month grid, Monday-first, tabular numerals. Each day: Gregorian number large, lu
 ### 6.10 Header, navigation, footer
 - Header: wordmark (left), nav (Horoscopes, Chinese zodiac, Khmer, Compatibility, Lucky days, Sky), "My sign", the Traditions menu, the language switch (English ↔ ខ្មែរ), theme toggle. On mobile: wordmark, Traditions, language, theme and a menu button opening a full-height sheet; below 480px the Traditions panel spans the page gutters.
 - "My sign" shortcut appears in the header once a sign is remembered.
-- Footer: section links (Readings, Calendars, Tools, About), legal pages, the language switch, disclaimer line: "For entertainment and reflection. Not medical, legal, or financial advice." (Khmer pages show the Khmer line).
+- Footer: section links (Readings, Calendars, Tools, About), legal pages, disclaimer line: "For entertainment and reflection. Not medical, legal, or financial advice." (Khmer pages show the Khmer line).
 
 ### 6.11 AdSlot
 - Reserved fixed-height container (mobile 280px, desktop rail 600px, in-content 250px) so ads never shift layout.
@@ -337,7 +337,7 @@ Week navigation (previous/next) → sign glyph + "Aries weekly horoscope" + the 
 5. **Dates** always written out in the page's language ("5 October 2026"); use the visitor's local date for "today".
 6. **Performance budgets** (per page): JS ≤ 50 KB gzipped, CSS ≤ 30 KB, LCP < 2.0s and CLS < 0.05 on a mid-range phone (4G). Fail CI on regression.
 7. **Accessibility:** WCAG 2.2 AA. Semantic HTML, one `h1` per page, visible focus ring (2px `cinnabar` outline, 2px offset), full keyboard support, tap targets ≥ 44px, `lang` attribute per page and per mixed-language span, alt text for every meaningful image.
-8. **Bilingual (English and Khmer):** every visible string has both languages (co-located `defineMessages` pairs, `docs/I18N.md`); no text baked into SVGs except glyphs; Khmer inside share images is HarfBuzz-shaped (`lib/khmerShape.ts`); layouts must survive 40% longer text without breaking.
+8. **English only** (2026-10-05): every visible string is English; Khmer tradition terms appear inline as `<span lang="km">` and must survive 360px.
 
 ---
 
@@ -396,3 +396,4 @@ Week navigation (previous/next) → sign glyph + "Aries weekly horoscope" + the 
 | 2026-10-04 | Added Date converter + AgeTool (§6.18), Printable calendar (§6.19, token `--size-print-sheet`, the only print styles), Colour of the day (§6.20) | Top three features from FEATURES.md §7; the age tool stays client-side because a birth date must not reach the server |
 | 2026-10-04 | Weekly horoscope template (§7.7) | FEATURES.md #46: weekly readings from the week's lunation, the Moon's path and planet events |
 | 2026-10-05 | PeoplePicker (§6.21), numerology result (§6.22), search (§6.23); the almanac day, solar terms and sky week pages reuse the dated-list row pattern (label column, hairline rows, prev/next nav) | Remaining features from FEATURES.md §7 |
+| 2026-10-05 | English only: the Khmer language version, the language switch and Khmer share images were removed; Khmer fonts remain for inline tradition terms. Supersedes the 2026-10-04 language-switch, Khmer-numeral and `:root:lang(km)` rows | Owner decision; Google's publisher products do not support Khmer, and one language halves the copy to maintain |

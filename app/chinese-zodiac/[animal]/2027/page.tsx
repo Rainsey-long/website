@@ -13,8 +13,7 @@ import { chineseScore, pairSlug, relationName } from "@/lib/compatibility";
 import { yearlyForecast } from "@/lib/content";
 import { absolute, articleLd, pageMetadata } from "@/lib/seo";
 import { getLang } from "@/lib/langServer";
-import { defineMessages, localePath } from "@/lib/i18n";
-import { animalName } from "@/lib/names";
+import { defineMessages } from "@/lib/i18n";
 
 const T = defineMessages({
   en: {
@@ -34,26 +33,6 @@ const T = defineMessages({
     profile: (a: string) => `${a} profile`,
     pairGoat: (a: string) => `${a} and Goat compatibility`,
     all: "All 2027 forecasts",
-    notYet: "",
-  },
-  km: {
-    title: (a: string) => `ឆ្នាំ${a} ក្នុងឆ្នាំមមែធាតុភ្លើង (២០២៧)`,
-    h1: (a: string) => `ឆ្នាំ${a} ក្នុងឆ្នាំមមែធាតុភ្លើង`,
-    fallbackDesc: (a: string) => `ការព្យាករណ៍ឆ្នាំ២០២៧ សម្រាប់អ្នកកើតឆ្នាំ${a}។`,
-    zodiac: "ឆ្នាំសត្វចិន", y2027: "២០២៧",
-    range: "ពីថ្ងៃទី៦ ខែកុម្ភៈ ឆ្នាំ២០២៧ ដល់ថ្ងៃទី២៥ ខែមករា ឆ្នាំ២០២៨",
-    withGoat: "ជាមួយឆ្នាំមមែ", own: "ឆ្នាំរបស់អ្នកផ្ទាល់",
-    outlookLabel: "ទស្សនវិស័យទូទៅ", outlook: "ទស្សនវិស័យ",
-    months: "ប្រចាំខែនីមួយៗ",
-    reportTitle: (a: string) => `របាយការណ៍ពេញលេញឆ្នាំ២០២៧ សម្រាប់ឆ្នាំ${a}`,
-    reportText: "ការព្យាករណ៍វែងជាងនេះ ដែលអាចបោះពុម្ពបាន ព្រមទាំងលម្អិតប្រចាំខែ។",
-    shareText: (a: string) => `អ្វីដែលឆ្នាំ២០២៧ អាចនាំមកសម្រាប់ឆ្នាំ${a}`,
-    related: "សត្វពាក់ព័ន្ធ",
-    in2027: (a: string) => `ឆ្នាំ${a} ក្នុងឆ្នាំ២០២៧`,
-    profile: (a: string) => `អំពីឆ្នាំ${a}`,
-    pairGoat: (a: string) => `ភាពត្រូវគ្នារវាងឆ្នាំ${a} និងឆ្នាំមមែ`,
-    all: "ការព្យាករណ៍ឆ្នាំ២០២៧ ទាំងអស់",
-    notYet: "អត្ថបទនេះមានជាភាសាអង់គ្លេសនៅឡើយ។",
   },
 });
 
@@ -65,7 +44,7 @@ export async function generateMetadata({ params }: Params) {
   const animal = animalBySlug((await params).animal);
   if (!animal) return {};
   const lang = await getLang();
-  const A = lang === "km" ? animalName(animal.slug, lang) : animal.name;
+  const A = animal.name;
   const loaded = yearlyForecast(animal.slug, lang);
   const desc = loaded && (lang === "en" || loaded.translated) ? loaded.fm.summary : T[lang].fallbackDesc(A);
   return pageMetadata({ lang, title: T[lang].title(A), description: desc, path: `/chinese-zodiac/${animal.slug}/2027`, ogImage: `/og/animal-${animal.slug}`, type: "article" });
@@ -76,17 +55,15 @@ export default async function Forecast({ params }: Params) {
   if (!animal) notFound();
   const lang = await getLang();
   const t = T[lang];
-  const km = lang === "km";
-  const A = km ? animalName(animal.slug, lang) : animal.name;
+  const A = animal.name;
   const f = yearlyForecast(animal.slug, lang);
-  const untranslated = km && f !== null && !f.translated;
   const fm = f?.fm;
   const rel = chineseScore(animal, animalBySlug("goat")!).relation;
   const title = t.title(A);
   const allies = ANIMALS.filter((o) => o.slug !== animal.slug && ["three-harmonies", "six-harmonies"].includes(chineseScore(animal, o).relation));
   return (
     <>
-      <Breadcrumbs items={[{ name: t.zodiac, href: "/chinese-zodiac" }, { name: t.y2027, href: "/chinese-zodiac/2027" }, { name: km ? `ឆ្នាំ${A}` : animal.name, href: `/chinese-zodiac/${animal.slug}/2027` }]} />
+      <Breadcrumbs items={[{ name: t.zodiac, href: "/chinese-zodiac" }, { name: t.y2027, href: "/chinese-zodiac/2027" }, { name: animal.name, href: `/chinese-zodiac/${animal.slug}/2027` }]} />
       <JsonLd data={[articleLd({ headline: title, description: fm?.summary ?? "", path: `/chinese-zodiac/${animal.slug}/2027`, lang })]} />
       <div className="mx-auto max-w-page safe-x py-5 lg:grid lg:grid-cols-[minmax(0,1fr)_var(--size-rail)] lg:gap-7">
         <article className="max-w-reading">
@@ -97,11 +74,11 @@ export default async function Forecast({ params }: Params) {
             <div><dt className="text-muted">{t.withGoat}</dt><dd className="mt-1 font-semibold">{animal.slug === "goat" ? t.own : relationName(rel, lang)}</dd></div>
             {fm?.outlook ? <div><dt className="text-muted">{t.outlookLabel}</dt><dd className="mt-1"><EnergyMeter value={fm.outlook} label={t.outlook} lang={lang} /></dd></div> : null}
           </dl>
-          <div className="mt-7">{untranslated && <p className="mb-4 text-small text-muted">{t.notYet}</p>}{f ? (untranslated ? <div lang="en"><Prose html={f.html} /></div> : <Prose html={f.html} />) : null}</div>
+          <div className="mt-7">{f ? (<Prose html={f.html} />) : null}</div>
           {fm?.months && (
             <section className="mt-7 border-t border-rule pt-5" aria-labelledby="months-h">
               <h2 id="months-h" className="text-h2">{t.months}</h2>
-              <ol className="mt-3" lang={untranslated ? "en" : undefined}>
+              <ol className="mt-3">
                 {fm.months.map((m) => (
                   <li key={m.label} className="border-b border-rule py-4">
                     <h3 className="text-h3">{m.label}</h3>
@@ -113,9 +90,9 @@ export default async function Forecast({ params }: Params) {
           )}
           <AdSlot placement="afterReading" />
           <ReportOffer title={t.reportTitle(A)} text={t.reportText} />
-          <Share title={title} text={t.shareText(A)} url={absolute(localePath(`/chinese-zodiac/${animal.slug}/2027`, lang))} />
+          <Share title={title} text={t.shareText(A)} url={absolute(`/chinese-zodiac/${animal.slug}/2027`)} />
           <RelatedLinks heading={t.related} links={[
-            ...allies.map((o) => ({ href: `/chinese-zodiac/${o.slug}/2027`, label: t.in2027(km ? animalName(o.slug, lang) : o.name) })),
+            ...allies.map((o) => ({ href: `/chinese-zodiac/${o.slug}/2027`, label: t.in2027(o.name) })),
             { href: `/chinese-zodiac/${animal.slug}`, label: t.profile(A) },
             ...(animal.slug !== "goat" ? [{ href: `/chinese-compatibility/${pairSlug(animal.slug, "goat")}`, label: t.pairGoat(A) }] : []),
             { href: "/chinese-zodiac/2027", label: t.all },

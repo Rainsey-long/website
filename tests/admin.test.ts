@@ -41,6 +41,6 @@ describe("admin content validation", () => {
     const f = "yearly/2027/rat.md";
     const src = repoSource(f, "en")!;
     expect(validateContent(f, "en", src)).toBeNull();
-    expect(validateContent(f, "km", src.replace(/outlook: \d/, "outlook: 5"))).toMatch(/outlook/);
+    expect(validateContent(f, "en", src.replace(/outlook: \d/, "outlook: 5"))).toMatch(/outlook/);
   });
 });

@@ -5,7 +5,6 @@
 import Link from "@/components/client/LocaleLink";
 import Glyph from "./Glyph";
 import { RememberedChipStyle } from "./client/Remembered";
-import { getLang } from "@/lib/langServer";
 
 export default async function ChipGrid({ items, set, heading, headingId = `chips-${set}`, remember = false, selected }: {
   items: Array<{ slug: string; name: string; sub: string; href: string }>;
@@ -15,7 +14,6 @@ export default async function ChipGrid({ items, set, heading, headingId = `chips
   remember?: boolean;
   selected?: string;
 }) {
-  const lang = await getLang();
   return (
     <section aria-labelledby={heading ? headingId : undefined}>
       {heading && <h2 id={headingId} className="text-h2">{heading}</h2>}
@@ -25,7 +23,7 @@ export default async function ChipGrid({ items, set, heading, headingId = `chips
           <li key={it.slug}>
             <Link href={it.href} className={`chip${selected === it.slug ? " is-selected" : ""}`} data-slug={it.slug} aria-current={selected === it.slug ? "page" : undefined}>
               <Glyph name={it.slug} set={set} className="size-glyph-lg" />
-              <span className="chip-name text-small font-semibold" lang={lang === "km" ? "km" : undefined}>{it.name}</span>
+              <span className="chip-name text-small font-semibold">{it.name}</span>
               <span className="chip-sub text-small tabular text-muted">{it.sub}</span>
             </Link>
           </li>

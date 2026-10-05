@@ -17,7 +17,7 @@ import { today } from "@/lib/today";
 import { pageMetadata } from "@/lib/seo";
 import { CALENDAR_YEARS } from "@/lib/site";
 import { getLang } from "@/lib/langServer";
-import { defineMessages, khmerDigits, localePath, num } from "@/lib/i18n";
+import { defineMessages, num } from "@/lib/i18n";
 import { animalName, elementName } from "@/lib/names";
 import { almanacDay } from "@/lib/almanac";
 import { GLOBAL_LIMIT_KEY, createRateLimiter } from "@/lib/rateLimit";
@@ -68,41 +68,6 @@ const T = defineMessages({
     how2: "The Chinese lunar calendar numbers its months 1 to 12, adds a leap month about every three years, and starts the year at Lunar New Year in late January or February.",
     how3: "Both are calculated here by their published rules (the Chhankitek arithmetic and the Chinese calendar), so a printed calendar from your pagoda or temple is the final word if the two ever differ.",
   },
-  km: {
-    title: "កម្មវិធីបម្លែងកាលបរិច្ឆេទ៖ ចន្ទគតិខ្មែរ ចន្ទគតិចិន និងសុរិយគតិ",
-    description: "បម្លែងកាលបរិច្ឆេទណាមួយទៅប្រតិទិនចន្ទគតិខ្មែរ និងប្រតិទិនចន្ទគតិចិន រកថ្ងៃដែលត្រូវនឹងថ្ងៃចន្ទគតិ និងគណនាអាយុរបស់អ្នកតាមប្រពៃណីនីមួយៗ។",
-    h1: "បម្លែងកាលបរិច្ឆេទ",
-    intro: "អានថ្ងៃណាមួយតាមប្រតិទិនចន្ទគតិខ្មែរ និងចិន ឬរកថ្ងៃខែសុរិយគតិនៃថ្ងៃចន្ទគតិណាមួយ។",
-    date: "កាលបរិច្ឆេទ", convert: "បម្លែងកាលបរិច្ឆេទ", dateErr: "សូមបញ្ចូលកាលបរិច្ឆេទចន្លោះឆ្នាំ ១៩០០ និង ២១០០។",
-    when: (n: number) => (n === 0 ? "ថ្ងៃនេះ" : n > 0 ? `${khmerDigits(n)} ថ្ងៃទៀត` : `${khmerDigits(-n)} ថ្ងៃមុន`),
-    khmerLunar: "ថ្ងៃខែចន្ទគតិខ្មែរ", khmerYear: "ឆ្នាំខ្មែរ",
-    khmerYearValue: (be: number, an: string, _roman: string, sak: string) => `ព.ស. ${khmerDigits(be)} ឆ្នាំ${an} ${sak}`,
-    holy: "ថ្ងៃសីល", festival: "ពិធីបុណ្យ",
-    chineseLunar: "ថ្ងៃខែចន្ទគតិចិន", chineseYear: "ឆ្នាំរាសីចិន", pillar: "សសរថ្ងៃ",
-    chineseYearValue: (el: string, an: string, y: number) => `ឆ្នាំ${an} ធាតុ${el} ឆ្នាំចន្ទគតិ ${khmerDigits(y)}`,
-    almanac: "ប្រតិទិនចិន", good: "ថ្ងៃល្អ", neutral: "ថ្ងៃធម្មតា", challenging: "ថ្ងៃស្ងាត់", clash: (a: string) => `ឆុងនឹងឆ្នាំ${a}`,
-    month: "មើលខែទាំងមូល",
-    findKhmer: "រកថ្ងៃចន្ទគតិខ្មែរ",
-    findKhmerIntro: "ថ្ងៃ ១៥កើត ខែពិសាខ ឆ្នាំនេះ ត្រូវនឹងថ្ងៃណា? សូមជ្រើសថ្ងៃចន្ទគតិ និងឆ្នាំសុរិយគតិ។",
-    year: "ឆ្នាំសុរិយគតិ", lmonth: "ខែចន្ទគតិ", phase: "កើត ឬរោច", waxing: "កើត", waning: "រោច", day: "ថ្ងៃ",
-    leapNote: "(តែឆ្នាំអធិកមាសប៉ុណ្ណោះ)",
-    find: "រកកាលបរិច្ឆេទ",
-    busy: "ទំព័រនេះរវល់បន្តិចឥឡូវនេះ។ សូមព្យាយាមម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
-    birthHint: "ចង់បម្លែងថ្ងៃកំណើតរបស់អ្នក? សូមប្រើឧបករណ៍អាយុខាងក្រោម៖ វាដំណើរការនៅលើឧបករណ៍របស់អ្នក ហើយមិនផ្ញើអ្វីទាំងអស់។",
-    ageLink: "ទៅកាន់ឧបករណ៍អាយុ",
-    khmerNone: (y: number) => `ថ្ងៃចន្ទគតិនោះមិនមាននៅក្នុងឆ្នាំ ${khmerDigits(y)} ទេ។ ខែអាសាឍទាំងពីរមានតែក្នុងឆ្នាំអធិកមាស ហើយខែខ្លះមានថ្ងៃរោចត្រឹម ១៤ មិនមែន ១៥ ទេ។`,
-    khmerMany: "ឆ្នាំនេះវាធ្លាក់ពីរដង៖ ខែចន្ទគតិនោះចាប់ផ្ដើមក្នុងខែមករា និងម្ដងទៀតក្នុងខែធ្នូ។",
-    findChinese: "រកថ្ងៃចន្ទគតិចិន",
-    findChineseIntro: "គ្រួសារដែលរក្សាថ្ងៃកំណើតតាមចន្ទគតិ ឬថ្ងៃខួបដូនតា រកមើលវារៀងរាល់ឆ្នាំ។ ឆ្នាំចន្ទគតិនៅទីនេះ គឺឆ្នាំដែលចាប់ផ្ដើមនៅបុណ្យចូលឆ្នាំចិននៃឆ្នាំដែលអ្នកជ្រើស។",
-    cmonth: "ខែចន្ទគតិ", leap: "ខែអធិក", monthN: (n: number) => `ខែទី${khmerDigits(n)}`,
-    noDay30: "ខែនោះមានត្រឹម ២៩ ថ្ងៃប៉ុណ្ណោះក្នុងឆ្នាំចន្ទគតិនេះ។ គ្រួសារជាច្រើនប្រើថ្ងៃទី២៩ ជំនួសវិញ។",
-    noLeap: (m: number) => (m ? `ខែអធិកនៃឆ្នាំចន្ទគតិនេះ គឺខែទី${khmerDigits(m)} មិនមែនខែដែលអ្នកជ្រើសទេ។` : "ឆ្នាំចន្ទគតិនេះគ្មានខែអធិកទេ។"),
-    chineseResult: (y: number) => `ឆ្នាំចន្ទគតិ ${khmerDigits(y)}៖`,
-    how: "របៀបដែលប្រតិទិនទាំងនេះត្រូវគ្នា",
-    how1: "ប្រតិទិនខ្មែររាប់ខែចន្ទគតិនីមួយៗជាពីរពាក់កណ្ដាល គឺកើត និងរោច រហូតដល់ ១៥ ថ្ងៃម្ខាង។ ឆ្នាំពុទ្ធសករាជប្ដូរនៅថ្ងៃវិសាខបូជា ហើយឆ្នាំសត្វប្ដូរនៅពេលចូលឆ្នាំខ្មែរក្នុងខែមេសា។",
-    how2: "ប្រតិទិនចន្ទគតិចិនដាក់លេខខែពី ១ ដល់ ១២ បន្ថែមខែអធិកប្រហែលរៀងរាល់បីឆ្នាំម្ដង ហើយចាប់ផ្ដើមឆ្នាំនៅបុណ្យចូលឆ្នាំចិន ចុងខែមករា ឬខែកុម្ភៈ។",
-    how3: "ទាំងពីរត្រូវបានគណនានៅទីនេះតាមច្បាប់ដែលបានបោះពុម្ព (ការគណនាចន្ទគតិ និងប្រតិទិនចិន) ដូច្នេះប្រសិនបើខុសគ្នា ប្រតិទិនដែលបោះពុម្ពដោយវត្ត ឬទីសក្ការៈរបស់អ្នក គឺជាពាក្យចុងក្រោយ។",
-  },
 });
 
 export async function generateMetadata() {
@@ -117,10 +82,9 @@ export default async function DateConverter({ searchParams }: Search) {
   const sp = await searchParams;
   const lang = await getLang();
   const t = T[lang];
-  const km = lang === "km";
   const now = await today();
   const thisYear = Number(now.slice(0, 4));
-  const action = localePath("/tools/date-converter", lang);
+  const action = "/tools/date-converter";
 
   const asked = parseDateKey(sp.d);
   const dateError = sp.d !== undefined && !asked;
@@ -168,22 +132,22 @@ export default async function DateConverter({ searchParams }: Search) {
           <dl className="mt-4">
             <Row label={t.khmerLunar}>
               <span lang="km" className="serif text-h3">{k.labelKm}</span>
-              {!km && <span className="block text-muted">{k.weekday.en}, the {k.labelEn}</span>}
+              <span className="block text-muted">{k.weekday.en}, the {k.labelEn}</span>
             </Row>
-            <Row label={t.khmerYear}>{t.khmerYearValue(k.beYear, km ? k.animal.km : k.animal.en, k.animal.roman, km ? k.sakKm : k.sakRoman)}</Row>
+            <Row label={t.khmerYear}>{t.khmerYearValue(k.beYear, k.animal.en, k.animal.roman, k.sakRoman)}</Row>
             {(k.sila || k.festival) && (
               <Row label={k.festival ? t.festival : t.holy}>
                 <span className="inline-flex flex-wrap items-center gap-x-4 gap-y-2">
-                  {k.sila && <span className="inline-flex items-center gap-2"><span className="cal-sila" aria-hidden="true" />{t.holy}{!km && <span lang="km" className="text-muted"> ថ្ងៃសីល</span>}</span>}
-                  {k.festival && <span className="font-semibold">{km ? k.festival.km : <>{k.festival.en} <span lang="km" className="font-normal text-muted">{k.festival.km}</span></>}</span>}
+                  {k.sila && <span className="inline-flex items-center gap-2"><span className="cal-sila" aria-hidden="true" />{t.holy}<span lang="km" className="text-muted"> ថ្ងៃសីល</span></span>}
+                  {k.festival && <span className="font-semibold">{k.festival.en} <span lang="km" className="font-normal text-muted">{k.festival.km}</span></span>}
                 </span>
               </Row>
             )}
-            <Row label={t.chineseLunar}>{km ? a.lunarLabelKm : a.lunarLabel}</Row>
+            <Row label={t.chineseLunar}>{a.lunarLabel}</Row>
             <Row label={t.chineseYear}>
               <Link className="link" href={`/chinese-zodiac/${c.zodiac.animal.slug}`}>{t.chineseYearValue(elementName(c.zodiac.element, lang), animalName(c.zodiac.animal.slug, lang), c.zodiac.year)}</Link>
             </Row>
-            <Row label={t.pillar}>{km ? <span lang="zh">{a.dayPillarHanzi}</span> : <>{a.dayPillar} <span lang="zh" className="text-muted">{a.dayPillarHanzi}</span></>}</Row>
+            <Row label={t.pillar}>{a.dayPillar} <span lang="zh" className="text-muted">{a.dayPillarHanzi}</span></Row>
             <Row label={t.almanac}>
               <span className="inline-flex items-center gap-2">{a.quality === "good" && <Seal size="sm" />}{a.quality === "challenging" && <span className="cal-dot" aria-hidden="true" />}{quality}</span>
               <span className="block text-small text-muted">{t.clash(animalName(a.clash.slug, lang))}</span>
@@ -210,7 +174,7 @@ export default async function DateConverter({ searchParams }: Search) {
               </Field>
               <Field id="kf-m" label={t.lmonth}>
                 <select className="field" id="kf-m" name="kmo" defaultValue={String(kDefaults.month)}>
-                  {LUNAR_MONTHS.map((m, i) => <option key={i} value={i}>{km ? `ខែ${m.km}` : `${m.en} (${m.km})`}{i >= 12 ? ` ${t.leapNote}` : ""}</option>)}
+                  {LUNAR_MONTHS.map((m, i) => <option key={i} value={i}>{`${m.en} (${m.km})`}{i >= 12 ? ` ${t.leapNote}` : ""}</option>)}
                 </select>
               </Field>
               <Field id="kf-y" label={t.year}>

@@ -4,7 +4,6 @@ import { defineMessages } from "@/lib/i18n";
 
 const T = defineMessages({
   en: { system: "System", western: "Western signs", animals: "Zodiac animals (Chinese and Khmer)", first: "First", second: "Second", check: "Check compatibility" },
-  km: { system: "ប្រព័ន្ធ", western: "រាសីលោកខាងលិច", animals: "សត្វរាសី (ចិន និងខ្មែរ)", first: "ទីមួយ", second: "ទីពីរ", check: "ពិនិត្យភាពត្រូវគ្នា" },
 });
 /** Compatibility checker: pick a system and two of each, go to the pair page. */
 import { useRouter } from "next/navigation";

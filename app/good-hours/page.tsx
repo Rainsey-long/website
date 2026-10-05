@@ -19,7 +19,7 @@ import { pageMetadata } from "@/lib/seo";
 import { CALENDAR_YEARS } from "@/lib/site";
 import { nowIso } from "@/lib/clock";
 import { getLang } from "@/lib/langServer";
-import { defineMessages, localePath, num } from "@/lib/i18n";
+import { defineMessages, num } from "@/lib/i18n";
 import { animalName } from "@/lib/names";
 
 export const dynamic = "force-dynamic";
@@ -50,31 +50,6 @@ const T = defineMessages({
     how2: "Planetary hours are a Western tradition: the first hour after sunrise belongs to the planet that names the weekday (the Sun on Sunday, the Moon on Monday), and the rest follow the old order Saturn, Jupiter, Mars, Sun, Venus, Mercury, Moon.",
     how3: "Both are cultural traditions to enjoy and reflect on, not instructions.",
   },
-  km: {
-    title: "ម៉ោងល្អថ្ងៃនេះ៖ ម៉ោងល្អតាមប្រតិទិនចិន និងម៉ោងភព",
-    description: "ម៉ោងល្អ និងម៉ោងស្ងាត់ថ្ងៃនេះ តាមប្រតិទិនចិន និងម៉ោងភពដែលរាប់ចាប់ពីពេលថ្ងៃរះនៅទីក្រុងរបស់អ្នក។",
-    h1: "ម៉ោងល្អ",
-    where: (date: string, city: string) => `${date} នៅ ${city}។ ម៉ោងគិតតាមនាឡិកាក្នុងស្រុកនៅទីនោះ។`,
-    city: "ទីក្រុង", day: "ថ្ងៃ", show: "បង្ហាញម៉ោង", dayNav: "ថ្ងៃ", prev: "ថ្ងៃមុន", next: "ថ្ងៃបន្ទាប់",
-    unknown: (city: string) => `ទីក្រុងនោះមិនមាននៅក្នុងបញ្ជីរបស់យើងទេ ដូច្នេះទំព័រនេះបង្ហាញ ${city}។ សូមជ្រើសរើសទីក្រុងធំដែលនៅជិតបំផុតខាងលើ។`,
-    neither: "ម៉ោងល្អមកពីប្រពៃណីចិន និងប្រពៃណីលោកខាងលិច ដូច្នេះទាំងពីរត្រូវបានបង្ហាញនៅទីនេះ។",
-    chinese: "ម៉ោងតាមប្រតិទិនចិន",
-    chineseIntro: (pillar: string) => `ថ្ងៃ ${pillar} `,
-    chineseIntro2: "។ ម៉ោងពីរៗនីមួយៗ ស្ថិតក្រោមការគ្រប់គ្រងរបស់ទេវតាមួយក្នុងចំណោមដប់ពីរ ហើយប្រាំមួយក្នុងចំណោមនោះ ត្រូវបានរាប់ជាម៉ោងល្អ។",
-    hour: (animal: string) => `ម៉ោង${animal} `,
-    spiritLine: (spirit: string, clash: string) => `${spirit}។ ឆុងនឹងឆ្នាំ${clash}។`,
-    now: "ឥឡូវ", good: "ម៉ោងល្អ", quiet: "ម៉ោងស្ងាត់",
-    planetary: "ម៉ោងភព",
-    fallback: "នៅថ្ងៃនេះ ព្រះអាទិត្យមិនរះ និងលិចទាំងពីរនៅទីនេះទេ ដូច្នេះនេះជាម៉ោងស្មើគ្នា ២៤ ម៉ោង ចាប់ពីម៉ោង ០៦:០០។",
-    sun: (rise: string, set: string) => `ថ្ងៃរះម៉ោង ${rise} ថ្ងៃលិចម៉ោង ${set}។ ពេលថ្ងៃ និងពេលយប់ ត្រូវបានចែកជាដប់ពីរម៉ោងស្មើៗគ្នា ដែលភពបុរាណទាំងប្រាំពីរផ្លាស់វេនគ្នាគ្រប់គ្រង។`,
-    pHour: (p: string) => `ម៉ោង${p}`,
-    night: " · ពេលយប់",
-    goodFor: (theme: string) => `ល្អសម្រាប់${theme}។`,
-    how: "របៀបដែលម៉ោងទាំងនេះដំណើរការ",
-    how1: "ប្រតិទិនចិនចែកថ្ងៃមួយជាដប់ពីរម៉ោងពីរៗ ដែលដាក់ឈ្មោះតាមសត្វទាំងដប់ពីរ។ ជារៀងរាល់ថ្ងៃ ច្បាប់ថេរមួយកំណត់ថាទេវតាណាគ្រប់គ្រងម៉ោងនីមួយៗ ហើយម៉ោងល្អទាំងប្រាំមួយ ត្រូវបានជ្រើសរើសតាមប្រពៃណីសម្រាប់ចាប់ផ្ដើមកិច្ចការសំខាន់ៗ។ ម៉ោងជូតត្រូវបានចែកនៅពាក់កណ្ដាលអធ្រាត្រ ដូច្នេះមួយថ្ងៃបង្ហាញដប់បីជួរ។",
-    how2: "ម៉ោងភព ជាប្រពៃណីលោកខាងលិច៖ ម៉ោងទីមួយបន្ទាប់ពីថ្ងៃរះ ជារបស់ភពដែលជាឈ្មោះថ្ងៃនោះ (ព្រះអាទិត្យនៅថ្ងៃអាទិត្យ ព្រះចន្ទនៅថ្ងៃច័ន្ទ) ហើយម៉ោងបន្ទាប់ៗ ដើរតាមលំដាប់បុរាណ៖ ព្រះសៅរ៍ ព្រះព្រហស្បតិ៍ ព្រះអង្គារ ព្រះអាទិត្យ ព្រះសុក្រ ព្រះពុធ ព្រះចន្ទ។",
-    how3: "ទាំងពីរជាប្រពៃណីវប្បធម៌សម្រាប់រីករាយ និងពិចារណា មិនមែនជាការណែនាំឲ្យធ្វើតាមទេ។",
-  },
 });
 
 export async function generateMetadata() {
@@ -94,7 +69,6 @@ export default async function GoodHours({ searchParams }: Search) {
   const sp = await searchParams;
   const lang = await getLang();
   const t = T[lang];
-  const km = lang === "km";
   const asked = cityBySlug(sp.city);
   const city = asked ?? cityForZone(await visitorZone());
   const unknownCity = !!sp.city && !asked;
@@ -120,7 +94,7 @@ export default async function GoodHours({ searchParams }: Search) {
         <h1 className="text-h1">{t.h1}</h1>
         <p className="mt-2 text-muted">{t.where(fullDate(date, lang), cityLabel(city, lang))}</p>
 
-        <form method="get" action={localePath("/good-hours", lang)} className="mt-5 grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_auto] sm:items-end">
+        <form method="get" action="/good-hours" className="mt-5 grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_auto] sm:items-end">
           <div>
             <label className="label" htmlFor="gh-city">{t.city}</label>
             <select className="field" id="gh-city" name="city" defaultValue={city.slug}>
@@ -158,7 +132,7 @@ export default async function GoodHours({ searchParams }: Search) {
                       <span className="tabular shrink-0">{num(h.start, lang)}–{num(h.end, lang)}</span>
                       <span className="min-w-0 flex-1">
                         {t.hour(animalName(h.animal.slug, lang))}<span lang="zh">{h.branchHanzi}</span>
-                        <span className="block text-small text-muted">{t.spiritLine(km ? h.spiritKm : h.spirit, animalName(h.clash.slug, lang))}</span>
+                        <span className="block text-small text-muted">{t.spiritLine(h.spirit, animalName(h.clash.slug, lang))}</span>
                       </span>
                       <span className="flex w-full shrink-0 items-center justify-end gap-2 text-small sm:w-auto">
                         {current && <span className="font-semibold">{t.now}</span>}
@@ -188,8 +162,8 @@ export default async function GoodHours({ searchParams }: Search) {
                       <span className="tabular shrink-0">{timeIn(h.start, city.tz, lang)}–{timeIn(h.end, city.tz, lang)}</span>
                       <Glyph name={h.planet} set="planet" className="size-5 shrink-0" />
                       <span className="flex-1">
-                        {t.pHour(km ? p.nameKm : p.name)}{h.night ? <span className="text-muted">{t.night}</span> : null}
-                        <span className="block text-small text-muted">{t.goodFor(km ? p.themeKm : p.theme)}</span>
+                        {t.pHour(p.name)}{h.night ? <span className="text-muted">{t.night}</span> : null}
+                        <span className="block text-small text-muted">{t.goodFor(p.theme)}</span>
                       </span>
                       {current && <span className="shrink-0 text-small font-semibold">{t.now}</span>}
                     </li>

@@ -22,7 +22,7 @@
  * Instants are UTC; the week window is Monday 00:00 UTC to the next Monday.
  */
 import lunations from "../content/weekly/lunations.json";
-import { dailyReading, HOUSE_THEME, HOUSE_THEME_KM, solarHouse, TOPICS, type Topic } from "./reading-engine";
+import { dailyReading, HOUSE_THEME, solarHouse, TOPICS, type Topic } from "./reading-engine";
 import * as A from "astronomy-engine";
 import { planetLongitude, skyForDay, type SkyDay } from "./sky";
 import { signIndexFromLongitude } from "./western";
@@ -42,7 +42,6 @@ export interface WeekBlock {
   conditions: { phase: PhaseKey; house: number[] };
   tone: string;
   text: string;
-  text_km?: string;
 }
 
 export const WEEKLY_BLOCKS = lunations as WeekBlock[];
@@ -134,7 +133,8 @@ export function weekSkyEvents(monday: string): SkyWeekEvent[] {
   return unique.sort((a, b) => a.date.localeCompare(b.date));
 }
 
-export function weeklyReading(sign: WesternSign, monday: string, texts?: ReadonlyMap<string, string>, lang: Lang = "en"): WeeklyReading {
+// `...[]: [lang?: Lang]` keeps the old language argument for existing callers and ignores it (English only since 2026-10-05).
+export function weeklyReading(sign: WesternSign, monday: string, texts?: ReadonlyMap<string, string>, ...[]: [lang?: Lang]): WeeklyReading {
   const days = Array.from({ length: 7 }, (_, i) => addDays(monday, i));
   const next = addDays(monday, 7);
   const from = `${monday}T00:00:00.000Z`, to = `${next}T00:00:00.000Z`;
@@ -150,10 +150,9 @@ export function weeklyReading(sign: WesternSign, monday: string, texts?: Readonl
   };
   const lunation = major ?? phases[0] ?? carried();
   const block = WEEKLY_BLOCKS.find((b) => b.conditions.phase === lunation.key && b.conditions.house.includes(lunation.house))!;
-  const own = lang === "km" ? (block.text_km || block.text) : block.text;
-  const overview = { id: block.id, text: texts?.get(block.id) ?? own };
+  const overview = { id: block.id, text: texts?.get(block.id) ?? block.text };
 
-  const themes = lang === "km" ? HOUSE_THEME_KM : HOUSE_THEME;
+  const themes = HOUSE_THEME;
   const moonPath: WeeklyReading["moonPath"] = [];
   skies.forEach((s, i) => {
     const h = house(s.moon.signIndex);

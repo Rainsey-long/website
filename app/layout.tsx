@@ -54,7 +54,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <LangProvider lang={lang}>
-          <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-raised focus:p-3 focus:rounded-sm">{lang === "km" ? "រំលងទៅខ្លឹមសារ" : "Skip to content"}</a>
+          <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-raised focus:p-3 focus:rounded-sm">{"Skip to content"}</a>
           <Header />
           <main id="main" className="flex-1">{children}</main>
           <Footer />

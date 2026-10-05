@@ -8,7 +8,6 @@ export const dynamic = "force-dynamic";
 
 const T = defineMessages({
   en: { title: "Sign in", lead: "Site administration." },
-  km: { title: "ចូល", lead: "ការគ្រប់គ្រងគេហទំព័រ។" },
 });
 
 /** Staff sign-in. Not linked from the public site. */

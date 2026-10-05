@@ -1,6 +1,6 @@
 /**
  * Compatibility pair page body (wireframe §7.4), shared by Western and Chinese pairs.
- * `noun` is in the page language ("sign" / "រាសី"); names arrive already localised.
+ * `noun` is in the page language ("sign" or "animal"); names arrive already localised.
  */
 import Breadcrumbs from "./Breadcrumbs";
 import CompatibilityResult from "./CompatibilityResult";
@@ -12,7 +12,7 @@ import PairPicker from "./client/PairPicker";
 import type { PairCopy } from "@/lib/compat-copy";
 import type { PairScore } from "@/lib/compatibility";
 import { absolute, articleLd } from "@/lib/seo";
-import { defineMessages, num } from "@/lib/i18n";
+import { defineMessages } from "@/lib/i18n";
 import { getLang } from "@/lib/langServer";
 
 const T = defineMessages({
@@ -20,11 +20,6 @@ const T = defineMessages({
     pair: (a: string, b: string) => `${a} and ${b}`, connect: (noun: string) => `How these ${noun}s connect`,
     strengths: "Strengths", challenges: "Challenges", advice: "Advice", related: "Related pairs and readings",
     share: (a: string, b: string, n: number) => `${a} and ${b}: ${n}% match`,
-  },
-  km: {
-    pair: (a: string, b: string) => `${a} និង ${b}`, connect: (noun: string) => `របៀបដែល${noun}ទាំងពីរនេះភ្ជាប់គ្នា`,
-    strengths: "ចំណុចខ្លាំង", challenges: "បញ្ហាប្រឈម", advice: "ដំបូន្មាន", related: "គូ និងការអានពាក់ព័ន្ធ",
-    share: (a: string, b: string, n: number) => `${a} និង ${b}៖ ត្រូវគ្នា ${num(n, "km")}%`,
   },
 });
 

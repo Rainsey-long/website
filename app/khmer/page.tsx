@@ -10,7 +10,7 @@ import { fullDate } from "@/lib/dates";
 import { today } from "@/lib/today";
 import { pageMetadata } from "@/lib/seo";
 import { getLang } from "@/lib/langServer";
-import { defineMessages, khmerDigits } from "@/lib/i18n";
+import { defineMessages } from "@/lib/i18n";
 
 export const dynamic = "force-dynamic";
 
@@ -34,25 +34,6 @@ const T = defineMessages({
     cal: "Open the Khmer calendar", converter: "Convert a date", colours: "Colour of the day",
     sea: "The zodiac across Southeast Asia",
   },
-  km: {
-    title: "ប្រពៃណីខ្មែរ៖ ប្រតិទិន ថ្ងៃកំណើត និងទេវតាឆ្នាំថ្មី",
-    description: "ថ្ងៃខែតាមចន្ទគតិខ្មែរថ្ងៃនេះ ថ្ងៃសីល ឆ្នាំសត្វ និងពណ៌ថ្ងៃកំណើតរបស់អ្នក ព្រមទាំងទេវតាឆ្នាំថ្មី ដែលគណនាតាមរបៀបប្រពៃណី។",
-    crumb: "ប្រពៃណីខ្មែរ",
-    intro: "ប្រតិទិនខ្មែរដើរតាមព្រះចន្ទ និងឆ្នាំពុទ្ធសករាជ។ នៅទីនេះ យើងគណនាវាតាមវិធីគណនាចន្ទគតិប្រពៃណី ដែលជាការគណនាដូចគ្នានឹងប្រតិទិនខ្មែរដែលគេបោះពុម្ព។",
-    ny: (y: number) => `ចូលឆ្នាំខ្មែរ ${khmerDigits(y)}`,
-    moment: (date: string, time: string) => `មហាសង្ក្រាន្ត៖ ${date} ប្រហែលម៉ោង ${khmerDigits(time)} ម៉ោងនៅកម្ពុជា។`,
-    meet: "ស្គាល់ទេវតាឆ្នាំថ្មី",
-    animals: "ឆ្នាំសត្វទាំងដប់ពីរ",
-    animalsBody: "កម្ពុជាប្រើសត្វទាំងដប់ពីរដូចប្រទេសចិន និងវៀតណាម។ ភាពខុសគ្នាគឺចំណុចចាប់ផ្ដើម៖ ឆ្នាំសត្វខ្មែរចាប់ផ្ដើមនៅពេលមហាសង្ក្រាន្តពិតប្រាកដ ក្នុងពាក់កណ្ដាលខែមេសា មិនមែននៅបុណ្យចូលឆ្នាំចិនទេ។ ឆ្នាំនីមួយៗក៏មាន",
-    sak: "ស័ក",
-    animalsEnd: " ដែលជាការរាប់ដប់ឆ្នាំម្ដងផងដែរ។",
-    find: "រកឆ្នាំសត្វ និងថ្ងៃកំណើតខ្មែររបស់ខ្ញុំ",
-    what: "អ្វីដែលយើងគណនា និងអ្វីដែលយើងទុកឲ្យមនុស្សសម្រេច",
-    what1: "យើងគណនាតែអ្វីដែលប្រពៃណីកំណត់ដោយច្បាប់ច្បាស់លាស់៖ ថ្ងៃខែតាមចន្ទគតិ ថ្ងៃសីល ពិធីបុណ្យ ឆ្នាំសត្វ ថ្ងៃកំណើត និងពណ៌របស់វា ព្រមទាំងពេលចូលឆ្នាំថ្មី និងទេវតា។",
-    what2: "យើងមិនរើសថ្ងៃរៀបការ ឬថ្ងៃឡើងផ្ទះទេ។ គ្រួសារនានាសួរលោកអាចារ្យសម្រាប់រឿងនោះ ហើយមិនមានច្បាប់តែមួយដែលបានបោះពុម្ពនោះទេ។ យើងក៏មិនដាក់ទំនាយអំពីជំងឺ គ្រោះថ្នាក់ ឬសង្គ្រាម ឬអ្វីដែលឲ្យអ្នកបង់ប្រាក់សម្រាប់ពិធីណាមួយដែរ។",
-    cal: "បើកប្រតិទិនខ្មែរ", converter: "បម្លែងកាលបរិច្ឆេទ", colours: "ពណ៌ប្រចាំថ្ងៃ",
-    sea: "ឆ្នាំសត្វនៅទូទាំងអាស៊ីអាគ្នេយ៍",
-  },
 });
 
 export async function generateMetadata() {
@@ -63,7 +44,6 @@ export async function generateMetadata() {
 export default async function KhmerHub() {
   const lang = await getLang();
   const t = T[lang];
-  const km = lang === "km";
   const date = await today();
   const day = khmerDay(date);
   const y = Number(date.slice(0, 4));
@@ -72,7 +52,7 @@ export default async function KhmerHub() {
     <>
       <Breadcrumbs items={[{ name: t.crumb, href: "/khmer" }]} />
       <div className="mx-auto max-w-page safe-x py-6">
-        <h1 className="text-h1">{km ? t.crumb : <>Khmer traditions <span lang="km" className="text-muted">ប្រពៃណីខ្មែរ</span></>}</h1>
+        <h1 className="text-h1">Khmer traditions <span lang="km" className="text-muted">ប្រពៃណីខ្មែរ</span></h1>
         <p className="reading mt-3 text-muted">{t.intro}</p>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
@@ -81,9 +61,7 @@ export default async function KhmerHub() {
             <h2 id="ny-h" className="text-h3">{t.ny(ny.year)}</h2>
             <p className="mt-3">{t.moment(fullDate(ny.date, lang), ny.time)}</p>
             <Countdown to={ny.instantIso} />
-            {km ? (
-              <p className="mt-3">{`ទេវតាប្រចាំឆ្នាំគឺ ${ny.angel.km}។`}</p>
-            ) : (
+            {(
               <p className="mt-3">The year&apos;s angel is <span lang="km">{ny.angel.km}</span> ({ny.angel.roman}).</p>
             )}
             <p className="mt-4"><Link className="link" href="/khmer/new-year">{t.meet}</Link></p>
@@ -98,7 +76,7 @@ export default async function KhmerHub() {
           <ul className="mt-4 grid grid-cols-2 gap-x-5 sm:grid-cols-3 md:grid-cols-4">
             {KHMER_ANIMALS.map((a) => (
               <li key={a.slug} className="border-b border-rule py-2">
-                {km ? <Link className="link inline-flex min-h-tap items-center" href={`/chinese-zodiac/${a.slug}`}>{a.km}</Link> : <><Link className="link inline-flex min-h-tap items-center" href={`/chinese-zodiac/${a.slug}`}>{a.en}</Link> <span lang="km">{a.km}</span></>} <span className="text-muted" lang={km ? "en" : undefined}>{a.roman}</span>
+                <Link className="link inline-flex min-h-tap items-center" href={`/chinese-zodiac/${a.slug}`}>{a.en}</Link> <span lang="km">{a.km}</span> <span className="text-muted">{a.roman}</span>
               </li>
             ))}
           </ul>

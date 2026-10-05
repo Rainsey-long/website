@@ -3,7 +3,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import { getLang } from "@/lib/langServer";
 import { defineMessages } from "@/lib/i18n";
 
-const T = defineMessages({ en: { updated: "Last updated" }, km: { updated: "កែប្រែចុងក្រោយ" } });
+const T = defineMessages({ en: { updated: "Last updated" } });
 
 export default async function TextPage({ title, path, updated, children, crumbs }: { title: string; path: string; updated?: string; children: React.ReactNode; crumbs?: Array<{ name: string; href: string }> }) {
   const lang = await getLang();

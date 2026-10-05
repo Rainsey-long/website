@@ -9,8 +9,7 @@
    ]
   },
   "tone": "warm",
-  "text": "You feel more like yourself today. Trust your instincts and take up a little more space.",
-  "text_km": "ថ្ងៃនេះ អ្នកមានអារម្មណ៍ថាជាខ្លួនឯងច្រើនជាងមុន។ សូមជឿលើវិចារណញាណរបស់អ្នក ហើយហ៊ានបង្ហាញខ្លួនឱ្យច្រើនជាងមុនបន្តិច។"
+  "text": "You feel more like yourself today. Trust your instincts and take up a little more space."
  },
  {
   "id": "mood-h1-02",
@@ -22,8 +21,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Energy is good and your mood is bright. Start something you have been meaning to do.",
-  "text_km": "ថាមពលល្អ ហើយអារម្មណ៍របស់អ្នកភ្លឺស្វាង។ សូមចាប់ផ្ដើមអ្វីមួយដែលអ្នកចង់ធ្វើយូរមកហើយ។"
+  "text": "Energy is good and your mood is bright. Start something you have been meaning to do."
  },
  {
   "id": "mood-h1-03",
@@ -35,8 +33,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Today is a good day to look after you first. A small act of self-care goes a long way.",
-  "text_km": "ថ្ងៃនេះ ជាថ្ងៃល្អដើម្បីថែរក្សាខ្លួនឯងជាមុនសិន។ ការថែទាំខ្លួនឯងតូចមួយ មានប្រយោជន៍ច្រើន។"
+  "text": "Today is a good day to look after you first. A small act of self-care goes a long way."
  },
  {
   "id": "mood-h2-01",
@@ -48,8 +45,7 @@
    ]
   },
   "tone": "warm",
-  "text": "You crave calm and comfort. Slow down and enjoy simple pleasures.",
-  "text_km": "អ្នកចង់បានភាពស្ងប់ស្ងាត់ និងភាពស្រួលខ្លួន។ សូមបន្ថយល្បឿន ហើយរីករាយនឹងសេចក្ដីសុខសាមញ្ញៗ។"
+  "text": "You crave calm and comfort. Slow down and enjoy simple pleasures."
  },
  {
   "id": "mood-h2-02",
@@ -61,8 +57,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Steadiness suits you. A familiar routine helps you feel grounded.",
-  "text_km": "ភាពនឹងនរសមនឹងអ្នក។ ទម្លាប់ដែលធ្លាប់ស្គាល់ ជួយឱ្យអ្នកមានអារម្មណ៍ឈរជើងបានរឹងមាំ។"
+  "text": "Steadiness suits you. A familiar routine helps you feel grounded."
  },
  {
   "id": "mood-h2-03",
@@ -74,8 +69,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Notice what makes you feel secure, and give yourself a little more of it.",
-  "text_km": "សូមកត់សម្គាល់អ្វីដែលធ្វើឱ្យអ្នកមានអារម្មណ៍សុវត្ថិភាព ហើយផ្ដល់វាដល់ខ្លួនឯងឱ្យបានច្រើនជាងមុនបន្តិច។"
+  "text": "Notice what makes you feel secure, and give yourself a little more of it."
  },
  {
   "id": "mood-h3-01",
@@ -87,8 +81,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Your mind is busy and curious. Write things down so ideas do not slip away.",
-  "text_km": "គំនិតរបស់អ្នករវល់ និងចង់ដឹងចង់ឃើញ។ សូមកត់ត្រាអ្វីៗទុក កុំឱ្យគំនិតល្អៗរបូតបាត់។"
+  "text": "Your mind is busy and curious. Write things down so ideas do not slip away."
  },
  {
   "id": "mood-h3-02",
@@ -100,8 +93,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Chatting with others lifts your mood. Reach out to someone you enjoy talking to.",
-  "text_km": "ការជជែកជាមួយអ្នកដទៃ ធ្វើឱ្យអារម្មណ៍របស់អ្នកប្រសើរឡើង។ សូមទាក់ទងទៅនរណាម្នាក់ដែលអ្នកចូលចិត្តនិយាយជាមួយ។"
+  "text": "Chatting with others lifts your mood. Reach out to someone you enjoy talking to."
  },
  {
   "id": "mood-h3-03",
@@ -113,8 +105,7 @@
    ]
   },
   "tone": "warm",
-  "text": "A walk, a podcast or a good conversation helps you think clearly.",
-  "text_km": "ការដើរលេង ការស្ដាប់កម្មវិធីសំឡេង ឬការជជែកល្អៗ ជួយឱ្យអ្នកគិតបានច្បាស់។"
+  "text": "A walk, a podcast or a good conversation helps you think clearly."
  },
  {
   "id": "mood-h4-01",
@@ -126,8 +117,7 @@
    ]
   },
   "tone": "warm",
-  "text": "You may feel more sensitive than usual. Be gentle with yourself.",
-  "text_km": "អ្នកប្រហែលជាងាយរំជួលចិត្តជាងធម្មតា។ សូមទន់ភ្លន់ចំពោះខ្លួនឯង។"
+  "text": "You may feel more sensitive than usual. Be gentle with yourself."
  },
  {
   "id": "mood-h4-02",
@@ -139,8 +129,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Home is your recharge station today. Spend time somewhere that feels safe.",
-  "text_km": "ថ្ងៃនេះ ផ្ទះគឺជាកន្លែងបញ្ចូលថាមពលរបស់អ្នក។ សូមចំណាយពេលនៅកន្លែងដែលអ្នកមានអារម្មណ៍សុវត្ថិភាព។"
+  "text": "Home is your recharge station today. Spend time somewhere that feels safe."
  },
  {
   "id": "mood-h4-03",
@@ -152,8 +141,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Old memories may visit. Let them pass through kindly.",
-  "text_km": "អនុស្សាវរីយ៍ចាស់ៗអាចមកលេង។ សូមទុកឱ្យវាឆ្លងកាត់ទៅដោយចិត្តល្អ។"
+  "text": "Old memories may visit. Let them pass through kindly."
  },
  {
   "id": "mood-h5-01",
@@ -165,8 +153,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Your mood is playful and warm. Make time for something you love.",
-  "text_km": "អារម្មណ៍របស់អ្នករីករាយ និងកក់ក្ដៅ។ សូមទុកពេលសម្រាប់អ្វីមួយដែលអ្នកស្រឡាញ់។"
+  "text": "Your mood is playful and warm. Make time for something you love."
  },
  {
   "id": "mood-h5-02",
@@ -178,8 +165,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Creative energy is high. Draw, write, cook or dance, just for the joy of it.",
-  "text_km": "ថាមពលច្នៃប្រឌិតខ្ពស់។ សូមគូរ សរសេរ ចម្អិន ឬរាំ គ្រាន់តែដើម្បីសេចក្ដីរីករាយ។"
+  "text": "Creative energy is high. Draw, write, cook or dance, just for the joy of it."
  },
  {
   "id": "mood-h5-03",
@@ -191,8 +177,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Laughter comes easily today. Share it.",
-  "text_km": "សំណើចមកយ៉ាងងាយនៅថ្ងៃនេះ។ សូមចែករំលែកវាជាមួយអ្នកដទៃ។"
+  "text": "Laughter comes easily today. Share it."
  },
  {
   "id": "mood-h6-01",
@@ -204,8 +189,7 @@
    ]
   },
   "tone": "warm",
-  "text": "A tidy space helps you feel calm. Small chores can be surprisingly satisfying.",
-  "text_km": "កន្លែងស្អាតមានសណ្ដាប់ធ្នាប់ ជួយឱ្យអ្នកមានអារម្មណ៍ស្ងប់។ កិច្ចការតូចៗ អាចធ្វើឱ្យពេញចិត្តគួរឱ្យភ្ញាក់ផ្អើល។"
+  "text": "A tidy space helps you feel calm. Small chores can be surprisingly satisfying."
  },
  {
   "id": "mood-h6-02",
@@ -217,8 +201,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Simple routines steady your mood. Eat well, move a little and rest when you need to.",
-  "text_km": "ទម្លាប់សាមញ្ញៗ ធ្វើឱ្យអារម្មណ៍របស់អ្នកនឹងនរ។ សូមញ៉ាំឱ្យបានល្អ ធ្វើចលនាបន្តិច ហើយសម្រាកពេលអ្នកត្រូវការ។"
+  "text": "Simple routines steady your mood. Eat well, move a little and rest when you need to."
  },
  {
   "id": "mood-h6-03",
@@ -230,8 +213,7 @@
    ]
   },
   "tone": "warm",
-  "text": "You feel best when you are useful. Help someone with something small.",
-  "text_km": "អ្នកមានអារម្មណ៍ល្អបំផុត នៅពេលអ្នកមានប្រយោជន៍។ សូមជួយនរណាម្នាក់ក្នុងរឿងតូចមួយ។"
+  "text": "You feel best when you are useful. Help someone with something small."
  },
  {
   "id": "mood-h7-01",
@@ -243,8 +225,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Other people affect your mood more than usual. Choose company that feels kind.",
-  "text_km": "អ្នកដទៃមានឥទ្ធិពលលើអារម្មណ៍របស់អ្នកច្រើនជាងធម្មតា។ សូមជ្រើសរើសនៅជាមួយមនុស្សដែលធ្វើឱ្យអ្នកមានអារម្មណ៍កក់ក្ដៅ។"
+  "text": "Other people affect your mood more than usual. Choose company that feels kind."
  },
  {
   "id": "mood-h7-02",
@@ -256,8 +237,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Balance is the theme. Give and receive in equal measure.",
-  "text_km": "តុល្យភាព គឺជាប្រធានបទនៃថ្ងៃនេះ។ សូមផ្ដល់ និងទទួល ក្នុងកម្រិតស្មើគ្នា។"
+  "text": "Balance is the theme. Give and receive in equal measure."
  },
  {
   "id": "mood-h7-03",
@@ -269,8 +249,7 @@
    ]
   },
   "tone": "warm",
-  "text": "A good chat with someone you trust leaves you feeling lighter.",
-  "text_km": "ការជជែកល្អៗជាមួយនរណាម្នាក់ដែលអ្នកទុកចិត្ត ធ្វើឱ្យអ្នកមានអារម្មណ៍ស្រាលជាងមុន។"
+  "text": "A good chat with someone you trust leaves you feeling lighter."
  },
  {
   "id": "mood-h8-01",
@@ -282,8 +261,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Your feelings run deep today. Give yourself room to process them.",
-  "text_km": "អារម្មណ៍របស់អ្នកស៊ីជម្រៅនៅថ្ងៃនេះ។ សូមផ្ដល់ពេលឱ្យខ្លួនឯងដើម្បីគិតពិចារណាពីវា។"
+  "text": "Your feelings run deep today. Give yourself room to process them."
  },
  {
   "id": "mood-h8-02",
@@ -295,8 +273,7 @@
    ]
   },
   "tone": "warm",
-  "text": "A good day to let go of something that no longer serves you.",
-  "text_km": "ជាថ្ងៃល្អដើម្បីដោះលែងអ្វីមួយ ដែលលែងមានប្រយោជន៍សម្រាប់អ្នក។"
+  "text": "A good day to let go of something that no longer serves you."
  },
  {
   "id": "mood-h8-03",
@@ -308,8 +285,7 @@
    ]
   },
   "tone": "warm",
-  "text": "You may feel intense. Channel it into something focused and meaningful.",
-  "text_km": "អ្នកប្រហែលជាមានអារម្មណ៍ខ្លាំងក្លា។ សូមបង្វែរវាទៅកាន់អ្វីមួយដែលផ្ដោត និងមានអត្ថន័យ។"
+  "text": "You may feel intense. Channel it into something focused and meaningful."
  },
  {
   "id": "mood-h9-01",
@@ -321,8 +297,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Restlessness is a sign you want something new. Explore an idea, a place or a book.",
-  "text_km": "ភាពមិនស្ងប់ គឺជាសញ្ញាថាអ្នកចង់បានអ្វីថ្មី។ សូមស្វែងយល់ពីគំនិតមួយ កន្លែងមួយ ឬសៀវភៅមួយ។"
+  "text": "Restlessness is a sign you want something new. Explore an idea, a place or a book."
  },
  {
   "id": "mood-h9-02",
@@ -334,8 +309,7 @@
    ]
   },
   "tone": "warm",
-  "text": "You feel optimistic. Let that hopeful mood carry you.",
-  "text_km": "អ្នកមានទស្សនៈវិជ្ជមាន។ សូមឱ្យអារម្មណ៍ពោរពេញដោយក្ដីសង្ឃឹមនោះ នាំអ្នកទៅមុខ។"
+  "text": "You feel optimistic. Let that hopeful mood carry you."
  },
  {
   "id": "mood-h9-03",
@@ -347,8 +321,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Big questions are on your mind. Write down what you would like to learn.",
-  "text_km": "សំណួរធំៗ កំពុងនៅក្នុងគំនិតរបស់អ្នក។ សូមសរសេរនូវអ្វីដែលអ្នកចង់រៀន។"
+  "text": "Big questions are on your mind. Write down what you would like to learn."
  },
  {
   "id": "mood-h10-01",
@@ -360,8 +333,7 @@
    ]
   },
   "tone": "warm",
-  "text": "You feel driven. Use that energy wisely and remember to pause.",
-  "text_km": "អ្នកមានកម្លាំងចិត្តខ្លាំង។ សូមប្រើថាមពលនោះដោយឈ្លាសវៃ ហើយកុំភ្លេចសម្រាកផង។"
+  "text": "You feel driven. Use that energy wisely and remember to pause."
  },
  {
   "id": "mood-h10-02",
@@ -373,8 +345,7 @@
    ]
   },
   "tone": "warm",
-  "text": "A sense of purpose lifts your mood. Notice how far you have come.",
-  "text_km": "អារម្មណ៍នៃគោលបំណង ធ្វើឱ្យចិត្តអ្នកភ្លឺស្វាង។ សូមកត់សម្គាល់ថា អ្នកបានដើរមកឆ្ងាយប៉ុណ្ណាហើយ។"
+  "text": "A sense of purpose lifts your mood. Notice how far you have come."
  },
  {
   "id": "mood-h10-03",
@@ -386,8 +357,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Pressure may feel higher. Take things one step at a time.",
-  "text_km": "សម្ពាធអាចហាក់ដូចជាខ្ពស់ជាងមុន។ សូមធ្វើអ្វីៗម្ដងមួយជំហាន។"
+  "text": "Pressure may feel higher. Take things one step at a time."
  },
  {
   "id": "mood-h11-01",
@@ -399,8 +369,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Friendly energy lifts you up. Reach out to your people.",
-  "text_km": "ថាមពលរួសរាយ លើកទឹកចិត្តអ្នក។ សូមទាក់ទងទៅមនុស្សជិតស្និទ្ធរបស់អ្នក។"
+  "text": "Friendly energy lifts you up. Reach out to your people."
  },
  {
   "id": "mood-h11-02",
@@ -412,8 +381,7 @@
    ]
   },
   "tone": "warm",
-  "text": "You feel hopeful about the future. Dream a little.",
-  "text_km": "អ្នកមានក្ដីសង្ឃឹមចំពោះអនាគត។ សូមស្រមៃបន្តិច។"
+  "text": "You feel hopeful about the future. Dream a little."
  },
  {
   "id": "mood-h11-03",
@@ -425,8 +393,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Being part of something bigger feels good today.",
-  "text_km": "ការក្លាយជាផ្នែកមួយនៃអ្វីដែលធំជាងខ្លួន ផ្ដល់អារម្មណ៍ល្អនៅថ្ងៃនេះ។"
+  "text": "Being part of something bigger feels good today."
  },
  {
   "id": "mood-h12-01",
@@ -438,8 +405,7 @@
    ]
   },
   "tone": "warm",
-  "text": "You need more quiet than usual. Honour it.",
-  "text_km": "អ្នកត្រូវការភាពស្ងប់ស្ងាត់ច្រើនជាងធម្មតា។ សូមគោរពតម្រូវការនោះ។"
+  "text": "You need more quiet than usual. Honour it."
  },
  {
   "id": "mood-h12-02",
@@ -451,8 +417,7 @@
    ]
   },
   "tone": "warm",
-  "text": "A reflective mood suits you. Journal, rest or simply be still.",
-  "text_km": "អារម្មណ៍ចង់ពិចារណាសមនឹងអ្នក។ សូមសរសេរកំណត់ហេតុ សម្រាក ឬគ្រាន់តែនៅស្ងៀម។"
+  "text": "A reflective mood suits you. Journal, rest or simply be still."
  },
  {
   "id": "mood-h12-03",
@@ -464,8 +429,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Recharge today so you can shine tomorrow.",
-  "text_km": "សូមបញ្ចូលថាមពលនៅថ្ងៃនេះ ដើម្បីឱ្យអ្នកអាចភ្លឺស្វាងនៅថ្ងៃស្អែក។"
+  "text": "Recharge today so you can shine tomorrow."
  },
  {
   "id": "mood-phase-new-01",
@@ -477,8 +441,7 @@
    ]
   },
   "tone": "warm",
-  "text": "The new Moon invites a quiet reset.",
-  "text_km": "ព្រះចន្ទងងឹត អញ្ជើញអ្នកឱ្យចាប់ផ្ដើមឡើងវិញដោយស្ងៀមស្ងាត់។"
+  "text": "The new Moon invites a quiet reset."
  },
  {
   "id": "mood-phase-new-02",
@@ -490,8 +453,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Begin again, gently, under the new Moon.",
-  "text_km": "សូមចាប់ផ្ដើមម្ដងទៀតយ៉ាងទន់ភ្លន់ ក្រោមព្រះចន្ទងងឹត។"
+  "text": "Begin again, gently, under the new Moon."
  },
  {
   "id": "mood-phase-waxing-01",
@@ -503,8 +465,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Your energy grows with the Moon.",
-  "text_km": "ថាមពលរបស់អ្នកកើនឡើង ជាមួយព្រះចន្ទ។"
+  "text": "Your energy grows with the Moon."
  },
  {
   "id": "mood-phase-waxing-02",
@@ -516,8 +477,7 @@
    ]
   },
   "tone": "warm",
-  "text": "The waxing Moon brings a gradual lift.",
-  "text_km": "ព្រះចន្ទដែលកំពុងភ្លឺឡើង នាំមកនូវការលើកចិត្តបន្តិចម្ដងៗ។"
+  "text": "The waxing Moon brings a gradual lift."
  },
  {
   "id": "mood-phase-full-01",
@@ -529,8 +489,7 @@
    ]
   },
   "tone": "warm",
-  "text": "The full Moon can stir strong emotions. Breathe and stay present.",
-  "text_km": "ព្រះចន្ទពេញវង់ អាចធ្វើឱ្យអារម្មណ៍រំជួលខ្លាំង។ សូមដកដង្ហើម ហើយរស់នៅនឹងពេលបច្ចុប្បន្ន។"
+  "text": "The full Moon can stir strong emotions. Breathe and stay present."
  },
  {
   "id": "mood-phase-full-02",
@@ -542,8 +501,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Feelings peak with the full Moon. Be kind to yourself.",
-  "text_km": "អារម្មណ៍ឡើងដល់កំពូល ជាមួយព្រះចន្ទពេញវង់។ សូមមានចិត្តល្អចំពោះខ្លួនឯង។"
+  "text": "Feelings peak with the full Moon. Be kind to yourself."
  },
  {
   "id": "mood-phase-waning-01",
@@ -555,8 +513,7 @@
    ]
   },
   "tone": "warm",
-  "text": "The waning Moon supports rest and release.",
-  "text_km": "ព្រះចន្ទដែលកំពុងរួញ គាំទ្រការសម្រាក និងការដោះលែង។"
+  "text": "The waning Moon supports rest and release."
  },
  {
   "id": "mood-phase-waning-02",
@@ -568,8 +525,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Let things slow down as the Moon wanes.",
-  "text_km": "សូមទុកឱ្យអ្វីៗយឺតទៅវិញ ពេលព្រះចន្ទកំពុងរួញ។"
+  "text": "Let things slow down as the Moon wanes."
  },
  {
   "id": "mood-retro-mars-01",
@@ -581,8 +537,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Mars is retrograde, so pace yourself and avoid needless conflict.",
-  "text_km": "ព្រះអង្គារកំពុងដើរថយក្រោយ ដូច្នេះសូមធ្វើការតាមល្បឿនសមល្មម ហើយជៀសវាងជម្លោះដែលមិនចាំបាច់។"
+  "text": "Mars is retrograde, so pace yourself and avoid needless conflict."
  },
  {
   "id": "mood-retro-mars-02",
@@ -594,8 +549,7 @@
    ]
   },
   "tone": "warm",
-  "text": "With Mars retrograde, steady effort beats forcing things.",
-  "text_km": "ពេលព្រះអង្គារដើរថយក្រោយ ការខិតខំនឹងនរ ល្អជាងការបង្ខំអ្វីៗ។"
+  "text": "With Mars retrograde, steady effort beats forcing things."
  },
  {
   "id": "mood-element-fire-01",
@@ -607,8 +561,7 @@
    ]
   },
   "tone": "warm",
-  "text": "The Moon in a fire sign adds warmth and courage.",
-  "text_km": "ព្រះចន្ទក្នុងរាសីធាតុភ្លើង បន្ថែមភាពកក់ក្ដៅ និងភាពក្លាហាន។"
+  "text": "The Moon in a fire sign adds warmth and courage."
  },
  {
   "id": "mood-element-fire-02",
@@ -620,8 +573,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Fire-sign energy from the Moon gives you a spark.",
-  "text_km": "ថាមពលរាសីធាតុភ្លើងពីព្រះចន្ទ ផ្ដល់ឱ្យអ្នកនូវផ្កាភ្លើងនៃកម្លាំងចិត្ត។"
+  "text": "Fire-sign energy from the Moon gives you a spark."
  },
  {
   "id": "mood-element-earth-01",
@@ -633,8 +585,7 @@
    ]
   },
   "tone": "warm",
-  "text": "The Moon in an earth sign keeps you grounded.",
-  "text_km": "ព្រះចន្ទក្នុងរាសីធាតុដី ជួយឱ្យអ្នកឈរជើងបានរឹងមាំ។"
+  "text": "The Moon in an earth sign keeps you grounded."
  },
  {
   "id": "mood-element-earth-02",
@@ -646,8 +597,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Earth-sign energy from the Moon favours practical steps.",
-  "text_km": "ថាមពលរាសីធាតុដីពីព្រះចន្ទ គាំទ្រជំហានជាក់ស្ដែង។"
+  "text": "Earth-sign energy from the Moon favours practical steps."
  },
  {
   "id": "mood-element-air-01",
@@ -659,8 +609,7 @@
    ]
   },
   "tone": "warm",
-  "text": "The Moon in an air sign makes ideas flow.",
-  "text_km": "ព្រះចន្ទក្នុងរាសីធាតុខ្យល់ ធ្វើឱ្យគំនិតហូរមកយ៉ាងងាយ។"
+  "text": "The Moon in an air sign makes ideas flow."
  },
  {
   "id": "mood-element-air-02",
@@ -672,8 +621,7 @@
    ]
   },
   "tone": "warm",
-  "text": "Air-sign energy from the Moon helps you connect.",
-  "text_km": "ថាមពលរាសីធាតុខ្យល់ពីព្រះចន្ទ ជួយអ្នកឱ្យភ្ជាប់ទំនាក់ទំនងជាមួយអ្នកដទៃ។"
+  "text": "Air-sign energy from the Moon helps you connect."
  },
  {
   "id": "mood-element-water-01",
@@ -685,8 +633,7 @@
    ]
   },
   "tone": "warm",
-  "text": "The Moon in a water sign deepens feelings.",
-  "text_km": "ព្រះចន្ទក្នុងរាសីធាតុទឹក ធ្វើឱ្យអារម្មណ៍កាន់តែស៊ីជម្រៅ។"
+  "text": "The Moon in a water sign deepens feelings."
  },
  {
   "id": "mood-element-water-02",
@@ -698,7 +645,6 @@
    ]
   },
   "tone": "warm",
-  "text": "Water-sign energy from the Moon invites empathy.",
-  "text_km": "ថាមពលរាសីធាតុទឹកពីព្រះចន្ទ អញ្ជើញអ្នកឱ្យយល់ចិត្តអ្នកដទៃ។"
+  "text": "Water-sign energy from the Moon invites empathy."
  }
 ]

@@ -40,21 +40,6 @@ const T = defineMessages({
     pairs: "Popular compatibility pairs", westernSigns: "Western signs", animals: "Zodiac animals", check: "Check compatibility",
     pair: (a: string, b: string) => `${a} and ${b}`,
   },
-  km: {
-    title: "ហោរាសាស្ត្រប្រចាំថ្ងៃ រាសីចិន និងប្រពៃណីខ្មែរ",
-    description: "ហោរាសាស្ត្រប្រចាំថ្ងៃ រាសីចិន និងប្រពៃណីខ្មែរ ការព្យាករឆ្នាំមមែ ធាតុភ្លើង ២០២៧ ភាពត្រូវគ្នា និងថ្ងៃល្អ ឥតគិតថ្លៃ ពីទិន្នន័យមេឃពិត។",
-    h1: `${SITE_NAME}៖ ហោរាសាស្ត្រប្រចាំថ្ងៃ រាសីចិន ប្រពៃណីខ្មែរ និងថ្ងៃល្អ`,
-    today: "ថ្ងៃនេះ", pickSign: "ជ្រើសរើសរាសីរបស់អ្នក", findSign: "ស្វែងរករាសីខ្ញុំ",
-    newYear: (y: number) => `ចូលឆ្នាំខ្មែរ ${num(y, "km")}`,
-    songkran: (date: string, time: string, km: string, _roman: string, posture: string) => <>មហាសង្ក្រាន្តចូលនៅ{date} ប្រហែលម៉ោង {time} ម៉ោងកម្ពុជា។ ទេវតាឆ្នាំថ្មីគឺ{km} យាងមកក្នុងឥរិយាបថ{posture}។</>,
-    angelLink: "អានអំពីទេវតាឆ្នាំថ្មី",
-    chinese: "រាសីចិន", animalNote: "សត្វរាសីរបស់អ្នកមកពីឆ្នាំកំណើត រាប់ចាប់ពីបុណ្យចូលឆ្នាំចិន។", findAnimal: "ស្វែងរកសត្វរាសីរបស់អ្នក",
-    almanac: (label: string) => `ប្រតិទិនចិនថ្ងៃនេះ៖ ${label}`,
-    dayOf: (pillar: string, clash: string) => `ថ្ងៃ ${pillar}។ ប៉ះទង្គិចជាមួយឆ្នាំ${clash}។`, monthLucky: "មើលថ្ងៃល្អក្នុងខែនេះ",
-    goat: "ឆ្នាំមមែ ធាតុភ្លើង ២០២៧", goatIntro: "ឆ្នាំមមែ ធាតុភ្លើង ចាប់ផ្ដើមនៅបុណ្យចូលឆ្នាំចិន ថ្ងៃទី៦ ខែកុម្ភៈ ឆ្នាំ២០២៧។ អានថាវាអាចនាំមកអ្វីខ្លះសម្រាប់សត្វរាសីរបស់អ្នក។",
-    pairs: "គូដែលគេពេញនិយម", westernSigns: "រាសីលោកខាងលិច", animals: "សត្វរាសី", check: "ពិនិត្យភាពត្រូវគ្នា",
-    pair: (a: string, b: string) => `${a} និង ${b}`,
-  },
 });
 
 export const dynamic = "force-dynamic";
@@ -76,7 +61,7 @@ export default async function Home() {
   for (const d of [addDays(date, -1), date, addDays(date, 1)]) {
     summaries[d] = {};
     for (const r of readingsForDay(d, texts, lang)) {
-      summaries[d][r.sign.slug] = { energy: r.topics.map((x) => x.energy), line: r.topics[3].text.split(/(?<=[.។])\s/)[0], date: fullDate(d, lang) };
+      summaries[d][r.sign.slug] = { energy: r.topics.map((x) => x.energy), line: r.topics[3].text.split(/(?<=\.)\s/)[0], date: fullDate(d, lang) };
     }
   }
   const lucky = generalLucky(date, lang);
@@ -100,7 +85,7 @@ export default async function Home() {
         <KhmerDayCard day={kday} />
         <section aria-labelledby="ny-h" className="border-y-2 border-ink py-5">
           <h2 id="ny-h" className="text-h3">{t.newYear(ny.year)}</h2>
-          <p className="mt-3">{t.songkran(fullDate(ny.date, lang), num(ny.time, lang), ny.angel.km, ny.angel.roman, lang === "km" ? ny.posture.km : ny.posture.en)}</p>
+          <p className="mt-3">{t.songkran(fullDate(ny.date, lang), num(ny.time, lang), ny.angel.km, ny.angel.roman, ny.posture.en)}</p>
           <p className="mt-4 text-small"><Link className="link" href="/khmer/new-year">{t.angelLink}</Link></p>
         </section>
       </div>
@@ -141,8 +126,8 @@ export default async function Home() {
               <p className="mt-4 text-muted">{t.animalNote} <Link className="link text-ink" href="/tools/zodiac-calculator">{t.findAnimal}</Link></p>
             </div>
             <div className="border-t border-rule py-7">
-              <LuckyRow heading={t.almanac(lang === "km" ? lucky.almanac.lunarLabelKm : lucky.almanac.lunarLabel)} headingId="almanac-h" color={lucky.color} number={lucky.number} hour={lucky.hour} seal={lucky.seal} />
-              <p className="mt-4 text-muted">{t.dayOf(lucky.almanac.dayPillar, lang === "km" ? animalName(lucky.almanac.clash.slug, "km") : lucky.almanac.clash.name)} <Link className="link text-ink" href={`/lucky-days/${date.slice(0, 4)}/${date.slice(5, 7)}`}>{t.monthLucky}</Link></p>
+              <LuckyRow heading={t.almanac(lucky.almanac.lunarLabel)} headingId="almanac-h" color={lucky.color} number={lucky.number} hour={lucky.hour} seal={lucky.seal} />
+              <p className="mt-4 text-muted">{t.dayOf(lucky.almanac.dayPillar, lucky.almanac.clash.name)} <Link className="link text-ink" href={`/lucky-days/${date.slice(0, 4)}/${date.slice(5, 7)}`}>{t.monthLucky}</Link></p>
             </div>
             <section className="border-t border-rule py-7" aria-labelledby="goat-h">
               <h2 id="goat-h" className="text-h2">{t.goat}</h2>

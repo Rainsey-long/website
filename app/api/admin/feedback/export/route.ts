@@ -5,7 +5,7 @@
  */
 import { getDb, type FeedbackRow } from "@/lib/db";
 import { getSession } from "@/lib/auth";
-import { json, requestLang } from "@/lib/http";
+import { json } from "@/lib/http";
 
 export const dynamic = "force-dynamic";
 
@@ -15,12 +15,10 @@ function cell(v: unknown): string {
   return `"${s.replace(/"/g, '""')}"`;
 }
 
-export async function GET(req: Request) {
-  if (!(await getSession())) return json({ error: requestLang(req) === "km" ? "សូមចូលជាអ្នកគ្រប់គ្រងសិន។" : "Unauthorized" }, 401);
+export async function GET() {
+  if (!(await getSession())) return json({ error: "Unauthorized" }, 401);
   const rows = getDb().prepare("SELECT * FROM feedback ORDER BY id DESC").all() as FeedbackRow[];
-  const head = requestLang(req) === "km"
-    ? ["លេខ", "ពេលបង្កើត (UTC)", "ទំព័រ", "ការវាយតម្លៃ", "ប្លុក", "មតិ", "ពេលអាន (UTC)"]
-    : ["id", "created_at_utc", "page", "verdict", "blocks", "comment", "read_at_utc"];
+  const head = ["id", "created_at_utc", "page", "verdict", "blocks", "comment", "read_at_utc"];
   const lines = [head.join(","), ...rows.map((r) => [r.id, r.created_at, r.path, r.verdict, r.block_ids, r.comment, r.read_at ?? ""].map(cell).join(","))];
   return new Response("﻿" + lines.join("\r\n") + "\r\n", {
     headers: {

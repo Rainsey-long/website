@@ -14,7 +14,7 @@ import Share from "@/components/client/Share";
 import Feedback from "@/components/client/Feedback";
 import { weeklyReading, type WeekEvent } from "@/lib/weekly";
 import { blockTexts } from "@/lib/blockText";
-import { HOUSE_THEME, HOUSE_THEME_KM, TOPIC_LABEL, TOPIC_LABEL_KM, TOPICS } from "@/lib/reading-engine";
+import { HOUSE_THEME, TOPIC_LABEL, TOPICS } from "@/lib/reading-engine";
 import { addDays, fromKey, fullDate, weekRange, weekdayName } from "@/lib/dates";
 import { eclipseName, phaseName, planetNameIn, signNameIn, skyYearsAvailable } from "@/lib/skyEvents";
 import { absolute, articleLd } from "@/lib/seo";
@@ -43,24 +43,6 @@ const T = defineMessages({
     note: "Days are counted Monday to Sunday in universal time. For entertainment and reflection.",
     busy: "This page is busy right now. Try again in a few minutes.",
   },
-  km: {
-    crumb: "ហោរាសាស្ត្រ", week: "សប្ដាហ៍នេះ", weekNav: "សប្ដាហ៍", prev: "សប្ដាហ៍មុន", next: "សប្ដាហ៍បន្ទាប់",
-    h1: (s: string) => `ហោរាសាស្ត្រប្រចាំសប្ដាហ៍ រាសី${s}`,
-    overview: "សប្ដាហ៍ខាងមុខ",
-    lunation: (phase: string, date: string, sign: string, theme: string) => `${phase} នៅ${date} ក្នុងរាសី${sign}៖ ផ្នែក${theme}របស់អ្នក។`,
-    carried: (phase: string, date: string, sign: string, theme: string) => `សប្ដាហ៍នេះគ្មានព្រះចន្ទងងឹត ព្រះចន្ទពេញវង់ ឬព្រះចន្ទកន្លះទេ។ វាបន្តពី${phase} នៅ${date} ក្នុងរាសី${sign}៖ ផ្នែក${theme}របស់អ្នក។`,
-    best: "ថ្ងៃល្អបំផុត", bestIntro: "ថ្ងៃដែលផ្នែកនីមួយៗនៃជីវិតទទួលបានការគាំទ្រច្រើនបំផុតក្នុងសប្ដាហ៍នេះ តាមការទស្សន៍ទាយប្រចាំថ្ងៃរបស់អ្នក។",
-    path: "ដំណើររបស់ព្រះចន្ទក្នុងសប្ដាហ៍នេះ", pathIntro: "ព្រះចន្ទឆ្លងកាត់ប្រហែលពីររាសីនៃតារាងរបស់អ្នកក្នុងមួយសប្ដាហ៍។ ទីតាំងរបស់វាបង្ហាញពីអ្វីដែលនៅក្នុងគំនិតរបស់អ្នក។",
-    sky: "នៅលើមេឃសប្ដាហ៍នេះ", none: "សប្ដាហ៍នេះគ្មានភពណាប្ដូររាសី ឬប្ដូរទិសដៅទេ។",
-    ingress: (planet: string, sign: string, theme: string) => `${planet}ចូលរាសី${sign} ដែលជាផ្នែក${theme}របស់អ្នក។`,
-    rx: (planet: string, sign: string, theme: string) => `${planet}ចាប់ផ្ដើមដើរថយក្រោយក្នុងរាសី${sign}។ សូមដើរយឺតៗក្នុងរឿង${theme} ហើយពិនិត្យផែនការម្ដងទៀត។`,
-    direct: (planet: string, sign: string, theme: string) => `${planet}ដើរទៅមុខវិញក្នុងរាសី${sign}។ គម្រោងទាក់ទងនឹង${theme} ចាប់ផ្ដើមដំណើរការឡើងវិញ។`,
-    eclipse: (name: string, sign: string, theme: string) => `${name}ក្នុងរាសី${sign} ផ្នែក${theme}របស់អ្នក។`,
-    daily: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}`, others: "រាសីផ្សេងទៀតសប្ដាហ៍នេះ",
-    my: (s: string, r: string) => `ហោរាសាស្ត្រប្រចាំសប្ដាហ៍ រាសី${s} របស់ខ្ញុំ ${r}`,
-    note: "ថ្ងៃត្រូវបានរាប់ពីថ្ងៃច័ន្ទដល់ថ្ងៃអាទិត្យ តាមម៉ោងសកល។ សម្រាប់ការកម្សាន្ត និងការឆ្លុះបញ្ចាំង។",
-    busy: "ទំព័រនេះរវល់បន្តិចឥឡូវនេះ។ សូមព្យាយាមម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
-  },
 });
 
 const dayName = (date: string, lang: Lang) => weekdayName(fromKey(date).getUTCDay(), lang);
@@ -69,7 +51,7 @@ const validMonday = (d: string) => Number(d.slice(0, 4)) >= CALENDAR_YEARS.min &
 function eventLine(e: WeekEvent, lang: Lang): string {
   const t = T[lang];
   const sign = signNameIn(e.signIndex, lang);
-  const theme = (lang === "km" ? HOUSE_THEME_KM : HOUSE_THEME)[e.house];
+  const theme = HOUSE_THEME[e.house];
   if (e.kind === "eclipse") return t.eclipse(eclipseName({ kind: e.eclipseKind!, body: e.body as "sun" | "moon" }, lang), sign, theme);
   const planet = planetNameIn(e.body as Exclude<WeekEvent["body"], "sun" | "moon">, lang);
   if (e.kind === "ingress") return t.ingress(planet, sign, theme);
@@ -80,7 +62,6 @@ export default async function WeeklyPage({ sign, monday }: { sign: WesternSign; 
   const path = `/horoscope/${sign.slug}/week/${monday}`;
   const lang = await getLang();
   const t = T[lang];
-  const km = lang === "km";
   const name = signName(sign.slug, lang);
   // The years lib/weekly.ts reads stations and eclipses from; computing a new
   // one is charged against the site-wide ceiling in lib/skyEvents.ts.
@@ -94,7 +75,7 @@ export default async function WeeklyPage({ sign, monday }: { sign: WesternSign; 
   const prev = addDays(monday, -7), next = addDays(monday, 7);
   const L = w.lunation;
   const lunationDate = fullDate(L.at.slice(0, 10), lang);
-  const lunationArgs = [phaseName(L, lang), lunationDate, signNameIn(L.signIndex, lang), (km ? HOUSE_THEME_KM : HOUSE_THEME)[L.house]] as const;
+  const lunationArgs = [phaseName(L, lang), lunationDate, signNameIn(L.signIndex, lang), HOUSE_THEME[L.house]] as const;
   const carried = w.phases.length === 0;
   const span = (from: string, to: string) => (from === to ? dayName(from, lang) : `${dayName(from, lang)} – ${dayName(to, lang)}`);
 
@@ -126,7 +107,7 @@ export default async function WeeklyPage({ sign, monday }: { sign: WesternSign; 
             <dl className="mt-3 grid grid-cols-2 gap-x-5 gap-y-2 sm:grid-cols-4">
               {TOPICS.map((topic) => (
                 <div key={topic}>
-                  <dt className="text-small font-semibold">{(km ? TOPIC_LABEL_KM : TOPIC_LABEL)[topic]}</dt>
+                  <dt className="text-small font-semibold">{TOPIC_LABEL[topic]}</dt>
                   <dd><Link className="link inline-flex min-h-tap items-center" href={`/horoscope/${sign.slug}/${w.best[topic].date}`}>{dayName(w.best[topic].date, lang)}</Link></dd>
                 </div>
               ))}

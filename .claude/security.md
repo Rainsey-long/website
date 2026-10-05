@@ -4,7 +4,7 @@
 
 | Layer | Mechanism | Grants |
 |---|---|---|
-| **Admin** | username + scrypt password (`lib/auth.ts`), HMAC-signed `al_session` cookie (`__Host-` in production, httpOnly, SameSite=Strict, 8 h) | `/admin`: reading text (both languages), profiles and forecasts, Songkran override, feedback triage and CSV, admin accounts, backups |
+| **Admin** | username + scrypt password (`lib/auth.ts`), HMAC-signed `al_session` cookie (`__Host-` in production, httpOnly, SameSite=Strict, 8 h) | `/admin`: reading text, profiles and forecasts, Songkran override, feedback triage and CSV, admin accounts, backups |
 | **Visitor** | nothing. No accounts, ever (owner rule) | everything public |
 
 **`getSession()` re-reads the users row on every call** and refuses a token whose `session_epoch` no longer matches, so sign-out (which bumps the epoch) revokes every copy of the token. It denies on a database error. Token readers refuse a non-base64url body before the MAC check. The password floor is `ADMIN_PASSWORD_MIN` (12), checked wherever a password is set.

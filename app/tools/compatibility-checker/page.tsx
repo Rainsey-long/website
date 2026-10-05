@@ -12,10 +12,6 @@ const T = defineMessages({
     title: "Compatibility checker", description: "Check zodiac compatibility for any two Western signs or zodiac animals: overall match, love, friendship and work.",
     intro: "Choose a system and two signs. You'll go straight to the full pair page.",
   },
-  km: {
-    title: "ពិនិត្យភាពត្រូវគ្នា", description: "ពិនិត្យភាពត្រូវគ្នារវាងរាសីលោកខាងលិច ឬសត្វរាសីណាមួយពីរ៖ ភាពត្រូវគ្នាទូទៅ ស្នេហា មិត្តភាព និងការងារ។",
-    intro: "ជ្រើសរើសប្រព័ន្ធ និងរាសីពីរ។ អ្នកនឹងទៅដល់ទំព័រគូពេញលេញភ្លាមៗ។",
-  },
 });
 export async function generateMetadata() {
   const lang = await getLang();

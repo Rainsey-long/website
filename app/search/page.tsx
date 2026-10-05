@@ -7,7 +7,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import Link from "@/components/client/LocaleLink";
 import { getLang } from "@/lib/langServer";
 import { pageMetadata } from "@/lib/seo";
-import { defineMessages, localePath, num } from "@/lib/i18n";
+import { defineMessages } from "@/lib/i18n";
 import { entryFor, MAX_QUERY, search, SUGGESTIONS, type SearchEntry, type SearchKind } from "@/lib/searchIndex";
 
 export const dynamic = "force-dynamic";
@@ -23,17 +23,6 @@ const T = defineMessages({
     none: (q: string) => `Nothing matched “${q}”. Try a sign, an animal or a festival name, or start from one of these:`,
     start: "Start from one of these:",
     kinds: { sign: "Horoscope", animal: "Chinese zodiac", compatibility: "Compatibility", khmer: "Khmer tradition", festival: "Festival", tool: "Tool", sky: "Sky", page: "About the site" } as Record<SearchKind, string>,
-  },
-  km: {
-    title: "ស្វែងរក",
-    description: "ស្វែងរកហោរាសាស្ត្រ ឆ្នាំចិន ប្រពៃណីខ្មែរ បុណ្យ ឧបករណ៍ និងទំព័រមេឃ។",
-    label: "ស្វែងរកក្នុងគេហទំព័រ",
-    placeholder: "រាសី ឆ្នាំ ឬឈ្មោះបុណ្យ…",
-    submit: "ស្វែងរក",
-    results: (n: number, q: string) => `លទ្ធផល ${num(n, "km")} សម្រាប់ «${q}»`,
-    none: (q: string) => `រកមិនឃើញ «${q}» ទេ។ សូមសាកល្បងឈ្មោះរាសី ឆ្នាំ ឬបុណ្យ ឬចាប់ផ្ដើមពីទំព័រទាំងនេះ៖`,
-    start: "ចាប់ផ្ដើមពីទំព័រទាំងនេះ៖",
-    kinds: { sign: "ហោរាសាស្ត្រ", animal: "ឆ្នាំចិន", compatibility: "ភាពត្រូវគ្នា", khmer: "ប្រពៃណីខ្មែរ", festival: "បុណ្យ", tool: "ឧបករណ៍", sky: "មេឃ", page: "អំពីគេហទំព័រ" } as Record<SearchKind, string>,
   },
 });
 
@@ -67,7 +56,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
       <Breadcrumbs items={[{ name: t.title, href: "/search" }]} />
       <div className="mx-auto max-w-reading safe-x py-6 box-content">
         <h1 className="text-h1">{t.title}</h1>
-        <form role="search" action={localePath("/search", lang)} method="get" className="mt-6 flex flex-wrap items-end gap-3">
+        <form role="search" action="/search" method="get" className="mt-6 flex flex-wrap items-end gap-3">
           <div className="min-w-0 flex-1">
             <label htmlFor="q" className="label">{t.label}</label>
             <input id="q" name="q" type="search" className="field w-full" defaultValue={q} maxLength={MAX_QUERY} placeholder={t.placeholder} autoComplete="off" enterKeyHint="search" />

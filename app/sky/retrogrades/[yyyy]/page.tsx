@@ -30,23 +30,7 @@ const T = defineMessages({
     foot: "Whether an eclipse is visible depends on where you are. Calculated with astronomy-engine.",
     busy: "This page is busy right now. Try this year again in a few minutes.",
   },
-  km: {
-    title: (y: number) => `ព្រះពុធដើរថយក្រោយ ${khmerYear(y)} និងភពដើរថយក្រោយ និងគ្រាសទាំងអស់`,
-    description: (y: number) => `រាល់ការដើរថយក្រោយរបស់ភព ពីព្រះពុធដល់ព្រះសៅរ៍ ក្នុងឆ្នាំ${khmerYear(y)} ព្រមទាំងថ្ងៃឈប់ រយៈពេលស្រមោល និងសូរ្យគ្រាស ចន្ទគ្រាសប្រចាំឆ្នាំ។`,
-    sky: "មេឃ", crumb: (y: number) => `ភពដើរថយក្រោយ ${khmerYear(y)}`, yearNav: "ឆ្នាំ",
-    h1: (y: number) => `ភពដើរថយក្រោយ និងគ្រាស ក្នុងឆ្នាំ${khmerYear(y)}`,
-    intro: "ភពមួយមើលទៅដូចជាដើរថយក្រោយ នៅពេលដែលចលនារបស់ផែនដីខ្លួនឯង ធ្វើឲ្យវាហាក់ដូចជាផ្លាស់ទីថយក្រោយធៀបនឹងផ្កាយ។ ប្រពៃណីចាត់ទុកវាជាពេលសម្រាប់ពិនិត្យឡើងវិញ ត្រឡប់មើល និងបញ្ចប់កិច្ចការ មិនមែនសម្រាប់ភ័យខ្លាចទេ។ ស្រមោល គឺជាផ្នែកមេឃដែលភពនោះឆ្លងកាត់បីដង។",
-    zone: (z: string) => `ម៉ោងគិតតាមម៉ោង ${z} ត្រឹមត្រូវក្នុងរង្វង់ប្រហែលដប់នាទី។`,
-    rx: "ភពដើរថយក្រោយ",
-    span: (p: string, a: string, b: string) => `${p} ពី ${a} ដល់ ${b}`,
-    turnsRx: "ចាប់ផ្ដើមដើរថយក្រោយ", turnsD: "ដើរទៅមុខវិញ", shadowStart: "ស្រមោលចាប់ផ្ដើម", shadowEnd: "ស្រមោលបញ្ចប់",
-    eclipses: "សូរ្យគ្រាស និងចន្ទគ្រាស", peak: "(ពេលពេញលេញបំផុត)",
-    bodyIn: (sun: boolean, sign: string) => `${sun ? "ព្រះអាទិត្យ" : "ព្រះចន្ទ"}ក្នុងរាសី${sign}`,
-    foot: "អ្នកអាចមើលឃើញគ្រាសឬអត់ អាស្រ័យលើទីកន្លែងដែលអ្នកនៅ។ គណនាដោយ astronomy-engine។",
-    busy: "ទំព័រនេះរវល់បន្តិចឥឡូវនេះ។ សូមព្យាយាមម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
-  },
 });
-function khmerYear(y: number) { return num(y, "km"); }
 
 export async function generateMetadata({ params }: Params) {
   const year = parse((await params).yyyy);

@@ -7,7 +7,7 @@ import MoonGlyph from "@/components/MoonGlyph";
 import { moonInfo } from "@/lib/sky";
 import { moonIngresses, moonPhases, phaseName, signNameIn } from "@/lib/skyEvents";
 import { dateIn, timeIn, zoneLabel } from "@/lib/format";
-import { monthName, monthYear, weekdayName } from "@/lib/dates";
+import { monthName, weekdayName } from "@/lib/dates";
 import { getLang } from "@/lib/langServer";
 import { defineMessages, num } from "@/lib/i18n";
 import { visitorZone } from "@/lib/today";
@@ -35,22 +35,6 @@ const T = defineMessages({
     foot: "Calculated with astronomy-engine. Want these in your phone's calendar?",
     feeds: "Calendar feeds",
   },
-  km: {
-    title: (my: string) => `ប្រតិទិនព្រះចន្ទ ${my}`,
-    description: (my: string) => `ដំណាក់កាលព្រះចន្ទ និងរាសីដែលព្រះចន្ទស្ថិតនៅ សម្រាប់គ្រប់ថ្ងៃក្នុង${my} ព្រមទាំងម៉ោងពិតប្រាកដនៃព្រះចន្ទងងឹត ព្រះចន្ទពេញវង់ និងការប្ដូររាសី។`,
-    sky: "មេឃ",
-    crumb: (my: string) => `ព្រះចន្ទ ${my}`,
-    monthNav: "ខែ", prev: "ខែមុន", next: "ខែបន្ទាប់",
-    h1: (my: string) => `ប្រតិទិនព្រះចន្ទ ${my}`,
-    zone: (z: string) => `ម៉ោងគិតតាមម៉ោង ${z}។ ដំណាក់កាល និងរាសីប្រចាំថ្ងៃ បង្ហាញសម្រាប់ម៉ោង ១២:០០ UTC។`,
-    moonIn: (sign: string) => `ព្រះចន្ទក្នុងរាសី${sign}`,
-    lit: (n: number) => `ភ្លឺ ${num(n, "km")}%`,
-    phaseAt: (name: string) => `${name} ម៉ោង `,
-    phaseSign: (sign: string) => ` ក្នុងរាសី${sign}`,
-    enters: (sign: string) => `ព្រះចន្ទចូលរាសី${sign} ម៉ោង `,
-    foot: "គណនាដោយ astronomy-engine។ ចង់បានកាលបរិច្ឆេទទាំងនេះក្នុងប្រតិទិនទូរសព្ទរបស់អ្នកទេ?",
-    feeds: "ប្រតិទិនសម្រាប់ជាវ",
-  },
 });
 
 export async function generateMetadata({ params }: Params) {
@@ -58,7 +42,7 @@ export async function generateMetadata({ params }: Params) {
   const p = parse(yyyy, mm);
   if (!p) return {};
   const lang = await getLang();
-  const my = lang === "km" ? monthYear(p.year, p.month, "km") : `${monthName(p.month)} ${p.year}`;
+  const my = `${monthName(p.month)} ${p.year}`;
   return pageMetadata({ lang, title: T[lang].title(my), description: T[lang].description(my), path: `/sky/moon/${yyyy}/${mm}`, noindex: p.year < 2020 || p.year > 2030 });
 }
 
@@ -70,7 +54,7 @@ export default async function MoonMonth({ params }: Params) {
   const lang = await getLang();
   const t = T[lang];
   const { year, month } = p;
-  const my = lang === "km" ? monthYear(year, month, "km") : `${monthName(month)} ${year}`;
+  const my = `${monthName(month)} ${year}`;
   const sign = (i: number) => signNameIn(i, lang);
   const count = new Date(Date.UTC(year, month, 0)).getUTCDate();
   const from = new Date(Date.UTC(year, month - 1, 1) - 86400_000).toISOString();

@@ -20,11 +20,6 @@ const T = defineMessages({
     showMe: "Show me", showMeHint: "Choose the traditions you want to see across the site.", openMenu: "Open menu", menu: "Menu",
     closeMenu: "Close menu", main: "Main", findSign: "Find my sign",
   },
-  km: {
-    toLight: "ប្ដូរទៅពណ៌ភ្លឺ", toDark: "ប្ដូរទៅពណ៌ងងឹត", mySign: "រាសីខ្ញុំ", traditions: "ប្រពៃណី", all: "ទាំងអស់",
-    showMe: "បង្ហាញ", showMeHint: "ជ្រើសរើសប្រពៃណីដែលអ្នកចង់ឃើញនៅលើគេហទំព័រ។", openMenu: "បើកម៉ឺនុយ", menu: "ម៉ឺនុយ",
-    closeMenu: "បិទម៉ឺនុយ", main: "ការរុករកមេ", findSign: "ស្វែងរករាសីខ្ញុំ",
-  },
 });
 
 const Icon = ({ name }: { name: string }) => (
@@ -115,7 +110,7 @@ export function TraditionsMenu({ initial }: { initial: Tradition[] }) {
     <div className="relative max-sm:static" ref={wrap}>
       <button type="button" className="inline-flex min-h-tap items-center gap-2 rounded-sm px-2 text-small font-semibold" aria-expanded={open} aria-controls="traditions-pop" onClick={() => setOpen((o) => !o)}>
         {t.traditions}
-        <span className="hidden font-normal text-muted sm:inline">{picked.length === 3 ? t.all : picked.map((x) => TRADITION_LABEL[x][lang]).join(", ")}</span>
+        <span className="hidden font-normal text-muted sm:inline">{picked.length === 3 ? t.all : picked.map((x) => TRADITION_LABEL[x].en).join(", ")}</span>
       </button>
       {open && (
         <div id="traditions-pop" className="popover absolute right-0 z-40 mt-1 w-[var(--size-rail)] max-w-[calc(100vw-32px)] p-4 max-sm:left-4 max-sm:right-4 max-sm:w-auto">
@@ -126,7 +121,7 @@ export function TraditionsMenu({ initial }: { initial: Tradition[] }) {
               {ALL_TRADITIONS.map((x) => (
                 <label key={x} className="flex min-h-tap items-center gap-3">
                   <input type="checkbox" className="size-5 shrink-0" checked={picked.includes(x)} onChange={() => toggle(x)} disabled={picked.length === 1 && picked.includes(x)} />
-                  <span>{TRADITION_LABEL[x][lang]} <span lang={lang === "en" ? "km" : "en"} className="text-muted">{TRADITION_LABEL[x][lang === "en" ? "km" : "en"]}</span></span>
+                  <span>{TRADITION_LABEL[x].en} <span lang="km" className="text-muted">{TRADITION_LABEL[x].km}</span></span>
                 </label>
               ))}
             </div>
@@ -138,7 +133,6 @@ export function TraditionsMenu({ initial }: { initial: Tradition[] }) {
 }
 
 export function MenuSheet({ nav }: { nav: Array<{ href: string; label: string }> }) {
-  // `label` arrives already in the page language (Header picks it on the server).
   const ref = useRef<HTMLDialogElement>(null);
   const [expanded, setExpanded] = useState(false);
   const sign = useMySign();

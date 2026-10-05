@@ -52,28 +52,6 @@ const T = defineMessages({
     note: "Calculated with astronomy-engine. For entertainment and reflection.",
     busy: "This page is busy right now. Try this week again in a few minutes.",
   },
-  km: {
-    title: (r: string) => `មេឃសប្ដាហ៍នេះ ${r}`,
-    description: (r: string) => `មេឃសម្រាប់${r}៖ ដំណាក់កាលព្រះចន្ទ និងការប្ដូររាសី ភពប្ដូររាសី ឬប្ដូរទិសដៅ គ្រាស ថ្ងៃសីល និងថ្ងៃល្អតាមប្រតិទិនចិន។`,
-    sky: "មេឃ", weekNav: "សប្ដាហ៍", prev: "សប្ដាហ៍មុន", next: "សប្ដាហ៍បន្ទាប់",
-    h1: "មេឃសប្ដាហ៍នេះ",
-    zone: (z: string) => `ម៉ោងគិតតាមម៉ោង ${z}។ សប្ដាហ៍រាប់ពីថ្ងៃច័ន្ទដល់ថ្ងៃអាទិត្យ តាមម៉ោងសកល។`,
-    phases: "ដំណាក់កាលព្រះចន្ទ", noPhase: "សប្ដាហ៍នេះគ្មានព្រះចន្ទងងឹត ព្រះចន្ទពេញវង់ ឬព្រះចន្ទកន្លះទេ។",
-    phaseLine: (p: string, s: string) => `${p} ក្នុងរាសី${s}`,
-    moonSigns: "ព្រះចន្ទប្ដូររាសី",
-    moonLine: (s: string) => `ព្រះចន្ទចូលរាសី${s}`,
-    planets: "ភពនានា", none: "សប្ដាហ៍នេះគ្មានភពណាប្ដូររាសី ឬប្ដូរទិសដៅទេ។",
-    ingress: (p: string, s: string) => `${p}ចូលរាសី${s}។`,
-    rx: (p: string, s: string) => `${p}ចាប់ផ្ដើមដើរថយក្រោយក្នុងរាសី${s}។ ជាពេលសម្រាប់ពិនិត្យឡើងវិញ មិនមែនសម្រាប់ភ័យខ្លាចទេ។`,
-    direct: (p: string, s: string) => `${p}ដើរទៅមុខវិញក្នុងរាសី${s}។`,
-    eclipse: (n: string, s: string) => `${n}ក្នុងរាសី${s}។`,
-    khmer: "ថ្ងៃសីល និងពិធីបុណ្យខ្មែរ", noKhmer: "សប្ដាហ៍នេះគ្មានថ្ងៃសីល ឬពិធីបុណ្យទេ។",
-    holy: "ថ្ងៃសីល",
-    chinese: "ថ្ងៃល្អតាមប្រតិទិនចិន", noChinese: "សប្ដាហ៍នេះ ប្រតិទិនមិនបានកំណត់ថ្ងៃល្អពិសេសណាមួយទេ។",
-    moonCal: "ប្រតិទិនព្រះចន្ទ", rxCal: "ភពដើរថយក្រោយ និងគ្រាស", terms: "រដូវកាលព្រះអាទិត្យទាំង ២៤", feeds: "បន្ថែមកាលបរិច្ឆេទទាំងនេះទៅប្រតិទិនរបស់អ្នក",
-    note: "គណនាដោយ astronomy-engine។ សម្រាប់ការកម្សាន្ត និងការឆ្លុះបញ្ចាំង។",
-    busy: "ទំព័រនេះរវល់បន្តិចឥឡូវនេះ។ សូមព្យាយាមម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
-  },
 });
 
 /** Indexed: the last eight weeks and the next four. */
@@ -106,7 +84,6 @@ export default async function SkyWeek({ params }: Params) {
   if (!validWeek(monday)) notFound();
   const lang = await getLang();
   const t = T[lang];
-  const km = lang === "km";
   const range = weekRange(monday, lang);
   if (!skyYearsAvailable(weekSkyYears(monday))) {
     return <div className="mx-auto max-w-reading safe-x py-7"><h1 className="text-h1">{t.h1}</h1><p className="mt-3">{t.busy}</p></div>;
@@ -173,8 +150,8 @@ export default async function SkyWeek({ params }: Params) {
                   <span className="text-small font-semibold">{fullDate(k.date, lang)}</span>
                   <span>
                     <span lang="km">{k.labelKmShort}</span>
-                    {k.sila && <> · {t.holy}{km ? "" : <> (<span lang="km">ថ្ងៃសីល</span>)</>}</>}
-                    {k.festival && <> · <span className="font-semibold">{km ? k.festival.km : k.festival.en}</span></>}
+                    {k.sila && <> · {t.holy} (<span lang="km">ថ្ងៃសីល</span>)</>}
+                    {k.festival && <> · <span className="font-semibold">{k.festival.en}</span></>}
                   </span>
                 </li>
               ))}</ul>
@@ -189,7 +166,7 @@ export default async function SkyWeek({ params }: Params) {
               <ul className="mt-3">{chinese.map((a) => (
                 <li key={a.date} className={row}>
                   <span className="text-small font-semibold"><Link className="link inline-flex min-h-tap items-center gap-2" href={`/lucky-days/day/${a.date}`}><Seal size="sm" />{dayName(a.date)}</Link></span>
-                  <span>{(km ? a.goodKm : a.good).slice(0, 4).join(km ? " · " : ", ")}</span>
+                  <span>{(a.good).slice(0, 4).join(", ")}</span>
                 </li>
               ))}</ul>
             )}
@@ -206,8 +183,8 @@ export default async function SkyWeek({ params }: Params) {
                   <span className="text-small font-semibold">{fullDate(k.date, lang)}</span>
                   <span>
                     <span lang="km">{k.labelKmShort}</span>
-                    {k.sila && <> · {t.holy}{km ? "" : <> (<span lang="km">ថ្ងៃសីល</span>)</>}</>}
-                    {k.festival && <> · <span className="font-semibold">{km ? k.festival.km : k.festival.en}</span></>}
+                    {k.sila && <> · {t.holy} (<span lang="km">ថ្ងៃសីល</span>)</>}
+                    {k.festival && <> · <span className="font-semibold">{k.festival.en}</span></>}
                   </span>
                 </li>
               ))}</ul>
@@ -222,7 +199,7 @@ export default async function SkyWeek({ params }: Params) {
               <ul className="mt-3">{chinese.map((a) => (
                 <li key={a.date} className={row}>
                   <span className="text-small font-semibold"><Link className="link inline-flex min-h-tap items-center gap-2" href={`/lucky-days/day/${a.date}`}><Seal size="sm" />{dayName(a.date)}</Link></span>
-                  <span>{(km ? a.goodKm : a.good).slice(0, 4).join(km ? " · " : ", ")}</span>
+                  <span>{(a.good).slice(0, 4).join(", ")}</span>
                 </li>
               ))}</ul>
             )}

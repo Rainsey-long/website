@@ -14,12 +14,6 @@ const T = defineMessages({
     h1: "Find my sign",
     intro: "Enter your birth date to see your signs. Add a time and place for your moon and rising signs. Your details stay on this device.",
   },
-  km: {
-    title: "តើខ្ញុំរាសីអ្វី? រាសីព្រះអាទិត្យ ព្រះចន្ទ រាសីឡើង ចិន និងខ្មែរ",
-    description: "ស្វែងរករាសីព្រះអាទិត្យ ព្រះចន្ទ និងរាសីឡើង សត្វ និងធាតុតាមរាសីចិន ព្រមទាំងឆ្នាំសត្វ ថ្ងៃកំណើត និងពណ៌តាមប្រពៃណីខ្មែរ។ ឥតគិតថ្លៃ ឯកជន ដំណើរការក្នុងកម្មវិធីរុករករបស់អ្នក។",
-    h1: "ស្វែងរករាសីខ្ញុំ",
-    intro: "បញ្ចូលថ្ងៃខែឆ្នាំកំណើត ដើម្បីមើលរាសីរបស់អ្នក។ បន្ថែមម៉ោង និងទីកន្លែង ដើម្បីដឹងរាសីព្រះចន្ទ និងរាសីឡើង។ ព័ត៌មានរបស់អ្នកនៅតែលើឧបករណ៍នេះ។",
-  },
 });
 export async function generateMetadata() {
   const lang = await getLang();

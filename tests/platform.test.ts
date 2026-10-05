@@ -1,7 +1,7 @@
 /**
  * Site search (lib/searchIndex.ts) and the Telegram daily card
- * (lib/telegram.ts). Names are the published ones (Khmer rasi and animal
- * names, Cambodia's 2025 Pchum Ben public holiday on 22 September).
+ * (lib/telegram.ts). Names are the published ones (Khmer festival names,
+ * Cambodia's 2025 Pchum Ben public holiday on 22 September).
  */
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { normalise, search, MAX_QUERY } from "@/lib/searchIndex";
@@ -10,9 +10,6 @@ import { dailyPost, telegramConfig } from "@/lib/telegram";
 describe("search", () => {
   it("finds a sign in English, case-insensitively", () => {
     expect(search("ARIES")[0].href).toBe("/horoscope/aries");
-  });
-  it("finds a sign by its Khmer rasi name", () => {
-    expect(search("មេស").map((r) => r.href)).toContain("/zodiac/aries");
   });
   it("matches Khmer by substring", () => {
     expect(search("ភ្ជុំ").some((r) => r.title.en === "Pchum Ben")).toBe(true);
@@ -36,11 +33,11 @@ describe("search", () => {
 
 describe("telegram", () => {
   afterEach(() => vi.unstubAllEnvs());
-  it("names the festival in both languages", () => {
+  it("names the festival in English with its Khmer name inline", () => {
     const { caption, photo } = dailyPost("2025-09-22");
     expect(caption).toContain("ភ្ជុំបិណ្ឌ");
     expect(caption).toContain("Pchum Ben");
-    expect(photo).toMatch(/\/og\/default\?lang=km&d=2025-09-22$/);
+    expect(photo).toMatch(/\/og\/default\?d=2025-09-22$/);
   });
   it("is off unless token and chat are well-formed", () => {
     vi.stubEnv("TELEGRAM_BOT_TOKEN", "");

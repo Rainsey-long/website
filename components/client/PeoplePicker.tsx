@@ -103,7 +103,7 @@ export default function PeoplePicker({ current, onPick }: { current: PersonDraft
           <ul className="flex flex-wrap gap-2" aria-labelledby={`${id}-h`}>
             {people.map((p) => (
               <li key={p.label} className="inline-flex items-center rounded-full border border-rule">
-                <button type="button" className="min-h-tap rounded-full pl-4 pr-2 text-ink" aria-label={t.fill(p.label)}
+                <button type="button" className="min-h-tap min-w-tap rounded-full pl-4 pr-2 text-ink" aria-label={t.fill(p.label)}
                   onClick={() => { onPick(p); setStatus({ text: t.filled(p.label) }); }}>
                   {p.label}
                 </button>

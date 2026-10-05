@@ -116,7 +116,7 @@ export default async function AlmanacDayPage({ params }: Params) {
 
         <dl className="mt-6 grid gap-x-5 gap-y-4 border-t border-rule pt-5 sm:grid-cols-2 tabular">
           <div><dt className="text-small text-muted">{t.lunar}</dt><dd>{km ? a.lunarLabelKm : a.lunarLabel}</dd></div>
-          <div><dt className="text-small text-muted">{t.pillar}</dt><dd><span lang="zh">{a.dayPillarHanzi}</span> · {a.dayPillar}</dd></div>
+          <div><dt className="text-small text-muted">{t.pillar}</dt><dd><span lang="zh">{a.dayPillarHanzi}</span> · <span lang="zh-Latn">{a.dayPillar}</span></dd></div>
           <div><dt className="text-small text-muted">{t.officer}</dt><dd><span lang="zh">{a.officer.hanzi}</span> · {km ? a.officer.km : a.officer.en}</dd></div>
           <div><dt className="text-small text-muted">{t.spirit}</dt><dd><span lang="zh">{a.spirit.hanzi}</span> · {km ? a.spirit.km : a.spirit.en} ({a.spirit.auspicious ? t.spiritGood : t.spiritPlain})</dd></div>
         </dl>

@@ -41,7 +41,7 @@ export default async function Header() {
         </Link>
         <MySignChip />
         <TraditionsMenu initial={traditions} />
-        <LanguageSwitch className="px-1 text-small font-semibold" />
+        <LanguageSwitch className="min-w-tap justify-center px-1 text-small font-semibold" />
         <ThemeToggle />
         <MenuSheet nav={[...nav, { href: SEARCH.href, label: SEARCH.label[lang] }]} />
       </div>

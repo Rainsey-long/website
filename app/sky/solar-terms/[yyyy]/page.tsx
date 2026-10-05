@@ -81,7 +81,7 @@ export default async function SolarTerms({ params }: Params) {
             <li key={s.pinyin} className="grid gap-1 border-t border-rule py-3 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:items-baseline sm:gap-5">
               <div>
                 <span className="font-semibold">{solarTermName(s, lang)}</span>
-                <span className="ml-2 text-small text-muted"><span lang="zh">{s.hanzi}</span> {s.pinyin}</span>
+                <span className="ml-2 text-small text-muted"><span lang="zh">{s.hanzi}</span> <span lang="zh-Latn">{s.pinyin}</span></span>
               </div>
               <div className="text-small tabular">
                 <time dateTime={s.at}>{dateTimeIn(s.at, tz, lang)}</time>

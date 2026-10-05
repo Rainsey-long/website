@@ -1,11 +1,11 @@
 # System state — living snapshot
 
-**Last refreshed 2026-10-04.** Re-check before trusting; update in the same commit as the change.
+**Last refreshed 2026-10-05.** Re-check; update with the change.
 
 ## Current shape
 
-- Branch `claude/zodiac-site` of `Rainsey-long/website` (orphan; `master` is an unrelated 2018 Flutter docs fork). Not deployed yet.
-- Next.js 16 on the CamboMath production shape (Docker, Railway volume, one replica). Ported from an earlier Astro static build on 2026-10-04 at the owner's request.
+- Branch `claude/zodiac-site` of `Rainsey-long/website` (orphan; `master` is unrelated). Not deployed yet.
+- Next.js 16 on the CamboMath production shape (Docker, Railway volume, one replica). Ported from Astro on 2026-10-04 (owner request).
 - Content: 196 daily reading blocks and 48 weekly overviews (all `draft`), 12 Western + 12 Chinese profiles, 12 Fire Goat 2027 forecasts, 156 compatibility pairs (templated), 7 Khmer birth-weekday portraits. All original, all awaiting owner review.
 - Khmer traditions: lunar calendar, holy days, festivals, Moha Songkran + angel (2020–2026 match km.wikipedia's table), birth weekday, tradition switch.
 - Sky: moon calendar, ingresses, retrogrades with shadows, eclipses (2026 matches published tables), .ics feeds.
@@ -28,7 +28,7 @@
 
 - Owner: brand name and domain; review of all text; native-speaker check of the inline Khmer tradition terms (`docs/KHMER-REVIEW.md`); Railway + Cloudflare setup (`docs/OWNER-ACTIONS.md`).
 - Khmer calendar validated against the cases in tests and the research table; validation against Roath Kim Soeun's tables for 200+ dates (research §1.3) not yet done.
-- English only since 2026-10-05: the Khmer language version was removed (owner decision); every `/km` URL 308-redirects to English. Khmer traditions stay, in English. AdSense readiness, privacy and a full security audit are in progress.
+- English only since 2026-10-05 (`/km` 308s to English). AdSense ready, shipped off (`docs/ADSENSE.md`); security audit `docs/SECURITY-AUDIT-2026-10-05.md`; next steps `docs/COMPLIANCE.md`.
 - Reading block library is 196 of the ~360 the plan targets.
 - Built 2026-10-04 (second pass): birth chart (`/tools/birth-chart`), good hours (`/good-hours`), lucky-date finder (`/lucky-days/finder`). Their wording (`lib/natalCopy.ts`, `PLANET_HOUR` in `lib/goodHours.ts`) is draft.
 - FEATURES.md §7 list built through 2026-10-05 except: personal transits (#4, ~600 text blocks first), BaZi (#6, would put lunar-javascript in the browser), owner analytics (#52, needs a Cloudflare token), gardening by the Moon (#53).

@@ -19,6 +19,8 @@ const NAV: Array<{ href: string; label: Record<Lang, string> }> = [
   { href: "/sky", label: { en: "Sky", km: "មេឃ" } },
 ];
 
+const SEARCH = { href: "/search", label: { en: "Search", km: "ស្វែងរក" } as Record<Lang, string> };
+
 export default async function Header() {
   const [traditions, lang] = await Promise.all([chosenTraditions(), getLang()]);
   const nav = NAV.map((n) => ({ href: n.href, label: n.label[lang] }));
@@ -31,11 +33,17 @@ export default async function Header() {
             {nav.map((n) => <li key={n.href}><Link href={n.href} className="link nav-link">{n.label}</Link></li>)}
           </ul>
         </nav>
+        <Link href={SEARCH.href} aria-label={SEARCH.label[lang]} title={SEARCH.label[lang]} className="hidden size-tap items-center justify-center rounded-full no-underline lg:inline-flex">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="size-glyph" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-4.35-4.35" />
+          </svg>
+        </Link>
         <MySignChip />
         <TraditionsMenu initial={traditions} />
         <LanguageSwitch className="px-1 text-small font-semibold" />
         <ThemeToggle />
-        <MenuSheet nav={nav} />
+        <MenuSheet nav={[...nav, { href: SEARCH.href, label: SEARCH.label[lang] }]} />
       </div>
     </header>
   );

@@ -30,7 +30,7 @@ const T = defineMessages({
     major: "Season marker",
     sun: (d: string) => `Sun at ${d}`,
     foot: "Calculated with astronomy-engine from the Sun's apparent longitude. The date of a term can differ by a day between time zones.",
-    busy: "Many people are looking at the sky right now. Try this year again in a few minutes.",
+    busy: "This page is busy right now. Try this year again in a few minutes.",
   },
   km: {
     title: (y: string) => `រដូវកាលព្រះអាទិត្យទាំង ២៤ ក្នុងឆ្នាំ${y}៖ ថ្ងៃ និងម៉ោង`,
@@ -42,7 +42,7 @@ const T = defineMessages({
     major: "សញ្ញារដូវ",
     sun: (d: string) => `ព្រះអាទិត្យនៅ ${d}`,
     foot: "គណនាដោយ astronomy-engine ពីទីតាំងដែលយើងឃើញនៃព្រះអាទិត្យ។ ថ្ងៃនៃរដូវកាលមួយ អាចខុសគ្នាមួយថ្ងៃ រវាងតំបន់ម៉ោងផ្សេងៗ។",
-    busy: "ឥឡូវនេះមានមនុស្សច្រើនកំពុងមើលមេឃ។ សូមព្យាយាមឆ្នាំនេះម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
+    busy: "ទំព័រនេះរវល់បន្តិចឥឡូវនេះ។ សូមព្យាយាមម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
   },
 });
 

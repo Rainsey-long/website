@@ -43,7 +43,7 @@ export default async function Header() {
         <TraditionsMenu initial={traditions} />
         <LanguageSwitch className="min-w-tap justify-center px-1 text-small font-semibold" />
         <ThemeToggle />
-        <MenuSheet nav={[...nav, { href: SEARCH.href, label: SEARCH.label[lang] }]} />
+        <MenuSheet nav={[{ href: SEARCH.href, label: SEARCH.label[lang] }, ...nav]} />
       </div>
     </header>
   );

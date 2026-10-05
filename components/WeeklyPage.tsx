@@ -41,7 +41,7 @@ const T = defineMessages({
     daily: (s: string) => `${s} horoscope today`, others: "Other signs this week",
     my: (s: string, r: string) => `My ${s} weekly horoscope, ${r}`,
     note: "Days are counted Monday to Sunday in universal time. For entertainment and reflection.",
-    busy: "Many people are reading their week right now. Try again in a few minutes.",
+    busy: "This page is busy right now. Try again in a few minutes.",
   },
   km: {
     crumb: "ហោរាសាស្ត្រ", week: "សប្ដាហ៍នេះ", weekNav: "សប្ដាហ៍", prev: "សប្ដាហ៍មុន", next: "សប្ដាហ៍បន្ទាប់",
@@ -59,7 +59,7 @@ const T = defineMessages({
     daily: (s: string) => `ហោរាសាស្ត្រថ្ងៃនេះ រាសី${s}`, others: "រាសីផ្សេងទៀតសប្ដាហ៍នេះ",
     my: (s: string, r: string) => `ហោរាសាស្ត្រប្រចាំសប្ដាហ៍ រាសី${s} របស់ខ្ញុំ ${r}`,
     note: "ថ្ងៃត្រូវបានរាប់ពីថ្ងៃច័ន្ទដល់ថ្ងៃអាទិត្យ តាមម៉ោងសកល។ សម្រាប់ការកម្សាន្ត និងការឆ្លុះបញ្ចាំង។",
-    busy: "ឥឡូវនេះមានមនុស្សច្រើនកំពុងអានសប្ដាហ៍របស់ខ្លួន។ សូមព្យាយាមម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
+    busy: "ទំព័រនេះរវល់បន្តិចឥឡូវនេះ។ សូមព្យាយាមម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
   },
 });
 

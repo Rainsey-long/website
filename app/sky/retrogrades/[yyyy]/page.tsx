@@ -28,7 +28,7 @@ const T = defineMessages({
     eclipses: "Eclipses", peak: "(peak)",
     bodyIn: (sun: boolean, sign: string) => `${sun ? "Sun" : "Moon"} in ${sign}`,
     foot: "Whether an eclipse is visible depends on where you are. Calculated with astronomy-engine.",
-    busy: "Many people are looking at the sky right now. Try this year again in a few minutes.",
+    busy: "This page is busy right now. Try this year again in a few minutes.",
   },
   km: {
     title: (y: number) => `ព្រះពុធដើរថយក្រោយ ${khmerYear(y)} និងភពដើរថយក្រោយ និងគ្រាសទាំងអស់`,
@@ -43,7 +43,7 @@ const T = defineMessages({
     eclipses: "សូរ្យគ្រាស និងចន្ទគ្រាស", peak: "(ពេលពេញលេញបំផុត)",
     bodyIn: (sun: boolean, sign: string) => `${sun ? "ព្រះអាទិត្យ" : "ព្រះចន្ទ"}ក្នុងរាសី${sign}`,
     foot: "អ្នកអាចមើលឃើញគ្រាសឬអត់ អាស្រ័យលើទីកន្លែងដែលអ្នកនៅ។ គណនាដោយ astronomy-engine។",
-    busy: "ឥឡូវនេះមានមនុស្សច្រើនកំពុងមើលមេឃ។ សូមព្យាយាមឆ្នាំនេះម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
+    busy: "ទំព័រនេះរវល់បន្តិចឥឡូវនេះ។ សូមព្យាយាមម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
   },
 });
 function khmerYear(y: number) { return num(y, "km"); }

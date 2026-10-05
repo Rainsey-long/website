@@ -258,7 +258,7 @@ Sits at the top of a birth form above a hairline: saved people as `radius-full` 
 The AgeTool layout (§6.18): definition-list rows with the number in the serif at `text-h1` beside its meaning, and the method note in small muted type.
 
 ### 6.23 Search
-A magnifier in the header (desktop, `size-tap`) and a "Search" entry in the mobile menu sheet; `/search` is a GET form with a plain result list (title, one-line description, path in muted small type). The app icon is the cinnabar seal on paper.
+A magnifier in the header (desktop, `size-tap`) and a "Search" entry in the mobile menu sheet; `/search` is a GET form with a plain result list (title, and what kind of page it is in muted small type). The app icon is the cinnabar seal on paper.
 
 ---
 

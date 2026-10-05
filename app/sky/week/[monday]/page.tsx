@@ -50,7 +50,7 @@ const T = defineMessages({
     chinese: "Good days by the Chinese almanac", noChinese: "The almanac marks no especially good day this week.",
     moonCal: "Moon calendar", rxCal: "Retrogrades and eclipses", terms: "The 24 solar terms", feeds: "Add these dates to your calendar",
     note: "Calculated with astronomy-engine. For entertainment and reflection.",
-    busy: "Many people are looking at the sky right now. Try this week again in a few minutes.",
+    busy: "This page is busy right now. Try this week again in a few minutes.",
   },
   km: {
     title: (r: string) => `មេឃសប្ដាហ៍នេះ ${r}`,
@@ -72,7 +72,7 @@ const T = defineMessages({
     chinese: "ថ្ងៃល្អតាមប្រតិទិនចិន", noChinese: "សប្ដាហ៍នេះ ប្រតិទិនមិនបានកំណត់ថ្ងៃល្អពិសេសណាមួយទេ។",
     moonCal: "ប្រតិទិនព្រះចន្ទ", rxCal: "ភពដើរថយក្រោយ និងគ្រាស", terms: "រដូវកាលព្រះអាទិត្យទាំង ២៤", feeds: "បន្ថែមកាលបរិច្ឆេទទាំងនេះទៅប្រតិទិនរបស់អ្នក",
     note: "គណនាដោយ astronomy-engine។ សម្រាប់ការកម្សាន្ត និងការឆ្លុះបញ្ចាំង។",
-    busy: "ឥឡូវនេះមានមនុស្សច្រើនកំពុងមើលមេឃ។ សូមព្យាយាមសប្ដាហ៍នេះម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
+    busy: "ទំព័រនេះរវល់បន្តិចឥឡូវនេះ។ សូមព្យាយាមម្ដងទៀតក្នុងពេលបន្តិចទៀត។",
   },
 });
 
@@ -135,7 +135,11 @@ export default async function SkyWeek({ params }: Params) {
         <p className="mt-2 text-muted"><time dateTime={monday}>{range}</time></p>
         <p className="mt-1 text-small text-muted">{t.zone(zoneLabel(tz))}</p>
 
-        <section className="mt-6 border-t border-rule py-5" aria-labelledby="sw-phases">
+        {/* The sky sections are Western; with Western readings off the Khmer and
+            Chinese calendar lead (UI review 2026-10-05). */}
+        <div className="mt-6">
+        {traditions.includes("western") ? <>
+        <section className="border-t border-rule py-5" aria-labelledby="sw-phases">
           <h2 id="sw-phases" className="text-h3">{t.phases}</h2>
           {phases.length === 0 ? <p className="mt-3">{t.noPhase}</p> : (
             <ul className="mt-3">{phases.map((p) => (
@@ -191,6 +195,67 @@ export default async function SkyWeek({ params }: Params) {
             )}
           </section>
         )}
+
+        </> : <>
+        {khmer && (
+          <section className="border-t border-rule py-5" aria-labelledby="sw-khmer">
+            <h2 id="sw-khmer" className="text-h3">{t.khmer}</h2>
+            {khmer.length === 0 ? <p className="mt-3">{t.noKhmer}</p> : (
+              <ul className="mt-3">{khmer.map((k) => (
+                <li key={k.date} className={row}>
+                  <span className="text-small font-semibold">{fullDate(k.date, lang)}</span>
+                  <span>
+                    <span lang="km">{k.labelKmShort}</span>
+                    {k.sila && <> · {t.holy}{km ? "" : <> (<span lang="km">ថ្ងៃសីល</span>)</>}</>}
+                    {k.festival && <> · <span className="font-semibold">{km ? k.festival.km : k.festival.en}</span></>}
+                  </span>
+                </li>
+              ))}</ul>
+            )}
+          </section>
+        )}
+
+        {chinese && (
+          <section className="border-t border-rule py-5" aria-labelledby="sw-chinese">
+            <h2 id="sw-chinese" className="text-h3">{t.chinese}</h2>
+            {chinese.length === 0 ? <p className="mt-3">{t.noChinese}</p> : (
+              <ul className="mt-3">{chinese.map((a) => (
+                <li key={a.date} className={row}>
+                  <span className="text-small font-semibold"><Link className="link inline-flex min-h-tap items-center gap-2" href={`/lucky-days/day/${a.date}`}><Seal size="sm" />{dayName(a.date)}</Link></span>
+                  <span>{(km ? a.goodKm : a.good).slice(0, 4).join(km ? " · " : ", ")}</span>
+                </li>
+              ))}</ul>
+            )}
+          </section>
+        )}
+
+        <section className="border-t border-rule py-5" aria-labelledby="sw-phases">
+          <h2 id="sw-phases" className="text-h3">{t.phases}</h2>
+          {phases.length === 0 ? <p className="mt-3">{t.noPhase}</p> : (
+            <ul className="mt-3">{phases.map((p) => (
+              <li key={p.at} className={row}><span className="text-small font-semibold tabular"><time dateTime={p.at}>{dateTimeIn(p.at, tz, lang)}</time></span><span>{t.phaseLine(phaseName(p, lang), signNameIn(p.signIndex, lang))}</span></li>
+            ))}</ul>
+          )}
+        </section>
+
+        <section className="border-t border-rule py-5" aria-labelledby="sw-moon">
+          <h2 id="sw-moon" className="text-h3">{t.moonSigns}</h2>
+          <ul className="mt-3">{ingresses.map((m) => (
+            <li key={m.at} className={row}><span className="text-small font-semibold tabular"><time dateTime={m.at}>{dateTimeIn(m.at, tz, lang)}</time></span><span>{t.moonLine(signNameIn(m.signIndex, lang))}</span></li>
+          ))}</ul>
+        </section>
+
+        <section className="border-t border-rule py-5" aria-labelledby="sw-planets">
+          <h2 id="sw-planets" className="text-h3">{t.planets}</h2>
+          {events.length === 0 ? <p className="mt-3">{t.none}</p> : (
+            <ul className="mt-3">{events.map((e) => (
+              <li key={`${e.kind}-${e.body}-${e.date}`} className={row}><span className="text-small font-semibold">{dayName(e.date)}</span><span>{eventLine(e, lang)}</span></li>
+            ))}</ul>
+          )}
+        </section>
+
+        </>}
+        </div>
 
         <p className="border-t border-rule pt-5">
           <Link className="link" href="/sky/moon">{t.moonCal}</Link> · <Link className="link" href="/sky/retrogrades">{t.rxCal}</Link> · <Link className="link" href="/sky/solar-terms">{t.terms}</Link> · <Link className="link" href="/feeds">{t.feeds}</Link>

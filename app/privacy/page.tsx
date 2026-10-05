@@ -24,6 +24,7 @@ export default async function Privacy() {
         <p className="text-small text-muted">ទំព័រនេះជាការបកប្រែ។ ប្រសិនបើកំណែភាសាខ្មែរ និងភាសាអង់គ្លេសខុសគ្នា កំណែភាសាអង់គ្លេសជាកំណែដែលមានអានុភាព។</p>
         <h2>សេចក្ដីសង្ខេប</h2>
         <p>យើងមិនសុំឲ្យអ្នកចុះឈ្មោះទេ ហើយព័ត៌មានកំណើតដែលអ្នកវាយបញ្ចូលក្នុងឧបករណ៍របស់យើង មិនដែលចេញពីឧបករណ៍របស់អ្នកឡើយ។ ការគណនាដំណើរការនៅក្នុងកម្មវិធីរុករករបស់អ្នក។</p>
+        <p>ប្រសិនបើអ្នករក្សាទុកមនុស្សសម្រាប់បំពេញរហ័ស ឈ្មោះ ថ្ងៃកំណើត ម៉ោង និងទីក្រុងរបស់ពួកគេ ត្រូវបានរក្សាទុកក្នុងកន្លែងផ្ទុកក្នុងស្រុករបស់កម្មវិធីរុករក ក្រោមឈ្មោះ «people»។ ពួកវាមិនដែលត្រូវបានផ្ញើមកយើងទេ។ «បំភ្លេច» លុបមនុស្សម្នាក់ ហើយការសម្អាតទិន្នន័យរបស់គេហទំព័រនេះ លុបពួកវាទាំងអស់។ លេខវិទ្យាក៏ត្រូវបានគណនាក្នុងកម្មវិធីរុករករបស់អ្នកដែរ ថ្ងៃខែ និងឈ្មោះដែលអ្នកបញ្ចូល មិនត្រូវបានផ្ញើទេ។</p>
         <h2>អ្វីដែលនៅលើឧបករណ៍របស់អ្នក</h2>
         <p>ប្រសិនបើអ្នករក្សាទុករាសីរបស់អ្នក ឬជ្រើសរើសរូបរាងពណ៌ កម្មវិធីរុករករបស់អ្នករក្សាជម្រើសនោះក្នុងកន្លែងផ្ទុកក្នុងស្រុករបស់វា។ អ្នកអាចលុបវាបានគ្រប់ពេល ឬប្រើ «ប្ដូររាសី» នៅលើទំព័រដើម។</p>
         <h2>ខូគីដែលយើងដាក់</h2>
@@ -43,6 +44,7 @@ export default async function Privacy() {
     <TextPage title="Privacy" path="/privacy" updated={longDate(UPDATED)}>
       <h2>The short version</h2>
       <p>We don&apos;t ask you to sign up, and the birth details you type into our tools never leave your device. The calculations run in your browser.</p>
+      <p>If you save people for quick filling, their labels, birth dates, times and cities are kept in your browser&apos;s local storage, under the name &quot;people&quot;. They are never sent to us. &quot;Forget&quot; removes one person, and clearing this site&apos;s data removes them all. Numerology is worked out in your browser too; the date and name you enter are not sent.</p>
       <h2>What stays on your device</h2>
       <p>If you save your sign or choose a theme, your browser keeps that choice in its local storage. You can clear it at any time, or use &quot;Change sign&quot; on the homepage.</p>
       <h2>Cookies we set</h2>

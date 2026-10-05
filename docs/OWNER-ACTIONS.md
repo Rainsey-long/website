@@ -14,3 +14,4 @@ Update this file in the same commit as the change that adds or closes an item.
 | 8 | Decide whether answer-engine bots (Perplexity, OpenAI search) may crawl | `lib/aiBots.ts`, `FEATURES.BLOCK_AI_CRAWLERS` |
 | 9 | Search Console and Bing: verify the domain, submit `/sitemap.xml` | after #3 |
 | 10 | Delete the local test Songkran rows (dev database only; never on production) if you run this checkout: Admin → Songkran shows them as "Test entry" | local `data/almanac.db` |
+| 11 | Telegram daily card: create a bot with @BotFather and a channel, make the bot a channel admin, set `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` and `TELEGRAM_CRON_SECRET` on Railway, and add a cron service calling `GET https://<domain>/api/cron/telegram` daily (e.g. 07:00 Asia/Phnom_Penh) with the bearer header. The site must be public: Telegram fetches the card image from it | Railway, after #1–#3 |

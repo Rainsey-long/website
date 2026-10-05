@@ -58,3 +58,16 @@ Noted by the UI review: Cancer is now spelled កក្កដ everywhere (was �
 |---|---|
 | `content/weekly/lunations.json` (`text_km`, 48 blocks; also editable in `/km/admin/readings?topic=week`) | The weekly overviews: one per Moon phase (new, first quarter, full, last quarter) and house |
 | `components/WeeklyPage.tsx`, `lib/weeklyMeta.ts`, `app/horoscope/page.tsx`, `app/horoscope/[sign]/page.tsx` | "ហោរាសាស្ត្រប្រចាំសប្ដាហ៍", "ផ្នែក…របស់អ្នក" for a house, the planet-event sentences ("ចាប់ផ្ដើមដើរថយក្រោយ", "ដើរទៅមុខវិញ"), "ថ្ងៃល្អបំផុត", the carried-over Moon line, and the two "busy, try again" lines (weekly page, `/sky/retrogrades`) |
+
+## Added 2026-10-05: almanac day, solar terms, sky week, numerology, saved people, search, offline, Telegram
+
+| Where | What to check |
+|---|---|
+| `app/lucky-days/day/[date]/page.tsx`, `components/client/AlmanacCalendar.tsx` (`dayPage`) | Almanac day page |
+| `lib/solarTerms.ts` (the 24 `SOLAR_TERMS` names), `app/sky/solar-terms/[yyyy]/page.tsx` | Solar-term names: are there accepted Khmer names, or should they stay descriptive? |
+| `app/sky/week/[monday]/page.tsx`, `app/sky/page.tsx` | "មេឃសប្ដាហ៍នេះ" digest |
+| `lib/ics.ts` (eve title/description), `app/feeds/page.tsx` | Holy-day eve note |
+| `lib/numerologyCopy.ts`, `components/client/Numerology.tsx`, `app/tools/numerology/page.tsx` | "លេខវិទ្យា" and the meaning texts |
+| `components/client/PeoplePicker.tsx`, `app/privacy/page.tsx` | Saved people and the privacy paragraph |
+| `app/search/page.tsx`, `lib/searchIndex.ts`, `components/Header.tsx`, `app/offline/page.tsx` | Search titles and the offline page |
+| `lib/telegram.ts` | The daily Telegram caption |

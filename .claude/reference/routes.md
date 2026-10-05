@@ -31,3 +31,17 @@ Every page below also exists in Khmer at `/km<path>` (the admin at `/km/admin`),
 | `/admin/songkran` · `/admin/feedback` · `/admin/accounts` · `/admin/backups` | Official Khmer New Year moment · feedback triage, delete, CSV · add/remove admins, change password · list backups, back up now | DB / volume |
 | `/api/health`, `/api/feedback`, `/api/admin/login`, `/api/admin/blocks/[id]`, `/api/admin/songkran/[year]`, `/api/admin/content`, `/api/admin/feedback` (+ `/export` CSV), `/api/admin/users`, `/api/admin/password`, `/api/admin/backups`, `/api/cron/backup` | see `.claude/security.md` | DB |
 | `/og/[slug]` (`?lang=km`), `/sitemap.xml` (both languages with hreflang alternates), `/robots.txt` | share cards (Khmer shaped with HarfBuzz), sitemap, robots | |
+
+## Added 2026-10-05
+
+| Route | What | Data |
+|---|---|---|
+| `/lucky-days/day/[yyyy-mm-dd]` | One almanac day: lunar date, pillar, officer, spirit, good-for / leave for another day, clash; Khmer section when the traditions cookie includes Khmer. 1900–2100; indexed 60 days back to 366 ahead | almanac + Khmer engines |
+| `/sky/solar-terms`, `/sky/solar-terms/[yyyy]` | The 24 jieqi with exact moments in the visitor's zone (`lib/solarTerms.ts`); uncached years charged to a ceiling | astronomy-engine |
+| `/sky/week`, `/sky/week/[monday]` | This week in the sky: phases, Moon ingresses, planets, eclipses, Khmer holy days and festivals, Chinese good days (`weekSkyEvents` in `lib/weekly.ts`); charged to the sky-year ceiling | sky + calendars |
+| `/feeds/khmer-holy-days.ics?eve=1` | Holy-day feed with an all-day note on each eve (`-eve` UIDs) | Khmer engine |
+| `/tools/numerology` | Client-only numerology (life path, birthday, name number, personal year and month, `lib/numerology.ts`) | browser only |
+| (saved people) | `lib/people.ts` + `PeoplePicker`: up to 6 people in localStorage key `people`, used by the calculator, birth chart, age tool and numerology; never sent | browser only |
+| `/search?q=` | Static site search over pages, signs, animals, festivals, tools (`lib/searchIndex.ts`), q capped at 80, noindex with a query | static |
+| `/offline`, `/manifest.webmanifest`, `/sw.js` | Installable app; the service worker keeps the last 20 pages, never `/api`, `/admin`, `/og`, `/feeds` or non-GET | — |
+| `GET /api/cron/telegram` | `TELEGRAM_CRON_SECRET` bearer; posts the daily Khmer card to Telegram once per day (`lib/telegram.ts`, last date in `app_settings`) | DB |

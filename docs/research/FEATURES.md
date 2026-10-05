@@ -306,3 +306,7 @@ Numbered from #45 so they never collide with §3's #1–#44.
 4. **Weekly horoscopes (#46)** — the largest SEO gain; content first (blocks in both languages), then the page.
 5. **Telegram daily card (#47)** — needs the owner to create a bot and channel; the images already exist.
 6. Then: almanac day pages and solar terms (#5, #20), installable app (#48), weekly sky digest (#51), family profiles (#8), numerology (#26), transits (#4).
+
+### Status 2026-10-05
+
+Built: #21 + #50 (date converter, age tool), #19 (colour of the day), #45 (printable calendar), #46 (weekly horoscopes; monthly not yet), #5 (almanac day pages), #20 (solar terms), #54 (holy-day eve feed), #51 (sky week), #26 (numerology), #8 (saved people), #48 (installable app), #49 (search), #47 (Telegram card, waits on the owner's bot). Not built, and why: #4 personal transits (needs ~600 reviewed text blocks per language first), #6 BaZi (birth data must stay in the browser, and lunar-javascript is too large for the client budget), #52 owner analytics (needs a Cloudflare API token), #53 gardening by the Moon (lowest score, weakest accuracy).

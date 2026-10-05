@@ -251,6 +251,15 @@ A single sheet, A4 landscape (`@page calendar`), always in the light palette (`.
 ### 6.20 Colour of the day
 Today's weekday colour as a large swatch (`--size-glyph-lg`, §2 Khmer swatch rule: 1px `rule-strong` border, the name always in text), the meaning and angel in one sentence, then a plain list of the next seven days. A short "colours vary between almanacs" note lists the newer-book variants. The Khmer day card (home, Khmer hub) carries a one-line version with a small swatch.
 
+### 6.21 PeoplePicker (saved people)
+Sits at the top of a birth form above a hairline: saved people as `radius-full` bordered chips (a fill button and a close-icon "Forget" button, both tap-sized), a note that the list stays in this browser (up to 6), and a link-style `<details>` "Save this person" holding a name field and a secondary Save button. Status in a polite live line; errors in cinnabar.
+
+### 6.22 Numerology result
+The AgeTool layout (§6.18): definition-list rows with the number in the serif at `text-h1` beside its meaning, and the method note in small muted type.
+
+### 6.23 Search
+A magnifier in the header (desktop, `size-tap`) and a "Search" entry in the mobile menu sheet; `/search` is a GET form with a plain result list (title, one-line description, path in muted small type). The app icon is the cinnabar seal on paper.
+
 ---
 
 ## 7. Page templates (wireframes)
@@ -386,3 +395,4 @@ Week navigation (previous/next) → sign glyph + "Aries weekly horoscope" + the 
 | 2026-10-04 | AlmanacCalendar: holy-day ring, seal and dot sit on their own fixed-height line under the lunar date; animal and year links in lists get the 44px tap height | Khmer two-digit dates wrapped the marks, so they jumped between rows; small inline links failed §8.7 |
 | 2026-10-04 | Added Date converter + AgeTool (§6.18), Printable calendar (§6.19, token `--size-print-sheet`, the only print styles), Colour of the day (§6.20) | Top three features from FEATURES.md §7; the age tool stays client-side because a birth date must not reach the server |
 | 2026-10-04 | Weekly horoscope template (§7.7) | FEATURES.md #46: weekly readings from the week's lunation, the Moon's path and planet events |
+| 2026-10-05 | PeoplePicker (§6.21), numerology result (§6.22), search (§6.23); the almanac day, solar terms and sky week pages reuse the dated-list row pattern (label column, hairline rows, prev/next nav) | Remaining features from FEATURES.md §7 |

@@ -12,6 +12,7 @@ const T = defineMessages({
     intro: "Add these to the calendar you already use. They update themselves, and there is nothing to sign up for.",
     subscribe: "Subscribe",
     google: "Add to Google Calendar",
+    eve: "Or subscribe with a reminder the day before each holy day",
     note: "",
   },
   km: {
@@ -21,6 +22,7 @@ const T = defineMessages({
     intro: "បន្ថែមប្រតិទិនទាំងនេះទៅក្នុងកម្មវិធីប្រតិទិនដែលអ្នកកំពុងប្រើ។ វាធ្វើបច្ចុប្បន្នភាពដោយខ្លួនឯង ហើយមិនចាំបាច់ចុះឈ្មោះអ្វីទេ។",
     subscribe: "ជាវ",
     google: "បន្ថែមទៅ Google Calendar",
+    eve: "ឬជាវជាមួយការរំលឹកមួយថ្ងៃមុនថ្ងៃសីលនីមួយៗ",
     note: "",
   },
 });
@@ -53,6 +55,7 @@ export default async function Feeds() {
                   <a className="btn-secondary" href={webcal}>{t.subscribe}</a>
                   <a className="btn-secondary" href={`https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}`} target="_blank" rel="noopener noreferrer">{t.google}</a>
                 </p>
+                {name === "khmer-holy-days" && <p className="mt-2 text-small"><a className="link inline-flex min-h-tap items-center" href={absolute(`/feeds/${name}.ics?eve=1${km ? "&lang=km" : ""}`).replace(/^https?:/, "webcal:")}>{t.eve}</a></p>}
                 <p className="mt-2 text-small text-muted break-all" lang={km ? "en" : undefined}>{https}</p>
               </li>
             );
